@@ -4,7 +4,7 @@
       <div class="navbar-content">
         <!-- Logo/Brand -->
         <div class="navbar-brand">
-          <NuxtLink to="/" class="brand-link">
+          <NuxtLink to="/" class="brand-link" @click="closeMobileMenu">
             Enon Baptist Church
           </NuxtLink>
         </div>
