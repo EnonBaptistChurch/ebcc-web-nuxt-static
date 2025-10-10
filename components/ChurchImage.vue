@@ -22,6 +22,7 @@
   sizes="100vw"
   alt="Enon Baptist Church"
   class="responsive-image"
+  fetchpriority="high"
 />
   
   

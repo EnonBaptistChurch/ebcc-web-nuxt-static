@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
-import CalendarEventsComponent from '../components/events/CalendarEventsComponent.vue';
+// import CalendarEventsComponent from '../components/events/CalendarEventsComponent.vue';
 import ChurchImage from '../components/ChurchImage.vue';
 import NetlifyContact from '../components/NetlifyContact.vue';
 import { usePageReady } from '../composables/usePageReady'
