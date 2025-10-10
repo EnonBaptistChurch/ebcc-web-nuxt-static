@@ -48,11 +48,12 @@ html,body {
     
   }
   .responsive-image {
-    width: 100%; /* Makes the image fill the width of its container */
+    width: 100%; 
       height: auto;
-      max-height: 600px; /* Maintains the aspect ratio */
-      display: block; /* Removes extra spacing below the image */
+      max-height: 600px; 
+      display: block; 
       aspect-ratio: 1487 / 600;
+
   }
 
 .App {

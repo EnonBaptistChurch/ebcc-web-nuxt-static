@@ -30,6 +30,7 @@ const isOpen = ref(false)
 
 .collapsible-header {
   background: var(--nav-bar-bg-color, #f0f0f0);
+  color: #f0f0f0;
   padding: 0.75rem 1rem;
   font-weight: bold;
   width: 100%;
@@ -44,6 +45,7 @@ const isOpen = ref(false)
 
 .collapsible-header:hover {
   background: #eaeaea;
+  color: var(--nav-bar-bg-color, #000);
 }
 
 .arrow {
@@ -57,7 +59,7 @@ const isOpen = ref(false)
 
 .collapsible-content {
   padding: 1rem;
-  background-color: white;
+  background-color: var(--body-bf-color, #fff);
   border-top: 1px solid #ddd;
 }
 </style>
