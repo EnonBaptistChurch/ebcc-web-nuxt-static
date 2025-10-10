@@ -1,6 +1,6 @@
 <template>
   <div>
-       <NavigationBar />
+       <Nav />
       <main>
         <div class="content">
         <slot />
@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import NavigationBar from '../components/nav/NavigationBar.vue';
-import Footer from '../components/Footer.vue'
+import Nav from '../components/nav/Nav.vue';
+import Footer from '../components/nav/Footer.vue';
 </script>
 
