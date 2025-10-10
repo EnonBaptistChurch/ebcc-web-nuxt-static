@@ -10,7 +10,7 @@ import type { CalendarEvent } from '@/types/CalendarEvent';
 const props = defineProps<{ event: CalendarEvent }>();
 </script>
 
-<style>
+<style scoped>
 .sunday-prayer {
     background-color: #e2e2cd;
   margin-bottom: 1rem;
