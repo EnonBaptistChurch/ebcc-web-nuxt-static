@@ -2,19 +2,24 @@
   <div class="footer">
     <div class="footer-section">
       <p class="left-align-section">© Enon Baptist Church 2025</p>
-      <p class="right-align-section">
+      <br />
+      <p>
         Enon Baptist Church, Skinner Street, Chatham, ME4 5RF, UK
         (<NuxtLink href="/find-us">Find Us</NuxtLink>)
       </p>
+
     </div>
   </div>
 </template>
-
 <style scoped>
+
+
 .footer {
-  background-color: var(--nav-bar-bg-color);
-  color: var(--body-text-color);
-  padding: 0px;
+    --nav-bar-bg-color: #84c4f4;
+    background-color: var(--nav-bar-bg-color);
+    color: var(--body-text-color);
+    margin-top: 1rem;
+  
 }
 
 .footer-section {
@@ -25,11 +30,11 @@
   flex-wrap: wrap;
 }
 
-.left-align-section,
+/* .left-align-section,
 .right-align-section {
   flex: 1 1 100%;
   margin: 5px 0;
-}
+} */
 
 .left-align-section {
   text-align: left;
@@ -39,6 +44,11 @@
 .right-align-section {
   text-align: right;
   padding-right: 10px;
+}
+
+.footer-section p {
+  margin: 0;
+  font-size: 0.875rem;
 }
 
 /* Less than Laptop layout */

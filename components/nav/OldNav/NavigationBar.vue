@@ -30,7 +30,7 @@ const closeMenu = () => {
   isOpen.value = false;
 }
 
-import navItems from '../../data/NavigationLinks'
+import navItems from '../../../data/NavigationLinks'
 </script>
 
 <template>

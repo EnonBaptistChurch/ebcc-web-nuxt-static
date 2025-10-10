@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavItem } from '../../types/NavItem.ts'
+import type { NavItem } from '../../../types/NavItem.js'
 import NavDropdown from './NavDropdown.vue'
 
 const props = defineProps<{

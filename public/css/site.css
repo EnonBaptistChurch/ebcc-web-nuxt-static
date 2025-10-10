@@ -1,21 +1,18 @@
 :root {
-  --primary-color: #104268;
-  --secondary-color: #edd286;
-  --body-text-color: #000;
-  --nav-bar-bg-color: #84c4f4;
-  --nav-bar-text-color: #333;
-  --body-bf-color: #FFFF;
-  --nav-bar-hover-color: #125a83;
+  --body-bg-color: #FFFF;
+  --nav-bar-bg-color: #104268;
+  --button-bg-color: var(--nav-bar-bg-color);
+  --button-color: var(--body-bg-color);
+  
 }
 
 html,body {
-    background-color: var(--body-bf-color);
+    background-color: var(--body-bg-color);
     height: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;
     font-family: 'Inter', sans-serif;
-    
   }
  @font-face {
   font-family: 'Inter';
@@ -26,7 +23,19 @@ html,body {
   font-display: swap;
  }
 
+ @font-face {
+  font-family: 'Inter-Bold';
+  src: url('/fonts/Inter_Tight/static/InterTight-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+ }
+
   p {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  }
+
+  a {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   }
    .text-content {
