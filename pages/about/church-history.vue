@@ -1,7 +1,7 @@
 <template>
     <div>
     <article class="text-content">
-		<h1 >Church History</h1>
+		<h1>Church History</h1>
         <div>
             <h4>
                 <strong>
