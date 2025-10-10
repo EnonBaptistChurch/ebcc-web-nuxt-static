@@ -94,7 +94,7 @@ const props = defineProps<{
 }
 
 .mobile-menu-content {
-  padding: 0.5rem;
+  padding: 0rem 0rem 0.25rem 0rem;
 }
 
 .mobile-nav-item {
@@ -104,7 +104,6 @@ const props = defineProps<{
 .mobile-nav-item .mobile-nav-link {
   display: block;
   padding: 0.5rem 0.75rem;
-  border-radius: 0.375rem;
   font-size: 1rem;
   font-weight: 500;
   color: var(--nav-text-color);
@@ -134,7 +133,6 @@ const props = defineProps<{
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0.75rem;
-  border-radius: 0.375rem;
   font-size: 1rem;
   font-weight: 500;
   background: transparent;
@@ -160,7 +158,6 @@ const props = defineProps<{
 .mobile-submenu-link {
   display: block;
   padding: 0.75rem 0.75rem;
-  border-radius: 0.375rem;
   font-size: 0.875rem;
   text-decoration: none;
   color: var(--nav-text-color);
