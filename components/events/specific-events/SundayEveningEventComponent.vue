@@ -11,7 +11,7 @@ import type { CalendarEvent } from '@/types/CalendarEvent';
 const props = defineProps<{ event: CalendarEvent }>();
 </script>
 
-<style>
+<style scoped>
 .sunday-evening {
   background-color: #A1F0D6;
   overflow: hidden;
