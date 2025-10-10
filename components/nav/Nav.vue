@@ -114,8 +114,10 @@ nav {
   transition: color 0.3s;
 }
 
-.brand-link:hover {
-  color: #bfdbfe;
+@media (hover: hover) {
+  .brand-link:hover {
+    color: #bfdbfe;
+  }
 }
 
 
