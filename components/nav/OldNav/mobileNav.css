@@ -1,0 +1,129 @@
+/* Mobile toggle button */
+.mobile-toggle {
+  background: none;
+  border: none;
+  color: var(--nav-text-color);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.mobile-menu {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--mobile-bg);
+  box-shadow: var(--shadow);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.mobile-menu.active {
+  max-height: 600px;
+}
+
+.mobile-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--nav-text-color);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.single-mobile-link {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 15px 20px;
+  color: var(--nav-text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.mobile-nav-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  padding-left: 30px;
+}
+
+/* Mobile SVG arrow */
+.navmobile-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.mobile-submenu-toggle {
+  background: none;
+  border: none;
+  color: var(--nav-text-color);
+  padding: 0.25rem 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid #eee;
+}
+
+.mobile-submenu-toggle:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-submenu {
+  background: var(--mobile-bg);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.mobile-submenu.open {
+  max-height: 400px;
+}
+
+.mobile-submenu-link {
+  display: block;
+  margin: 0.75rem 2rem;
+  padding: 0.25rem 0.5rem;
+  color: var(--nav-text-color);
+  text-decoration: none;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mobile-submenu-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  padding-left: 50px;
+}
+
+.toggle-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .nav-menu {
+    display: none; /* hide desktop menu */
+  }
+
+  .mobile-toggle {
+    display: block; /* show hamburger */
+  }
+
+  .mobile-menu {
+    display: block; /* allow mobile menu toggle */
+  }
+}
+
+@media (min-width: 1025px) {
+  .mobile-menu {
+    display: none !important; /* always hidden on desktop */
+  }
+}
