@@ -1,6 +1,7 @@
 import type { Handler } from "@netlify/functions"
 import Parser from "rss-parser"
 import type { PodcastItem } from "../../types/SermonPodcasts"
+import {parseContentSnippet, parseDateString} from "../../utils/sermonUtils"
 
 const parser = new Parser<PodcastItem>()
 const FEED_URL = process.env.SERMON_RSS_FEED_URL || ""
@@ -9,45 +10,6 @@ const FEED_URL = process.env.SERMON_RSS_FEED_URL || ""
 let cache: { data: any; expiry: number } | null = null
 const CACHE_DURATION_MS = 30 * 60 * 1000 // 30 minutes
 
-// Define structured snippet
-interface ParsedSnippet {
-  title: string
-  speaker: string
-  date: string
-  service?: string
-}
-
-function parseContentSnippet(snippet: string): ParsedSnippet {
-  const lines = snippet
-    .split("\n")
-    .map(line => line.trim())
-    .filter(Boolean)
-
-  return {
-    title: lines[0] || "",
-    speaker: lines[1] || "",
-    date: lines[2] || "",
-    service: lines[3] || "",
-  }
-}
-
-/**
- * Convert DD-MM-YYYY (or other) to a valid timestamp
- */
-function parseDateString(dateStr: string): number {
-  if (!dateStr) return 0
-
-  // Match DD-MM-YYYY pattern
-  const match = dateStr.match(/^(\d{2})-(\d{2})-(\d{4})$/)
-  if (match) {
-    const [, dd, mm, yyyy] = match
-    return new Date(Number(yyyy), Number(mm) - 1, Number(dd)).getTime()
-  }
-
-  // Fallback: try native Date parsing
-  const native = new Date(dateStr).getTime()
-  return isNaN(native) ? 0 : native
-}
 
 export const handler: Handler = async () => {
   const now = Date.now()
@@ -88,11 +50,11 @@ export const handler: Handler = async () => {
     // Sort by parsedSnippet.date (newest first)
     // and for same date, "Evening Service" before "Morning Service"
     itemsWithSnippet.sort((a, b) => {
-      const dateA = parseDateString(a.parsedSnippet.date)
-      const dateB = parseDateString(b.parsedSnippet.date)
+      const dateA = parseDateString(a.parsedSnippet?.date ?? a.pubDate!)
+      const dateB = parseDateString(b.parsedSnippet?.date ?? b.pubDate!)
 
       if (dateB !== dateA) return dateB - dateA
-
+      if(!a.parsedSnippet || !b.parsedSnippet) return 0;
       const serviceA = a.parsedSnippet.service?.toLowerCase() || ""
       const serviceB = b.parsedSnippet.service?.toLowerCase() || ""
 
