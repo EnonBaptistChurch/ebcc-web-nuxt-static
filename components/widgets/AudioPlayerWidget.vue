@@ -1,7 +1,8 @@
 <template>
-  <div class="audio-player">
-    <p class="audio-details">Speaker: Paul Relf</p>
-    <p class="audio-details">Exodus 18 - God is Good</p>
+  <div class="audio-player" id="#audio-player">
+    <p class="audio-details">{{ src.title }}</p>
+    <p class="audio-details">{{ src.parsedSnippet?.speaker }}</p>
+    <p class="audio-details">{{ ukDateString(src.parsedSnippet?.date!) }} - {{ src.parsedSnippet?.service }}</p>
     
     <div class="controls">
       <!-- Rewind 10s -->
@@ -42,14 +43,18 @@
   </div>
 </template>
 
-<script setup>
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
+<script setup lang="ts">
+import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
 
-const props = defineProps({
-  src: { type: String, required: true }
-})
+import type { PodcastItem } from '@/types/SermonPodcasts'
 
-let audio
+
+
+const props = defineProps<{
+  src: PodcastItem
+}>()
+
+let audio: any
 const isPlaying = ref(false)
 const currentTime = ref(0)
 const duration = ref(0)
@@ -58,11 +63,13 @@ const initAudio = () => {
   if (audio) {
     audio.pause()
     audio.src = ''
+    isPlaying.value = false
   }
-  audio = new Audio(props.src)
+  audio = new Audio(props.src.enclosure.url)
 
   audio.addEventListener('timeupdate', () => {
-    currentTime.value = audio.currentTime
+    if(audio !== null)
+    currentTime.value = audio.currentTime;
   })
 
   audio.addEventListener('loadedmetadata', () => {
@@ -73,6 +80,16 @@ const initAudio = () => {
     isPlaying.value = false
   })
 }
+
+const ukDateString = (date: string) => {
+  const newDate = new Date(parseDateString(date));
+ return newDate.toLocaleDateString('en-GB', {
+      weekday: 'long',
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric'
+    });
+} 
 
 onMounted(initAudio)
 watch(() => props.src, initAudio)
@@ -96,7 +113,7 @@ const forward = () => {
   if (audio) audio.currentTime = Math.min(audio.duration, audio.currentTime + 10)
 }
 
-const formatTime = (sec) => {
+const formatTime = (sec: number) => {
   if (isNaN(sec)) return '0:00'
   const m = Math.floor(sec / 60)
   const s = Math.floor(sec % 60).toString().padStart(2, '0')
@@ -117,7 +134,6 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
   padding: 1rem 1.25rem;
   border-radius: 1rem;
   background: linear-gradient(145deg, #ffffff, #f2f4f8);
@@ -134,7 +150,7 @@ onBeforeUnmount(() => {
 
 .audio-details {
   text-align: center;
-  margin:0;
+  margin:0.25rem;
 }
 
 .controls {
@@ -190,8 +206,8 @@ input[type='range'] {
 .time-container {
   display: flex;
   justify-content: space-between; /* pushes content to the edges */
-  font-family: monospace; /* optional, looks nice for time */
   font-size: 14px;
   width: 100%;
+  margin:0;
 }
 </style>
