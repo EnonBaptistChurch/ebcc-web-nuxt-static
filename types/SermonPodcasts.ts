@@ -23,6 +23,13 @@ export interface PodcastChannel {
   items: PodcastItem[]
 }
 
+export interface ParsedSnippet {
+  title: string
+  speaker: string
+  date: string
+  service?: string
+}
+
 export interface ItunesOwner {
   name: string
   email?: string
@@ -41,13 +48,25 @@ export interface PodcastItem {
   dcCreator?: string
   pubDate: string
   enclosure: Enclosure
+  itunes: Itunes,
   itunesSummary?: string
   itunesExplicit?: string | boolean
   itunesDuration?: string
   itunesImage?: { href: string }
   itunesSeason?: string | number
   itunesEpisode?: string | number
-  itunesEpisodeType?: string
+  itunesEpisodeType?: string,
+  parsedSnippet: ParsedSnippet | null
+}
+
+interface Itunes {
+  summary?: string
+  explicit?: string | boolean
+  duration?: string
+  image?: string 
+  season?: string | number
+  episode?: string | number
+  episodeType?: string,
 }
 
 export interface Enclosure {
