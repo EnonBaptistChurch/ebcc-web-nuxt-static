@@ -1,12 +1,9 @@
 <template>
-  <div class="sermon-widget">
-    <ul class="cards-list">
-      <li v-for="episode in episodes" :key="episode.guid" class="card">
-        
-        <!-- Top row: Thumbnail + Info -->
+    <div class="card" :class ="{ chosen: chosenPodcast }">
+    <!-- Top row: Thumbnail + Info -->
         <div class="row thumbnail-row">
           <!-- Thumbnail with play button -->
-          <div class="thumbnail">
+          <div class="thumbnail" @click="play(episode)">
             <img :src="episode.itunes.image" alt="Episode Thumbnail" />
             <div class="play-button">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -14,7 +11,6 @@
               </svg>
             </div>
           </div>
-
           <!-- Info -->
           <div class="info">
             <div class="card-header">
@@ -22,10 +18,12 @@
               {{ episode.title }}
             </h2>
             </div>
+            <div v-if="episode.parsedSnippet !== null">
             <p class="card-speaker">{{ episode.parsedSnippet.speaker }}</p>
             <div class="info-row">
               <span class="card-date">{{ episode.parsedSnippet.date }}</span> - 
               <span class="card-service">{{ episode.parsedSnippet.service }}</span>
+            </div>
             </div>
           </div>
         </div>
@@ -43,42 +41,29 @@
         </div>
         </a>
         </div>
-
-      </li>
-    </ul>
-  </div>
-</template>
+        </div>
+</template> 
 
 <script setup lang="ts">
-defineProps<{ episodes: any[] }>();
+import type { PodcastItem } from '@/types/SermonPodcasts';
+
+const props = defineProps<{
+  episode: PodcastItem
+  choosePodcast: (episode: PodcastItem) => void
+  chosenPodcast: boolean
+}>()
+
+const play = (episode: PodcastItem) => {
+  props.choosePodcast(episode);
+
+}
 </script>
 
-<style>
-/* Container */
-.sermon-widget {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-}
-.bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-/* Card List */
-.cards-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+<style scoped>
 
 /* Card */
 .card {
   position: relative;
-  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 0.75rem;
@@ -91,6 +76,15 @@ defineProps<{ episodes: any[] }>();
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+.chosen{
+  background-color: #dddbeb;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 /* Thumbnail */
 .thumbnail-row {
   display: flex;
@@ -265,3 +259,6 @@ defineProps<{ episodes: any[] }>();
   }
 }
 </style>
+
+
+
