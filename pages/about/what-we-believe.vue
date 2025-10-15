@@ -22,11 +22,10 @@
       <div>
         <h3>Set out below is a summary of the essential doctrines which we at Enon Baptist Church believe:</h3>
           
-            <CollapsibleComponent
-              v-for="(section) in sections"
-              :title="section.title"
-              :content="section.content"
-            />
+            <div v-for="section in sections" :key="section.title">
+              <h3>{{ section.title }}</h3>
+              <p>{{ section.content }}</p>
+            </div>
       </div>
       </div>
   </div>
