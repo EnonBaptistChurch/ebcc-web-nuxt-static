@@ -42,7 +42,6 @@
           </ul>
         </div>
 
-        <!-- Contact & Newsletter Column -->
         <div class="footer-column">
           <div class="contact-section">
             <h4 class="column-title">Lord's Day Services</h4>

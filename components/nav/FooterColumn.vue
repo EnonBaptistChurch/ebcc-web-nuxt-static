@@ -3,7 +3,7 @@
     <h4 class="column-title">
       <NuxtLink :href="link">{{ title }}</NuxtLink>
     </h4>
-    <ul class="column-list">
+    <ul class="column-list" :class="{ doubleColumn: items.length > 4 }">
       <li v-for="(item, idx) in items" :key="idx">
         <NuxtLink :href="item.link">{{ item.title }}</NuxtLink>
       </li>
@@ -68,5 +68,14 @@ defineProps({
 
 .column-list a:hover {
   opacity: 0.8;
+}
+
+/* Only apply multi-column layout for wide screens */
+@media (max-width: 1024px) {
+  .column-list.doubleColumn {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem 1rem; /* optional spacing between columns and rows */
+  }
 }
 </style>
