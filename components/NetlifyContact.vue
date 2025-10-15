@@ -101,14 +101,12 @@ const handleSubmit = async () => {
 .email-form {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0.5rem;
   border-radius: 1rem;
 }
 
 .form-row {
   display: flex;
-  gap: 2rem;
-  margin-bottom: 1.25rem;
 }
 
 .form-group {
@@ -146,9 +144,11 @@ button {
   padding: 0.75rem;
   font-size: 1rem;
   font-weight: 600;
-  color: #000;
-  background-color: var(--nav-bar-bg-color);
-  border: none;
+  color: var(--button-color);
+  background-color: var(--button-bg-color);
+  border-color: var(--button-bg-color);
+  border-width: 1px;
+  border-style: solid; 
   border-radius: 0.75rem;
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -157,10 +157,17 @@ button {
 button:disabled {
   background-color: #aaa;
   cursor: not-allowed;
+  border-color: #aaa;
+  border-width: 1px;
+  border-style: solid; /* <-- this is required */
 }
 
 button:hover:not(:disabled) {
-  background-color: #0056b3;
+  color: var(--button-bg-color);
+  background-color: var(--button-color);
+  border-color: var(--button-bg-color);
+  border-width: 1px;
+  border-style: solid; /* <-- this is required */
 }
 
 .status {

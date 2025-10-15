@@ -22,7 +22,7 @@ const props = defineProps<{
 .navlogo-text {
   font-size: 1.25rem; /* text-xl */
   font-weight: 700;   /* font-bold */
-  color:var(--nav-bar-text-color); /* similar to text-white */
+  color:var(--nav-bar-text-color); 
 }
 
 .navlogo-text a {

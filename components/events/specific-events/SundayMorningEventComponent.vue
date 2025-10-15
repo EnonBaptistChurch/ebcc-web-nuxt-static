@@ -47,7 +47,6 @@ const props = defineProps<{ event: CalendarEvent }>();
 .event-box {
   padding: 5px 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 275px;
   border-radius: 18px !important;
 }
 .date {
