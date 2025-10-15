@@ -13,7 +13,9 @@
     /images/bible-1920.webp 1920w"
   sizes="100vw"
   fetchpriority="high" decoding="async"
+  loading="eager"
   class="responsive-image"
+  alt="NKJV Bible"
 />
       <!-- <img fetchpriority="high" decoding="async" class="responsive-image" src="/images/bible.webp" width="772" height="515" /> -->
       <div class="text-content">
