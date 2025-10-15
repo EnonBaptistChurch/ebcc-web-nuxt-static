@@ -3,7 +3,7 @@
     <div class="footer-container">
       <div>
       
-      <div>
+      <div class="footer-header">
       Enon Baptist Church
       </div>
       </div>
@@ -125,6 +125,12 @@ const currentYear = computed(() => new Date().getFullYear());
 </script>
 
 <style scoped>
+.footer-header {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: #000 1px solid;
+}
 .lines {
   border: 1px solid #000
 }
