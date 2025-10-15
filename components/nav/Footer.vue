@@ -34,7 +34,8 @@
         <!-- Testimonies & Other Links Column -->
         <div class="footer-column">
 
-          <ul class="column-list additional-links">
+          <h4 class="column-title">Other Links</h4>
+          <ul class="column-list">
             <li><NuxtLink :href="sermonSection.link">{{ sermonSection.title }}</NuxtLink></li>
             <li><NuxtLink :href="findUsSection.link">{{ findUsSection.title }}</NuxtLink></li>
             <li><NuxtLink :href="contactSection.link">{{ contactSection.title }}</NuxtLink></li>
@@ -67,7 +68,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>© {{ currentYear }} Enon Baptist Church. All rights reserved.</p>
+        <p>© {{ currentYear }} Enon Baptist Church, Chatham. All rights reserved.</p>
       </div>
     </div>
   </footer>
