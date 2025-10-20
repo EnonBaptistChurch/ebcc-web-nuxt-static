@@ -1,6 +1,6 @@
 import type { NavItem } from '@/types/NavItem';
 
-const aboutSection :NavItem =
+export const aboutSection :NavItem =
 {
   title: "About Us",
   link: "/about",
@@ -11,7 +11,7 @@ const aboutSection :NavItem =
   ],
   submenuOpen: false
 }
-const whatsonSection: NavItem = {
+export const whatsonSection: NavItem = {
   title: 'What\'s on',
   submenu: [
     { link: "/whats-on/sunday-services/", title: "Sunday Services" },
@@ -27,7 +27,7 @@ const whatsonSection: NavItem = {
   submenuOpen:false
 };
 
-const whatsaChristianSection: NavItem = {
+export const whatsaChristianSection: NavItem = {
   title: 'What Is A Christian?',
   submenu:[
     { link: "/what-is-a-christian/becoming-a-christian/", title: "Becoming a Christian" },
@@ -44,9 +44,9 @@ const whatsaChristianSection: NavItem = {
   submenuOpen:false
 };
 
-const sermonSection: NavItem ={ title:"Sermons", link: "/sermons/" }
-const findUsSection: NavItem ={ title:"Find Us", link: "/find-us/" }
-const contactSection: NavItem ={ title:"Contact Us", link: "/contact-us/" }
+export const sermonSection: NavItem ={ title:"Sermons", link: "/sermons/" }
+export const findUsSection: NavItem ={ title:"Find Us", link: "/find-us/" }
+export const contactSection: NavItem ={ title:"Contact Us", link: "/contact-us/" }
 
 const navItems: NavItem[] = [
   aboutSection,
