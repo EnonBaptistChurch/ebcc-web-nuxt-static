@@ -107,8 +107,6 @@ const handleSubmit = async () => {
 
 .form-row {
   display: flex;
-  gap: 2rem;
-  margin-bottom: 1.25rem;
 }
 
 .form-group {

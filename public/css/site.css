@@ -3,6 +3,7 @@
   --nav-bar-bg-color: #104268;
   --button-bg-color: var(--nav-bar-bg-color);
   --button-color: var(--body-bg-color);
+  --button-text-color: var(--body-bg-color)
   
 }
 
@@ -14,6 +15,8 @@ html,body {
     flex-direction: column;
     font-family: 'Inter', sans-serif;
   }
+
+  
  @font-face {
   font-family: 'Inter';
   src: url('/fonts/Inter_Tight/static/InterTight-Regular.ttf') format('truetype'), 
