@@ -9,19 +9,19 @@
 /> -->
   <!-- <img fetchpriority="high" src="/images/enonChurch.webp" alt="Enon Baptist Church"  @load="notifyParent" class="responsive-image" width="1487" height="600" /> -->
    <img
-  src="/images/enonChurch-1920.webp"
+  src="/images/new-enon-1920.webp"
   srcset="
-    /images/enonChurch-320.webp 320w,
-    /images/enonChurch-480.webp 480w,
-    /images/enonChurch-640.webp 640w,
-    /images/enonChurch-768.webp 768w,
-    /images/enonChurch-1024.webp 1024w,
-    /images/enonChurch-1280.webp 1280w,
-    /images/enonChurch-1440.webp 1440w,
-    /images/enonChurch-1920.webp 1920w"
+    /images/new-enon-320.webp 320w,
+    /images/new-enon-480.webp 480w,
+    /images/new-enon-640.webp 640w,
+    /images/new-enon-768.webp 768w,
+    /images/new-enon-1024.webp 1024w,
+    /images/new-enon-1280.webp 1280w,
+    /images/new-enon-1440.webp 1440w,
+    /images/new-enon-1920.webp 1920w"
   sizes="100vw"
   alt="Enon Baptist Church"
-  class="responsive-image"
+  class="church-image"
   fetchpriority="high"
 />
   
@@ -43,3 +43,11 @@ onMounted(async () => {
   notifyParent();
 });
 </script>
+<style scoped>
+.church-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* <-- the key */
+  object-position: center;   /* optional: change focal point */
+}
+</style>
