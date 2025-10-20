@@ -45,9 +45,13 @@ onMounted(async () => {
 </script>
 <style scoped>
 .church-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;         /* <-- the key */
-  object-position: center;   /* optional: change focal point */
+    width: 100%;            
+  max-height: 1850px;        
+  object-fit: cover;        
+  object-position: center;  
+  display: block;           
+
+
+  
 }
 </style>
