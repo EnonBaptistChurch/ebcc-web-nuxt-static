@@ -3,7 +3,7 @@
   <div>
     
     <ChurchImage @imageRendered="onImageRendered" />
-      <HeroSection />
+      <!-- <HeroSection /> -->
         <div class="home-page">
           <h1 class="welcome text-content">Welcome to Enon Baptist Church</h1>
           <p class="home-description text-content">

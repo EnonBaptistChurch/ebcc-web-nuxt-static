@@ -8,6 +8,7 @@
   loading="eager"
 /> -->
   <!-- <img fetchpriority="high" src="/images/enonChurch.webp" alt="Enon Baptist Church"  @load="notifyParent" class="responsive-image" width="1487" height="600" /> -->
+   <ClientOnly>
    <img
   src="/images/new-enon-1920.webp"
   srcset="
@@ -24,7 +25,7 @@
   class="church-image"
   fetchpriority="high"
 />
-  
+  </ClientOnly>
   
 </template>
 
