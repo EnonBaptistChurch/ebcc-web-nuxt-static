@@ -1,16 +1,18 @@
-<template></template>
-<!-- <template>
+
+<template>
   <div class="event-wrapper">
   <h2 class="event-underline">Upcoming Events</h2>
 
   <div class="event-container">
     
     <template v-if="events.length === 0">
+      <div class="loading-grid">
       <LoadingCalendarEventComponent 
         v-for="n in 4"
         :key="'placeholder-' + n"
         
-      ></LoadingCalendarEventComponent>
+      />
+      </div>
     </template>
     
     <template v-else>
@@ -47,14 +49,16 @@ import SundayClubEventComponent from './specific-events/SundayClubEventComponent
 import DiscoverersEventComponent from './specific-events/DiscoverersEventComponent.vue';
 import LoadingCalendarEventComponent from './LoadingCalendarEventComponent.vue';
 
-// import { parseCalendarEvents } from '../../utils/parseCalendar';
-
 const events = ref<GoogleCalendarEvent[]>([]);
 const emit = defineEmits(['eventsLoaded']);
 
 async function loadGoogle() {
   try {
-    const data = await parseCalendarEvents(4);
+    console.log('Events loading...');
+    const data = await fetch('/.netlify/functions/ical-calendar?maxResults=4')
+      .then((res) => res.json())
+      .then((data) => data as GoogleCalendarEvent[]);
+      console.log('Events loaded', data);
     events.value = data;
   } catch (error) {
     console.error('Failed to fetch events:', error);
@@ -64,22 +68,23 @@ async function loadGoogle() {
 
 onMounted(async () => {
   await loadGoogle();
+  console.log('Events loaded:', events.value);
   emit('eventsLoaded');
 });
 </script>
 
 <style scoped>
 .event-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  gap: 0.5rem ;
   justify-content: flex-start;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .event-underline {
   border-bottom: 1px solid var(--nav-bar-bg-color);
-  max-width: 1250px;
   width:95%;
+  margin-left: 1rem;
 }
 
 @media (min-width: 1024px) {
@@ -101,7 +106,6 @@ onMounted(async () => {
 .event-box {
   padding: 5px 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 275px;
   border-radius: 18px !important;
 }
 
@@ -115,24 +119,28 @@ onMounted(async () => {
 
 .loading-grid {
   display: grid;
-  gap: 1rem;
+  gap: 0.5rem;
   justify-content: center;
-  grid-template-columns: repeat(4, 315px);
+  grid-template-columns: repeat(4, 275px);
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1200px) {
   .loading-grid {
-    grid-template-columns: repeat(2, 315px);
+    grid-template-columns: repeat(2, 275px);
+    width: 100%;
   }
 }
 
 @media (max-width: 600px) {
   .loading-grid {
-    grid-template-columns: 100%;
+    display: grid;
+    grid-template-columns: 100%; /* single column */
+    gap: 0.5rem; /* optional spacing between items */
+    width: 100%;
   }
   .event-box {
     width: 100%;
     min-width: 100%;
   }
 }
-</style> -->
+</style> 

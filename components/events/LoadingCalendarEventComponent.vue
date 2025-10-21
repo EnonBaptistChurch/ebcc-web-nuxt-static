@@ -17,7 +17,7 @@
   background-color: aliceblue;
 
   /* center the spinner */
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   height: 60px; 
