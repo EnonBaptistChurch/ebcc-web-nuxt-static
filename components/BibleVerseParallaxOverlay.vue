@@ -1,5 +1,4 @@
 <template>
-  <ClientOnly>
   <div
     id="edenParallax_page_section"
     class="edenParallax-zone"
@@ -13,7 +12,6 @@
       </div>
     </div>
   </div>
-  </ClientOnly>
 </template>
 
 <script>
