@@ -25,7 +25,7 @@
     "@types/ical": "^0.8.3",
     "@types/luxon": "^3.7.1",
     "compression-webpack-plugin": "^11.1.0",
-    "nuxt": "^4.1.0",
+    "nuxt": "^4.2.0",
     "typescript": "^5.9.2",
     "vite-tsconfig-paths": "^5.1.4"
   }
