@@ -6,9 +6,9 @@
           <div class="thumbnail" @click="play(episode)">
             <img :src="episode.itunes.image" alt="Episode Thumbnail" />
             <div class="play-button">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <path fill="#fff" d="M424 214.7L72 3c-17.8-10.2-40 2.7-40 23.7v458.6c0 21 22.2 34 40 23.7l352-211.7c16.5-9.9 16.5-33.7 0-43.3z"/>
-              </svg>
+              
+              <PauseIcon v-if="chosenPodcast && props.player.isPlaying.value"  width="16" height="16" fill="#ffffff"/>
+              <PlayIcon v-else width="16" height="16" fill="#ffffff"/>
             </div>
           </div>
           <!-- Info -->
@@ -21,7 +21,7 @@
             <div v-if="episode.parsedSnippet !== null">
             <p class="card-speaker">{{ episode.parsedSnippet.speaker }}</p>
             <div class="info-row">
-              <span class="card-date">{{ episode.parsedSnippet.date }}</span> - 
+              <span class="card-date">{{ getUkDateString(episode.parsedSnippet.formattedDate) }}</span> - 
               <span class="card-service">{{ episode.parsedSnippet.service }}</span>
             </div>
             </div>
@@ -46,17 +46,30 @@
 
 <script setup lang="ts">
 import type { PodcastItem } from '@/types/SermonPodcasts';
+import PlayIcon from '../widgets/audio/icons/PlayIcon.vue';
+import PauseIcon from '../widgets/audio/icons/PauseIcon.vue';
+import { getUkDateString } from '../../composables/useDateToText';
+
 
 const props = defineProps<{
   episode: PodcastItem
   choosePodcast: (episode: PodcastItem) => void
-  chosenPodcast: boolean
+  chosenPodcast: boolean,
+  player: ReturnType<typeof useAudioPlayer>
 }>()
 
 const play = (episode: PodcastItem) => {
-  props.choosePodcast(episode);
+  props.player.setInitialStart(true); // now this is the same instance
+  if(!props.chosenPodcast){
+    props.choosePodcast(episode);
+  }
+  else{
+    props.player.togglePlay();
+  }
+  
+};
 
-}
+
 </script>
 
 <style scoped>

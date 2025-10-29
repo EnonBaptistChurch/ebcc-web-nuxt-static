@@ -2,20 +2,20 @@
   <div class="audio-player" id="#audio-player">
     <p class="audio-details">{{ src.title }}</p>
     <p class="audio-details">{{ src.parsedSnippet?.speaker }}</p>
-    <p class="audio-details">{{ ukDateString(src.parsedSnippet?.date!) }} - {{ src.parsedSnippet?.service }}</p>
+    <p class="audio-details">{{ getUkDateString(src.parsedSnippet?.formattedDate!) }} - {{ src.parsedSnippet?.service }}</p>
     
     <div class="controls">
   <div class="left-controls">
-    <button @click="rewind" class="icon-btn" title="Rewind 10s" :style="{ '--btn-size': buttonSize + 'px' }">
+    <button @click="props.player.rewind(10)" class="icon-btn" title="Rewind 10s" :style="{ '--btn-size': buttonSize + 'px' }">
       <RewindIcon :size="iconSize" />
     </button>
 
-    <button @click="togglePlay" class="play-btn" :class="{ playing: isPlaying }" title="Play/Pause" :style="{ '--btn-size': buttonSize + 'px' }">
-      <PlayIcon v-if="!isPlaying" :size="iconSize" />
+    <button @click="toPlayAtStart()" class="play-btn" :class="{ playing: props.player.isPlaying }" title="Play/Pause" :style="{ '--btn-size': buttonSize + 'px' }">
+      <PlayIcon v-if="!props.player.isPlaying.value" :size="iconSize" />
       <PauseIcon v-else :size="iconSize" />
     </button>
 
-    <button @click="forward" class="icon-btn" title="Forward 10s" :style="{ '--btn-size': buttonSize + 'px' }">
+    <button @click="props.player.forward(10)" class="icon-btn" title="Forward 10s" :style="{ '--btn-size': buttonSize + 'px' }">
       <ForwardIcon :size="iconSize" />
     </button>
   </div>
@@ -29,7 +29,7 @@
         min="0"
         max="1"
         step="0.01"
-        v-model.number="volume"
+        v-model.number="props.player.volume.value"
         @input="changeVolume"
         title="Volume"
         class="volume-slider"
@@ -38,16 +38,16 @@
   </div>
 </div>
     <div class="time-container">
-      <span class="current-time">{{ formatTime(currentTime) }}</span>
-      <span class="duration">{{ formatTime(duration) }}</span>
+      <span class="current-time">{{ props.player.formatTime(props.player.currentTime.value) }}</span>
+      <span class="duration">{{ props.player.formatTime(props.player.duration.value) }}</span>
     </div>
     <div class="progress">
       <input
         type="range"
         min="0"
-        :max="duration"
+        :max="props.player.duration.value"
         step="0.1"
-        v-model="currentTime"
+        v-model="props.player.currentTime.value"
         @input="seekAudio"
       />
       
@@ -57,103 +57,54 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
-import RewindIcon from './audio/icons/RewindIcon.vue'
-import PlayIcon from './audio/icons/PlayIcon.vue'
-import PauseIcon from './audio/icons/PauseIcon.vue'
-import ForwardIcon from './audio/icons/ForwardIcon.vue'
+import { ref, watch } from 'vue';
+import RewindIcon from './audio/icons/RewindIcon.vue';
+import PlayIcon from './audio/icons/PlayIcon.vue';
+import PauseIcon from './audio/icons/PauseIcon.vue';
+import ForwardIcon from './audio/icons/ForwardIcon.vue';
+import type { PodcastItem } from '@/types/SermonPodcasts';
+import { getUkDateString } from '../../composables/useDateToText';
 
+const props = defineProps<{ src: PodcastItem,
+  player: ReturnType<typeof useAudioPlayer> }>();
 
-import type { PodcastItem } from '@/types/SermonPodcasts'
-const volume = ref(1) 
-const iconSize = ref(30) 
-const buttonSize = ref(40)
+const iconSize = ref(30);
+const buttonSize = ref(40);
+const volume = ref(1);
+
+const toPlayAtStart = () => {
+    if(!props.player.initialStart.value)
+    {
+      props.player.setInitialStart(true);
+      props.player.togglePlay();
+    }
+    else
+    {
+      props.player.togglePlay();
+    }
+};
+
+watch(
+  () => props.src,
+  (newVal) => {
+    if (newVal?.enclosure?.url) {
+      props.player.init(newVal.enclosure.url, props.player.initialStart.value); // autoplay only if user clicked
+    }
+  },
+  { immediate: true }
+);
 
 const changeVolume = () => {
-  if (audio) audio.volume = volume.value
-}
-
-
-const props = defineProps<{
-  src: PodcastItem
-}>()
-
-let audio: any
-const isPlaying = ref(false)
-const currentTime = ref(0)
-const duration = ref(0)
-
-const initAudio = (autoplay: boolean) => {
-  if (audio) {
-    audio.pause()
-    audio.src = ''
-    isPlaying.value = false
-  }
-  audio = new Audio(props.src.enclosure.url)
-
-  audio.addEventListener('timeupdate', () => {
-    if(audio !== null)
-    currentTime.value = audio.currentTime;
-  })
-
-  audio.addEventListener('loadedmetadata', () => {
-    duration.value = audio.duration
-  })
-
-  audio.addEventListener('ended', () => {
-    isPlaying.value = false
-  })
-  if (autoplay)
-  togglePlay();
-}
-
-const ukDateString = (date: string) => {
-  const newDate = new Date(parseDateString(date));
- return newDate.toLocaleDateString('en-GB', {
-      weekday: 'long',
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric'
-    });
-} 
-
-onMounted(() =>initAudio(false))
-watch(() => props.src, () => initAudio(true))
-
-const togglePlay = () => {
-  if (!audio) return
-  if (isPlaying.value) audio.pause()
-  else audio.play()
-  isPlaying.value = !isPlaying.value
-}
+  props.player.setVolume(props.player.volume.value);
+};
 
 const seekAudio = () => {
-  if (audio) audio.currentTime = currentTime.value
-}
+  props.player.seek(props.player.currentTime.value);
+};
 
-const rewind = () => {
-  if (audio) audio.currentTime = Math.max(0, audio.currentTime - 10)
-}
 
-const forward = () => {
-  if (audio) audio.currentTime = Math.min(audio.duration, audio.currentTime + 10)
-}
-
-const formatTime = (sec: number) => {
-  if (isNaN(sec)) return '0:00'
-  const m = Math.floor(sec / 60)
-  const s = Math.floor(sec % 60).toString().padStart(2, '0')
-  return `${m}:${s}`
-}
-
-onBeforeUnmount(() => {
-  if (audio) {
-    audio.pause()
-    audio.src = ''
-    audio = null
-  }
-})
 </script>
+
 
 <style scoped>
 .audio-player {
@@ -169,7 +120,7 @@ onBeforeUnmount(() => {
     url('/images/new-enon-320.webp') no-repeat center / cover; /* non-repeating, fit container */
 
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
-  max-width: 400px;
+  max-width: 500px;
   margin: 0 auto;
   transition: all 0.3s ease;
 }
