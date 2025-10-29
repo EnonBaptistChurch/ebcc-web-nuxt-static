@@ -8,10 +8,7 @@
             Enon Baptist Church
           </NuxtLink>
         </div>
-
-        <!-- Desktop Menu -->
         <DesktopNav />
-        <!-- Mobile menu button -->
         <MobileMenuButton
           :mobile-menu-open="mobileMenuOpen"
           :toggleMenu="toggleMobileMenu" />
