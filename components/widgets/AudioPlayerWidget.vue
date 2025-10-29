@@ -2,132 +2,109 @@
   <div class="audio-player" id="#audio-player">
     <p class="audio-details">{{ src.title }}</p>
     <p class="audio-details">{{ src.parsedSnippet?.speaker }}</p>
-    <p class="audio-details">{{ ukDateString(src.parsedSnippet?.date!) }} - {{ src.parsedSnippet?.service }}</p>
+    <p class="audio-details">{{ getUkDateString(src.parsedSnippet?.formattedDate!) }} - {{ src.parsedSnippet?.service }}</p>
     
     <div class="controls">
-      <!-- Rewind 10s -->
-      <button @click="rewind" class="icon-btn" title="Rewind 10s">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><polyline points="9.57 15.41 12.17 24.05 20.81 21.44" stroke-linecap="round"></polyline><path d="M26.93,41.41V23a.09.09,0,0,0-.16-.07s-2.58,3.69-4.17,4.78" stroke-linecap="round"></path><rect x="32.19" y="22.52" width="11.41" height="18.89" rx="5.7"></rect><path d="M12.14,23.94a21.91,21.91,0,1,1-.91,13.25" stroke-linecap="round"></path></g></svg>
-      </button>
+  <div class="left-controls">
+    <button @click="props.player.rewind(10)" class="icon-btn" title="Rewind 10s" :style="{ '--btn-size': buttonSize + 'px' }">
+      <RewindIcon :size="iconSize" />
+    </button>
 
-      <!-- Play/Pause -->
-      <button @click="togglePlay" class="play-btn" :class="{ playing: isPlaying }" title="Play/Pause">
-        <svg v-if="!isPlaying" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon">
-          <path d="M8 5v14l11-7z"/>
-        </svg>
-        <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon">
-          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-        </svg>
-      </button>
+    <button @click="toPlayAtStart()" class="play-btn" :class="{ playing: props.player.isPlaying }" title="Play/Pause" :style="{ '--btn-size': buttonSize + 'px' }">
+      <PlayIcon v-if="!props.player.isPlaying.value" :size="iconSize" />
+      <PauseIcon v-else :size="iconSize" />
+    </button>
 
-      <!-- Forward 10s -->
-      <button @click="forward" class="icon-btn" title="Forward 10s">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><polyline points="54.43 15.41 51.83 24.05 43.19 21.44" stroke-linecap="round"></polyline><path d="M24.93,41.41V23a.09.09,0,0,0-.16-.07s-2.58,3.69-4.17,4.78" stroke-linecap="round"></path><rect x="30.19" y="22.52" width="11.41" height="18.89" rx="5.7"></rect><path d="M51.86,23.94a21.91,21.91,0,1,0,.91,13.25" stroke-linecap="round"></path></g></svg>
-      </button>
+    <button @click="props.player.forward(10)" class="icon-btn" title="Forward 10s" :style="{ '--btn-size': buttonSize + 'px' }">
+      <ForwardIcon :size="iconSize" />
+    </button>
+  </div>
+
+  <div class="right-controls">
+    <div class="volume-control">
+      <label for="volume">🔊</label>
+      <input
+        id="volume"
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        v-model.number="props.player.volume.value"
+        @input="changeVolume"
+        title="Volume"
+        class="volume-slider"
+      />
     </div>
-<div class="time-container">
-  <span class="current-time">{{ formatTime(currentTime) }}</span>
-  <span class="duration">{{ formatTime(duration) }}</span>
+  </div>
 </div>
+    <div class="time-container">
+      <span class="current-time">{{ props.player.formatTime(props.player.currentTime.value) }}</span>
+      <span class="duration">{{ props.player.formatTime(props.player.duration.value) }}</span>
+    </div>
     <div class="progress">
       <input
         type="range"
         min="0"
-        :max="duration"
+        :max="props.player.duration.value"
         step="0.1"
-        v-model="currentTime"
+        v-model="props.player.currentTime.value"
         @input="seekAudio"
       />
       
     </div>
   </div>
+  
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
+import { ref, watch } from 'vue';
+import RewindIcon from './audio/icons/RewindIcon.vue';
+import PlayIcon from './audio/icons/PlayIcon.vue';
+import PauseIcon from './audio/icons/PauseIcon.vue';
+import ForwardIcon from './audio/icons/ForwardIcon.vue';
+import type { PodcastItem } from '@/types/SermonPodcasts';
+import { getUkDateString } from '../../composables/useDateToText';
 
-import type { PodcastItem } from '@/types/SermonPodcasts'
+const props = defineProps<{ src: PodcastItem,
+  player: ReturnType<typeof useAudioPlayer> }>();
 
+const iconSize = ref(30);
+const buttonSize = ref(40);
+const volume = ref(1);
 
+const toPlayAtStart = () => {
+    if(!props.player.initialStart.value)
+    {
+      props.player.setInitialStart(true);
+      props.player.togglePlay();
+    }
+    else
+    {
+      props.player.togglePlay();
+    }
+};
 
-const props = defineProps<{
-  src: PodcastItem
-}>()
+watch(
+  () => props.src,
+  (newVal) => {
+    if (newVal?.enclosure?.url) {
+      props.player.init(newVal.enclosure.url, props.player.initialStart.value); // autoplay only if user clicked
+    }
+  },
+  { immediate: true }
+);
 
-let audio: any
-const isPlaying = ref(false)
-const currentTime = ref(0)
-const duration = ref(0)
-
-const initAudio = () => {
-  if (audio) {
-    audio.pause()
-    audio.src = ''
-    isPlaying.value = false
-  }
-  audio = new Audio(props.src.enclosure.url)
-
-  audio.addEventListener('timeupdate', () => {
-    if(audio !== null)
-    currentTime.value = audio.currentTime;
-  })
-
-  audio.addEventListener('loadedmetadata', () => {
-    duration.value = audio.duration
-  })
-
-  audio.addEventListener('ended', () => {
-    isPlaying.value = false
-  })
-}
-
-const ukDateString = (date: string) => {
-  const newDate = new Date(parseDateString(date));
- return newDate.toLocaleDateString('en-GB', {
-      weekday: 'long',
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric'
-    });
-} 
-
-onMounted(initAudio)
-watch(() => props.src, initAudio)
-
-const togglePlay = () => {
-  if (!audio) return
-  if (isPlaying.value) audio.pause()
-  else audio.play()
-  isPlaying.value = !isPlaying.value
-}
+const changeVolume = () => {
+  props.player.setVolume(props.player.volume.value);
+};
 
 const seekAudio = () => {
-  if (audio) audio.currentTime = currentTime.value
-}
+  props.player.seek(props.player.currentTime.value);
+};
 
-const rewind = () => {
-  if (audio) audio.currentTime = Math.max(0, audio.currentTime - 10)
-}
 
-const forward = () => {
-  if (audio) audio.currentTime = Math.min(audio.duration, audio.currentTime + 10)
-}
-
-const formatTime = (sec: number) => {
-  if (isNaN(sec)) return '0:00'
-  const m = Math.floor(sec / 60)
-  const s = Math.floor(sec % 60).toString().padStart(2, '0')
-  return `${m}:${s}`
-}
-
-onBeforeUnmount(() => {
-  if (audio) {
-    audio.pause()
-    audio.src = ''
-    audio = null
-  }
-})
 </script>
+
 
 <style scoped>
 .audio-player {
@@ -136,9 +113,14 @@ onBeforeUnmount(() => {
   align-items: center;
   padding: 1rem 1.25rem;
   border-radius: 1rem;
-  background: linear-gradient(145deg, #ffffff, #f2f4f8);
+  font-weight: 700;
+  /* Background with watermark overlay */
+  background: 
+    linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), /* semi-transparent overlay */
+    url('/images/new-enon-320.webp') no-repeat center / cover; /* non-repeating, fit container */
+
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
-  max-width: 400px;
+  max-width: 500px;
   margin: 0 auto;
   transition: all 0.3s ease;
 }
@@ -153,12 +135,6 @@ onBeforeUnmount(() => {
   margin:0.25rem;
 }
 
-.controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.25rem;
-}
 
 .icon-btn,
 .play-btn {
@@ -168,8 +144,8 @@ onBeforeUnmount(() => {
   background: #f9fafb;
   border: none;
   border-radius: 50%;
-  width: 52px;
-  height: 52px;
+  width: var(--btn-size, 52px);   /* default 52px */
+  height: var(--btn-size, 52px);  /* default 52px */
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
@@ -181,7 +157,7 @@ onBeforeUnmount(() => {
 }
 
 .play-btn.playing {
-  background: #2563eb;
+  background: var(--button-bg-color);
   color: white;
 }
 
@@ -199,7 +175,7 @@ onBeforeUnmount(() => {
 
 input[type='range'] {
   width: 100%;
-  accent-color: #2563eb;
+  accent-color: var(--button-bg-color);
   cursor: pointer;
 }
 
@@ -209,5 +185,66 @@ input[type='range'] {
   font-size: 14px;
   width: 100%;
   margin:0;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between; /* left controls to left, volume to right */
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.left-controls {
+  display: flex;
+  gap: 1rem; /* spacing between rewind, play, forward */
+  align-items: center;
+  margin-left: 1.25rem;
+}
+
+.right-controls {
+  display: flex;
+  align-items: center;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.volume-control input[type="range"] {
+  cursor: pointer;
+  accent-color: var(--button-bg-color);
+}
+
+.volume-slider {
+  max-width: 100px;
+}
+
+@media (max-width: 600px) {
+  .controls {
+    flex-direction: column;
+    align-items: stretch; /* stretch to full width */
+  }
+
+  .left-controls,
+  .right-controls {
+    justify-content: center; /* center the controls horizontally */
+    margin: 0.5rem 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .volume-control {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .volume-control input[type="range"] {
+    width: 80%; /* make slider more mobile-friendly */
+  }
 }
 </style>

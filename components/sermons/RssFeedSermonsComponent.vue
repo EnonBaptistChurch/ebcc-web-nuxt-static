@@ -19,6 +19,7 @@
         :episode="episode"
         :choosePodcast="choosePodcast"
         :chosenPodcast="isChosenPodcast(episode)"
+        :player="player"
       />
     </ul>
 
@@ -36,7 +37,9 @@ import type { PodcastItem } from '@/types/SermonPodcasts'
 const props = defineProps<{
   episodes: PodcastItem[]
   choosePodcast: Function
-  chosenPodcast: PodcastItem
+  chosenPodcast: PodcastItem,
+  player: ReturnType<typeof useAudioPlayer>
+  
 }>()
 
 const searchQuery = ref('')
@@ -100,6 +103,9 @@ const isChosenPodcast = (episode: PodcastItem) => {
 
 .filter-bar {
   margin-bottom: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .search-input {

@@ -2,17 +2,17 @@
   <div class="sermons-page">
     <h1>Recent Sermons</h1>
     
-    <SermonWidget >
+    <SermonWidget v-if="fetchedNoPodcastSuccessfully">
       <p>Here is our latest uploaded sermon.</p>
     </SermonWidget>
     
-    <!-- <div v-if="podcast">
-      <AudioPlayerWidget :src="chosenPodcast"/>
-      <RssFeedSermonsComponent :episodes="podcast.items" :choose-podcast="choosePodcast" :chosen-podcast="chosenPodcast" />
+    <div v-if="podcast">
+      <AudioPlayerWidget :src="chosenPodcast" :player="audioPlayer"/>
+      <RssFeedSermonsComponent :episodes="podcast.items" :choose-podcast="choosePodcast" :chosen-podcast="chosenPodcast" :player="audioPlayer" />
     </div>
     <div v-else>
       <p>Loading sermons...</p>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ const fetchedNoPodcastSuccessfully = ref<boolean|null>(false);
 onMounted(async () => {
   try {
     const data = await fetch("/.netlify/functions/sermons").then(res => res.json())
-    podcast.value = data
+    podcast.value = data;
     choosePodcast(data.items[0]);
   } catch (err) {
     podcast.value = [];
@@ -43,4 +43,6 @@ const choosePodcast = (podcast: PodcastItem) => {
   chosenPodcast.value = podcast;
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
+
+const audioPlayer = useAudioPlayer();
 </script>
