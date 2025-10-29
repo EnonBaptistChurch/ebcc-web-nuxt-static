@@ -7,7 +7,7 @@
     <button
       type="button"
       @click="openZoom"
-      class="btn btn-primary"
+      class="zoom-btn"
     >
       Join Zoom
     </button>
@@ -25,3 +25,32 @@ function openZoom() {
   window.open(link, "_blank", "noopener,noreferrer");
 }
 </script>
+
+<style scoped>
+.zoom-btn {
+  background-color: var(--btn-primary-bg, #1976D2);
+  color: #fff;
+  font-weight: 600;
+  padding: 12px 22px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: background-color .2s, transform .1s, box-shadow .2s;
+}
+
+.zoom-btn:hover {
+  background-color: #166FE5;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.zoom-btn:active {
+  background-color: #0B5FCC;
+  transform: scale(0.97);
+}
+
+.zoom-btn:focus {
+  outline: 2px solid #8BB8F3;
+  outline-offset: 3px;
+}
+</style>
