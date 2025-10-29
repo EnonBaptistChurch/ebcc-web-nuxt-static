@@ -1,4 +1,5 @@
 import type { ParsedSnippet } from "@/types/SermonPodcasts"
+import { getSermonDate } from "@/composables/UseSermonDateConverter";
 export function parseContentSnippet(snippet: string): ParsedSnippet |null {
   const lines = snippet
     .split("\n")
@@ -12,6 +13,7 @@ export function parseContentSnippet(snippet: string): ParsedSnippet |null {
     speaker: lines[1] || "",
     date: lines[2] || "",
     service: lines[3] || "",
+    formattedDate: getSermonDate(lines[2]!) || undefined
   }
 }
 

@@ -27,7 +27,8 @@ export interface ParsedSnippet {
   title: string
   speaker: string
   date: string
-  service?: string
+  service?: string,
+  formattedDate?: Date
 }
 
 export interface ItunesOwner {
