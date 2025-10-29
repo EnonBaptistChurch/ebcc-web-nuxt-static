@@ -28,7 +28,7 @@ function openZoom() {
 
 <style scoped>
 .zoom-btn {
-  background-color: var(--btn-primary-bg, #1976D2);
+  background-color: var(--button-bg-color, #1976D2);
   color: #fff;
   font-weight: 600;
   padding: 12px 22px;
