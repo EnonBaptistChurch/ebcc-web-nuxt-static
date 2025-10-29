@@ -2,17 +2,17 @@
   <div class="sermons-page">
     <h1>Recent Sermons</h1>
     
-    <SermonWidget v-if="fetchedNoPodcastSuccessfully">
+    <SermonWidget >
       <p>Here is our latest uploaded sermon.</p>
     </SermonWidget>
     
-    <div v-if="podcast">
+    <!-- <div v-if="podcast">
       <AudioPlayerWidget :src="chosenPodcast"/>
       <RssFeedSermonsComponent :episodes="podcast.items" :choose-podcast="choosePodcast" :chosen-podcast="chosenPodcast" />
     </div>
     <div v-else>
       <p>Loading sermons...</p>
-    </div>
+    </div> -->
   </div>
 </template>
 
