@@ -2,7 +2,7 @@
   <div class="sermons-page">
     <h1>Recent Sermons</h1>
     
-    <SermonWidget v-if="fetchedNoPodcastSuccessfully">
+    <SermonWidget >
       <p>Here is our latest uploaded sermon.</p>
     </SermonWidget>
     
@@ -12,7 +12,7 @@
     </div>
     <div v-else>
       <p>Loading sermons...</p>
-    </div>
+    </div> -->
   </div>
 </template>
 
