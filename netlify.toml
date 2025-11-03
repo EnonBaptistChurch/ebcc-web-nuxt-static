@@ -3,13 +3,7 @@
   publish = "dist"
 
 [functions]
-  directory = "netlify/functions"  # folder where your functions live
-
-[dev]
-  command = "npm run dev"
-  targetPort = 3000
-  port = 8888
-  functions = "netlify/functions"
+  directory = "netlify/functions"
 
 [[redirects]]
   from = "/children"
@@ -18,7 +12,7 @@
 
 [[redirects]]
   from = "/church-history"
-  to = "/about/church-history/"
+  to = "/about/church-history"
   status = 301
 
 [[redirects]]
@@ -85,5 +79,3 @@
   from = "/sample-page/"
   to = "/"
   status = 301
-
-  
