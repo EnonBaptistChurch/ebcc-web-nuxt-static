@@ -6,7 +6,7 @@
   directory = "netlify/functions"
 
 [[redirects]]
-  from = "/children"
+  from = "/children*"
   to = "/whats-on/children"
   status = 301
 
