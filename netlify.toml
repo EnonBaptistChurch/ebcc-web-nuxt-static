@@ -10,3 +10,80 @@
   targetPort = 3000
   port = 8888
   functions = "netlify/functions"
+
+[[redirects]]
+  from = "/children"
+  to = "/whats-on/children"
+  status = 301
+
+[[redirects]]
+  from = "/church-history"
+  to = "/about/church-history/"
+  status = 301
+
+  [[redirects]]
+  from = "/pastors-message"
+  to = "/about/pastors-message"
+  status = 301
+
+[[redirects]]
+  from = "/online-sermons"
+  to = "/sermons"
+  status = 301
+
+[[redirects]]
+  from = "/sermons-2"
+  to = "/sermons"
+  status = 301
+
+[[redirects]]
+  from = "/sunday-services"
+  to = "/whats-on/sunday-services"
+  status = 301
+
+[[redirects]]
+  from = "/mens-meetings"
+  to = "/whats-on/mens-meetings"
+  status = 301
+
+[[redirects]]
+  from = "/womens-meetings-2"
+  to = "/whats-on/womens-meetings"
+  status = 301
+
+[[redirects]]
+  from = "/womens-meetings"
+  to = "/whats-on/womens-meetings"
+  status = 301
+
+[[redirects]]
+  from = "/bible-study"
+  to = "/whats-on/bible-study"
+  status = 301
+
+[[redirects]]
+  from = "/becoming-a-christian/*"
+  to = "/what-is-a-christian/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/becoming-a-christian"
+  to = "/what-is-a-christian"
+  status = 301
+
+[[redirects]]
+  from = "/event-category/sunday-services/"
+  to = "/sunday-services"
+  status = 301
+
+[[redirects]]
+  from = "/events/morning-worship/"
+  to = "/sunday-services"
+  status = 301
+
+[[redirects]]
+  from = "/sample-page/"
+  to = "/"
+  status = 301
+
+  
