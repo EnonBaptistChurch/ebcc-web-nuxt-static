@@ -21,7 +21,7 @@
   to = "/about/church-history/"
   status = 301
 
-  [[redirects]]
+[[redirects]]
   from = "/pastors-message"
   to = "/about/pastors-message"
   status = 301
