@@ -41,8 +41,8 @@
 
 .btn-home {
   display: inline-block;
-  background-color: var(--nav-bar-bg-color, #007bff);
-  color: #000;
+  background-color: var(--button-bg-color, #007bff);
+  color: var(--button-text-color, #ffffff);
   padding: 0.5rem 0.5rem;
   border-radius: 4px;
   text-decoration: none;
