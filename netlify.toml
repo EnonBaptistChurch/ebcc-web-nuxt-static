@@ -87,7 +87,4 @@
   to = "/"
   status = 301
 
-  [[redirects]]
-  from = "/*"
-  to = "/error"
-  status = 404
+  
