@@ -52,4 +52,10 @@ export default defineNuxtConfig({
     },
     plugins: [tsconfigPaths()]
   },
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      ignore: ['/error']
+    }
+  }
 })
