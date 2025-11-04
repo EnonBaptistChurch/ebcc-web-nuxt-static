@@ -87,7 +87,7 @@
   to = "/"
   status = 301
 
-[[redirects]]
+  [[redirects]]
   from = "/*"
-  to = "/error"
-  status = 404
+  to = "/index.html"
+  status = 200
