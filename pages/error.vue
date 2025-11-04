@@ -5,7 +5,8 @@
     image="/images/field.webp"
       verseText="And you will seek Me and find Me, when you search for Me with all your heart."
       reference="Jeremiah 29:13"
-      version="NKJV" />
+      version="NKJV" 
+      isErrorPage=true />
       <div class="text-content">
     <h5>This page wandered off — like a sheep without a shepherd.</h5>
     <NuxtLink to="/" class="btn-home">Return home</NuxtLink>

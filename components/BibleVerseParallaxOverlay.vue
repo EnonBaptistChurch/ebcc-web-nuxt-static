@@ -2,6 +2,7 @@
   <div
     id="edenParallax_page_section"
     class="edenParallax-zone"
+    :class="{ 'edenParallax-error': isErrorPage }"
     :data-speed="speed"
     :style="{ backgroundImage: `url(${currentImage})` }"
   >
@@ -30,11 +31,12 @@ export default {
         large: '/images/field-1440.webp',
         xlarge: '/images/field-1920.webp',
       })
-    }
+    },
+    isErrorPage: { type: Boolean, default: false }
   },
   data() {
     return {
-      currentImage: this.images.large,
+      currentImage: '', // Will be set on mount
     };
   },
   mounted() {
@@ -47,10 +49,10 @@ export default {
   methods: {
     updateImage() {
       const width = window.innerWidth;
-      if (width >= 1440 && this.images.xlarge) this.currentImage = this.images.xlarge;
-      else if (width >= 1024 && this.images.large) this.currentImage = this.images.large;
+      if (width >= 1920 && this.images.xlarge) this.currentImage = this.images.xlarge;
+      else if (width >= 1440 && this.images.large) this.currentImage = this.images.large;
       else if (width >= 768 && this.images.medium) this.currentImage = this.images.medium;
-      else if (this.images.small) this.currentImage = this.images.small;
+      else this.currentImage = this.images.small || '';
     }
   }
 };
@@ -64,9 +66,13 @@ export default {
   background-size: cover;
   position: relative;
   width: 100%;
-  height: 300px; /* default height for portrait */
+  height: 300px; 
   overflow: hidden;
   transition: background-image 0.3s ease-in-out;
+}
+
+.edenParallax-error {
+  background-attachment: unset !important;
 }
 
 /* Safari/iOS fallback for fixed backgrounds */
