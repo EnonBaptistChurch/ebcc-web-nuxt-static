@@ -9,11 +9,13 @@
   from = "/children"
   to = "/whats-on/children"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/children/"
   to = "/whats-on/children"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/church-history"
