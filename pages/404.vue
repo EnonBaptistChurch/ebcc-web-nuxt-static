@@ -1,5 +1,5 @@
 <template>
-  <main >
+  <main>
     
     <BibleVerseParallaxOverlay
     image="/images/field.webp"
@@ -15,9 +15,7 @@
   </main>
 </template>
 
-<script setup>
-// No special logic needed here for 404 page in static mode
-</script>
+
 
 <style scoped>
 .error-page {
