@@ -19,11 +19,7 @@
 <script setup lang="ts">
 
 import BibleVerseParallaxOverlay from '@/components/BibleVerseParallaxOverlay.vue'
-throw createError({ 
-  statusCode: 404, 
-  statusMessage: 'Page Not Found',
-  fatal: false 
-})
+
 </script>
 
 <style scoped>
