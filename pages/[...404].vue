@@ -12,7 +12,6 @@
     <NuxtLink to="/" class="btn-home">Return home</NuxtLink>
     </div>
     <br />
-  
   </main>
 </template>
 
