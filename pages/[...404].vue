@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 
-import BibleVerseParallaxOverlay from '@/components/BibleVerseParallaxOverlay.vue'
+import BibleVerseParallaxOverlay from '../components/BibleVerseParallaxOverlay.vue'
 
 </script>
 

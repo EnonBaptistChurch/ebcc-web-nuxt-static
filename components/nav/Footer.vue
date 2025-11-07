@@ -48,8 +48,10 @@
             <p>Sunday at 11:15am and 6:30pm</p>
             
             <h4 class="column-title">Location</h4>
-            <p>Skinner Street, Chatham, ME4 5RF</p>
-
+             <p>
+              <!--<DirectionsComponent location="Enon Baptist Church,Skinner Street, Chatham, ME4 5RF"/> -->
+              Skinner Street, Chatham, ME4 5RF
+            </p>
             <h4 class="column-title">Follow Us</h4>
             <a 
               href="https://open.spotify.com/show/18dBkVZvm1lsJAwhdJAOY1" 
@@ -77,7 +79,7 @@
 import { computed } from 'vue';
 import FooterColumn from './FooterColumn.vue';
 import { aboutSection, whatsonSection, whatsaChristianSection, sermonSection, findUsSection, contactSection }  from '../../data/NavigationLinks'
-
+// import DirectionsComponent from '../DirectionsComponent.vue';
 
 const currentYear = computed(() => new Date().getFullYear());
 </script>
@@ -96,7 +98,6 @@ const currentYear = computed(() => new Date().getFullYear());
   --nav-bar-bg-color: #84c4f4;
   background-color: var(--nav-bar-bg-color);
   color: var(--body-text-color);
-  margin-top: 1rem;
   padding: 0rem 0.5rem;
 }
 
