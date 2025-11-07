@@ -17,3 +17,14 @@
     </article>
 </div>
 </template>
+<script setup lang="ts">
+useHead({
+  title: 'Church History - Enon Baptist Church',
+  meta: [
+    {
+      name: 'description',
+      content: 'Discover the rich history of Enon Baptist Church in Chatham, a Bible-believing congregation founded in 1842, rooted in early English Baptist traditions and still alive today.'
+    }
+  ]
+});
+</script>

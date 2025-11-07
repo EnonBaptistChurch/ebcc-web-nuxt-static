@@ -12,5 +12,16 @@
       </div>
   </div>
 </template> 
+<script setup lang="ts">  
+useHead({
+  title: 'First Steps Toddler Group - Enon Baptist Church',
+  meta: [
+    {
+      name: 'description',
+      content: 'Join our First Steps toddler group at Enon Baptist Church, Chatham. A space for parents and carers to chat, and pre-school children to learn and play together.'
+    }
+  ]
+});
+</script>
 
 

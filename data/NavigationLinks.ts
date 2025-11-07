@@ -39,7 +39,7 @@ export const whatsaChristianSection: NavItem = {
   
   const testimonySection: NavItem = {
   title: 'Testimonies',
-  submenu: [{ link: "/testimonies/", title: "Graham Trice" }],
+  submenu: [{ link: "/testimonies/graham-trice", title: "Graham Trice" }],
   link:"/testimonies/",
   submenuOpen:false
 };

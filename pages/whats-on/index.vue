@@ -36,3 +36,15 @@
         </div>							
     </article>
 </template>
+
+<script setup lang="ts">
+useHead({
+  title: "What's On - Enon Baptist Church",
+  meta: [
+    {
+      name: 'description',
+      content: "Discover regular meetings at Enon Baptist Church, Chatham. Join us for worship, Bible study and children's activities."
+    }
+  ]
+});
+</script>

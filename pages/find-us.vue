@@ -21,6 +21,15 @@
 import MapsWidget from '../components/widgets/MapsWidget.vue'
 import CallWidget from '../components/widgets/CallWidget.vue'
 import CollapsibleSection from '../components/CollapsibleComponent.vue'
+useHead({
+  title: 'Find Us - Enon Baptist Church',
+  meta: [
+    {
+      name: 'description',
+      content: 'Find directions to Enon Baptist Church in Chatham, Kent. Get detailed routes from various locations to our church.'
+    }
+  ]
+})
 
 const sections = [
   {
