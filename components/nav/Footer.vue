@@ -98,7 +98,6 @@ const currentYear = computed(() => new Date().getFullYear());
   --nav-bar-bg-color: #84c4f4;
   background-color: var(--nav-bar-bg-color);
   color: var(--body-text-color);
-  margin-top: 1rem;
   padding: 0rem 0.5rem;
 }
 
