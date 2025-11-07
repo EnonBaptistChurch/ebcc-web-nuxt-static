@@ -1,24 +1,52 @@
-// scripts/resize-images.js
 import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
 
-// Common screen widths for responsiveness
-const sizes = [320, 480, 640, 768, 1024, 1280, 1440, 1920];  
+const sizes = [320, 480, 640, 768, 1024, 1280, 1440, 1920];
 
-const inputDir = './public/images';
-const outputDir = './public/images';
+const rootDir = './public/images';
 
-// Ensure output folder exists
-if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
+function processDirectory(dir) {
+  fs.readdirSync(dir).forEach(item => {
+    const fullPath = path.join(dir, item);
+    const stat = fs.statSync(fullPath);
 
-// Loop through all images in inputDir
-fs.readdirSync(inputDir).forEach(file => {
-  sizes.forEach(size => {
-    sharp(path.join(inputDir, file))
-      .resize(size)
-      .toFile(path.join(outputDir, `${path.parse(file).name}-${size}.webp`))
-      .then(() => console.log(`Generated ${file} at ${size}px`))
-      .catch(err => console.error(err));
+    if (stat.isDirectory()) {
+      // Recurse into child folder
+      processDirectory(fullPath);
+      return;
+    }
+
+    const name = path.parse(item).name;
+    const ext = path.parse(item).ext.toLowerCase();
+
+    // Skip non-image files (optional safety)
+    if (!['.webp'].includes(ext)) return;
+
+    // Skip files that are already resized (e.g., image-640.webp)
+    if (sizes.some(size => name.endsWith(`-${size}`))) return;
+
+    // Check if any resized version already exists in the SAME folder
+    const alreadyExists = sizes.some(size => {
+      const outputFile = path.join(dir, `${name}-${size}.webp`);
+      return fs.existsSync(outputFile);
+    });
+
+    if (alreadyExists) {
+      console.log(`Skipping ${fullPath} (variants already exist)`);
+      return;
+    }
+
+    // Generate new resized variants
+    sizes.forEach(size => {
+      sharp(fullPath)
+        .resize(size)
+        .toFile(path.join(dir, `${name}-${size}.webp`))
+        .then(() => console.log(`Generated ${path.join(dir, `${name}-${size}.webp`)}`))
+        .catch(err => console.error(err));
+    });
   });
-});
+}
+
+// Run starting from the root images directory
+processDirectory(rootDir);
