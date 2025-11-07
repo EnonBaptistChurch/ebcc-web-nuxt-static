@@ -8,3 +8,14 @@
         </div>
 </div>
 </template>
+<script setup lang="ts">
+useHead({
+  title: 'Sunday Prayer Meeting - Enon Baptist Church',
+  meta: [
+    {
+      name: 'description',
+      content: 'A Believer coming to the evening service? Why not join us for a time to come together in prayer before the evening service.'
+    }
+  ]
+})
+</script>
