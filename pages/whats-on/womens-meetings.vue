@@ -1,11 +1,5 @@
-<script>
-import CallWidget from '~/components/widgets/CallWidget.vue';
-
-export default {
-    components:{
-        CallWidget
-    }
-}
+<script setup lang="ts">
+import CallWidget from '../../components/widgets/CallWidget.vue';
 useHead({
   title: 'Ladies Meetings - Enon Baptist Church',
   meta: [
@@ -20,6 +14,6 @@ useHead({
     <div class="text-content">
         <h1>Ladies Meetings</h1>
         <p>Ladies Meeting – 1st and 3rd Thursday each month at 1.45pm </p>
-        <p>Monthly Bible Study on Tuesdays – please contact for details  </p>
+        <p>Monthly Bible Study on Tuesdays – please contact for details <CallWidget /> </p>
     </div>
 </template>
