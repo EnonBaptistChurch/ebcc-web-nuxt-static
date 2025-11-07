@@ -13,3 +13,15 @@
         </article>
     </div>
 </template>
+
+<script setup lang="ts">
+useHead({
+  title: 'Discoverers Youth Group - Enon Baptist Church',
+  meta: [
+    {
+      name: 'description',
+      content: 'Join Discoverers, the youth group for 11-16 year olds at Enon Baptist Church, Chatham. Enjoy games, activities, and a Christian message every other Friday during term time.'
+    }
+  ]
+});
+</script>
