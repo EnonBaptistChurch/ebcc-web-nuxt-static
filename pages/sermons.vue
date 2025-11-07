@@ -1,10 +1,10 @@
 <template>
   <div class="sermons-page">
     <h1>Recent Sermons</h1>
-    
-    <SermonWidget >
-      <p>Here is our latest uploaded sermon.</p>
-    </SermonWidget>
+    <p>Here is our latest uploaded sermon.</p>
+    <SermonWidget />
+
+    <p>We hope to have easier access to historical sermons here in the near future! Meanwhile, if you would like to have access to current historical sermons, please click on the spotify logo in the top right of the widget.</p>
     
     <!-- <div v-if="podcast">
       <AudioPlayerWidget :src="chosenPodcast"/>
@@ -23,6 +23,15 @@ import RssFeedSermonsComponent from '../components/sermons/RssFeedSermonsCompone
 import AudioPlayerWidget from '../components/widgets/AudioPlayerWidget.vue'
 import type { PodcastItem } from '@/types/SermonPodcasts';
 
+useHead({
+  title: 'Sermons - Enon Baptist Church',
+  meta: [
+    {
+      name: 'description',
+      content: 'Listen to recent sermons from Enon Baptist Church, Chatham.'
+    }
+  ]
+})
 
 const podcast = ref<any>(null);
 const chosenPodcast = ref<any>(null);
