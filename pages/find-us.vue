@@ -3,20 +3,23 @@
         <MapsWidget />
     <div class="directions-page">
     <h3>Getting to Enon</h3>
-
     <CollapsibleSection
       v-for="(section, i) in sections"
       :key="i"
       :title="section.heading"
       :content="section.body"
     />
+    <p>
+      If you have any queries, please give us a call on
+      <CallWidget text="01634 301499" />
+    </p>
   </div>
 
 </div>							
 </template>
 <script setup lang="ts">
 import MapsWidget from '../components/widgets/MapsWidget.vue'
-
+import CallWidget from '../components/widgets/CallWidget.vue'
 import CollapsibleSection from '../components/CollapsibleComponent.vue'
 
 const sections = [
