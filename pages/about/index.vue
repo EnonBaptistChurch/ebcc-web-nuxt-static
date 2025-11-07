@@ -34,10 +34,7 @@
 
 </template>
 
-<script>
-export default {
-  name: 'AboutPage'
-}
+<script setup lang="ts">
 useHead({
   title: 'About Us - Enon Baptist Church',
   meta: [
