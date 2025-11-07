@@ -26,3 +26,15 @@ the expert at work it all looked so easy—it always does when you watch experts
 
 </div>							</article>
 </template>
+
+<script setup lang="ts">
+useHead({
+  title: 'Stop Trying and Start Trusting - Enon Baptist Church',
+  meta: [
+    {
+      name: 'description',
+      content: 'Discover the true path to becoming a Christian by trusting in Christ rather than trying on your own.'
+    }
+  ]
+});
+</script>
