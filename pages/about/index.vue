@@ -38,7 +38,13 @@
 export default {
   name: 'AboutPage'
 }
+useHead({
+  title: 'About Us - Enon Baptist Church',
+  meta: [
+    {
+      name: 'description',
+      content: 'Learn more about Enon Baptist Church in Chatham, Kent. Discover our beliefs, worship style, and what to expect when you visit us.'
+    }
+  ]
+})
 </script>
-
-<style scoped>
-</style>
