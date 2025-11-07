@@ -6,6 +6,14 @@ export default {
         CallWidget
     }
 }
+useHead({
+  title: 'Ladies Meetings - Enon Baptist Church',
+  meta: [
+    {
+      name: 'description',
+      content: 'Find out about the Ladies Meetings at Enon Baptist Church, Chatham. Join us for fellowship and Bible study designed for women.'
+    }
+]});
 </script>
 
 <template>
