@@ -1,13 +1,5 @@
 <script setup>
 import GrahamTrice from '~/components/testimonies/graham-trice.vue';
-
-</script>
-
-<template>
-    <GrahamTrice />
-</template>
-
-<script>
 useHead({
   title: 'Testimonies - Enon Baptist Church',
   meta: [
@@ -18,3 +10,7 @@ useHead({
   ]
 })
 </script>
+
+<template>
+    <GrahamTrice />
+</template>
