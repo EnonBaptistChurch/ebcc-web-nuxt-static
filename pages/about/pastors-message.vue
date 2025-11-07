@@ -18,3 +18,15 @@
         </div>							
     </article>
 </template>
+
+<script setup lang="ts">
+useHead({
+  title: "Pastor's Message - Enon Baptist Church",
+  meta: [
+    {
+      name: 'description',
+      content: "Facing life’s uncertainties and rising costs? Pastor Paul Relf shares how Christians can find hope, guidance, and peace by seeking God first and trusting in His promises."
+    }
+  ]
+});
+</script>
