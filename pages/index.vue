@@ -1,7 +1,6 @@
 <template>
   
   <div>
-    
     <ChurchImage @imageRendered="onImageRendered" />
       <!-- <HeroSection /> -->
         <div class="home-page">
@@ -18,7 +17,7 @@
           version="NKJV"
         />
     
-    <NetlifyContact />
+    <!-- <NetlifyContact /> -->
   </div>
 </template>
 
