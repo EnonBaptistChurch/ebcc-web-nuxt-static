@@ -1,7 +1,15 @@
 <script setup lang="ts">
 import SundayMorning from '../../components/sundays/SundayMorning.vue';
 import SundayEvening from '../../components/sundays/SundayEvening.vue';
-
+useHead({
+  title: 'Sunday Services - Enon Baptist Church',
+  meta: [
+    {
+      name: 'description',
+      content: 'Enon Baptist Church, Chatham welcomes you to Sunday Services with Bible preaching, gospel-centered worship, and fellowship.'
+    }
+  ]
+})
 </script>
 
 <template>
