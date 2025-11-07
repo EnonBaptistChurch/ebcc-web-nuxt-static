@@ -47,7 +47,7 @@ const handleSubmit = async () => {
 <template>
   <div>
     <p class="text-content contact-form-intro">
-      We'd love to hear from you! Whether you have questions, feedback, or just want to say hello, please fill out the form below and we'll get back to you as soon as possible.
+      If you have questions or want to know more about us or Christianity, please give us a call outside of service times or fill out the form below and we'll get back to you as soon as possible. We'd love to hear from you.
     </p>
     <div class="text-content contact-form-intro">
       <h2>Phone: <CallWidget text="01634 301499" /></h2>
@@ -55,7 +55,7 @@ const handleSubmit = async () => {
 
     <h2 class="text-content contact-form-intro">Contact Form</h2>
     
-    <form @submit.prevent="handleSubmit" class="email-form">
+    <form @submit.prevent="handleSubmit" class="email-form ">
       <div class="form-row">
         <div class="form-group">
           <label for="name">Name</label>
@@ -91,6 +91,7 @@ const handleSubmit = async () => {
           required
           placeholder="Type your message here..."
           rows="9"
+          class="contact-message"
         ></textarea>
       </div>
 
@@ -198,7 +199,18 @@ button:hover:not(:disabled) {
 .error {
   color: red;
 }
+.contact-message {
+  min-height: 150px;
+  max-width: 1000px;
+  min-width: 150px;
+  max-height: 500px;
+}
 
+@media (max-width: 1000px) {
+  .email-form {
+    margin: 0.5rem 1rem;
+  }
+}
 /* Mobile - Single column layout */
 @media (max-width: 767px) {
   .form-row {
