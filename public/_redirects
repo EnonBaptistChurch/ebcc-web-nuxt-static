@@ -13,4 +13,3 @@
 /event-category/sunday-services/ /sunday-services 301
 /events/morning-worship/       /sunday-services 301
 /sample-page/         / 301
-/*                    /404.html 404!
