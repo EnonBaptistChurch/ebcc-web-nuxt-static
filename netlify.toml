@@ -5,16 +5,6 @@
 [functions]
   directory = "netlify/functions"
 
-[[redirects]]
-  from = "/children"
-  to = "/whats-on/children"
-  status = 301
-  force = true
 
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
-  force = true
 
   
