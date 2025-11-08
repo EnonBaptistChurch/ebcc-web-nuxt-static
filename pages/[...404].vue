@@ -15,6 +15,7 @@
   </main>
 </template>
 
+
 <script setup lang="ts">
 
 import BibleVerseParallaxOverlay from '../components/BibleVerseParallaxOverlay.vue'
