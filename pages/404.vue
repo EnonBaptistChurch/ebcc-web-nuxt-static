@@ -1,59 +1,6 @@
 <template>
-  <main>
-    
-    <BibleVerseParallaxOverlay
-    image="/images/field.webp"
-      verseText="And you will seek Me and find Me, when you search for Me with all your heart."
-      reference="Jeremiah 29:13"
-      version="NKJV" 
-      :isErrorPage="true" />
-      <div class="text-content">
-    <h5>This page wandered off — like a sheep without a shepherd.</h5>
-    <NuxtLink to="/" class="btn-home">Return home</NuxtLink>
-    </div>
-    <br />
-  </main>
+  <div>
+    <h1>Page Not Found</h1>
+    <p>The page you’re looking for does not exist2.</p>
+  </div>
 </template>
-
-<script setup lang="ts">
-
-import BibleVerseParallaxOverlay from '../components/BibleVerseParallaxOverlay.vue'
-
-</script>
-
-<style scoped>
-.error-page {
-  max-width: 600px;
-  margin: 6rem auto;
-  padding: 2rem;
-  text-align: center;
-  font-family: var(--font-family, sans-serif);
-  color: var(--color-text, #333);
-}
-
-.error-page h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.error-page p {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
-}
-
-.btn-home {
-  display: inline-block;
-  background-color: var(--button-bg-color, #007bff);
-  color: var(--button-text-color, #ffffff);
-  padding: 0.5rem 0.5rem;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
-}
-
-.btn-home:hover {
-  background-color: #005fa3;
-  color: #ffffff
-}
-</style>
