@@ -15,6 +15,8 @@
 </template>
 
 <script setup lang="ts">
+import { useHead } from 'nuxt/app';
+
 useHead({
   title: 'Sunday Club for Children - Enon Baptist Church',
   meta: [
