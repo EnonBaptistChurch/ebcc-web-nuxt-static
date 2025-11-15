@@ -4,6 +4,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"]
-    }
-  }
+    },
+    "types": ["nuxt"]  // <-- ensures Nuxt types are loaded
+  },
+  "exclude": ["node_modules", ".nuxt"]
 }
