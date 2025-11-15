@@ -1,8 +1,7 @@
 <template>
-    <div >
+    <div style="display: inline-block;">
       <NuxtLink @click.prevent="getDirections(location)" rel="nofollow" href="#" >
         <img class="directions" src="~/assets/icons/nav.svg" alt="Home Icon" />
-        Get Directions
       </NuxtLink>
     </div>
   </template>

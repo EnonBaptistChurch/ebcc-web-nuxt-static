@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
+import CallWidget from './widgets/CallWidget.vue'
 
 const formData = ref({
   name: '',
@@ -45,7 +46,16 @@ const handleSubmit = async () => {
 
 <template>
   <div>
-    <form @submit.prevent="handleSubmit" class="email-form">
+    <p class="text-content contact-form-intro">
+      If you have questions or want to know more about us or Christianity, please give us a call outside of service times or fill out the form below and we'll get back to you as soon as possible. We'd love to hear from you.
+    </p>
+    <div class="text-content contact-form-intro">
+      <h2>Phone: <CallWidget text="01634 301499" /></h2>
+    </div>
+
+    <h2 class="text-content contact-form-intro">Contact Form</h2>
+    
+    <form @submit.prevent="handleSubmit" class="email-form ">
       <div class="form-row">
         <div class="form-group">
           <label for="name">Name</label>
@@ -81,6 +91,7 @@ const handleSubmit = async () => {
           required
           placeholder="Type your message here..."
           rows="9"
+          class="contact-message"
         ></textarea>
       </div>
 
@@ -98,11 +109,16 @@ const handleSubmit = async () => {
 </template>
 
 <style scoped>
+.contact-form-intro {
+  max-width: 1000px;
+  margin: 0.75rem auto 0 auto;
+  
+}
 .email-form {
   max-width: 1000px;
-  margin: 0 auto;
-  padding: 0.5rem;
-  border-radius: 1rem;
+  margin: 0.25rem auto 0 auto;
+  padding: 0.25rem;
+  border-radius: 0.1rem;
 }
 
 .form-row {
@@ -183,7 +199,18 @@ button:hover:not(:disabled) {
 .error {
   color: red;
 }
+.contact-message {
+  min-height: 150px;
+  max-width: 1000px;
+  min-width: 150px;
+  max-height: 500px;
+}
 
+@media (max-width: 1000px) {
+  .email-form {
+    margin: 0.5rem 1rem;
+  }
+}
 /* Mobile - Single column layout */
 @media (max-width: 767px) {
   .form-row {
@@ -195,7 +222,7 @@ button:hover:not(:disabled) {
 @media (min-width: 768px) {
   .email-form {
     max-width: 1000px;
-    padding: 3rem;
+    padding: 0.5rem;
   }
 
   .form-row {

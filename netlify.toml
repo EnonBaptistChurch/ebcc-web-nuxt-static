@@ -3,10 +3,8 @@
   publish = "dist"
 
 [functions]
-  directory = "netlify/functions"  # folder where your functions live
+  directory = "netlify/functions"
 
-[dev]
-  command = "npm run dev"
-  targetPort = 3000
-  port = 8888
-  functions = "netlify/functions"
+
+
+  
