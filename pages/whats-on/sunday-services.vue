@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import SundayMorning from '../../components/sundays/SundayMorning.vue';
 import SundayEvening from '../../components/sundays/SundayEvening.vue';
+import { useHead } from 'nuxt/app';
 useHead({
   title: 'Sunday Services - Enon Baptist Church',
   meta: [

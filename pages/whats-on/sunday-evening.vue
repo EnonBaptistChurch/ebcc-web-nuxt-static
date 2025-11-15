@@ -3,6 +3,7 @@
 </template>
 <script setup lang="ts">
 import SundayEvening from '../../components/sundays/SundayEvening.vue';
+import { useHead } from 'nuxt/app';
 useHead({
   title: 'Sunday Evening Service - Enon Baptist Church',
   meta: [

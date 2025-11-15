@@ -22,7 +22,7 @@ import SermonWidget from '../components/sermons/SermonWidget.vue'
 import RssFeedSermonsComponent from '../components/sermons/RssFeedSermonsComponent.vue'
 import AudioPlayerWidget from '../components/widgets/AudioPlayerWidget.vue'
 import type { PodcastItem } from '@/types/SermonPodcasts';
-
+import { useHead } from 'nuxt/app';
 useHead({
   title: 'Sermons - Enon Baptist Church',
   meta: [
