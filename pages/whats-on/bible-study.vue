@@ -13,6 +13,7 @@
 </template>
 
 <script setup>
+import { useHead } from 'nuxt/app';
 useHead({
   title: 'Bible Study | Enon Baptist Church',
   meta: [

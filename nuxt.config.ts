@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   ssr: true,
   devtools: { enabled: false },
-  css: ['~/public/css/site.css'], // Adjust to match your actual path
+  css: ['~/public/css/site.css'], 
   alias: {
     '@': './',
   },
@@ -17,8 +17,8 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       ],
       link: [
-        { rel: 'icon',type: 'image/x-icon', href: '/images/new-logo.ico' },  // For higher resolution displays
-        { rel: 'preload', href: '/css/site.css', as: 'style' },  // adjust if using hashed filenames
+        { rel: 'icon',type: 'image/x-icon', href: '/images/new-logo.ico' },  
+        { rel: 'preload', href: '/css/site.css', as: 'style' },  
         { rel: 'stylesheet', href: '/css/site.css' },
       ],
       htmlAttrs: {
@@ -48,7 +48,7 @@ export default defineNuxtConfig({
       },
     },
     server: {
-      allowedHosts: ['dev-church.david-p-mitchell.uk', 'localhost']
+      allowedHosts: ['enonbaptistchatham.org.uk', 'localhost']
     },
     plugins: [tsconfigPaths()]
   },
