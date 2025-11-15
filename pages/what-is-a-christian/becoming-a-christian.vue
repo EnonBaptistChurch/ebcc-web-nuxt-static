@@ -16,6 +16,19 @@
 <p><strong>If you believe these things and you really want to become a Christian, then there is only one thing to do.</strong> Trust in Christ alone to save you, and hate your own sin. Plead with God to have mercy on you. Do this until you know God’s peace in your heart. When you seek the Lord like this, you can be sure that he will not turn you away.</p>
 <p><em>Peter Jeffery<br />
 </em><em>© Day One Publications,</em><em> </em>
-<NuxtLink to="https://www.dayone.co.uk/"><em>www.dayone.co.uk</em></NuxtLink></p>
+<a href="https://www.dayone.co.uk/"><em>www.dayone.co.uk</em></a></p>
 </div>							</article>
 </template>
+
+<script setup lang="ts">
+import { useHead } from 'nuxt/app';
+useHead({
+  title: 'Stop Trying and Start Trusting - Enon Baptist Church',
+  meta: [
+    {
+      name: 'description',
+      content: 'Discover the true path to becoming a Christian by trusting in Christ rather than trying on your own.'
+    }
+  ]
+});
+</script>
