@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import CallWidget from '../../components/widgets/CallWidget.vue';
+import { useHead } from 'nuxt/app';
 useHead({
   title: 'Ladies Meetings - Enon Baptist Church',
   meta: [

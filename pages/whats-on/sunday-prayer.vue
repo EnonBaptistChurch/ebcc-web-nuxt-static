@@ -9,6 +9,7 @@
 </div>
 </template>
 <script setup lang="ts">
+import { useHead } from 'nuxt/app';
 useHead({
   title: 'Sunday Prayer Meeting - Enon Baptist Church',
   meta: [

@@ -21,6 +21,7 @@
 import MapsWidget from '../components/widgets/MapsWidget.vue'
 import CallWidget from '../components/widgets/CallWidget.vue'
 import CollapsibleSection from '../components/CollapsibleComponent.vue'
+import { useHead } from 'nuxt/app';
 useHead({
   title: 'Find Us - Enon Baptist Church',
   meta: [

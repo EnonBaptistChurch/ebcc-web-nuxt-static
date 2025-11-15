@@ -32,7 +32,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useHead } from '#imports'
+import { useHead } from 'nuxt/app';
 
 useHead({
   title: 'What We Believe - Enon Baptist Church',

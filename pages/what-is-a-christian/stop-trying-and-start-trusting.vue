@@ -28,6 +28,7 @@ the expert at work it all looked so easy—it always does when you watch experts
 </template>
 
 <script setup lang="ts">
+import { useHead } from 'nuxt/app';
 useHead({
   title: 'Stop Trying and Start Trusting - Enon Baptist Church',
   meta: [

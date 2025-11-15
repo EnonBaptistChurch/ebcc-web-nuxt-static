@@ -7,7 +7,7 @@
 
 <script setup lang="ts">
 import NetlifyContact from '../components/NetlifyContact.vue';
-// import Contact from '~/components/Contact.vue';
+import { useHead } from 'nuxt/app';
 useHead({
   title: 'Contact Us - Enon Baptist Church',
   meta: [

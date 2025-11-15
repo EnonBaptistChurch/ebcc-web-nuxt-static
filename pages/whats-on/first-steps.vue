@@ -13,6 +13,7 @@
   </div>
 </template> 
 <script setup lang="ts">  
+import { useHead } from 'nuxt/app';
 useHead({
   title: 'First Steps Toddler Group - Enon Baptist Church',
   meta: [
