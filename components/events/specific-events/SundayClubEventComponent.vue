@@ -1,6 +1,6 @@
 <template>
     <div class="sunday-club">
-      <NuxtLink to="/whats-on/children" class="sunday-club">
+      <NuxtLink to="/whats-on/sunday-club" class="sunday-club">
         <EventsCalendarEventComponent :event="event" :has-page="true" />
       </NuxtLink>
     </div>

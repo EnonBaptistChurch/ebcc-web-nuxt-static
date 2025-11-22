@@ -10,7 +10,7 @@
             <p>
                 <strong>Sunday</strong><br />
                 9.45am &#8211;  
-                    <NuxtLink to="/whats-on/children/">Sunday Club</NuxtLink> (for children aged 4 to 15)<br />
+                    <NuxtLink to="/whats-on/sunday-club/">Sunday Club</NuxtLink> (for children aged 4 to 15)<br />
                 11.15am &#8211; 
                     <NuxtLink to="/whats-on/sunday-morning/"> Morning Worship</NuxtLink><br />
                 6.00 pm &#8211; <NuxtLink to="/whats-on/sunday-prayer/">Prayer Time</NuxtLink><br />
@@ -36,3 +36,16 @@
         </div>							
     </article>
 </template>
+
+<script setup lang="ts">
+import { useHead } from 'nuxt/app';
+useHead({
+  title: "What's On - Enon Baptist Church",
+  meta: [
+    {
+      name: 'description',
+      content: "Discover regular meetings at Enon Baptist Church, Chatham. Join us for worship, Bible study and children's activities."
+    }
+  ]
+});
+</script>
