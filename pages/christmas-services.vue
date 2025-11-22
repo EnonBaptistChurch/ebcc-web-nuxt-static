@@ -27,8 +27,9 @@
 .container {
   max-width: 700px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0.5rem;
   font-family: Arial, sans-serif;
+  text-align: center;
 }
 
 h1 {
