@@ -49,6 +49,6 @@ const columns = computed(() => {
   display: grid;
   gap: 2rem;
   padding: 2rem 1rem;
-  background: linear-gradient(#fff, #fffd, #fff, #fffd, #fff);
+  background: #e2e2e0d8 
 }
 </style>
