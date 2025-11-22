@@ -3,7 +3,7 @@ export const cards = [
   {
     image:'/images/christmas-pic-640.webp',
     title: 'Christmas Services',
-    description: `We'd love to invite you to our Carol Services this Christmas`,
+    description: `Join us this Christmas as we celebrate the birth of Jesus Christ.`,
     link: '/christmas-services',
     ariaLabel: 'Christmas Services Image',
     buttonText: 'Find Out More',
@@ -26,15 +26,6 @@ export const cards = [
     ariaLabel: 'Sermons Image',
     buttonText: 'Listen Now',
     show: true
-  },
-  {
-    image: '/images/christmas-pic-320.webp',
-    title: 'Christmas Services',
-    description: `We'd love to invite you to our Carol Services this Christmas`,
-    link: '/christmas-services',
-    ariaLabel: 'Christmas Services Image',
-    buttonText: 'Find Out More',
-    show: new Date(Date.now()) > new Date('2025-11-26') && new Date(Date.now()) < new Date('2025-12-29')
   },
   {
     image: '/images/sunday-club-640.webp',
