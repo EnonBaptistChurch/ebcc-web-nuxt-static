@@ -60,7 +60,7 @@ export async function handler(event) {
             To: [
               {
                 Email: process.env.EMAIL_TO,
-                Name: 'Your Name'
+                Name: 'Pastor @ Enon'
               }
             ],
             Subject: `New Contact Form Message from ${name}`,
