@@ -16,7 +16,6 @@ export async function handler(event) {
 
     // --- Turnstile verification ---
     const secret = process.env.TURNSTILE_SECRET_KEY;
-
     const verifyRes = await fetch(
       'https://challenges.cloudflare.com/turnstile/v0/siteverify',
       {
