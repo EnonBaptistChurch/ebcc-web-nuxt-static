@@ -13,6 +13,7 @@ export async function handler(event) {
     if (!name || !email || !message || !turnstileToken) {
       return { statusCode: 400, body: JSON.stringify({ error: 'Missing fields' }) };
     }
+    
 
     // --- Turnstile verification ---
     const secret = process.env.TURNSTILE_SECRET_KEY;
