@@ -26,7 +26,7 @@ onMounted(() => {
     return
   }
 
-  // Otherwise, dynamically load script
+  // Otherwise, dynamically load script 
   const script = document.createElement('script')
   script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js'
   script.async = true
