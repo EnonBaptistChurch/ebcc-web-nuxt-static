@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import CallWidget from './widgets/CallWidget.vue'
 
 const formData = ref({
@@ -12,10 +12,46 @@ const status = ref<'idle' | 'success' | 'error'>('idle')
 const isSubmitting = ref(false)
 const honeypot = ref('') // anti-spam hidden input
 
+// Turnstile references
+const captcha = ref<HTMLDivElement | null>(null)
+let widgetId: string | null = null
+
+// Dynamically load Turnstile on mount
+onMounted(() => {
+  // If Turnstile already loaded, just render
+  if ((window as any).turnstile && captcha.value) {
+    widgetId = (window as any).turnstile.render(captcha.value, {
+      sitekey: '0x4AAAAAACDJOgyutnSkQsYR'
+    })
+    return
+  }
+
+  // Otherwise, dynamically load script
+  const script = document.createElement('script')
+  script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js'
+  script.async = true
+  script.defer = true
+  script.onload = () => {
+    if (captcha.value) {
+      widgetId = (window as any).turnstile.render(captcha.value, {
+        sitekey: '0x4AAAAAACDJOgyutnSkQsYR'
+      })
+    }
+  }
+  document.head.appendChild(script)
+})
+
 // Submit the form
 const handleSubmit = async () => {
   if (honeypot.value) {
     status.value = 'error'
+    return
+  }
+
+  const turnstileToken = widgetId ? (window as any).turnstile.getResponse(widgetId) : null
+  if (!turnstileToken) {
+    status.value = 'error'
+    console.error('Turnstile verification missing')
     return
   }
 
@@ -25,16 +61,21 @@ const handleSubmit = async () => {
   try {
     const response = await $fetch('/.netlify/functions/contact', {
       method: 'POST',
-      body: formData.value
+      body: { ...formData.value, turnstileToken }
     })
 
     if (typeof response === 'object' && response !== null && 'error' in response) {
       const message = (response as { error: string }).error
-      throw new Error(message) // now TypeScript knows it's a string
+      throw new Error(message)
     }
 
     status.value = 'success'
     formData.value = { name: '', email: '', message: '' }
+
+    // Reset Turnstile widget
+    if (widgetId) {
+      (window as any).turnstile.reset(widgetId)
+    }
   } catch (err) {
     status.value = 'error'
     console.error('Submission failed:', err instanceof Error ? err.message : err)
@@ -49,54 +90,36 @@ const handleSubmit = async () => {
     <p class="text-content contact-form-intro">
       If you have questions or want to know more about us or Christianity, please give us a call outside of service times or fill out the form below and we'll get back to you as soon as possible. We'd love to hear from you.
     </p>
+
     <div class="text-content contact-form-intro">
       <h2>Phone: <CallWidget text="01634 301499" /></h2>
     </div>
 
     <h2 class="text-content contact-form-intro">Contact Form</h2>
-    
-    <form @submit.prevent="handleSubmit" class="email-form ">
+
+    <form @submit.prevent="handleSubmit" class="email-form">
       <div class="form-row">
         <div class="form-group">
           <label for="name">Name</label>
-          <input
-            id="name"
-            v-model="formData.name"
-            type="text"
-            name="name"
-            required
-            placeholder="Your full name"
-          />
+          <input id="name" v-model="formData.name" type="text" name="name" required placeholder="Your full name" />
         </div>
 
         <div class="form-group">
           <label for="email">Email</label>
-          <input
-            id="email"
-            v-model="formData.email"
-            type="email"
-            name="email"
-            required
-            placeholder="you@example.com"
-          />
+          <input id="email" v-model="formData.email" type="email" name="email" required placeholder="you@example.com" />
         </div>
       </div>
 
       <div class="form-group">
         <label for="message">Message</label>
-        <textarea
-          id="message"
-          v-model="formData.message"
-          name="message"
-          required
-          placeholder="Type your message here..."
-          rows="9"
-          class="contact-message"
-        ></textarea>
+        <textarea id="message" v-model="formData.message" name="message" required placeholder="Type your message here..." rows="9" class="contact-message"></textarea>
       </div>
 
       <!-- Honeypot hidden field -->
       <input v-model="honeypot" type="text" name="_gotcha" style="display: none;" />
+
+      <!-- Turnstile widget -->
+      <div ref="captcha"></div>
 
       <button type="submit" :disabled="isSubmitting">
         {{ isSubmitting ? 'Sending...' : 'Send' }}
@@ -112,8 +135,8 @@ const handleSubmit = async () => {
 .contact-form-intro {
   max-width: 1000px;
   margin: 0.75rem auto 0 auto;
-  
 }
+
 .email-form {
   max-width: 1000px;
   margin: 0.25rem auto 0 auto;
@@ -123,6 +146,7 @@ const handleSubmit = async () => {
 
 .form-row {
   display: flex;
+  gap: 2rem;
 }
 
 .form-group {
@@ -174,16 +198,12 @@ button:disabled {
   background-color: #aaa;
   cursor: not-allowed;
   border-color: #aaa;
-  border-width: 1px;
-  border-style: solid; /* <-- this is required */
 }
 
 button:hover:not(:disabled) {
   color: var(--button-bg-color);
   background-color: var(--button-color);
   border-color: var(--button-bg-color);
-  border-width: 1px;
-  border-style: solid; /* <-- this is required */
 }
 
 .status {
@@ -199,6 +219,7 @@ button:hover:not(:disabled) {
 .error {
   color: red;
 }
+
 .contact-message {
   min-height: 150px;
   max-width: 1000px;
@@ -206,43 +227,10 @@ button:hover:not(:disabled) {
   max-height: 500px;
 }
 
-@media (max-width: 1000px) {
-  .email-form {
-    margin: 0.5rem 1rem;
-  }
-}
-/* Mobile - Single column layout */
+/* Responsive */
 @media (max-width: 767px) {
   .form-row {
     flex-direction: column;
-  }
-}
-
-/* Desktop - Two-column layout */
-@media (min-width: 768px) {
-  .email-form {
-    max-width: 1000px;
-    padding: 0.5rem;
-  }
-
-  .form-row {
-    display: flex;
-    gap: 2rem;
-  }
-
-  .form-group {
-    flex: 1;
-  }
-
-  input,
-  textarea {
-    font-size: 1.125rem;
-    padding: 1rem;
-  }
-
-  button {
-    font-size: 1.125rem;
-    padding: 1rem;
   }
 }
 </style>
