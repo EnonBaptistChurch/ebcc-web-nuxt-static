@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import Mailjet from 'node-mailjet';
-import fetch from 'node-fetch'; // if using Node 18+ may not be needed
+import fetch from 'node-fetch';
 
 export async function handler(event) {
   if (event.httpMethod !== 'POST') {
@@ -16,22 +16,34 @@ export async function handler(event) {
 
     // --- Turnstile verification ---
     const secret = process.env.TURNSTILE_SECRET_KEY;
-    const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-      method: 'POST',
-      body: new URLSearchParams({
-        secret,
-        response: turnstileToken
-      }),
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-    });
+
+    const verifyRes = await fetch(
+      'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+      {
+        method: 'POST',
+        body: new URLSearchParams({
+          secret,
+          response: turnstileToken
+        }),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }
+    );
 
     const verifyJson = await verifyRes.json();
+    console.log('Turnstile verification response:', verifyJson);
+
     if (!verifyJson.success) {
-      return { statusCode: 400, body: JSON.stringify({ error: 'Captcha verification failed' }) };
+      return {
+        statusCode: 400,
+        body: JSON.stringify({
+          error: 'Captcha verification failed',
+          codes: verifyJson['error-codes'] || []
+        })
+      };
     }
     // --- End Turnstile verification ---
 
-    // --- Send email via Mailjet (your existing logic) ---
+    // --- Send email via Mailjet ---
     const mailjet = Mailjet.apiConnect(
       process.env.MJ_APIKEY_PUBLIC,
       process.env.MJ_APIKEY_PRIVATE
