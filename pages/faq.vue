@@ -58,7 +58,7 @@ const grouped = computed(() => {
 
     <div v-if="filteredFaqs.length === 0" class="no-results">No FAQs match your search.</div>
 
-    <div v-else>
+    <div v-else class="categories-container">
       <div v-for="(items, cat) in grouped" :key="cat" class="category-group">
         <h2>{{ cat }} ({{ items.length }})</h2>
         <ul class="faq-list">
@@ -66,7 +66,6 @@ const grouped = computed(() => {
             <details>
               <summary>{{ faq.question }}</summary>
               <p>{{ faq.answer }}</p>
-              <p class="keywords">Keywords: {{ (faq.keywords || []).join(', ') }}</p>
             </details>
           </li>
         </ul>
@@ -90,8 +89,11 @@ const grouped = computed(() => {
   border-radius: 4px;
 }
 
-.categories {
-  margin-bottom: 15px;
+
+.categories-container {
+  display: grid;
+  /* grid-template-columns: repeat(2,1fr); */
+  gap: 0 0.75rem;
 }
 
 .category-btn {
@@ -99,8 +101,9 @@ const grouped = computed(() => {
   margin-bottom: 6px;
   padding: 6px 12px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
+  border-radius: 0.5rem;
+  background-color: var(--button-bg-color, #f9d);
+  color: var(--button-text-color, #000);
   cursor: pointer;
 }
 
@@ -114,12 +117,14 @@ const grouped = computed(() => {
 }
 
 .category-group {
-  margin-bottom: 20px;
+  margin-bottom: 0.25rem;
+  
 }
 
 .faq-list {
   list-style: none;
   padding-left: 0;
+  
 }
 
 .faq-item {
