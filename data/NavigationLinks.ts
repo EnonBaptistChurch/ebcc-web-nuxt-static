@@ -1,6 +1,6 @@
 import type { NavItem } from '@/types/NavItem';
 
-const aboutSection :NavItem =
+export const aboutSection :NavItem =
 {
   title: "About Us",
   link: "/about",
@@ -11,23 +11,23 @@ const aboutSection :NavItem =
   ],
   submenuOpen: false
 }
-const whatsonSection: NavItem = {
+export const whatsonSection: NavItem = {
   title: 'What\'s on',
   submenu: [
     { link: "/whats-on/sunday-services/", title: "Sunday Services" },
     { link: "/whats-on/bible-study/", title: "Bible Study" },
+    { link: "/whats-on/sunday-club/", title: "Sunday Club" },
     { link: "/whats-on/womens-meetings/", title: "Women's Meetings" },
     { link: "/whats-on/online-prayer-meeting/", title: "Online Prayer Meeting" },
     { link: "/whats-on/mens-meetings/", title: "Men's Meetings" },
     { link: "/whats-on/youth/", title: "Discoverers" },
-    { link: "/whats-on/children/", title: "Children" },
     { link: "/whats-on/first-steps/", title: "First Steps" },
   ],
   link: "/whats-on",
   submenuOpen:false
 };
 
-const whatsaChristianSection: NavItem = {
+export const whatsaChristianSection: NavItem = {
   title: 'What Is A Christian?',
   submenu:[
     { link: "/what-is-a-christian/becoming-a-christian/", title: "Becoming a Christian" },
@@ -39,14 +39,14 @@ const whatsaChristianSection: NavItem = {
   
   const testimonySection: NavItem = {
   title: 'Testimonies',
-  submenu: [{ link: "/testimonies/", title: "Graham Trice" }],
+  submenu: [{ link: "/testimonies/graham-trice", title: "Graham Trice" }],
   link:"/testimonies/",
   submenuOpen:false
 };
 
-const sermonSection: NavItem ={ title:"Sermons", link: "/sermons/" }
-const findUsSection: NavItem ={ title:"Find Us", link: "/find-us/" }
-const contactSection: NavItem ={ title:"Contact Us", link: "/contact-us/" }
+export const sermonSection: NavItem ={ title:"Sermons", link: "/sermons/" }
+export const findUsSection: NavItem ={ title:"Find Us", link: "/find-us/" }
+export const contactSection: NavItem ={ title:"Contact Us", link: "/contact-us/" }
 
 const navItems: NavItem[] = [
   aboutSection,

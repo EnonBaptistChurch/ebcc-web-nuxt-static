@@ -4,14 +4,11 @@
       <div class="navbar-content">
         <!-- Logo/Brand -->
         <div class="navbar-brand">
-          <NuxtLink to="/" class="brand-link">
+          <NuxtLink to="/" class="brand-link" @click="closeMobileMenu">
             Enon Baptist Church
           </NuxtLink>
         </div>
-
-        <!-- Desktop Menu -->
         <DesktopNav />
-        <!-- Mobile menu button -->
         <MobileMenuButton
           :mobile-menu-open="mobileMenuOpen"
           :toggleMenu="toggleMobileMenu" />
@@ -114,8 +111,10 @@ nav {
   transition: color 0.3s;
 }
 
-.brand-link:hover {
-  color: #bfdbfe;
+@media (hover: hover) {
+  .brand-link:hover {
+    color: #bfdbfe;
+  }
 }
 
 

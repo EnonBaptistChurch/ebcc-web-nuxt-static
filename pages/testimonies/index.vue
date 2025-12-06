@@ -1,6 +1,15 @@
 <script setup>
 import GrahamTrice from '~/components/testimonies/graham-trice.vue';
-
+import { useHead } from 'nuxt/app';
+useHead({
+  title: 'Testimonies - Enon Baptist Church',
+  meta: [
+    {
+      name: 'description',
+      content: 'Read the testimonies of people at Enon Baptist Church, Chatham.'
+    }
+  ]
+})
 </script>
 
 <template>
