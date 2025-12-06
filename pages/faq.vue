@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import Fuse from 'fuse.js'
 import { faqs, type FAQ } from '../data/faqs'
+import CollapsibleComponent from '../components/CollapsibleComponent.vue'
 
 const query = ref('')
 const selectedCategory = ref('All')
@@ -62,11 +63,8 @@ const grouped = computed(() => {
       <div v-for="(items, cat) in grouped" :key="cat" class="category-group">
         <h2>{{ cat }} ({{ items.length }})</h2>
         <ul class="faq-list">
-          <li v-for="faq in items" :key="faq.id" class="faq-item">
-            <details>
-              <summary>{{ faq.question }}</summary>
-              <p>{{ faq.answer }}</p>
-            </details>
+          <li v-for="faq in items" :key="faq.id" >
+            <collapsible-component :title="faq.question" :content="faq.answer" />
           </li>
         </ul>
       </div>
@@ -76,7 +74,7 @@ const grouped = computed(() => {
 
 <style scoped>
 .container {
-  max-width: 800px;
+  
   margin: 0 auto;
   padding: 20px;
 }
@@ -92,7 +90,7 @@ const grouped = computed(() => {
 
 .categories-container {
   display: grid;
-  /* grid-template-columns: repeat(2,1fr); */
+  grid-template-columns: repeat(2,1fr);
   gap: 0 0.75rem;
 }
 
@@ -146,5 +144,22 @@ const grouped = computed(() => {
 .keywords {
   font-size: 12px;
   color: #555;
+}
+
+@media (min-width: 768px) {
+  .categories-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop layout */
+@media (min-width: 1024px) {
+  .categories-container {
+    padding: 0.5rem 2rem;
+  }
+
+  .categories-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 </style>
