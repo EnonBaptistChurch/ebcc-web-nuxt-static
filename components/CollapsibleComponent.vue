@@ -1,26 +1,24 @@
 <template>
-  <section class="collapsible-section">
-    <button class="collapsible-header" @click="isOpen = !isOpen">
-      <span>{{ title }}</span>
-      <span class="arrow" :class="{ open: isOpen }">▼</span>
-    </button>
-    <div v-show="isOpen" class="collapsible-content" v-html="content"></div>
+  <section class="item">
+    <details>
+      <summary>
+        <span class="arrow">▼</span>
+        {{ title }}
+      </summary>
+      <div class="content" v-html="content"></div>
+    </details>
   </section>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
 defineProps({
   title: String,
   content: String
 })
-
-const isOpen = ref(false)
 </script>
 
 <style scoped>
-.collapsible-section {
+.item {
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 1rem;
@@ -28,39 +26,43 @@ const isOpen = ref(false)
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-.collapsible-header {
+/* Style the summary */
+summary {
   background: var(--nav-bar-bg-color);
   color: var(--button-text-color);
   padding: 0.75rem 1rem;
-  font-weight: bold;
-  width: 100%;
-  text-align: left;
+  /* font-weight: bold; */
   cursor: pointer;
-  display: flex;
   justify-content: space-between;
   align-items: center;
-  border: none;
+  list-style: none; /* Remove default marker */
   outline: none;
 }
 
-.collapsible-header:hover {
+/* Optional hover effect */
+summary:hover {
   background: #eaeaea;
   color: var(--nav-bar-bg-color);
-
 }
 
+/* Arrow rotation */
 .arrow {
-  transition: transform 0.3s ease;
   display: inline-block;
+  transition: transform 0.3s ease;
+  transform: rotate(-90deg);
+  font-size: 0.8rem; /* Smaller arrow */
 }
 
-.arrow.open {
-  transform: rotate(180deg);
+/* Rotate arrow when open */
+details[open] .arrow {
+  transform: rotate(0deg);
 }
 
-.collapsible-content {
+/* FAQ content styling */
+.content {
   padding: 1rem;
   background-color: white;
   border-top: 1px solid #ddd;
 }
+
 </style>
