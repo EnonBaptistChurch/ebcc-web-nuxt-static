@@ -10,7 +10,7 @@
             <p>
                 <strong>Sunday</strong><br />
                 9.45am &#8211;  
-                    <NuxtLink to="/whats-on/children/">Sunday Club</NuxtLink> (for children aged 4 to 15)<br />
+                    <NuxtLink to="/whats-on/sunday-club/">Sunday Club</NuxtLink> (for children aged 4 to 15)<br />
                 11.15am &#8211; 
                     <NuxtLink to="/whats-on/sunday-morning/"> Morning Worship</NuxtLink><br />
                 6.00 pm &#8211; <NuxtLink to="/whats-on/sunday-prayer/">Prayer Time</NuxtLink><br />
@@ -29,18 +29,23 @@
             </p>
             <p>
                 <strong>Friday<br /></strong>
-                10am to 11.30am &#8211; Coffee Morning (every fortnight &#8211; <CallWidget text="ring"/> for details)<br />
+                10am to 11.30am &#8211; Coffee Morning (every fortnight &#8211; <NuxtLink to="/contact-us" >contact us</NuxtLink> for details)<br />
                 7.30pm &#8211; <NuxtLink to="/whats-on/youth/">Discoverers</NuxtLink> (Youth meeting for 11-16 year olds)<br />
-                (during term time &#8211; <CallWidget text="ring"/> for details)
+                (during term time &#8211; <NuxtLink to="/contact-us" >contact us</NuxtLink> for details)
             </p>
         </div>							
     </article>
 </template>
-<script>
-import CallWidget from '~/components/widgets/CallWidget.vue';
-export default {
-    components: {
-        CallWidget
+
+<script setup lang="ts">
+import { useHead } from 'nuxt/app';
+useHead({
+  title: "What's On - Enon Baptist Church",
+  meta: [
+    {
+      name: 'description',
+      content: "Discover regular meetings at Enon Baptist Church, Chatham. Join us for worship, Bible study and children's activities."
     }
-}
+  ]
+});
 </script>

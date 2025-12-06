@@ -22,7 +22,16 @@ import SermonWidget from '../components/sermons/SermonWidget.vue'
 import RssFeedSermonsComponent from '../components/sermons/RssFeedSermonsComponent.vue'
 import AudioPlayerWidget from '../components/widgets/AudioPlayerWidget.vue'
 import type { PodcastItem } from '@/types/SermonPodcasts';
-
+import { useHead } from 'nuxt/app';
+useHead({
+  title: 'Sermons - Enon Baptist Church',
+  meta: [
+    {
+      name: 'description',
+      content: 'Listen to recent sermons from Enon Baptist Church, Chatham.'
+    }
+  ]
+})
 
 const podcast = ref<any>(null);
 const chosenPodcast = ref<any>(null);

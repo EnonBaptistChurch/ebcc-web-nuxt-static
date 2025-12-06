@@ -17,10 +17,12 @@
                         sizes="100vw"
                         alt="Graham and Mee Suan Trice"
                         fetchpriority="high" decoding="async"
-                        class="responsive-image"
+                        class="gmt-image"
                         />
+                        <h3 class="gmtpic"> Graham and MeeSuan Trice</h3>
             </figure>
             <div>
+                
                 <p>My name is Graham Trice, I was born in Herbert Road Rainham at the end of the Second World War. Unbeknown to me at the time, I was given the grand title of the “Victory Baby of Herbert Road.” Having been born on the east side of the River Medway, I was able to call myself “A Man of Kent.” As I grew up, I eventually came to realize that there was also a far less flattering title for me—a “sinner.”</p>
                 <p>I did not get off to a good start in life as my mother died when I was four years old. I resented the fact my stepmother was introduced to me as “This is your new Mum!” The tension between us grew worse the older I became. In a defiant act of rebellion against parental discipline, I left the family home in a furious rage when I was sixteen. While I was able to live with my elder brother for a short time, his circumstances meant I was made homeless. Having resigned from my apprenticeship job, I found myself both homeless, without employment, and without a single academic qualification.</p>
                 <p>I managed to get a job as an evening porter at the King’s Head Hotel where the Manager took pity on me and I was able to sleep in the residents' lounge most nights. Such was my working environment that I was an underage drinker and gambler who carried a six-inch sheath knife for personal protection. When the chance to move away from the Medway Towns came, in the form of a job at the White Horse Inn, near Hertford, I took it. I felt the need to run for my life as a result of my disgraceful lifestyle.</p>
@@ -36,3 +38,25 @@
         </div>
     </article>
 </template>
+
+<style scoped>
+.gmt-image {
+    max-width: 100%;
+    min-width: 175px;
+    max-height: 500px;
+    min-height: 150px;
+    display: block;
+    margin: 0 auto 1rem auto;
+}
+article div {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.gmtpic {
+    text-align: center;
+    font-style: italic;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+}
+</style>

@@ -14,3 +14,17 @@
 	</article>
 </template>
 
+<script setup lang="ts">
+import { useHead } from 'nuxt/app';
+
+useHead({
+  title: 'Sunday Club for Children - Enon Baptist Church',
+  meta: [
+    {
+      name: 'description',
+      content: 'Join our free Sunday Club at Enon Baptist Church, Chatham, for children to sing and learn Bible lessons in an age appropriate way.'
+    }
+  ]
+});
+</script>
+
