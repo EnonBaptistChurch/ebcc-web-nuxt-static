@@ -8,6 +8,44 @@
         placeholder="Search sermons..."
         class="search-input"
       />
+
+      <!-- Speaker Checkboxes -->
+<div class="checkbox-group">
+  <span class="checkbox-label">Speakers:</span>
+  <div class="checkbox-items">
+    <label v-for="speaker in distinctSpeakers" :key="speaker">
+      <input
+        type="checkbox"
+        :value="speaker"
+        v-model="selectedSpeakers"
+      />
+      {{ speaker }}
+    </label>
+  </div>
+</div>
+
+<!-- Series Checkboxes -->
+<div class="checkbox-group">
+  <span class="checkbox-label">Series:</span>
+  <div class="checkbox-items">
+    <label v-for="series in distinctSeries" :key="series">
+      <input
+        type="checkbox"
+        :value="series"
+        v-model="selectedSeries"
+      />
+      {{ series }}
+    </label>
+  </div>
+</div>
+
+      <button
+        v-if="searchQuery || selectedSpeakers.length || selectedSeries.length"
+        @click="clearFilters"
+        class="clear-filters"
+      >
+        Clear Filters
+      </button>
     </div>
 
     <!-- Sermon Cards -->
@@ -23,6 +61,11 @@
       />
     </ul>
 
+    <!-- No results message -->
+    <p v-if="filteredEpisodes.length === 0" class="no-results">
+      No sermons found.
+    </p>
+
     <!-- Show More Button -->
     <div v-if="hasMoreEpisodes" class="show-more">
       <button @click="showMore">Show More</button>
@@ -33,34 +76,61 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { PodcastItem } from '@/types/SermonPodcasts'
+import SermonsRssFeedSermonCardComponent from './RssFeedSermonCardComponent.vue'
+import { useAudioPlayer } from '../../composables/useAudioPlayer'
 
 const props = defineProps<{
   episodes: PodcastItem[]
-  choosePodcast: Function
-  chosenPodcast: PodcastItem,
+  choosePodcast: (episode: PodcastItem) => void
+  chosenPodcast: PodcastItem
   player: ReturnType<typeof useAudioPlayer>
-  
 }>()
 
+// Filter state
 const searchQuery = ref('')
-const visibleCount = ref(10) 
+const selectedSpeakers = ref<string[]>([])
+const selectedSeries = ref<string[]>([])
+const visibleCount = ref(10)
 const increment = 10
 
-const filteredEpisodes = computed(() => {
-  const query = searchQuery.value.toLowerCase().trim()
-  let list = props.episodes
+// Distinct checkbox options
+const distinctSpeakers = computed(() =>
+  Array.from(
+    new Set(props.episodes.map(e => e.parsedSnippet?.speaker).filter(Boolean))
+  ) as string[]
+)
 
-  // Filter based on search query
+const distinctSeries = computed(() =>
+  Array.from(
+    new Set(props.episodes.map(e => e.parsedSnippet?.series).filter(Boolean))
+  ) as string[]
+)
+
+// Filtered episodes
+const filteredEpisodes = computed(() => {
+  let list = props.episodes
+  const query = searchQuery.value.toLowerCase().trim()
+
   if (query) {
     list = list.filter(
-      (ep) =>
+      ep =>
         ep.title.toLowerCase().includes(query) ||
         ep.pubDate?.toLowerCase().includes(query) ||
         ep.parsedSnippet?.speaker?.toLowerCase().includes(query)
     )
   }
 
-  // Move chosen podcast to the top
+  // Speaker filter (checkboxes)
+  if (selectedSpeakers.value.length) {
+    list = list.filter(ep => selectedSpeakers.value.includes(ep.parsedSnippet?.speaker ?? ''))
+  }
+
+  // Series filter (checkboxes)
+  if (selectedSeries.value.length) {
+    list = list.filter(ep => selectedSeries.value.includes(ep.parsedSnippet?.series ?? ''))
+  }
+
+  // Move chosen podcast to top
   if (props.chosenPodcast) {
     list = [
       ...list.filter(ep => ep.guid === props.chosenPodcast.guid),
@@ -71,18 +141,24 @@ const filteredEpisodes = computed(() => {
   return list.slice(0, visibleCount.value)
 })
 
+// Show more logic
 const hasMoreEpisodes = computed(() => {
-  const query = searchQuery.value.toLowerCase().trim()
-  const list = query
-    ? props.episodes.filter(
-        (ep) =>
-          ep.title.toLowerCase().includes(query) ||
-          ep.pubDate?.toLowerCase().includes(query) ||
-          ep.parsedSnippet?.speaker?.toLowerCase().includes(query)
-      )
-    : props.episodes
-
-  return visibleCount.value < list.length
+  const totalMatching = props.episodes.filter(ep => {
+    const query = searchQuery.value.toLowerCase().trim()
+    const matchesQuery = query
+      ? ep.title.toLowerCase().includes(query) ||
+        ep.pubDate?.toLowerCase().includes(query) ||
+        ep.parsedSnippet?.speaker?.toLowerCase().includes(query)
+      : true
+    const matchesSpeaker = selectedSpeakers.value.length
+      ? selectedSpeakers.value.includes(ep.parsedSnippet?.speaker ?? '')
+      : true
+    const matchesSeries = selectedSeries.value.length
+      ? selectedSeries.value.includes(ep.parsedSnippet?.series ?? '')
+      : true
+    return matchesQuery && matchesSpeaker && matchesSeries
+  })
+  return visibleCount.value < totalMatching.length
 })
 
 const showMore = () => {
@@ -91,6 +167,13 @@ const showMore = () => {
 
 const isChosenPodcast = (episode: PodcastItem) => {
   return props.chosenPodcast?.guid === episode.guid
+}
+
+const clearFilters = () => {
+  searchQuery.value = ''
+  selectedSpeakers.value = []
+  selectedSeries.value = []
+  visibleCount.value = 10
 }
 </script>
 
@@ -102,10 +185,11 @@ const isChosenPodcast = (episode: PodcastItem) => {
 }
 
 .filter-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   margin-bottom: 1rem;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+  align-items: flex-start;
 }
 
 .search-input {
@@ -123,6 +207,46 @@ const isChosenPodcast = (episode: PodcastItem) => {
   border-color: #66aaff;
 }
 
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.75rem;
+}
+
+.checkbox-label {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.checkbox-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+.checkbox-items label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.clear-filters {
+  background-color: #ff5555;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.clear-filters:hover {
+  background-color: #cc4444;
+  transform: scale(1.05);
+}
+
 /* Card List */
 .cards-list {
   list-style: none;
@@ -131,6 +255,13 @@ const isChosenPodcast = (episode: PodcastItem) => {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+/* No results */
+.no-results {
+  text-align: center;
+  font-style: italic;
+  margin-top: 1rem;
 }
 
 /* Show More Button */
