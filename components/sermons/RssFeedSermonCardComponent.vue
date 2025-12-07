@@ -24,6 +24,9 @@
               <span class="card-date">{{ getUkDateString(episode.parsedSnippet.formattedDate) }}</span> - 
               <span class="card-service">{{ episode.parsedSnippet.service }}</span>
             </div>
+            <div class="info-row">
+              <span v-if="episode.parsedSnippet.series?.length != undefined && episode.parsedSnippet.series?.length > 2" class="card-series"> Series: {{ episode.parsedSnippet.series }}</span>
+            </div>
             </div>
           </div>
         </div>
@@ -49,6 +52,7 @@ import type { PodcastItem } from '@/types/SermonPodcasts';
 import PlayIcon from '../widgets/audio/icons/PlayIcon.vue';
 import PauseIcon from '../widgets/audio/icons/PauseIcon.vue';
 import { getUkDateString } from '../../composables/useDateToText';
+import { useAudioPlayer } from '../../composables/useAudioPlayer';
 
 
 const props = defineProps<{
