@@ -87,7 +87,6 @@ export function useAudioPlayer(src?: string) {
       audio.value.pause();
       audio.value.src = '';
       audio.value = null;
-      console.log('Audio player unmounted and resources cleaned up.');
     }
   });
 
