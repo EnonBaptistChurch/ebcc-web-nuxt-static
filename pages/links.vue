@@ -8,6 +8,7 @@
       <section v-for="church in localChurches" :key="church.name" class="service">
         <h2><a :href="church.url" target="_blank" rel="noopener">{{ church.name }}</a></h2>
         <p class="church-description">{{ church.description }}</p>
+        <p v-if="church.pastor"><strong>Pastor:</strong> {{ church.pastor }}</p>
         <p class="location" v-if="church.location"><strong>Meeting Location:</strong><br/> {{ church.location }}</p>
       </section>
     </div>
@@ -58,7 +59,7 @@ const localChurches = [
 }
 .church-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   margin-top: 20px;
   align-items: stretch;
@@ -121,6 +122,11 @@ a {
   font-style: italic;
   color: #555;
   font-size: 1rem; /* or whatever you want */
+}
+.service p.pastor {
+  font-style: italic;
+  color: #555;
+  font-size: 0.75rem; /* or whatever you want */
 }
 
 .service p.location {
