@@ -29,6 +29,7 @@ export interface ParsedSnippet {
   date: string
   service?: string,
   formattedDate?: Date
+  series?: string
 }
 
 export interface ItunesOwner {
