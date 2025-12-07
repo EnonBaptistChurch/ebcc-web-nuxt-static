@@ -64,6 +64,7 @@ import PauseIcon from './audio/icons/PauseIcon.vue';
 import ForwardIcon from './audio/icons/ForwardIcon.vue';
 import type { PodcastItem } from '@/types/SermonPodcasts';
 import { getUkDateString } from '../../composables/useDateToText';
+import { useAudioPlayer } from '../../composables/useAudioPlayer';
 
 const props = defineProps<{ src: PodcastItem,
   player: ReturnType<typeof useAudioPlayer> }>();
@@ -117,7 +118,7 @@ const seekAudio = () => {
   /* Background with watermark overlay */
   background: 
     linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), /* semi-transparent overlay */
-    url('/images/new-enon-320.webp') no-repeat center / cover; /* non-repeating, fit container */
+    url('/images/building/new-enon-320.webp') no-repeat center / cover; /* non-repeating, fit container */
 
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
   max-width: 500px;
