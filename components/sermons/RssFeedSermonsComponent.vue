@@ -50,6 +50,8 @@
 
     <!-- Sermon Cards -->
     <ul class="cards-list">
+      <ClientOnly>
+      
       <SermonsRssFeedSermonCardComponent
         v-for="episode in filteredEpisodes"
         :key="episode.guid"
@@ -59,6 +61,8 @@
         :chosenPodcast="isChosenPodcast(episode)"
         :player="player"
       />
+      
+      </ClientOnly>
     </ul>
 
     <!-- No results message -->
@@ -77,7 +81,10 @@
 import { ref, computed } from 'vue'
 import type { PodcastItem } from '@/types/SermonPodcasts'
 import SermonsRssFeedSermonCardComponent from './RssFeedSermonCardComponent.vue'
+import BibleAutoLink from '../bible/BibleAutoLink.vue'
 import { useAudioPlayer } from '../../composables/useAudioPlayer'
+import BibleTooltip from '../bible/BibleTooltip.vue'
+import type BibleTooltipVue from '../bible/BibleTooltip.vue'
 
 const props = defineProps<{
   episodes: PodcastItem[]
@@ -175,6 +182,8 @@ const clearFilters = () => {
   selectedSeries.value = []
   visibleCount.value = 10
 }
+
+
 </script>
 
 <style scoped>

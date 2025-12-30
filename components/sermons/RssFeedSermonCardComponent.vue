@@ -14,9 +14,12 @@
           <!-- Info -->
           <div class="info">
             <div class="card-header">
-            <h2 class="card-title">
+              
+            <p class="card-title">
               {{ episode.title }}
-            </h2>
+              
+            </p>
+            
             </div>
             <div v-if="episode.parsedSnippet !== null">
             <p class="card-speaker">{{ episode.parsedSnippet.speaker }}</p>
@@ -26,6 +29,11 @@
             </div>
             <div class="info-row">
               <span v-if="episode.parsedSnippet.series?.length != undefined && episode.parsedSnippet.series?.length > 2" class="card-series"> Series: {{ episode.parsedSnippet.series }}</span>
+            </div>
+            <div class="info-row">
+            <BibleAutoLink lang="en" version="NKJV">
+            <p>Proverbs 28:10-11; Psalms 28:1-2; Genesis 11;</p>
+            </BibleAutoLink>
             </div>
             </div>
           </div>
@@ -53,14 +61,14 @@ import PlayIcon from '../widgets/audio/icons/PlayIcon.vue';
 import PauseIcon from '../widgets/audio/icons/PauseIcon.vue';
 import { getUkDateString } from '../../composables/useDateToText';
 import { useAudioPlayer } from '../../composables/useAudioPlayer';
-
-
+import BibleAutoLink from '../bible/BibleAutoLink.vue';
 const props = defineProps<{
   episode: PodcastItem
   choosePodcast: (episode: PodcastItem) => void
   chosenPodcast: boolean,
   player: ReturnType<typeof useAudioPlayer>
 }>()
+
 
 const play = (episode: PodcastItem) => {
   props.player.setInitialStart(true); // now this is the same instance
