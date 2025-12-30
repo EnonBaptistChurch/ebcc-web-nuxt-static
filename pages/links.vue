@@ -21,11 +21,26 @@
         </p>
       </article>
     </div>
+    <div class="intro">
+    <h2>Local Church Links</h2>
+      <p class="subtitle">
+        We have links with missionaries across the world.
+      </p>
+    <div class="mission-grid">
+      <article v-for="mission in missionLinks" :key="mission.name" class="church-card">
+        <h3 class="church-name">
+          <a :href="mission.link" target="_blank" rel="noopener">{{ mission.name }}</a>
+        </h3>
+        <p class="description">{{ mission.description }}</p>
+      </article>
+    </div>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
 import { localChurches } from '../data/localChurches';
+import missionLinks  from '../data/missionLinks';
 </script>
 
 <style scoped>
