@@ -1,5 +1,5 @@
 <template>
-    <article class="text-content">
+    <div class="text-content">
         <h1 class="testimony-header">Graham Trice</h1>
         <!-- <p class="sub-heading"> 
         <em>
@@ -39,7 +39,7 @@
                 <p>Why not use the words of one of old who prayed, <em>“God be merciful to me a sinner!”</em> (Luke 18:13) and trust the Saviour yourself before it is too late?</p>
             </div>
         </div>
-    </article>
+    </div>
 </template>
 
 <style scoped>
@@ -62,7 +62,7 @@
   font-size: 1rem;
   line-height: 1.6;
   max-width: 70ch;
-  margin:auto;
+  margin: 0 auto;
 }
 .gmt-image {
     max-width: 100%;
