@@ -1,5 +1,4 @@
 export const cards = [
-  
   {
     image:'/images/christmas-pic-640.webp',
     title: 'Christmas Services',
