@@ -172,6 +172,7 @@
   display: block;
   margin: 0 auto;
   border-radius: 8px;
+  border-radius: 2ch;
 }
 
 /* Text styling */
