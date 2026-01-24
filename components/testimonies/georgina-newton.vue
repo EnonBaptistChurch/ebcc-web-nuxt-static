@@ -4,7 +4,7 @@
     <div class="content-wrapper">
       <figure class="image-wrapper">
         <img
-          src="/images/GN-1920.webp"
+          src="/images/GN-480.webp"
           srcset="
             /images/GN-320.webp 320w,
             /images/GN-480.webp 480w,"
@@ -22,7 +22,8 @@
             By 1987, my parents split, and my mother brought us back to England to live permanently, to be closer to her family. 
             As a small girl, stability was not something I knew a lot about. 
             Things were always changing. 
-            We moved from temporary accommodation in Blackheath to Woolwich. I missed my dad and Hong Kong dearly.
+            We moved from temporary accommodation in Blackheath to Woolwich. 
+            I missed my dad and Hong Kong dearly.
         </p> 
         <p>
             By the age of 15, I was in full disruptive rebel mode. 
