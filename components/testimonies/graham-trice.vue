@@ -1,6 +1,10 @@
 <template>
     <article class="text-content">
-        <h1>Graham Trice</h1>
+        <h1 class="testimony-header">Graham Trice</h1>
+        <!-- <p class="sub-heading"> 
+        <em>
+        </em>
+        </p> -->
         <div>
             <figure>
                     <img
@@ -39,6 +43,21 @@
 </template>
 
 <style scoped>
+.testimony-header {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.sub-heading {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #555;
+  padding-top: 0.25rem;
+  margin-top: 0.25rem;
+  text-align: center;
+}
 .gmt-image {
     max-width: 100%;
     min-width: 175px;

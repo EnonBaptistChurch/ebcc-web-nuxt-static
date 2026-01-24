@@ -1,6 +1,11 @@
 <template>
   <article class="text-content">
-    <h1>Georgina Newton</h1>
+    <h1 class="testimony-header">Georgina Newton</h1>
+    <p class="sub-heading"> 
+      <em>
+        From Brokenness to Redemption
+      </em>
+    </p>
     <div class="content-wrapper">
       <figure class="image-wrapper">
         <img
@@ -134,6 +139,22 @@
   padding: 1rem;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.testimony-header {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.sub-heading {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #555;
+  padding-top: 0.25rem;
+  margin-top: 0.25rem;
+  text-align: center;
 }
 
 .content-wrapper {
