@@ -19,7 +19,7 @@
 <script setup>
 import PromoCard from '../components/widgets/PromoCard.vue'
 import { computed } from 'vue'
-import { cards } from '../data/PromoCards'
+import { cards } from '../../data/PromoCards'
 import { useWindowSize } from '@vueuse/core'
 
 // SSR-safe width tracking
