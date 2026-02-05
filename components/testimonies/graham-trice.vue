@@ -65,11 +65,10 @@
   margin: 0 auto;
 }
 .gmt-image {
-    max-width: 100%;
+    max-width: min(100%, 450px);
     min-width: 175px;
     max-height: 500px;
     min-height: 150px;
-    max-width: 450px;
     display: block;
     margin: 0 auto 1rem auto;
     border-radius: 2ch;
