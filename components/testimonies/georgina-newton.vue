@@ -50,7 +50,7 @@
         </p> 
         <p>
             It was then that I felt a still small voice say my name. All of a sudden, I felt a wave of love, light, and comfort come over me. 
-            My fears of grief and despair turned into happiness and joy. "What was this?" I believe that day God had reached out to me.
+            My tears of grief and despair turned into happiness and joy. "What was this?" I believe that day God had reached out to me.
         </p> 
         <p>
             When reflecting on the brokenness of myself and the world, the problems all became very clear: 
