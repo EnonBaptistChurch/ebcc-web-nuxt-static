@@ -20,7 +20,7 @@
     "node-mailjet": "^6.0.9",
     "rrule": "^2.8.1",
     "rss-parser": "^3.13.0",
-    "vue": "^3.5.24"
+    "vue": "^3.5.29"
   },
   "devDependencies": {
     "@types/ical": "^0.8.3",
