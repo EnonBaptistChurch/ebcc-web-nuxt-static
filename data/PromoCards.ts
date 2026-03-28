@@ -32,6 +32,15 @@ export const cards = [
     show: showChristmasCard()
   },
   {
+    image:'/images/Easter-640.webp',
+    title: 'Easter Services',
+    description: `Join us for Easter as we celebrate the resurrection of Jesus Christ.`,
+    link: '/seasonal/easter',
+    ariaLabel: 'Easter Services Image',
+    buttonText: 'Find Out More',
+    show: true
+  },
+  {
     image: '/images/building/enonOutside-480.webp',
     title: 'I\'m New',
     description: 'Find out more about who we are and what to expect when you visit us',
@@ -41,7 +50,7 @@ export const cards = [
     show: false
   },
   {
-    image: '/images/bible-640.webp',
+    image: '/images/bible-320.webp',
     title: 'Sermons',
     description: 'Catch up on all our recent sermons by clicking the link below',
     link: '/sermons',
