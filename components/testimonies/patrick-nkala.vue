@@ -124,9 +124,7 @@ continues to cover my sin.</p>
 .pn-image {
   width: 100%;
   height: auto;
-
-  max-width: 300px;        /* limits image size */
-  
+  max-width: 300px;
   display: block;
   margin: 0 auto;
   border-radius: 8px;
@@ -156,10 +154,6 @@ continues to cover my sin.</p>
 
 /* Large screens */
 @media screen and (min-width: 1200px) {
-  .image-wrapper {
-    flex: 0 0 350px;
-  }
-
   .text-wrapper {
     font-size: 1.1rem;
   }
