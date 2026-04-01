@@ -7,17 +7,17 @@
       </em>
     </p> -->
     <div class="content-wrapper">
-      <!-- <figure class="image-wrapper">
+      <figure class="image-wrapper">
         <img
-          src="/images/GN-480.webp"
+          src="/images/PN-480.webp"
           srcset="
-            /images/GN-320.webp 320w,
-            /images/GN-480.webp 480w,"
+            /images/PN-320.webp 320w,
+            /images/PN-480.webp 480w,"
           sizes="100vw"
-          alt="Georgina"
-          class="gn-image"
+          alt="Patrick"
+          class="pn-image"
         />
-      </figure> -->
+      </figure>
 
       <div class="text-wrapper">
         <p>My name is Patrick Nkala, and this is my testimony of how I came to understand the gospel
@@ -118,15 +118,15 @@ continues to cover my sin.</p>
 .content-wrapper {
   display: flex;
   flex-direction: column; /* stack on mobile */
-  gap: 1.5rem;
 }
 
 /* Image styling */
-.gn-image {
+.pn-image {
   width: 100%;
   height: auto;
+
   max-width: 300px;        /* limits image size */
-  max-height: 80vh;        /* prevents huge vertical gaps */
+  
   display: block;
   margin: 0 auto;
   border-radius: 8px;
@@ -146,10 +146,6 @@ continues to cover my sin.</p>
   .content-wrapper {
     position: sticky;
     top: 2rem;
-    flex: 0 0 300px;
-  }
-
-  .image-wrapper {
     flex: 0 0 300px;
   }
 
