@@ -30,6 +30,10 @@
               <span class="service-sep">·</span>
               <span class="service-time">{{ service.displayTime }}</span>
             </div>
+            <div>
+              <p v-if="service.extraDetail" class="service-extra-detail" v-html="service.extraDetail">
+              </p>
+            </div>
           </div>
         </article>
       </div>
@@ -49,7 +53,8 @@ import services from '../../data/EasterServices'
 
 
 const upcomingServices = computed(() => {
-  const now = new Date()
+  const twohoursAfterServiceStart = new Date()
+  twohoursAfterServiceStart.setHours(twohoursAfterServiceStart.getHours() + 2)
 
   return services.filter((service) => {
     // Build a Date from the service date + time (local timezone)
@@ -57,7 +62,7 @@ const upcomingServices = computed(() => {
     const [hours, minutes] = service.time.split(':').map(Number)
     const serviceDateTime = new Date(year, month - 1, day, hours, minutes)
 
-    return serviceDateTime > now
+    return serviceDateTime > twohoursAfterServiceStart
   })
 })
 </script>
@@ -242,6 +247,14 @@ h1 {
   font-size: 1rem;
   font-style: italic;
   color: #7a5c30;
+}
+
+.service-extra-detail {
+  margin-top: 0.75rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  color: #7a5c30;
+  line-height: 1.4;
 }
 
 .service-sep {

@@ -7,4 +7,5 @@ export interface SeasonalService {
   time: string
   displayDate: string
   displayTime: string
+  extraDetail?: string
 }
