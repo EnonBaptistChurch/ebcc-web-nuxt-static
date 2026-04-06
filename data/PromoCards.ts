@@ -38,7 +38,7 @@ export const cards = [
     link: '/seasonal/easter',
     ariaLabel: 'Easter Services Image',
     buttonText: 'Find Out More',
-    show: true
+    show: false
   },
   {
     image: '/images/building/enonOutside-480.webp',
