@@ -1,5 +1,5 @@
 :root {
-  --body-bg-color: #FFFF;
+  --body-bg-color: #fdf6ec;
   --nav-bar-bg-color: #104268;
   --button-bg-color: var(--nav-bar-bg-color);
   --button-color: var(--body-bg-color);
