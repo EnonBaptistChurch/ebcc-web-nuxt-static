@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import Mailjet from 'node-mailjet';
+import fetch from 'node-fetch';
 
 export async function handler(event) {
   if (event.httpMethod !== 'POST') {
@@ -7,18 +8,47 @@ export async function handler(event) {
   }
 
   try {
-    const { name, email, message } = JSON.parse(event.body);
+    const { name, email, message, turnstileToken } = JSON.parse(event.body);
 
-    if (!name || !email || !message) {
+    if (!name || !email || !message || !turnstileToken) {
       return { statusCode: 400, body: JSON.stringify({ error: 'Missing fields' }) };
     }
 
+    // --- Turnstile verification ---
+    const secret = process.env.TURNSTILE_SECRET_KEY;
+    const verifyRes = await fetch(
+      'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+      {
+        method: 'POST',
+        body: new URLSearchParams({
+          secret,
+          response: turnstileToken
+        }),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }
+    );
+
+    const verifyJson = await verifyRes.json();
+    console.log('Turnstile verification response:', verifyJson);
+
+    if (!verifyJson.success) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({
+          error: 'Captcha verification failed',
+          codes: verifyJson['error-codes'] || []
+        })
+      };
+    }
+    // --- End Turnstile verification ---
+
+    // --- Send email via Mailjet ---
     const mailjet = Mailjet.apiConnect(
       process.env.MJ_APIKEY_PUBLIC,
       process.env.MJ_APIKEY_PRIVATE
     );
 
-    const request = await mailjet
+    await mailjet
       .post('send', { version: 'v3.1' })
       .request({
         Messages: [
@@ -30,7 +60,7 @@ export async function handler(event) {
             To: [
               {
                 Email: process.env.EMAIL_TO,
-                Name: 'Your Name'
+                Name: process.env.PASTOR_NAME
               }
             ],
             Subject: `New Contact Form Message from ${name}`,
@@ -43,15 +73,9 @@ export async function handler(event) {
         ]
       });
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ success: true })
-    };
+    return { statusCode: 200, body: JSON.stringify({ success: true }) };
   } catch (err) {
-    console.error('Email sending error:', err);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Failed to send email' })
-    };
+    console.error('Error:', err);
+    return { statusCode: 500, body: JSON.stringify({ error: 'Failed to send email' }) };
   }
 }
