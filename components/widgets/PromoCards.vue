@@ -19,7 +19,7 @@
 <script setup>
 import PromoCard from '../components/widgets/PromoCard.vue'
 import { computed } from 'vue'
-import { cards } from '../data/PromoCards'
+import { cards } from '../../data/PromoCards'
 import { useWindowSize } from '@vueuse/core'
 
 // SSR-safe width tracking
@@ -49,6 +49,6 @@ const columns = computed(() => {
   display: grid;
   gap: 2rem;
   padding: 2rem 1rem;
-  background: #e2e2e0d8 
+  background: linear-gradient(to top, #f7efe2, color-mix(in srgb, var(--body-bg-color) 97%, black)); 
 }
 </style>
