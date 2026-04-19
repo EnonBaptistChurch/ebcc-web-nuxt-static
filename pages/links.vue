@@ -45,6 +45,9 @@
     <div class="card-grid mission-grid">
       <article v-for="mission in missionLinks" :key="mission.name" class="card">
         <div class="card-body">
+          <div class="mission-image">
+            <img v-if="mission.imgSrc" :src="mission.imgSrc">
+          </div>
           <h3 class="card-name">
             <a :href="mission.link" target="_blank" rel="noopener">{{ mission.name }}</a>
           </h3>
@@ -61,7 +64,7 @@ import missionLinks from '../data/missionLinks';
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap'); */
 
 /* ── Tokens ─────────────────────────────────────────── */
 :root {
@@ -74,7 +77,7 @@ import missionLinks from '../data/missionLinks';
   --gold-lt:  #c4a55a;
   --navy:     #1e3557;
   --navy-lt:  #2a4a7f;
-  --radius:   10px;
+  --radius:   ;
   --shadow-sm: 0 2px 8px rgba(28,26,23,0.07);
   --shadow-md: 0 6px 20px rgba(28,26,23,0.11);
   --shadow-lg: 0 12px 36px rgba(28,26,23,0.14);
@@ -175,12 +178,13 @@ import missionLinks from '../data/missionLinks';
 .card {
   background: #fff;
   border: 1px solid var(--parchment);
-  border-radius: var(--radius);
+  border-radius: 16px;
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   transition: transform 0.22s ease, box-shadow 0.22s ease;
+
 }
 
 .card:hover {
@@ -201,6 +205,7 @@ import missionLinks from '../data/missionLinks';
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  
 }
 
 .card-footer {
@@ -212,6 +217,18 @@ import missionLinks from '../data/missionLinks';
   background: var(--cream);
 }
 
+
+.mission-image {
+  aspect-ratio: 16 / 9; /* or 4 / 3 depending on your images */
+  overflow: hidden;
+  max-height: 100px;
+}
+
+.mission-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 /* ── Card typography ────────────────────────────────── */
 .card-name {
   margin: 0;
