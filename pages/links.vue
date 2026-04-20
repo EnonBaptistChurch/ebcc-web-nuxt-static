@@ -46,7 +46,7 @@
       <article v-for="mission in missionLinks" :key="mission.name" class="card">
         <div class="card-body">
           <div class="mission-image">
-            <img v-if="mission.imgSrc" :src="mission.imgSrc">
+            <img v-if="mission.imgSrc" :src="mission.imgSrc" :style="mission.bgColor ? { backgroundColor: mission.bgColor } : {}" />
           </div>
           <h3 class="card-name">
             <a :href="mission.link" target="_blank" rel="noopener">{{ mission.name }}</a>
