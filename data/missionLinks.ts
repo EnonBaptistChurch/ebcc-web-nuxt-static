@@ -35,7 +35,7 @@ const missionLinks: MissionLink[] = [
     link: "https://morningstar.org.za/",
     description: "Morning Star Mission works to reach and disciple communities in South Africa through church planting, education, and practical care, with a focus on gospel transformation.",
     prayer: true,
-    imgSrc: "https://morningstar.org.za/pics/Logo2.png"
+    imgSrc: "/images/morning-star-logo.png"
   },
   {
     name: "Open Doors",
