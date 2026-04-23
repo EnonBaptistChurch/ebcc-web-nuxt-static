@@ -51,20 +51,13 @@ const missionLinks: MissionLink[] = [
     prayer: true,
     imgSrc: "https://www.ufm.org.uk/ufm/wp-content/uploads/2022/06/Crowter_Rosie_1920px.jpg"
   },
-  
   {
-  name: "Trinitarian Bible Society",
-  link: "https://www.tbsbibles.org/",
-  description: "The Trinitarian Bible Society exists to publish and distribute faithful translations of the Holy Scriptures, upholding the historic texts of the Reformation and promoting Bible translation worldwide.",
-  imgSrc: "https://cdn.ymaws.com/www.tbsbibles.org/graphics/logo.png"
-},
-{
-  name: "Vuyiroli",
-  link: "https://vuyiroli.org/en-gb/",
-  description: "Vuyiroli is a non-profit organization that serves the abandoned elderly in need, regardless of caste, creed, religion, or language. Providing homes for the elderly who have no one else to care for them.",
-  imgSrc: "https://vuyiroli.org/wp-content/uploads/2015/01/vuyiroli-combined1.png"
+    name: "Vuyiroli",
+    link: "https://vuyiroli.org/en-gb/",
+    description: "Vuyiroli is a non-profit organization that serves the abandoned elderly in need, regardless of caste, creed, religion, or language. Providing homes for the elderly who have no one else to care for them.",
+    imgSrc: "https://vuyiroli.org/wp-content/uploads/2015/01/vuyiroli-combined1.png"
 
-}
+  }
 ];
 
 export default missionLinks;
