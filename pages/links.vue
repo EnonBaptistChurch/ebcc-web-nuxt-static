@@ -12,15 +12,31 @@
       <article v-for="church in localChurches" :key="church.name" class="card">
         <div class="card-body">
           <h3 class="card-name">
-            <a :href="church.url" target="_blank" rel="noopener">{{ church.name }}</a>
+            <a :href="church.url" target="_blank" rel="noopener">
+              {{ church.name }}
+            </a>
           </h3>
-          <p class="card-description">{{ church.description }}</p>
+
+          <div class="card-details">
+            <img
+              v-if="church.imgSrc"
+              :src="church.imgSrc"
+              :alt="church.name"
+              style="max-height: 100px; width: 100%; object-fit: contain;"
+            />
+
+            <p class="card-description">
+              {{ church.description }}
+            </p>
+          </div>
         </div>
+
         <footer class="card-footer">
           <p v-if="church.pastor" class="meta">
             <span class="meta-label">Pastor</span>
             {{ church.pastor }}
           </p>
+
           <p v-if="church.location" class="meta">
             <span class="meta-label">Location</span>
             {{ church.location }}
@@ -45,13 +61,48 @@
     <div class="card-grid mission-grid">
       <article v-for="mission in missionLinks" :key="mission.name" class="card">
         <div class="card-body">
+
+          <!-- IMAGE BLOCK -->
           <div class="mission-image">
-            <img v-if="mission.imgSrc" :src="mission.imgSrc" :style="mission.bgColor ? { backgroundColor: mission.bgColor } : {}" />
-          </div>
+  <template v-if="Array.isArray(mission.imgSrc)">
+    <img
+      v-for="(src, i) in mission.imgSrc"
+      :key="i"
+      :src="src"
+      :alt="mission.name"
+      :style="mission.bgColor ? { backgroundColor: mission.bgColor } : {}"
+    />
+  </template>
+
+  <img
+    v-else-if="mission.imgSrc"
+    :src="mission.imgSrc"
+    :alt="mission.name"
+    :style="mission.bgColor ? { backgroundColor: mission.bgColor } : {}"
+  />
+</div>
+
           <h3 class="card-name">
-            <a :href="mission.link" target="_blank" rel="noopener">{{ mission.name }}</a>
+            <a :href="mission.link" target="_blank" rel="noopener">
+              {{ mission.name }}
+            </a>
           </h3>
-          <p class="card-description">{{ mission.description }}</p>
+
+          <p class="card-description">
+            {{ mission.description }}
+          </p>
+
+          <div v-if="mission.moreInfoLink">
+            <a
+              class="link"
+              :href="mission.moreInfoLink.link"
+              target="_blank"
+              rel="noopener"
+            >
+              {{ mission.moreInfoLink.name }}
+            </a>
+          </div>
+
         </div>
       </article>
     </div>
@@ -83,9 +134,16 @@ import missionLinks from '../data/missionLinks';
   --shadow-lg: 0 12px 36px rgba(28,26,23,0.14);
 }
 
+.link {
+  color: var(--navy);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
 /* ── Layout ─────────────────────────────────────────── */
 .wrapper {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 3rem 1.5rem 4rem;
   background: var(--cream);
@@ -219,15 +277,21 @@ import missionLinks from '../data/missionLinks';
 
 
 .mission-image {
-  aspect-ratio: 16 / 9; /* or 4 / 3 depending on your images */
-  overflow: hidden;
+  display: flex;
+  gap: 0.5rem;
   max-height: 100px;
+  overflow: hidden;
 }
 
+/* equal width images */
 .mission-image img {
+  flex: 1;
+  min-width: 0;
   width: 100%;
-  height: 100%;
+  max-height: 100px;
   object-fit: contain;
+  display: block;
+  border-radius: 6px; /* optional but helps bgColor look intentional */
 }
 /* ── Card typography ────────────────────────────────── */
 .card-name {
@@ -236,6 +300,7 @@ import missionLinks from '../data/missionLinks';
   font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.3;
+  text-align: center;;
 }
 
 .card-name a {
@@ -246,6 +311,11 @@ import missionLinks from '../data/missionLinks';
 
 .card-name a:hover {
   color: var(--gold);
+}
+.card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .card-description {

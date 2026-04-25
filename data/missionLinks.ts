@@ -3,8 +3,14 @@ export interface MissionLink {
   link: string;
   description: string;
   prayer?: boolean;
-  imgSrc?: string;
+  imgSrc?: string | string[];
   bgColor?: string;
+  moreInfoLink?: MissionBasicLink;
+}
+
+export interface MissionBasicLink {
+  name: string;
+  link: string;
 }
 
 const missionLinks: MissionLink[] = [
@@ -33,14 +39,18 @@ const missionLinks: MissionLink[] = [
   {
     name: "Morning Star (South Africa)",
     link: "https://morningstar.org.za/",
-    description: "Morning Star Mission works to reach and disciple communities in South Africa through church planting, education, and practical care, with a focus on gospel transformation.",
+    description: "Morning Star Mission works in South Africa to reach and disciple communities through church planting, education, and practical care, with a focus on gospel transformation. It began in 2000 as a ministry for children affected by AIDS and is now transitioning into supporting those same children as teenagers and young adults, under the oversight of the charity Living Hope.",
     prayer: true,
-    imgSrc: "/images/morning-star-logo.png"
+    imgSrc: ["/images/morning-star-logo.png","https://www.livinghope.co.za/wp-content/uploads/2018/07/main-logo-1.png"],
+    moreInfoLink: {
+      name: "Living Hope - Morning Star",
+      link: "https://www.livinghope.co.za/where-we-work/free-state-morning-star/"
+    }
   },
   {
     name: "Open Doors",
     link: "https://www.opendoors.org.uk",
-    description: "Supporting persecuted Christians in over 70 countries, providing Bibles, training, and advocacy for those who suffer for their faith.",
+    description: "Supporting persecuted Christians in over 70 countries, providing Bibles, training, and advocacy for those who suffer for their faith. We often pray for our persecuted brothers and sisters in Christ, and Open Doors provides us with updates and prayer points to guide our prayers.",
     prayer: true,
     imgSrc:"https://www.opendoorsuk.org/wp-content/uploads/2022/05/logo.svg"
   },
