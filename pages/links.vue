@@ -4,7 +4,10 @@
     <header class="section-intro">
       <h2>Local Church Links</h2>
       <p class="subtitle">
-        We have links with like-minded churches across Medway, joining together for worship, prayer, and fellowship.
+        We have links with like-minded churches across Medway.
+      </p>
+      <p class="subtitle"> 
+        We meet occassionally for prayer, fellowship and joint meetings.
       </p>
     </header>
 
