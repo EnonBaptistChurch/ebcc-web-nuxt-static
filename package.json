@@ -28,6 +28,5 @@
     "nuxt": "^4.4.2",
     "typescript": "^6.0.3",
     "vite-tsconfig-paths": "^6.1.1"
-
   }
 }
