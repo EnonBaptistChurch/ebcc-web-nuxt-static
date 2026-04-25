@@ -279,7 +279,7 @@ import missionLinks from '../data/missionLinks';
 .mission-image {
   display: flex;
   gap: 0.5rem;
-  max-height: 100px;
+  max-height: 150px;
   overflow: hidden;
 }
 
@@ -288,7 +288,7 @@ import missionLinks from '../data/missionLinks';
   flex: 1;
   min-width: 0;
   width: 100%;
-  max-height: 100px;
+  max-height: 150px;
   object-fit: contain;
   display: block;
   border-radius: 6px; /* optional but helps bgColor look intentional */
