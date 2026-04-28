@@ -4,4 +4,14 @@
 
 [functions]
   directory = "netlify/functions"
+
+[dev]
+  command = "npm run dev"
+  port = 3000
+  targetPort = 3000
+  publish = "dist"
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = ""
   
