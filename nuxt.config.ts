@@ -45,8 +45,15 @@ export default defineNuxtConfig({
         mangle: {
           toplevel: true,  // Enable mangling of top-level variable names
         },
+        
       },
+      
     },
+    optimizeDeps: {
+        include: [
+          '@vueuse/core',
+        ]
+      },
     server: {
       allowedHosts: ['enonbaptistchatham.org.uk', 'localhost']
     },
