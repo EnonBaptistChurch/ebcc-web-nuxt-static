@@ -46,9 +46,15 @@ export default defineNuxtConfig({
           toplevel: true,  // Enable mangling of top-level variable names
         },
       },
+      
     },
     server: {
       allowedHosts: ['enonbaptistchatham.org.uk', 'localhost']
+    },
+    optimizeDeps: {
+      include: [
+        '@vueuse/core',
+      ]
     },
     plugins: [tsconfigPaths()]
   },
