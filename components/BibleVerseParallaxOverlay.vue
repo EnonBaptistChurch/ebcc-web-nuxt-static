@@ -1,6 +1,5 @@
 <template>
   <div
-    id="edenParallax_page_section"
     class="edenParallax-zone"
     :class="{ 'edenParallax-error': isErrorPage }"
     :data-speed="speed"
@@ -49,7 +48,6 @@ export default {
   methods: {
     updateImage() {
       const width = window.innerWidth;
-  console.log('width:', width, 'image:', this.currentImage); // debug
       if (width >= 1920 && this.images.xlarge) this.currentImage = this.images.xlarge;
       else if (width >= 1440 && this.images.large) this.currentImage = this.images.large;
       else if (width >= 768 && this.images.medium) this.currentImage = this.images.medium;

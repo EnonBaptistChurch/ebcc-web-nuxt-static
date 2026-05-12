@@ -49,9 +49,6 @@ const handleSubmit = async () => {
   }
 
   const turnstileToken = widgetId ? (window as any).turnstile.getResponse(widgetId) : null;
-
-  console.log("Widget ID:", widgetId);
-console.log("Turnstile token:", turnstileToken);
   if (!turnstileToken) {
     status.value = 'error'
     console.error('Turnstile verification missing')
