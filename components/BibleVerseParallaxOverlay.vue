@@ -49,6 +49,7 @@ export default {
   methods: {
     updateImage() {
       const width = window.innerWidth;
+  console.log('width:', width, 'image:', this.currentImage); // debug
       if (width >= 1920 && this.images.xlarge) this.currentImage = this.images.xlarge;
       else if (width >= 1440 && this.images.large) this.currentImage = this.images.large;
       else if (width >= 768 && this.images.medium) this.currentImage = this.images.medium;
@@ -60,6 +61,7 @@ export default {
 
 <style scoped>
 .edenParallax-zone {
+  flex-shrink: 0;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -67,6 +69,7 @@ export default {
   position: relative;
   width: 100%;
   height: 300px; 
+  min-height: 300px;
   overflow: hidden;
   transition: background-image 0.3s ease-in-out;
 }
