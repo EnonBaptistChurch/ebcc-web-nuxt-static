@@ -68,8 +68,8 @@ export default {
   background-size: cover;
   position: relative;
   width: 100%;
-  height: 300px; 
-  min-height: 300px;
+  height: 300px !important; 
+  min-height: 300px !important;
   overflow: hidden;
   transition: background-image 0.3s ease-in-out;
 }
