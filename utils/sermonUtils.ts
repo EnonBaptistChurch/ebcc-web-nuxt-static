@@ -32,20 +32,51 @@ export function parseContentSnippet(snippet: string): ParsedSnippet |null {
     console.log(snippet, 'invalid snippet');
     console.log(lines[5], 'invalid snippet');
   }
-
-  const speaker = deDupeGT(lines[1] != null? lines[1] : "")
+  const potentialSpeaker = lines[1] != null? lines[1] : "";
+  const speaker = convertToSpeaker(deDupe(potentialSpeaker));
   return {
     title: lines[0] ?? "",
     speaker: speaker,
     date,
     service: lines[3] ?? "",
-    series: lines[4] ?? "",
+    series: splitTags(lines[4]) ?? "",
     formattedDate: getSermonDate(date) ?? undefined
   };
 }
 
-function deDupeGT(preacher: string): string {
+function convertToSpeaker(speakerStr: string): ParsedSnippet["speaker"] {
+  const name = speakerStr.trim();
+  if(name.includes("[") || name.includes("]")) {
+    const captureInfo = name.match(/^(.*?)\s*\[(.*?)\]$/)
+    if(captureInfo) {
+      return {
+        name: captureInfo[1]?.trim() || name,
+        information: extractBracketContent(name) || ""
+      };
+    }
+    return { name, information: "Unusual format detected" };
+  }
+  return {
+    name,
+    information: "" // Placeholder for any additional info you might want to extract
+  };
+}
+
+function extractBracketContent(str: string)  {
+  const match = str.match(/\[(.*?)\]/);
+  return match ? match[1] : null;
+}
+
+function splitTags(input?: string): string[] {
+  return (input ?? "")
+    .split(";")
+    .map(t => t.trim())
+    .filter(Boolean);
+}
+
+function deDupe(preacher: string): string {
   if(!preacher) return preacher;
+  if(preacher.includes("Relf")) return "Pastor Paul Relf";
   if(preacher.includes("Trice")) return "Graham Trice";
   return preacher;
 }
