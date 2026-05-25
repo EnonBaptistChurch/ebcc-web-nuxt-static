@@ -1,71 +1,100 @@
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { ref, onBeforeUnmount } from 'vue';
 
-export function useAudioPlayer(src?: string) {
+export function useAudioPlayer() {
   const audio = ref<HTMLAudioElement | null>(null);
+
   const isPlaying = ref(false);
   const currentTime = ref(0);
   const duration = ref(0);
   const volume = ref(1);
-  const initialStart= ref(false);
+  const initialStart = ref(false);
+
+  let currentUrl: string | null = null;
 
   const setInitialStart = (autoplay: boolean) => {
     initialStart.value = autoplay;
-  }
+  };
+
+  // ✅ create audio ONCE
+  const ensureAudio = () => {
+    if (audio.value) return;
+
+    const el = new Audio();
+
+    el.addEventListener('timeupdate', () => {
+      currentTime.value = el.currentTime;
+      duration.value = el.duration || 0;
+    });
+
+    el.addEventListener('loadedmetadata', () => {
+      duration.value = el.duration || 0;
+    });
+
+    el.addEventListener('ended', () => {
+      isPlaying.value = false;
+    });
+
+    audio.value = el;
+  };
 
   const init = (url: string, autoplay = false) => {
-  if (audio.value) {
-    if(isPlaying.value) togglePlay();
-    audio.value.src = '';
-  }
+    ensureAudio();
 
-  audio.value = new Audio(url);
+    if (!audio.value) return;
 
-  audio.value.addEventListener('timeupdate', () => {
-    currentTime.value = audio.value?.currentTime ?? 0;
-    duration.value = audio.value?.duration ?? 0;
-  });
+    // ✅ prevent re-initialising same audio
+    if (url === currentUrl) return;
+    currentUrl = url;
 
-  audio.value.addEventListener('loadedmetadata', () => {
-    duration.value = audio.value?.duration ?? 0;
-  });
+    audio.value.pause();
+    audio.value.src = url;
+    audio.value.load();
 
-  audio.value.addEventListener('ended', () => {
-    isPlaying.value = false;
-  });
+    setVolume(volume.value);
 
-  setVolume(volume.value);
+    if (autoplay) {
+      audio.value.play();
+      isPlaying.value = true;
+    } else {
+      isPlaying.value = false;
+    }
 
-  if (autoplay) {
-    togglePlay();
-  }
-};
+    currentTime.value = 0;
+  };
 
   const togglePlay = () => {
     if (!audio.value) return;
-    if (isPlaying.value) audio.value.pause();
-    else audio.value.play();
-    isPlaying.value = !isPlaying.value;
+
+    if (isPlaying.value) {
+      audio.value.pause();
+      isPlaying.value = false;
+    } else {
+      audio.value.play();
+      isPlaying.value = true;
+    }
   };
 
   const seek = (time: number) => {
-  if (!audio.value) return;
+    if (!audio.value) return;
 
-  // Ensure the time is a finite number
-  const safeTime = Number.isFinite(time) ? time : 0;
+    const safe = Number.isFinite(time) ? time : 0;
+    const clamped = Math.min(
+      Math.max(safe, 0),
+      audio.value.duration || 0
+    );
 
-  // Clamp to audio duration
-  const clampedTime = Math.min(Math.max(safeTime, 0), audio.value.duration || 0);
-
-  audio.value.currentTime = clampedTime;
-  currentTime.value = clampedTime;
-};
-
-  const rewind = (seconds = 10) => {
-    if (audio.value) seek(Math.max(0, audio.value.currentTime - seconds));
+    audio.value.currentTime = clamped;
+    currentTime.value = clamped;
   };
 
-  const forward = (seconds = 10) => {
-    if (audio.value) seek(Math.min(audio.value.duration, audio.value.currentTime + seconds));
+  const rewind = (s = 10) => {
+    if (!audio.value) return;
+    seek(audio.value.currentTime - s);
+  };
+
+  const forward = (s = 10) => {
+    if (!audio.value) return;
+    seek(audio.value.currentTime + s);
   };
 
   const setVolume = (val: number) => {
@@ -74,20 +103,18 @@ export function useAudioPlayer(src?: string) {
   };
 
   const formatTime = (sec: number) => {
-    if (isNaN(sec)) return '0:00';
+    if (!isFinite(sec)) return '0:00';
     const m = Math.floor(sec / 60);
-    const s = Math.floor(sec % 60)
-      .toString()
-      .padStart(2, '0');
+    const s = Math.floor(sec % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
   };
 
   onBeforeUnmount(() => {
-    if (audio.value) {
-      audio.value.pause();
-      audio.value.src = '';
-      audio.value = null;
-    }
+    if (!audio.value) return;
+
+    audio.value.pause();
+    audio.value.src = '';
+    audio.value = null;
   });
 
   return {
@@ -96,6 +123,8 @@ export function useAudioPlayer(src?: string) {
     currentTime,
     duration,
     volume,
+    initialStart,
+
     init,
     togglePlay,
     seek,
@@ -103,7 +132,6 @@ export function useAudioPlayer(src?: string) {
     forward,
     setVolume,
     formatTime,
-    setInitialStart,
-    initialStart
+    setInitialStart
   };
 }
