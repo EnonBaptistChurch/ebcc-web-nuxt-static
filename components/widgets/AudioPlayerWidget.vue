@@ -1,95 +1,122 @@
 <template>
-  <div class="audio-player" id="#audio-player">
+  <div class="audio-player" id="audio-player">
     <p class="audio-details">{{ src.title }}</p>
-    <p class="audio-details">{{ src.parsedSnippet?.speaker }}</p>
-    <p class="audio-details">{{ getUkDateString(src.parsedSnippet?.formattedDate!) }} - {{ src.parsedSnippet?.service }}</p>
-    
+    <p class="audio-details">{{ src.parsedSnippet?.speaker.name }}</p>
+
+    <p v-if="src.parsedSnippet?.speaker.information" class="audio-details  speaker-info">
+      {{ src.parsedSnippet?.speaker.information }}
+    </p>
+
+    <p class="audio-details">
+      {{ getUkDateString(src.parsedSnippet?.formattedDate!) }} -
+      {{ src.parsedSnippet?.service }}
+    </p>
+
     <div class="controls">
-  <div class="left-controls">
-    <button @click="props.player.rewind(10)" class="icon-btn" title="Rewind 10s" :style="{ '--btn-size': buttonSize + 'px' }">
-      <RewindIcon :size="iconSize" />
-    </button>
+      <div class="left-controls">
+        <button
+          @click="props.player.rewind(10)"
+          class="icon-btn"
+          title="Rewind 10s"
+          :style="{ '--btn-size': buttonSize + 'px' }"
+        >
+          <RewindIcon :size="iconSize" />
+        </button>
 
-    <button @click="toPlayAtStart()" class="play-btn" :class="{ playing: props.player.isPlaying }" title="Play/Pause" :style="{ '--btn-size': buttonSize + 'px' }">
-      <PlayIcon v-if="!props.player.isPlaying.value" :size="iconSize" />
-      <PauseIcon v-else :size="iconSize" />
-    </button>
+        <button
+          @click="toPlayAtStart()"
+          class="play-btn"
+          :class="{ playing: props.player.isPlaying }"
+          title="Play/Pause"
+          :style="{ '--btn-size': buttonSize + 'px' }"
+        >
+          <PlayIcon v-if="!props.player.isPlaying.value" :size="iconSize" />
+          <PauseIcon v-else :size="iconSize" />
+        </button>
 
-    <button @click="props.player.forward(10)" class="icon-btn" title="Forward 10s" :style="{ '--btn-size': buttonSize + 'px' }">
-      <ForwardIcon :size="iconSize" />
-    </button>
-  </div>
+        <button
+          @click="props.player.forward(10)"
+          class="icon-btn"
+          title="Forward 10s"
+          :style="{ '--btn-size': buttonSize + 'px' }"
+        >
+          <ForwardIcon :size="iconSize" />
+        </button>
+      </div>
 
-  <div class="right-controls">
-    <div class="volume-control">
-      <label for="volume">🔊</label>
-      <input
-        id="volume"
-        type="range"
-        min="0"
-        max="1"
-        step="0.01"
-        v-model.number="props.player.volume.value"
-        @input="changeVolume"
-        title="Volume"
-        class="volume-slider"
-      />
+      <div class="right-controls">
+        <div class="volume-control">
+          <label for="volume">🔊</label>
+          <input
+            id="volume"
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            v-model.number="props.player.volume.value"
+            @input="changeVolume"
+            title="Volume"
+            class="volume-slider"
+          />
+        </div>
+      </div>
     </div>
-  </div>
-</div>
+
     <div class="time-container">
-      <span class="current-time">{{ props.player.formatTime(props.player.currentTime.value) }}</span>
-      <span class="duration">{{ props.player.formatTime(props.player.duration.value) }}</span>
+      <span class="current-time">
+        {{ props.player.formatTime(props.player.currentTime.value) }}
+      </span>
+      <span class="duration">
+        {{ props.player.formatTime(props.player.duration.value) }}
+      </span>
     </div>
+
     <div class="progress">
       <input
         type="range"
         min="0"
         :max="props.player.duration.value"
         step="0.1"
-        v-model="props.player.currentTime.value"
-        @input="seekAudio"
+        :value="props.player.currentTime.value"
+        @change="(e) => props.player.seek(Number((e.target as HTMLInputElement).value))"
       />
-      
     </div>
   </div>
-  
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import RewindIcon from './audio/icons/RewindIcon.vue';
 import PlayIcon from './audio/icons/PlayIcon.vue';
 import PauseIcon from './audio/icons/PauseIcon.vue';
 import ForwardIcon from './audio/icons/ForwardIcon.vue';
+
 import type { PodcastItem } from '@/types/SermonPodcasts';
 import { getUkDateString } from '../../composables/useDateToText';
 import { useAudioPlayer } from '../../composables/useAudioPlayer';
 
-const props = defineProps<{ src: PodcastItem,
-  player: ReturnType<typeof useAudioPlayer> }>();
+const props = defineProps<{
+  src: PodcastItem;
+  player: ReturnType<typeof useAudioPlayer>;
+}>();
 
 const iconSize = ref(30);
 const buttonSize = ref(40);
-const volume = ref(1);
 
 const toPlayAtStart = () => {
-    if(!props.player.initialStart.value)
-    {
-      props.player.setInitialStart(true);
-      props.player.togglePlay();
-    }
-    else
-    {
-      props.player.togglePlay();
-    }
+  if (!props.player.initialStart.value) {
+    props.player.setInitialStart(true);
+    props.player.togglePlay();
+  } else {
+    props.player.togglePlay();
+  }
 };
 
 watch(
-  () => props.src,
-  (newVal) => {
-    if (newVal?.enclosure?.url) {
-      props.player.init(newVal.enclosure.url, props.player.initialStart.value); // autoplay only if user clicked
+  () => props.src?.enclosure?.url,
+  (url) => {
+    if (url) {
+      props.player.init(url, props.player.initialStart.value);
     }
   },
   { immediate: true }
@@ -99,13 +126,16 @@ const changeVolume = () => {
   props.player.setVolume(props.player.volume.value);
 };
 
-const seekAudio = () => {
-  props.player.seek(props.player.currentTime.value);
-};
-
-
+/**
+ * FIX: proper seek binding
+ */
+const seekTime = computed({
+  get: () => props.player.currentTime.value,
+  set: (val: number) => {
+    props.player.seek(val);
+  }
+});
 </script>
-
 
 <style scoped>
 .audio-player {
@@ -115,10 +145,10 @@ const seekAudio = () => {
   padding: 1rem 1.25rem;
   border-radius: 1rem;
   font-weight: 700;
-  /* Background with watermark overlay */
-  background: 
-    linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), /* semi-transparent overlay */
-    url('/images/building/new-enon-320.webp') no-repeat center / cover; /* non-repeating, fit container */
+
+  background:
+    linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)),
+    url('/images/building/new-enon-320.webp') no-repeat center / cover;
 
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
   max-width: 500px;
@@ -133,9 +163,13 @@ const seekAudio = () => {
 
 .audio-details {
   text-align: center;
-  margin:0.25rem;
+  margin: 0.25rem;
 }
-
+.speaker-info {
+  font-size: 0.9rem;
+  color: #555;
+  font-style: italic;
+}
 
 .icon-btn,
 .play-btn {
@@ -145,8 +179,8 @@ const seekAudio = () => {
   background: #f9fafb;
   border: none;
   border-radius: 50%;
-  width: var(--btn-size, 52px);   /* default 52px */
-  height: var(--btn-size, 52px);  /* default 52px */
+  width: var(--btn-size, 52px);
+  height: var(--btn-size, 52px);
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
@@ -160,11 +194,6 @@ const seekAudio = () => {
 .play-btn.playing {
   background: var(--button-bg-color);
   color: white;
-}
-
-.icon {
-  width: 24px;
-  height: 24px;
 }
 
 .progress {
@@ -182,15 +211,15 @@ input[type='range'] {
 
 .time-container {
   display: flex;
-  justify-content: space-between; /* pushes content to the edges */
+  justify-content: space-between;
   font-size: 14px;
   width: 100%;
-  margin:0;
+  margin: 0;
 }
 
 .controls {
   display: flex;
-  justify-content: space-between; /* left controls to left, volume to right */
+  justify-content: space-between;
   align-items: center;
   gap: 1rem;
   width: 100%;
@@ -200,7 +229,7 @@ input[type='range'] {
 
 .left-controls {
   display: flex;
-  gap: 1rem; /* spacing between rewind, play, forward */
+  gap: 1rem;
   align-items: center;
   margin-left: 1.25rem;
 }
@@ -216,11 +245,6 @@ input[type='range'] {
   gap: 0.5rem;
 }
 
-.volume-control input[type="range"] {
-  cursor: pointer;
-  accent-color: var(--button-bg-color);
-}
-
 .volume-slider {
   max-width: 100px;
 }
@@ -228,12 +252,12 @@ input[type='range'] {
 @media (max-width: 600px) {
   .controls {
     flex-direction: column;
-    align-items: stretch; /* stretch to full width */
+    align-items: stretch;
   }
 
   .left-controls,
   .right-controls {
-    justify-content: center; /* center the controls horizontally */
+    justify-content: center;
     margin: 0.5rem 0;
     margin-left: 0;
     margin-right: 0;
@@ -245,7 +269,7 @@ input[type='range'] {
   }
 
   .volume-control input[type="range"] {
-    width: 80%; /* make slider more mobile-friendly */
+    width: 80%;
   }
 }
 </style>

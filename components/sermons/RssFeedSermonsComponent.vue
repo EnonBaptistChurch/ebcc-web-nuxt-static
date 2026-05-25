@@ -13,13 +13,13 @@
 <div class="checkbox-group">
   <span class="checkbox-label">Speakers:</span>
   <div class="checkbox-items">
-    <label v-for="speaker in distinctSpeakers" :key="speaker">
+    <label v-for="speakerObj in distinctSpeakers" :key="speakerObj.speaker">
       <input
         type="checkbox"
-        :value="speaker"
+        :value="speakerObj.speaker"
         v-model="selectedSpeakers"
       />
-      {{ speaker }}
+      {{ speakerObj.speaker }} ({{ speakerObj.count }})
     </label>
   </div>
 </div>
@@ -28,13 +28,13 @@
 <div class="checkbox-group">
   <span class="checkbox-label">Series:</span>
   <div class="checkbox-items">
-    <label v-for="series in distinctSeries" :key="series">
+    <label v-for="series in distinctSeries" :key="series.series">
       <input
         type="checkbox"
-        :value="series"
+        :value="series.series"
         v-model="selectedSeries"
       />
-      {{ series }}
+      {{ series.series }} ({{ series.count }})
     </label>
   </div>
 </div>
@@ -94,17 +94,37 @@ const visibleCount = ref(10)
 const increment = 10
 
 // Distinct checkbox options
-const distinctSpeakers = computed(() =>
-  Array.from(
-    new Set(props.episodes.map(e => e.parsedSnippet?.speaker).filter(Boolean))
-  ) as string[]
-)
+const distinctSpeakers = computed(() => {
+  const counts = props.episodes.reduce((acc, episode) => {
+    const speaker = episode.parsedSnippet?.speaker
 
-const distinctSeries = computed(() =>
-  Array.from(
-    new Set(props.episodes.map(e => e.parsedSnippet?.series).filter(Boolean))
-  ) as string[]
-)
+    if (!speaker) return acc
+
+    acc[speaker.name] = (acc[speaker.name] || 0) + 1
+
+    return acc
+  }, {} as Record<string, number>)
+
+  return Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])
+    .map(([speaker, count]) => ({
+      speaker,
+      count
+    }))
+})
+
+const distinctSeries = computed(() => {
+  const counts = props.episodes.reduce((acc, ep) => {
+    for (const tag of ep.parsedSnippet?.series ?? []) {
+      acc[tag] = (acc[tag] || 0) + 1
+    }
+    return acc
+  }, {} as Record<string, number>)
+
+  return Object.entries(counts)
+    .sort((a, b) => b[1] - a[1])
+    .map(([series, count]) => ({ series, count }))
+})
 
 // Filtered episodes
 const filteredEpisodes = computed(() => {
@@ -116,19 +136,23 @@ const filteredEpisodes = computed(() => {
       ep =>
         ep.title.toLowerCase().includes(query) ||
         ep.pubDate?.toLowerCase().includes(query) ||
-        ep.parsedSnippet?.speaker?.toLowerCase().includes(query)
+        ep.parsedSnippet?.speaker?.name?.toLowerCase().includes(query)
     )
   }
 
   // Speaker filter (checkboxes)
   if (selectedSpeakers.value.length) {
-    list = list.filter(ep => selectedSpeakers.value.includes(ep.parsedSnippet?.speaker ?? ''))
+    list = list.filter(ep => selectedSpeakers.value.includes(ep.parsedSnippet?.speaker?.name ?? ''))
   }
 
   // Series filter (checkboxes)
   if (selectedSeries.value.length) {
-    list = list.filter(ep => selectedSeries.value.includes(ep.parsedSnippet?.series ?? ''))
-  }
+  list = list.filter(ep =>
+    selectedSeries.value.some(tag =>
+      ep.parsedSnippet?.series?.includes(tag)
+    )
+  )
+}
 
   // Move chosen podcast to top
   if (props.chosenPodcast) {
@@ -148,13 +172,13 @@ const hasMoreEpisodes = computed(() => {
     const matchesQuery = query
       ? ep.title.toLowerCase().includes(query) ||
         ep.pubDate?.toLowerCase().includes(query) ||
-        ep.parsedSnippet?.speaker?.toLowerCase().includes(query)
+        ep.parsedSnippet?.speaker?.name?.toLowerCase().includes(query)
       : true
     const matchesSpeaker = selectedSpeakers.value.length
-      ? selectedSpeakers.value.includes(ep.parsedSnippet?.speaker ?? '')
+      ? selectedSpeakers.value.includes(ep.parsedSnippet?.speaker?.name ?? '')
       : true
     const matchesSeries = selectedSeries.value.length
-      ? selectedSeries.value.includes(ep.parsedSnippet?.series ?? '')
+      ? selectedSeries.value.some(tag => ep.parsedSnippet?.series?.includes(tag))
       : true
     return matchesQuery && matchesSpeaker && matchesSeries
   })
