@@ -14,7 +14,7 @@ export const localChurches: Church[] = [
     pastor: 'Danny Hawkes',
     description: 'A small, friendly, Evangelical church meeting to worship God in Rainham, Kent',
     location: 'Rainham Community Centre, Granary Close, Rainham, Kent, ME8 7SG',
-    imgSrc: "https://granarychurch.org.uk/wp-content/uploads/2024/12/oast-home-pic-1.jpg"
+    imgSrc: "/images/local-churches/granary-320.webp"
     
   },
   {
@@ -23,7 +23,7 @@ export const localChurches: Church[] = [
     pastor: 'Kevin Félix Hollington',
     description: 'A Grace Baptist Partnership Church in Halling.',
     location: 'The Old Fire Station, Vicarage Road, Halling, Rochester, Kent ME2 1BE',
-    imgSrc: "https://scontent-lhr8-2.xx.fbcdn.net/v/t39.30808-6/326542226_871998017215478_1603233835229363714_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=u8-ItcE7FO4Q7kNvwE2146Q&_nc_oc=AdrrKwXUZyFKW4ImaP_HM-x-4hy7O-BGZF11f7FKkesFADQsXt3Lx7l3sWBeuZW7Bgg&_nc_zt=23&_nc_ht=scontent-lhr8-2.xx&_nc_gid=XSXQRDxyTVXsTNPv69J_Xg&_nc_ss=7a2a8&oh=00_Af3ieIr_D5NCEDp_FJACR32GTDuTx8i_PzRCh8vbiB5vBg&oe=69F2E453"
+    imgSrc: "/images/local-churches/HallingBC-320.webp"
   },
   {
     name: 'Waterford House Evangelical Free Church',
