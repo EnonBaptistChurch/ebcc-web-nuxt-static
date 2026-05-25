@@ -17,7 +17,7 @@ const missionLinks: MissionLink[] = [
   {
     name: "African Pastors' Conference",
     link: "https://africanpastorsconferences.org/",
-    description: "African Pastors’ Conferences exists to glorify God through Jesus Christ in enabling Pastors to lead Christ-exalting Biblical churches as Christ-like servant leaders through the faithful ministry of God’s word in preaching and leading Bible-studies.",
+    description: "African Pastors’ Conferences exists to glorify God through Jesus Christ in enabling Pastors to lead Christ-exalting Biblical churches as Christ-like servant leaders through the faithful ministry of God’s word in preaching and leading Bible-studies. ",
     prayer: true,
     imgSrc: "https://africanpastorsconferences.org/Graphics/logo.jpg"
   },
@@ -32,7 +32,7 @@ const missionLinks: MissionLink[] = [
   {
     name: "Grace Baptist Mission",
     link: "https://www.gbm.org.uk/",
-    description: "Grace Baptist Mission exists to help churches support their missionaries worldwide.",
+    description: "Grace Baptist Mission exists to help churches support their missionaries worldwide.  We also support GBM Radio's ministry, broadcasting in French and English to hard-to-reach places around the world.",
     prayer: true,
     imgSrc:"https://www.gbm.org.uk/wp-content/uploads/2020/12/GBM-2020-updated-logo_-CMYK-100x100.jpg"
   },
