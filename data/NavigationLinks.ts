@@ -47,7 +47,14 @@ export const whatsaChristianSection: NavItem = {
   link:"/testimonies/",
   submenuOpen:false
 };
-export const linksSection: NavItem ={ title:"Links", link: "/links/" }
+export const linksSection: NavItem ={ 
+  title:"Links", link: "/links/local-churches/",
+  submenu: [
+    { link: "/links/local-churches/", title: "Local Churches" },
+    { link: "/links/mission/", title: "Missionary Links" },
+  ],
+  submenuOpen:false
+}
 export const sermonSection: NavItem ={ title:"Sermons", link: "/sermons/" }
 export const findUsSection: NavItem ={ title:"Find Us", link: "/find-us/" }
 export const contactSection: NavItem ={ title:"Contact Us", link: "/contact-us/" }
