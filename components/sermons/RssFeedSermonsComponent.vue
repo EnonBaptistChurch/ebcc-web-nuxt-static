@@ -225,6 +225,7 @@ const clearFilters = () => {
   font-size: 1rem;
   outline: none;
   transition: border-color 0.3s ease;
+  margin: 0 auto;
 }
 
 .search-input:focus {
