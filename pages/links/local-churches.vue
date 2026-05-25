@@ -1,126 +1,72 @@
 <template>
-  <section class="wrapper">
-    <!-- Local Churches -->
-    <header class="section-intro">
-      <h2>Local Church Links</h2>
-      <p class="subtitle">
-        We have links with like-minded churches across Medway.
-      </p>
-      <p class="subtitle"> 
-        We meet occassionally for prayer, fellowship and joint meetings.
-      </p>
-    </header>
+  <div>
+    <section class="wrapper">
+      <!-- Local Churches -->
+      <header class="section-intro">
+        <h2>Local Church Links</h2>
+        <p class="subtitle">
+          We have links with like-minded churches across Medway.
+        </p>
+        <p class="subtitle"> 
+          We meet occasionally for prayer, fellowship and joint meetings.
+        </p>
+      </header>
 
-    <div class="card-grid">
-      <article v-for="church in localChurches" :key="church.name" class="card">
-        <div class="card-body">
-          <h3 class="card-name">
-            <a :href="church.url" target="_blank" rel="noopener">
-              {{ church.name }}
-            </a>
-          </h3>
+      <div class="card-grid">
+        <article v-for="church in localChurches" :key="church.name" class="card">
+          <div class="card-body">
+            <h3 class="card-name">
+              <a :href="church.url" target="_blank" rel="noopener">
+                {{ church.name }}
+              </a>
+            </h3>
 
-          <div class="card-details">
-            <img
-              v-if="church.imgSrc"
-              :src="church.imgSrc"
-              :alt="church.name"
-              style="max-height: 100px; width: 100%; object-fit: contain;"
-            />
+            <div class="card-details">
+              <img
+                v-if="church.imgSrc"
+                :src="church.imgSrc"
+                :alt="church.name"
+                style="max-height: 100px; width: 100%; object-fit: contain;"
+              />
 
-            <p class="card-description">
-              {{ church.description }}
+              <p class="card-description">
+                {{ church.description }}
+              </p>
+            </div>
+          </div>
+
+          <footer class="card-footer">
+            <p v-if="church.pastor" class="meta">
+              <span class="meta-label">Pastor</span>
+              {{ church.pastor }}
             </p>
-          </div>
-        </div>
 
-        <footer class="card-footer">
-          <p v-if="church.pastor" class="meta">
-            <span class="meta-label">Pastor</span>
-            {{ church.pastor }}
-          </p>
-
-          <p v-if="church.location" class="meta">
-            <span class="meta-label">Location</span>
-            {{ church.location }}
-          </p>
-        </footer>
-      </article>
-    </div>
-
-    <div class="section-divider" aria-hidden="true">
-      <span class="divider-cross">✦</span>
-    </div>
-
-    <!-- Missionaries -->
-    <header class="section-intro">
-      <span class="eyebrow">Global Outreach</span>
-      <h2>Missionary Links</h2>
-      <p class="subtitle">
-        We have links with missionaries serving across the world, taking the gospel to the nations.
-      </p>
-    </header>
-
-    <div class="card-grid mission-grid">
-      <article v-for="mission in missionLinks" :key="mission.name" class="card">
-        <div class="card-body">
-
-          <!-- IMAGE BLOCK -->
-          <div class="mission-image">
-  <template v-if="Array.isArray(mission.imgSrc)">
-    <img
-      v-for="(src, i) in mission.imgSrc"
-      :key="i"
-      :src="src"
-      :alt="mission.name"
-      :style="mission.bgColor ? { backgroundColor: mission.bgColor } : {}"
-    />
-  </template>
-
-  <img
-    v-else-if="mission.imgSrc"
-    :src="mission.imgSrc"
-    :alt="mission.name"
-    :style="mission.bgColor ? { backgroundColor: mission.bgColor } : {}"
-  />
-</div>
-
-          <h3 class="card-name">
-            <a :href="mission.link" target="_blank" rel="noopener">
-              {{ mission.name }}
-            </a>
-          </h3>
-
-          <p class="card-description">
-            {{ mission.description }}
-          </p>
-
-          <div v-if="mission.moreInfoLink">
-            <a
-              class="link"
-              :href="mission.moreInfoLink.link"
-              target="_blank"
-              rel="noopener"
-            >
-              {{ mission.moreInfoLink.name }}
-            </a>
-          </div>
-
-        </div>
-      </article>
-    </div>
-  </section>
+            <p v-if="church.location" class="meta">
+              <span class="meta-label">Location</span>
+              {{ church.location }}
+            </p>
+          </footer>
+        </article>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { localChurches } from '../data/localChurches';
-import missionLinks from '../data/missionLinks';
+import { useHead } from 'nuxt/app';
+import { localChurches } from '../../data/localChurches';
+useHead({
+  title: 'Links - Local Churches - Enon Baptist Church',
+  meta: [
+    {
+      name: 'description',
+      content: 'Links to local churches in the Medway area that we have fellowship with.'
+    }
+  ]
+})
 </script>
 
 <style scoped>
-/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap'); */
-
-/* ── Tokens ─────────────────────────────────────────── */
 :root {
   --cream:    #faf7f2;
   --parchment:#f0ead8;
@@ -220,18 +166,14 @@ import missionLinks from '../data/missionLinks';
   gap: 1.25rem;
 }
 
-.mission-grid {
-  grid-template-columns: repeat(3, 1fr);
-}
+
 
 @media (max-width: 1024px) {
   .card-grid       { grid-template-columns: repeat(2, 1fr); }
-  .mission-grid    { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 600px) {
-  .card-grid,
-  .mission-grid    { grid-template-columns: 1fr; }
+  .card-grid    { grid-template-columns: 1fr; }
   .section-intro h2 { font-size: 1.7rem; }
 }
 
@@ -279,24 +221,6 @@ import missionLinks from '../data/missionLinks';
 }
 
 
-.mission-image {
-  display: flex;
-  gap: 0.5rem;
-  max-height: 150px;
-  overflow: hidden;
-}
-
-/* equal width images */
-.mission-image img {
-  flex: 1;
-  min-width: 0;
-  width: 100%;
-  max-height: 150px;
-  object-fit: contain;
-  display: block;
-  border-radius: 6px; /* optional but helps bgColor look intentional */
-}
-/* ── Card typography ────────────────────────────────── */
 .card-name {
   margin: 0;
   font-family: 'Playfair Display', Georgia, serif;
