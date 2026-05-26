@@ -4,4 +4,11 @@
 
 [functions]
   directory = "netlify/functions"
-  
+
+[dev]
+  command = "npm run dev"
+publish = "dist"
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = ""

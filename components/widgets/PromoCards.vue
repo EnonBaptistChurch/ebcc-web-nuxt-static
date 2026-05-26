@@ -25,6 +25,7 @@ import { useWindowSize } from '@vueuse/core'
 // SSR-safe width tracking
 const { width: screenWidth } = useWindowSize()
 
+
 const visibleCards = computed(() => {
   const shownCards = cards.filter(c => c.show)
 

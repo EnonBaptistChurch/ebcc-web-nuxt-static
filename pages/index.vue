@@ -31,7 +31,6 @@ import PromoCards from '../components/widgets/PromoCards.vue';
 import ChurchImage from '../components/ChurchImage.vue';
 import NetlifyContact from '../components/NetlifyContact.vue';
 import { usePageReady } from '../composables/usePageReady';
-import { useHead } from 'nuxt/app';
 
 const imageRendered = ref(false);
 const eventsLoaded = ref(false);
