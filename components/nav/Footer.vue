@@ -69,7 +69,7 @@
       </div>
 
       <div class="footer-bottom">
-        <p>© {{ currentYear }} Enon Baptist Church, Chatham. All rights reserved.</p>
+        <p>© 2025-{{ currentYear }} Enon Baptist Church, Chatham. All rights reserved.</p>
       </div>
     </div>
   </footer>

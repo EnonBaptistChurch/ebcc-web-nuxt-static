@@ -1,5 +1,27 @@
+function lastSundayOfOctober(year: number) {
+  const date = new Date(year, 9, 31); // Oct = 9
+  date.setDate(date.getDate() - date.getDay()); // set to last Sunday
+  return date;
+}
+
+function sundayAfterChristmas(year: number) {
+  const christmas = new Date(year, 11, 25); // Dec = 11
+  const daysUntilSunday = (7 - christmas.getDay()) % 7;
+  christmas.setDate(christmas.getDate() + daysUntilSunday);
+  return christmas;
+}
+
+function showChristmasCard() {
+  const now = new Date();
+  const year = now.getFullYear();
+
+  const lastSunday = lastSundayOfOctober(year);
+  const sundayAfter = sundayAfterChristmas(year);
+
+  return now > lastSunday && now < sundayAfter;
+}
+
 export const cards = [
-  
   {
     image:'/images/christmas-pic-640.webp',
     title: 'Christmas Services',
@@ -7,7 +29,16 @@ export const cards = [
     link: '/christmas-services',
     ariaLabel: 'Christmas Services Image',
     buttonText: 'Find Out More',
-    show: new Date(Date.now()) > new Date('2025-10-26') && new Date(Date.now()) < new Date('2025-12-26')
+    show: showChristmasCard()
+  },
+  {
+    image:'/images/Easter-640.webp',
+    title: 'Easter Services',
+    description: `Join us for Easter as we celebrate the resurrection of Jesus Christ.`,
+    link: '/seasonal/easter',
+    ariaLabel: 'Easter Services Image',
+    buttonText: 'Find Out More',
+    show: false
   },
   {
     image: '/images/building/enonOutside-480.webp',
@@ -19,7 +50,7 @@ export const cards = [
     show: false
   },
   {
-    image: '/images/bible-640.webp',
+    image: '/images/bible-320.webp',
     title: 'Sermons',
     description: 'Catch up on all our recent sermons by clicking the link below',
     link: '/sermons',

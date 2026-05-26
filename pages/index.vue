@@ -12,14 +12,13 @@
 <ClientOnly >
         <PromoCards />
         </ClientOnly>
-        <ClientOnly >
           <BibleVerseParallaxOverlay
             image="/images/field.webp"
             verseText="For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life."
             reference="John 3:16"
             version="NKJV"
           />
-        </ClientOnly>
+    
     <!-- <NetlifyContact /> -->
   </div>
 </template>
