@@ -217,7 +217,7 @@ const clearFilters = () => {
 
 .filters-container {
   position: relative;
-  width: 100%;
+  width: calc(100% - 1rem);
   padding: 0.5rem;
 }
 
@@ -225,6 +225,7 @@ const clearFilters = () => {
   border: 1px solid #000;
   border-radius: 8px;
   transition: border-color 0.6s ease;
+  margin: 0 auto;
 }
 
 .search-input {
