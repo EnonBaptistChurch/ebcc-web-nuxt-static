@@ -92,7 +92,7 @@ const handleSubmit = async () => {
     </p>
 
     <div class="text-content contact-form-intro">
-      <h2>Phone: <CallWidget text="01634 301499" /></h2>
+      <h2>Phone: <CallWidget text="07508 779145" /></h2>
     </div>
 
     <h2 class="text-content contact-form-intro">Contact Form</h2>
