@@ -23,3 +23,14 @@ export const getTime =(dateString?: string): string => {
   const date = new Date(dateString);
   return date.toLocaleString('en-GB', { hour: 'numeric', minute: '2-digit' });
 }
+
+export const getUkDateString = (date?: Date | null) :string => {
+  if (!date) return '';
+  const newDate = new Date(date);
+  return newDate.toLocaleDateString('en-GB', {
+    weekday: 'long',
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+  });
+};

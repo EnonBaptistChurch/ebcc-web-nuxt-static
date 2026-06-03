@@ -25,9 +25,16 @@ export interface PodcastChannel {
 
 export interface ParsedSnippet {
   title: string
-  speaker: string
+  speaker: Speaker
   date: string
-  service?: string
+  service?: string,
+  formattedDate?: Date
+  series?: string[]
+}
+
+export interface Speaker {
+  name: string,
+  information?: string
 }
 
 export interface ItunesOwner {

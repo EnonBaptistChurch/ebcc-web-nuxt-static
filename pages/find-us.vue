@@ -11,7 +11,7 @@
     />
     <p>
       If you have any queries, please give us a call on
-      <CallWidget text="01634 301499" />
+      <CallWidget text="07508 779145" />
     </p>
   </div>
 

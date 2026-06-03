@@ -96,7 +96,6 @@ data() {
 
     const toggleSubmenu = (index) => {
       activeSubmenus[index] = !activeSubmenus[index]
-      console.log(activeSubmenus);
     }
 
     return {

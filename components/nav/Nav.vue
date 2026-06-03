@@ -41,7 +41,6 @@ function toggleMobileMenu() {
   }
 }
 const closeMobileMenu = () => {
-  console.log(mobileSubmenuOpen.value);
   mobileMenuOpen.value = false
   mobileSubmenuOpen.value = null
    

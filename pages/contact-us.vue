@@ -4,7 +4,6 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
 import NetlifyContact from '../components/NetlifyContact.vue';
 import { useHead } from 'nuxt/app';

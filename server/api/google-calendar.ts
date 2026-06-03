@@ -18,7 +18,6 @@ export default defineEventHandler(async (event) => {
   // Check if there's cached data for the specific number and it's still fresh
   const cached = cache[number];
   if (cached && now - cached.timestamp < cacheDuration) {
-    console.log('Using cached calendar events');
     return cached.data;
   }
 

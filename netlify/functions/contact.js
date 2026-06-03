@@ -29,7 +29,6 @@ export async function handler(event) {
     );
 
     const verifyJson = await verifyRes.json();
-    console.log('Turnstile verification response:', verifyJson);
 
     if (!verifyJson.success) {
       return {
