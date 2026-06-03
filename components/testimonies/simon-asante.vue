@@ -39,7 +39,8 @@
             As children, we didn't really understand what church meant even though we started learning and memorising verses of the Bible. 
             The verse that stuck with me until today is Matthew 6:33 - 
             <br>
-            <br><em>".... seek ye first the kingdom of God and His righteousness, and all other things shall be added unto thee"</em>.
+            <br>
+            <em>".... seek first the kingdom of God and His righteousness, and all these things shall be added to you."</em>.
         </p>
         <p>
             My Uncle however, understood the message of the gospel and became a “Born again” Christian.
@@ -73,7 +74,7 @@
         </p>
         <p>
             This causes me to constantly ask myself even till today, "What if I had died at that time"? 
-            However,God always had His eyes on me.
+            However, God always had His eyes on me.
         </p>
         <p>
             My wayward lifestyle continued when I came to the UK. 
