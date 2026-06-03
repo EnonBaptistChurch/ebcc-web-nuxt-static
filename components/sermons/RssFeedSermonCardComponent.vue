@@ -63,11 +63,11 @@
             <span
               v-if="
                 episode.parsedSnippet.series?.length != undefined &&
-                episode.parsedSnippet.series?.length > 2
+                episode.parsedSnippet.series?.length > 0
               "
               class="card-series"
             >
-              Series: {{ episode.parsedSnippet.series }}
+              Series: {{ episode.parsedSnippet.series?.map((s) => s).join('; ') }}
             </span>
           </div>
         </div>
