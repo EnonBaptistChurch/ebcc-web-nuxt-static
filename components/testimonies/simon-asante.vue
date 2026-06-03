@@ -7,7 +7,17 @@
       </em>
     </p> -->
     <div class="content-wrapper">
-      
+      <figure class="image-wrapper">
+        <img
+          src="/images/SA-480.webp"
+          srcset="
+            /images/SA-320.webp 320w,
+            /images/SA-480.webp 480w,"
+          sizes="100vw"
+          alt="Simon Asante"
+          class="sa-image"
+        />
+      </figure>
 
       <div class="text-wrapper">
         <p>
@@ -158,7 +168,7 @@
 }
 
 /* Image styling */
-.pn-image {
+.sa-image {
   width: 100%;
   height: auto;
   max-width: 300px;
