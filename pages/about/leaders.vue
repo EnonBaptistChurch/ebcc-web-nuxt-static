@@ -301,12 +301,12 @@ function getPossessiveFirstName(person: Elder): string {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 0.2  5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    gap:0.5rem;
   }
 
   .elder-divider {
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
   }
   .elder-bio {
     padding: 0.25rem 16px;
