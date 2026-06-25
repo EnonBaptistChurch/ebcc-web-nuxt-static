@@ -12,6 +12,12 @@ export const testimonies : TestimonySnippet[] = [
         link: "/testimonies/graham-trice"
     },
     {
+        name: "Simon Asante",
+        shortBio: "",
+        img: "/images/SA-480.webp",
+        link: "/testimonies/simon-asante"
+    },
+    {
         name: "Georgina Newton",
         shortBio: "",
         img: "/images/GN-480.webp",
@@ -19,15 +25,10 @@ export const testimonies : TestimonySnippet[] = [
     },
     {
         name: "Patrick Nkala",
-        shortBio: "",
+        shortBio: "From Tiktok to Trust",
         img: "/images/PN-480.webp",
         link: "/testimonies/patrick-nkala"
     },
-    {
-        name: "Simon Asante",
-        shortBio: "",
-        img: "/images/SA-480.webp",
-        link: "/testimonies/simon-asante"
-    },
+    
 
 ]
