@@ -18,6 +18,7 @@ const getPossessiveFirstName = (person: Elder): string => {
 </script>
 
 <template>
+  <div>
   <section class="leaders-section">
     <p class="eyebrow">Church leadership</p>
     <h2 class="section-title">Meet our Elders</h2>
@@ -62,6 +63,7 @@ const getPossessiveFirstName = (person: Elder): string => {
       />
     </div>
   </section>
+  </div>
 </template>
 
 <style scoped>
