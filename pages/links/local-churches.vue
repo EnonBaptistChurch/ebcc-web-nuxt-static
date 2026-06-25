@@ -4,12 +4,40 @@
       <!-- Local Churches -->
       <header class="section-intro">
         <h2>Local Church Links</h2>
-        <p class="subtitle">
+        <!-- <p class="subtitle">
           We have links with like-minded churches across Medway.
         </p>
         <p class="subtitle"> 
           We meet occasionally for prayer, fellowship and joint meetings.
+        </p> -->
+<p class="subtitle">
+  We have links with like-minded churches across Medway, built on a shared commitment to the gospel and faithful Bible teaching.
+</p>
+<p class="subtitle">
+  We meet roughly once a quarter for a variety of joint gatherings, these may be times of prayer and praise, preaching, or gospel mission updates. 
+  These occasions also provide opportunities to meet with Christians from other like-minded churches, to catch up with one another, and to hear what God is doing in different congregations.
+</p>
+<p class="subtitle">
+  They help to strengthen fellowship across likeminded local churches across Medway, encourage each other in the Gospel, and better inform our prayers for one another and for the work of the gospel both locally and further afield.
+
+</p>
+
+        <!-- <p class="subtitle">
+          We have links with like-minded churches across Medway, built on a shared commitment to the gospel and faithful Bible teaching.
         </p>
+        <p class="subtitle">
+          We meet occasionally for prayer, fellowship, and joint services, encouraging one another in our local ministries and strengthening unity across the wider church family. 
+        </p>
+        <p class="subtitle">
+          These gatherings provide opportunities to share what God is doing in each congregation, pray together for our communities, and support one another in gospel work across the area.
+        </p>
+        <p class="subtitle">
+          We also sometimes gather for Bible Rallies, where a guest preacher opens God’s Word for a united meeting of the churches, helping to encourage and build up those who attend. 
+          </p>
+        <p class="subtitle">
+          On occasion, these joint gatherings may also include updates or contributions from wider mission work overseas, such as in Zambia, as part of sharing and praying for gospel ministry in other contexts.
+        </p>
+        <p class="subtitle"></p> -->
       </header>
 
       <div class="card-grid">
@@ -127,13 +155,13 @@ useHead({
 }
 
 .subtitle {
-  max-width: 56ch;
-  margin: 0 auto;
-  font-size: 1rem;
-  font-weight: 300;
-  font-style: italic;
+  max-width: 66ch;
+  margin: 1rem auto;
   color: var(--muted);
-  line-height: 1.65;
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.7;
+
 }
 
 /* ── Divider ────────────────────────────────────────── */
