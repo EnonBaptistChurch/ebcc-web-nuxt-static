@@ -9,6 +9,7 @@ export type TestimonySnippet = {
 }
 
 import { testimonies } from '../../data/Testimonies'
+import { useHead } from 'nuxt/app'
 
 function initials(name: string): string {
   return name
@@ -21,6 +22,16 @@ function initials(name: string): string {
 function firstName(name: string): string {
   return name.split(' ')[0]!
 }
+
+useHead({
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Read the testimonies of people at Enon Baptist Church, Chatham'
+    }
+  ]
+})
 </script>
 
 <template>
@@ -94,7 +105,7 @@ function firstName(name: string): string {
   display: flex;
   align-items: center;
   gap: 0.625rem;
-  margin: 0.75rem 0 2.5rem;
+  margin: 0.75rem 0 1.5rem;
 }
 
 .section-rule::before,
@@ -115,8 +126,8 @@ function firstName(name: string): string {
 .testimony-row {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
-  margin-bottom: 3rem;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .testimony-row.reverse {
@@ -192,7 +203,7 @@ function firstName(name: string): string {
 .row-divider {
   height: 0.5px;
   background: #e5e7eb;
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 /* --- Mobile: stack photo above centred text --- */
