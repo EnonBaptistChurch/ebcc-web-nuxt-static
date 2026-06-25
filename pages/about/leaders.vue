@@ -302,7 +302,7 @@ function getPossessiveFirstName(person: Elder): string {
     align-items: center;
     text-align: center;
     margin-bottom: 1rem;
-    gap:0.5rem;
+    gap: 0.5rem;
   }
 
   .elder-divider {
