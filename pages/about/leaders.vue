@@ -48,10 +48,10 @@ const getPossessiveFirstName = (person: Elder): string => {
         <div class="text-col">
           <span class="title-pill">{{ elder.elderTitle }}</span>
           <p class="elder-name">{{ elder.name }}</p>
-          <p v-if="elder.bio" class="elder-bio">{{ elder.bio }}</p>
+          <p v-if="elder.bio" class="elder-bio" v-html="elder.bio"></p>
           <p v-if="elder.testimonyLink">
             Read {{ getPossessiveFirstName(elder) }} Testimony
-          <NuxtLink :to="elder.testimonyLink" v-if="elder.testimonyLink">here.</NuxtLink>
+          <NuxtLink :to="elder.testimonyLink" v-if="elder.testimonyLink">here</NuxtLink>.
           </p>
         </div>
       </div>
@@ -67,7 +67,7 @@ const getPossessiveFirstName = (person: Elder): string => {
 <style scoped>
 .leaders-section {
   padding: 2rem 0;
-  max-width: 1024px;
+  max-width: min(90%, 1024px);
   margin: auto;
 }
 
@@ -178,6 +178,7 @@ const getPossessiveFirstName = (person: Elder): string => {
   color: #6b7280;
   line-height: 1.7;
   margin: 0;
+  padding: 0  8px 0 0;
 }
 
 .elder-divider {
@@ -200,6 +201,9 @@ const getPossessiveFirstName = (person: Elder): string => {
   .elder-divider {
     margin-bottom: 2rem;
   }
+  .elder-bio {
+    padding: 0 16px;
+  }
 }
 
 /* --- Dark mode --- */
@@ -217,7 +221,7 @@ const getPossessiveFirstName = (person: Elder): string => {
 
   .title-pill {
     background: #374151;
-    color: #9ca3af;
+    color: #ffffff;
     border-color: #4b5563;
   }
 }
