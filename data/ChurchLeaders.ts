@@ -54,7 +54,20 @@ export const Elders: Elder[] = [
     name: "Graham Trice",
     elderTitle: "Elder",
     photo: "",
-    bio: [],
+    bio: [
+      {
+        text: "Graham serves as an elder at Enon Baptist Church."
+      },
+      {
+        text: "Graham previously has worked as a nurse and then served as a missionary in Nigeria, and later pastored Churches in the North and the South East of London."
+      },
+      {
+        text: "Married to MeeSuan, they have 3 grown children and a number of grandchildren. In his free time, he too enjoys gardening as well as writing."
+      },
+      {
+        text: "He has written books on the Psalms and \"Angels: A Study of God's Special Agents\" "
+      }
+    ],
     testimonyLink: "/testimonies/graham-trice"
   }
 ]

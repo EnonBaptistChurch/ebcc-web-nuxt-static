@@ -136,7 +136,7 @@ function getPossessiveFirstName(person: Elder): string {
 
           <!-- TESTIMONY -->
           <p v-if="elder.testimonyLink">
-            Read {{ getPossessiveFirstName(elder) }} Testimony
+            You can read {{ getPossessiveFirstName(elder) }} Testimony
             <NuxtLink :to="elder.testimonyLink">here</NuxtLink>.
           </p>
         </div>
@@ -172,7 +172,7 @@ function getPossessiveFirstName(person: Elder): string {
   font-size: 1.5rem;
   font-weight: 500;
   text-align: center;
-  margin: 1.5rem 0;
+  margin: 0.75rem 0;
   
 }
 
@@ -293,7 +293,7 @@ function getPossessiveFirstName(person: Elder): string {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 1.25rem;
+    gap: 0.2  5rem;
     margin-bottom: 2rem;
   }
 
