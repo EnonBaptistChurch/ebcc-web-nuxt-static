@@ -6,8 +6,10 @@ export const aboutSection :NavItem =
   link: "/about",
   submenu: [
     { link: "/about/what-we-believe/", title: "What We Believe" },
+    { link: "/about/leaders/", title: "Leadership" },
     { link: "/about/church-history/", title: "Church History" },
     { link: "/about/pastors-message/", title: "Pastor's Message" },
+    
   ],
   submenuOpen: false
 }
