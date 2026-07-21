@@ -26,7 +26,7 @@ export const cards = [
     image:'/images/christmas-pic-640.webp',
     title: 'Christmas Services',
     description: `Join us this Christmas as we celebrate the birth of Jesus Christ.`,
-    link: '/christmas-services',
+    link: 'seasonal/christmas-services',
     ariaLabel: 'Christmas Services Image',
     buttonText: 'Find Out More',
     show: showChristmasCard()
