@@ -55,11 +55,6 @@ export default defineNuxtConfig({
     server: {
       allowedHosts: ['enonbaptistchatham.org.uk', 'localhost']
     },
-    optimizeDeps: {
-      include: [
-        '@vueuse/core',
-      ]
-    },
     plugins: [tsconfigPaths()]
   },
 })
