@@ -151,7 +151,7 @@ function getPossessiveFirstName(person: Elder): string {
     <div class="elder-divider" style="margin:1rem;" />
       <div class="elder-bio">
       <p>
-        We also have a deacon who serves alongside the Elders of the church, to support in practical matters.
+        We also have a number of deacons who serve alongside the Elders of the church, to support in practical matters.
       </p>
       </div>
     
