@@ -30,6 +30,9 @@
           />
         </swiper-slide>
       </swiper-container>
+      <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #555; font-style: italic;">
+        Above are some pictures of the latest Sunday Club prize-giving Service, where the children received their prizes for attending and learning throughout the year.
+      </p>
     </section>
     <div class="text-info">
       <h1>Sunday Club</h1>
@@ -50,26 +53,25 @@
       </p>
       <p>
         The Children present something they've been learning within the main service at different points in the year, and we encourage parents to attend the service with their children.
-        Children collect "stars" for attending and can exchange them for prizes across the year.
-        During our prize-giving service, we celebrate the children's achievements and present them with their prizes, alongside a message during the service. 
-        This is a great opportunity for parents to see what their children have been learning and to celebrate their progress.
+        </p>
+      <p>During our prize-giving service, we celebrate the children's achievements and present them with their prizes, alongside a message during the service. 
+        This is a great opportunity for parents to see what their children have been learning.
       </p>
-      <p>
-        Above are some pictures of the latest Sunday Club Prize Giving Service, where the children received their prizes for attending and learning throughout the year.
-      </p>
-
+      
     </div>
-
-    
   </article>
 </template>
 
 <script setup lang="ts">
 import { useHead } from 'nuxt/app';
+import { onMounted } from 'vue';
+onMounted(() => {
+  import('swiper/element/bundle').then(({ register }) => register());
+});
 
 // Register Swiper custom elements (Web Components API)
 import { register } from 'swiper/element/bundle';
-register();
+  register()
 
 useHead({
   title: 'Sunday Club for Children - Enon Baptist Church',
@@ -91,11 +93,13 @@ useHead({
 .text-info {
   margin-top: 1rem;
   margin-bottom: 2rem;
+  padding: 0 0.5rem;
 }
 
 .text-info h1 {
   margin-top: 0;
   color: #1a1a1a;
+  
 }
 
 .highlight-time {

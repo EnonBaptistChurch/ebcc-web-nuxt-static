@@ -46,6 +46,7 @@ export default defineNuxtConfig({
       },
       
     },
+    
     optimizeDeps: {
         include: [
           '@vueuse/core',
@@ -57,5 +58,10 @@ export default defineNuxtConfig({
     server: {
       allowedHosts: ['enonbaptistchatham.org.uk', 'localhost']
     },
+    vue: {
+      compilerOptions: {
+        isCustomElement: (tag: string) => tag.startsWith('swiper-')
+      }
+    } as any
   }
 })
