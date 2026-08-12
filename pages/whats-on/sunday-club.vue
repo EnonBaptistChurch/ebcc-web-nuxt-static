@@ -1,6 +1,13 @@
 <template>
   <article class="page-container">
     <section class="carousel-section">
+      <div class="text-info" style="margin:0;">
+      <h1 style="margin:0;">Sunday Club</h1>
+      <p class="highlight-time" style="margin:0.5rem 0;" >
+        <strong>Every Sunday from 9:45 – 10:45 am</strong>
+      </p>
+      </div>
+      
       <swiper-container
         :slides-per-view="1"
         :space-between="16"
@@ -35,10 +42,7 @@
       </p>
     </section>
     <div class="text-info">
-      <h1>Sunday Club</h1>
-      <p class="highlight-time">
-        <strong>Every Sunday from 9:45 – 10:45 am</strong>
-      </p>
+      
       
       <p>
         Each week, the children are taught a lesson from the Bible in age groups. 
