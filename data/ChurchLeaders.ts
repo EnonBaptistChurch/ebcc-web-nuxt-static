@@ -20,7 +20,7 @@ export const Elders: Elder[] = [
   {
     name: "Paul Relf",
     elderTitle: "Pastor",
-    photo: "/images/leaders/PR-8258.webp",
+    photo: "/images/leaders/PR-8258-320.webp",
     bio: [
       {
         text:
