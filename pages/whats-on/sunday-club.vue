@@ -30,7 +30,7 @@
           />
         </swiper-slide>
       </swiper-container>
-      <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #555; font-style: italic;">
+      <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #555; font-style: italic; padding: 0 0.5rem;">
         Above are some pictures of the latest Sunday Club prize-giving Service, where the children received their prizes for attending and learning throughout the year.
       </p>
     </section>
