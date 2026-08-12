@@ -18,6 +18,7 @@ export const whatsonSection: NavItem = {
   submenu: [
     { link: "/whats-on/sunday-services/", title: "Sunday Services" },
     { link: "/whats-on/bible-study/", title: "Bible Study" },
+    { link: "/whats-on/small-groups/", title: "Small Groups" },
     { link: "/whats-on/sunday-club/", title: "Sunday Club" },
     { link: "/whats-on/womens-meetings/", title: "Women's Meetings" },
     { link: "/whats-on/online-prayer-meeting/", title: "Online Prayer Meeting" },
