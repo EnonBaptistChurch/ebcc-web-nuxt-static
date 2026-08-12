@@ -18,7 +18,9 @@
             </p>
             <p>
                 <strong>Wednesday</strong><br />
-                7.30pm &#8211;  <NuxtLink to="/whats-on/bible-study/">Bible Study and Prayer Meeting</NuxtLink>
+                
+                7.30pm &#8211;  <NuxtLink to="/whats-on/bible-study/">Bible Study and Prayer Meeting</NuxtLink><br/>
+                Last Wednesday of Month 10am &amp; 7:45pm &#8211; <NuxtLink to="/whats-on/small-groups">Small Groups</NuxtLink> 
             </p>
             <p>
                 <strong>Thursday</strong><br />
