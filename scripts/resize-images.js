@@ -29,7 +29,16 @@ function processDirectory(dir) {
     // 2. Skip files that are already generated output variants (e.g. image-640.webp)
     if (sizes.some(size => name.endsWith(`-${size}`))) return;
 
-    // 3. Check if all resized WebP versions already exist
+    // 3. Check if any resized WebP versions already exist
+    const someExists = sizes.some(size => {
+      const outputFile = path.join(dir, `${name}-${size}.webp`);
+      return fs.existsSync(outputFile);
+    });
+
+    if(someExists) {
+      return;
+    }
+
     const allExists = sizes.every(size => {
       const outputFile = path.join(dir, `${name}-${size}.webp`);
       return fs.existsSync(outputFile);
