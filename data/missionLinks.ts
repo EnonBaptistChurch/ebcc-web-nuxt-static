@@ -5,13 +5,8 @@ export interface MissionLink {
   prayer?: boolean;
   imgSrc?: string | string[];
   bgColor?: string;
-  moreInfoLink?: MissionBasicLink;
 }
 
-export interface MissionBasicLink {
-  name: string;
-  link: string;
-}
 
 const missionLinks: MissionLink[] = [
   {
@@ -38,14 +33,10 @@ const missionLinks: MissionLink[] = [
   },
   {
     name: "Morning Star (South Africa)",
-    link: "https://morningstar.org.za/",
+    link: "https://www.livinghope.co.za/where-we-work/free-state-morning-star/",
     description: "Morning Star Mission works in South Africa to reach and disciple communities through church planting, education, and practical care, with a focus on gospel transformation. It began in 2000 as a ministry for children affected by AIDS and is now transitioning into supporting those same children as teenagers and young adults, under the oversight of the charity Living Hope.",
     prayer: true,
     imgSrc: ["/images/mission/morning-star-logo-320.webp","https://www.livinghope.co.za/wp-content/uploads/2018/07/main-logo-1.png"],
-    moreInfoLink: {
-      name: "Living Hope - Morning Star",
-      link: "https://www.livinghope.co.za/where-we-work/free-state-morning-star/"
-    }
   },
   {
     name: "Open Doors",
