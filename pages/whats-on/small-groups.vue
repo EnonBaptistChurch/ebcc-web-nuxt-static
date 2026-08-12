@@ -34,13 +34,20 @@
         <p class="additional-info">
           In the past,  we have explored topics like Prayer and Mission. Each session concludes with a short time of prayer together.
         </p>
-        <img src="/images/resources/StudyGuides/mission-320.webp" alt="" class="study-guide-img">
+
+        <p class="additional-info">
+          Here are some of the study guides we've been through in the past:
+        </p>
+        <FormerBooksCarousel :books="smallGroupBooks" />
+        
       </section>
       </div>
     </div>
 </template>
 
 <script setup>
+import FormerBooksCarousel from '../../components/widgets/FormerBooksCarousel.vue';
+import { smallGroupBooks } from '../../data/smallGroupBooks';
 import { useHead } from 'nuxt/app';
 useHead({
   title: 'Bible Study | Enon Baptist Church',
@@ -73,7 +80,7 @@ useHead({
 .meeting-time {
   font-size: 1.1rem;
   color: #4a5568;
-  margin-bottom: 1.5rem;
+  margin: 0 auto 0.5rem auto;
 }
 
 /* Featured Card Section */
