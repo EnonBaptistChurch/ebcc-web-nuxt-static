@@ -10,25 +10,14 @@
     <p>Each time the bible will be open and discussed with someone closing the meeting in prayer. </p>
 
     <p>In the past, we have studied books, such as:</p>
-    
-    <div class="books">
-      <div class="book">
-        <div class="book-image">
-          <img 
-            src="/images/resources/books/love-your-church-320.webp" 
-            alt="Love Your Church book cover" 
-          />
-        </div>
-        <p class="book-title">Love Your Church</p>
-        <p class="book-subtitle">8 Great Things About Being a Church Member</p>
-        <p class="book-author">Tony Merida</p>
-      </div>
-    </div>
+    <FormerBooksCarousel :books="mensMeetingBooks" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useHead } from 'nuxt/app';
+import { mensMeetingBooks } from '../../data/mensMeetingBooks'; // Adjust import path as needed
+import FormerBooksCarousel from '../../components/widgets/FormerBooksCarousel.vue';
 
 useHead({
   title: "Men's Meetings - Enon Baptist Church",
@@ -42,48 +31,5 @@ useHead({
 </script>
 
 <style scoped>
-.books {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  margin: 0 auto 1.5rem auto ;
-}
 
-.book {
-  max-width: 250px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.book-image {
-  margin-bottom: 0.5rem;
-}
-
-.book img {
-  max-width: 100px;
-  height: auto;
-}
-
-.book-title,
-.book-subtitle,
-.book-author {
-  padding: 0;
-  margin: 0;
-  text-align: center;
-}
-
-.book-title {
-  font-weight: bold;
-}
-
-.book-subtitle {
-  font-style: italic;
-  font-size: 0.9rem;
-}
-
-.book-author {
-  font-size: 0.85rem;
-  color: #555;
-}
 </style>
