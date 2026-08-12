@@ -4,51 +4,19 @@
         <h1>Bible Study</h1>
         <section>
             <p>
-            <strong>Wednesday at 7:30 pm</strong> – We value the Bible as God’s Word and meet each week to study it and learn from its teaching. </p> 
-            <p> We also spend time in prayer, seeking God’s help in all that we do as a church and praying for the advance of the Gospel (the good news about Jesus) around the world.
+            <strong>Wednesday at 7:30 pm</strong></p> 
+            <p>Unless we are meeting for <NuxtLink to="/whats-on/small-groups">small groups</NuxtLink>, which happen generally on the last Wednesday of the month, we meet for Bible Study and prayer at 7:30pm. </p>
+            
+            <p> We value the Bible as God's Word and meet each week to study it and learn from its teaching. We will learn from it and often discuss it together.
             </p>
-            <p> In our time of prayer we often remember our persecuted brothers and sisters in Christ using OpenDoors prayer updates to be more informed.
+            <p> We also spend time in prayer, seeking God's help in all that we do as a church and praying for the advance of the Gospel (the good news about Jesus) around the world.
+            </p>
+            <p> In our time of prayer we often remember our persecuted brothers and sisters in Christ using <a href="https://www.opendoorsuk.org/" target="_blank">OpenDoors</a> prayer updates to be more informed.
             </p>
             <p>
-              Occasionally, we will also watch together an update from GBM prayer waves, where we are updated on what is going in their respective field, but also how we may pray in a more informed way.
+              Occasionally, we will also watch together an update from <a href="https://www.gbm.org.uk/" target="_blank">GBM</a> <a href="https://vimeo.com/showcase/12227213" target="_blank">prayer waves</a>, where we are updated on what is going in their respective field, but also how we may pray in a more informed way.
             </p>
-
         </section>
-      
-
-      <section class="small-groups">
-        <h1>Small Groups</h1>
-        
-        <p class="meeting-time">
-          <strong> Last Wednesday of the month at 10:00 AM &amp; 7:45 PM</strong>
-        </p>
-
-        <p class="description">
-          Our "Small Groups" meet at the church building, morning and evening meeting to give people more opportunities to meet. 
-          We seek to discuss and study God's word together, where we often work through a book as our guide.
-        </p>
-        <p class="description">
-          The morning and evening sessions will be similar in content as each will go through the same chapter of the book.
-        </p>
-
-        <div class="card currently-studying">
-          <img 
-            src="/images/resources/StudyGuides/focus-on-faith-320.webp" 
-            alt="Focus On Faith book cover" 
-            class="study-guide-img"
-            loading="lazy"
-          /> 
-          <div class="study-details">
-            <h2>Currently Studying</h2>
-            <p>We are going through <em>Focus On Faith</em> by Nina Drew and Stewart Dinnen.</p>
-            <p>This study considers key characters in the Old Testament and the faith they displayed.</p>
-          </div>
-        </div>
-
-        <p class="additional-info">
-          In the past we have explored topics like prayer. Each session concludes with a short time of prayer together.
-        </p>
-      </section>
       </div>
     </div>
 </template>
@@ -61,12 +29,17 @@ useHead({
     {
       name: 'description',
       content:
-        'Join us for Bible Study at Enon to explore and study God’s Word together, and engage in prayer for our church and the whole world.',
+        "Join us for Bible Study at Enon to explore and study God's Word together, and engage in prayer for our church and the whole world.",
     }
   ]
 })
 </script>
 <style scoped>
+a {
+  text-decoration: none;
+  color:#1a202c;
+  font-weight: 900;
+}
 /* Base Container */
 .small-groups {
   max-width: 720px;
