@@ -41,7 +41,7 @@
           <div class="study-details">
             <h2>Currently Studying</h2>
             <p>We are going through <em>Focus On Faith</em> by Nina Drew and Stewart Dinnen.</p>
-            <p>This study considers key characters in the Old Testament and the practical faith they displayed.</p>
+            <p>This study considers key characters in the Old Testament and the faith they displayed.</p>
           </div>
         </div>
 
