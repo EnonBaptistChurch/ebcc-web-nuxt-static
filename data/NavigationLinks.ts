@@ -6,8 +6,10 @@ export const aboutSection :NavItem =
   link: "/about",
   submenu: [
     { link: "/about/what-we-believe/", title: "What We Believe" },
+    { link: "/about/leaders/", title: "Leadership" },
     { link: "/about/church-history/", title: "Church History" },
     { link: "/about/pastors-message/", title: "Pastor's Message" },
+    
   ],
   submenuOpen: false
 }
@@ -16,6 +18,7 @@ export const whatsonSection: NavItem = {
   submenu: [
     { link: "/whats-on/sunday-services/", title: "Sunday Services" },
     { link: "/whats-on/bible-study/", title: "Bible Study" },
+    { link: "/whats-on/small-groups/", title: "Small Groups" },
     { link: "/whats-on/sunday-club/", title: "Sunday Club" },
     { link: "/whats-on/womens-meetings/", title: "Women's Meetings" },
     { link: "/whats-on/online-prayer-meeting/", title: "Online Prayer Meeting" },
@@ -48,7 +51,14 @@ export const whatsaChristianSection: NavItem = {
   link:"/testimonies/",
   submenuOpen:false
 };
-
+export const linksSection: NavItem ={ 
+  title:"Links", link: "/links/local-churches/",
+  submenu: [
+    { link: "/links/local-churches/", title: "Local Churches" },
+    { link: "/links/mission/", title: "Missionary Links" },
+  ],
+  submenuOpen:false
+}
 export const sermonSection: NavItem ={ title:"Sermons", link: "/sermons/" }
 export const findUsSection: NavItem ={ title:"Find Us", link: "/find-us/" }
 export const contactSection: NavItem ={ title:"Contact Us", link: "/contact-us/" }
@@ -58,6 +68,7 @@ const navItems: NavItem[] = [
   whatsonSection,
   whatsaChristianSection,
   testimonySection,
+  linksSection,
   sermonSection,
   findUsSection,
   contactSection
