@@ -16,7 +16,7 @@
       <p>In the past, we have studied books, such as:</p>
       
     </div>
-    <FormerBooksCarousel :books="mensMeetingBooks" />
+    <FormerBooksCarousel :books="mensMeetingBooks" style="margin-bottom:1.5rem;" />
   </div>
   </div>
 </template>
