@@ -75,6 +75,15 @@ export const cards = [
     ariaLabel: 'Testimonies',
     buttonText: 'See More',
     show: true
+  },
+  {
+    image: '/images/mission/globe-480.webp',
+    title: 'Mission',
+    description: 'We believe the Gospel is meant for everyone. Find out those who we support.',
+    link: '/links/mission',
+    ariaLabel: 'Mission',
+    buttonText: 'Find out More',
+    show: true
   }
 
 ]
