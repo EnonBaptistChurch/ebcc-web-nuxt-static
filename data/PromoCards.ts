@@ -59,7 +59,7 @@ export const cards = [
     show: true
   },
   {
-    image: '/images/sunday-club-640.webp',
+    image: '/images/events/SCP-2026-07-12/4-640.webp',
     title: 'What\'s On',
     description: 'Find out about our regular meetings and what we do.',
     link: '/whats-on',
@@ -68,7 +68,7 @@ export const cards = [
     show: true
   },
   {
-    image: '/images/GMT-MST-640.webp',
+    image: '/images/people/testimonyCard-640.webp',
     title: 'Testimonies',
     description: 'See the stories of how God has worked in the lives of our members',
     link: '/testimonies',
