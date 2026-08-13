@@ -83,7 +83,7 @@ useHead({
 .testimonies-section {
   padding: 2rem 0;
   margin: auto;
-  max-width: min(90%,1440px);
+  max-width: min(90%,768px);
 
 }
 
@@ -105,7 +105,7 @@ useHead({
   display: flex;
   align-items: center;
   gap: 0.625rem;
-  margin: 0.75rem 0 1.5rem;
+  margin: 0.75rem 0 0.75rem;
 }
 
 .section-rule::before,
@@ -176,7 +176,7 @@ useHead({
   font-size: 0.875rem;
   color: #6b7280;
   line-height: 1.7;
-  margin: 0 0 1rem;
+  margin: 0 0 0.25rem;
 }
 
 .read-link {
@@ -214,11 +214,11 @@ useHead({
     align-items: center;
     text-align: center;
     gap: 1.25rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 
   .row-divider {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
   }
 }
 
