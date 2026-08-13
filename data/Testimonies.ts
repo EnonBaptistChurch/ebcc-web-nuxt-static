@@ -7,7 +7,7 @@ export type TestimonySnippet ={
 export const testimonies : TestimonySnippet[] = [
     {
         name: "Graham Trice",
-        shortBio: "From “Man of Kent” to “Man of God”: A Life Transformed by Grace",
+        shortBio: "From “Man of Kent” to “Man of God”",
         img: "/images/GMT-MST-640.webp",
         link: "/testimonies/graham-trice"
     },
@@ -29,6 +29,4 @@ export const testimonies : TestimonySnippet[] = [
         img: "/images/PN-480.webp",
         link: "/testimonies/patrick-nkala"
     },
-    
-
 ]
