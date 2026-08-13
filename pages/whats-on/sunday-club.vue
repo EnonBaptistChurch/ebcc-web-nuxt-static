@@ -42,8 +42,6 @@
       </p>
     </section>
     <div class="text-info">
-      
-      
       <p>
         Each week, the children are taught a lesson from the Bible in age groups. 
         We follow a syllabus that covers the main teaching of the Bible over a five-year period.
@@ -58,7 +56,8 @@
       <p>
         The Children present something they've been learning within the main service at different points in the year, and we encourage parents to attend the service with their children.
         </p>
-      <p>During our prize-giving service, we celebrate the children's achievements and present them with their prizes, alongside a message during the service. 
+      <p>
+        During our prize-giving service, we celebrate the children's achievements and present them with their prizes, alongside a message during the service. 
         This is a great opportunity for parents to see what their children have been learning.
       </p>
       
@@ -69,13 +68,12 @@
 <script setup lang="ts">
 import { useHead } from 'nuxt/app';
 import { onMounted } from 'vue';
+import { register } from 'swiper/element/bundle';
+  register()
 onMounted(() => {
   import('swiper/element/bundle').then(({ register }) => register());
 });
 
-// Register Swiper custom elements (Web Components API)
-import { register } from 'swiper/element/bundle';
-  register()
 
 useHead({
   title: 'Sunday Club for Children - Enon Baptist Church',
