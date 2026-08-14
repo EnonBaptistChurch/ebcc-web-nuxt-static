@@ -24,7 +24,7 @@
             </p>
             <p>
                 <strong>Thursday</strong><br />
-                9.30am &#8211; <NuxtLink to="/whats-on/first-steps/">First Steps</NuxtLink> – Toddler Group<br />
+                9.30am &#8211; <NuxtLink to="/whats-on/first-steps/">First Steps</NuxtLink> – Toddler Group <strong>(term-time)</strong><br />
                 (for parents, carers, and pre-school children)<br />
                 Parents/Carers need to stay with their children.<br />
                 1.45pm &#8211; <NuxtLink to="/whats-on/womens-meetings/">Ladies Meeting</NuxtLink> (1st and 3rd Thursday each month)
@@ -32,8 +32,7 @@
             <p>
                 <strong>Friday<br /></strong>
                 10am to 11.30am &#8211; Coffee Morning (every fortnight &#8211; <NuxtLink to="/contact-us" >contact us</NuxtLink> for details)<br />
-                7.30pm &#8211; <NuxtLink to="/whats-on/youth/">Discoverers</NuxtLink> (Youth meeting for 11-16 year olds)<br />
-                (during term time &#8211; <NuxtLink to="/contact-us" >contact us</NuxtLink> for details)
+                7.30pm &#8211; <NuxtLink to="/whats-on/youth/">Discoverers</NuxtLink> <strong>(term-time)</strong> (Youth meeting for 11-16 year olds) - <NuxtLink to="/contact-us">Contact us</NuxtLink> for details
             </p>
         </div>							
     </article>
