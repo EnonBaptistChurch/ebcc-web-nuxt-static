@@ -3,7 +3,7 @@
       <div class="text-content">
         
       <section class="small-groups">
-        <h1>Small Groups</h1>
+        <h1>Monthly Small Groups</h1>
         
         <p class="meeting-time">
           <strong> Last Wednesday of the month at 10:00 AM &amp; 7:45 PM</strong>
