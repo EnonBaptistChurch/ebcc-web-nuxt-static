@@ -3,49 +3,67 @@ import fs from 'fs';
 import path from 'path';
 
 const sizes = [320, 480, 640, 768, 1024, 1280, 1440, 1920];
-
 const rootDir = './public/images';
 
+// Allowed input image extensions
+const validExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.tiff', '.bmp', '.webp', '.avif'];
+
 function processDirectory(dir) {
+  
   fs.readdirSync(dir).forEach(item => {
     const fullPath = path.join(dir, item);
     const stat = fs.statSync(fullPath);
 
     if (stat.isDirectory()) {
-      // Recurse into child folder
+      // Recurse into subdirectories
       processDirectory(fullPath);
       return;
     }
 
-    const name = path.parse(item).name;
-    const ext = path.parse(item).ext.toLowerCase();
+    const { name, ext } = path.parse(item);
+    const lowerExt = ext.toLowerCase();
 
-    // Skip non-image files (optional safety)
-    if (!['.webp'].includes(ext)) return;
+    // 1. Skip non-image files based on extension
+    if (!validExtensions.includes(lowerExt)) return;
 
-    // Skip files that are already resized (e.g., image-640.webp)
+    // 2. Skip files that are already generated output variants (e.g. image-640.webp)
     if (sizes.some(size => name.endsWith(`-${size}`))) return;
 
-    // Check if any resized version already exists in the SAME folder
-    const alreadyExists = sizes.some(size => {
+    // 3. Check if any resized WebP versions already exist
+    const someExists = sizes.some(size => {
       const outputFile = path.join(dir, `${name}-${size}.webp`);
       return fs.existsSync(outputFile);
     });
 
-    if (alreadyExists) {
+    if(someExists) {
       return;
     }
 
-    // Generate new resized variants
+    const allExists = sizes.every(size => {
+      const outputFile = path.join(dir, `${name}-${size}.webp`);
+      return fs.existsSync(outputFile);
+    });
+
+    if (allExists) {
+      return;
+    }
+
+    // 4. Generate WebP variants from the input image
     sizes.forEach(size => {
+      const outputFile = path.join(dir, `${name}-${size}.webp`);
+
+      // Skip generating individual size if it already exists
+      if (fs.existsSync(outputFile)) return;
+
       sharp(fullPath)
         .resize(size)
-        .toFile(path.join(dir, `${name}-${size}.webp`))
-        .then(() => console.log(`Generated ${path.join(dir, `${name}-${size}.webp`)}`))
-        .catch(err => console.error(err));
+        .webp({ quality: 80 }) // Converts any input format to WebP
+        .toFile(outputFile)
+        .then(() => console.log(`Generated: ${outputFile}`))
+        .catch(err => console.error(`Error processing ${fullPath}:`, err));
     });
   });
 }
 
-// Run starting from the root images directory
+// Start processing
 processDirectory(rootDir);

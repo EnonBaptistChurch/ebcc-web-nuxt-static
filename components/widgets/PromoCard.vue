@@ -37,7 +37,8 @@ defineProps({
   color: inherit;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   max-width: 300px;
-    margin: auto;
+  margin: auto;
+  width: 100%;
 }
 
 .action-card:hover {
@@ -92,8 +93,37 @@ defineProps({
   background-color: #0056b3;
 }
 
-/* RESPONSIVE */
-@media (max-width: 600px) {
+/* HORIZONTAL LAYOUT: Only for mobile screens between 380px and 599px (1-column mode) */
+@media (min-width: 360px) {
+  .action-card {
+    flex-direction: row;
+    max-width: 100%; /* Expand to fill single column width */
+  }
+
+  .action-card__image {
+    width: 40%;
+    padding-top: 0; /* Clear ratio padding for row mode */
+    min-height: 150px;
+    flex-shrink: 0;
+  }
+
+  .action-card__content {
+    width: 60%;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .action-card__title {
+    font-size: 1.1rem;
+  }
+
+  .action-card__description {
+    font-size: 0.9rem;
+  }
+}
+
+/* VERY SMALL MOBILE (< 380px) */
+@media (max-width: 359px) {
   .action-card__title {
     font-size: 1.1rem;
   }
