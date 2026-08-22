@@ -24,7 +24,7 @@ export const Elders: Elder[] = [
     bio: [
       {
         text:
-          "Paul became our pastor in June 2006, after a period of itinerant preaching."
+          "Paul became our pastor in June 2006, after a period of itinerant preaching and some years of part time theological training."
       },
       {
         text:
@@ -32,7 +32,7 @@ export const Elders: Elder[] = [
       },
       {
         text:
-          "Married to Bridget, they have four grown children and a number of grandchildren. In his free time, he enjoys gardening, watching the news and playing games."
+          "Married to Bridget, they have four married children and a number of grandchildren. In his free time, he enjoys gardening, country walks and playing games."
       },
       {
         text:
@@ -62,7 +62,7 @@ export const Elders: Elder[] = [
         text: "Graham previously has worked as a nurse and then served as a missionary in Nigeria, and later pastored Churches in the North and the South East of London."
       },
       {
-        text: "Married to MeeSuan, they have 3 grown children and a number of grandchildren. In his free time, he too enjoys gardening as well as writing."
+        text: "Married to MeeSuan, they have 3 grown married children and a number of grandchildren. In his free time, he too enjoys gardening as well as writing."
       },
       {
         text: "He has written books on the Psalms and \"Angels: A Study of God's Special Agents\" "
