@@ -3,7 +3,7 @@
       <div class="text-content">
       
       <h1>First Steps</h1>
-      <p><strong>9:30 am – 11:00 am </strong></p>
+      <p><strong>9:00 am – 11:00 am </strong></p>
       <p><strong>First Steps – Toddler group</strong></p>
 
 <p>(for parents, carers and pre-school children)</p>
