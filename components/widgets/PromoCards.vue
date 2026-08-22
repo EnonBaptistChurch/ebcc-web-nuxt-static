@@ -22,26 +22,35 @@ import { computed } from 'vue'
 import { cards } from '../../data/PromoCards'
 import { useWindowSize } from '@vueuse/core'
 
-// SSR-safe width tracking
 const { width: screenWidth } = useWindowSize()
 
+// 1. All available cards that pass the show condition
+const shownCards = computed(() => cards.filter(c => c.show))
 
-const visibleCards = computed(() => {
-  const shownCards = cards.filter(c => c.show)
-
-  if (screenWidth.value < 1024) {
-    return shownCards.slice(0, 4)
-  }
-  return shownCards
+// 2. Define standard responsive column breakpoints
+const columns = computed(() => {
+  if (screenWidth.value < 640) return 1  // Mobile
+  if (screenWidth.value < 900) return 2  // Tablet
+  if (screenWidth.value < 1200) return 3 // Laptop
+  return 4                               // Desktop
 })
 
-const columns = computed(() => {
-  const count = visibleCards.value.length
+// 3. Display as many as possible without leaving remainder/gaps on the last row
+const visibleCards = computed(() => {
+  const total = shownCards.value.length
+  const cols = columns.value
 
-  if (screenWidth.value < 600) return 1
-  if (screenWidth.value < 900) return count === 3 ? 3 : 2
-  if (screenWidth.value < 1200) return count % 3 === 1 ? 2 : 3
-  return count % 4 === 1 ? 3 : 4
+  // On single-column screens, display all cards
+  if (cols === 1) return shownCards.value
+
+  // Calculate the largest multiple of `cols` that fits within `total`
+  // Example: 11 cards on a 3-column grid -> Math.floor(11 / 3) * 3 = 9 cards
+  const completeRowsCount = Math.floor(total / cols) * cols
+
+  // If there aren't enough cards to fill even 1 full row, show what we have
+  const limit = completeRowsCount > 0 ? completeRowsCount : total
+
+  return shownCards.value.slice(0, limit)
 })
 </script>
 
