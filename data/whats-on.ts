@@ -56,14 +56,14 @@ export const eventCardsData: EventCardItem[] = [
     id: 'small-groups',
     day: 'Wednesday',
     time: '10.00am & 7.45pm',
-    title: 'Small Groups',
+    title: 'Monthly Small Groups',
     url: '/whats-on/small-groups',
     note: 'Last Wednesday of Month'
   },
   {
     id: 'first-steps',
     day: 'Thursday',
-    time: '9.30am',
+    time: '9.00am',
     title: 'First Steps – Toddler Group',
     url: '/whats-on/first-steps/',
     note: 'term-time',
