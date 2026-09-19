@@ -5,7 +5,7 @@
         <section>
             <p>
             <strong>Wednesday at 7:30 pm</strong></p> 
-            <p>Unless we are meeting for <NuxtLink to="/whats-on/small-groups">small groups</NuxtLink>, which happen generally on the last Wednesday of the month, we meet for Bible Study and prayer at 7:30pm. </p>
+            <p>Unless we are meeting for <NuxtLink to="/whats-on/monthly-small-groups">small groups</NuxtLink>, which happen generally on the last Wednesday of the month, we meet for Bible Study and prayer at 7:30pm. </p>
             
             <p> We value the Bible as God's Word and meet each week to study it and learn from its teaching. We will learn from it and often discuss it together.
             </p>

@@ -57,7 +57,7 @@ export const eventCardsData: EventCardItem[] = [
     day: 'Wednesday',
     time: '10.00am & 7.45pm',
     title: 'Monthly Small Groups',
-    url: '/whats-on/small-groups',
+    url: '/whats-on/monthly-small-groups',
     note: 'Last Wednesday of Month'
   },
   {
