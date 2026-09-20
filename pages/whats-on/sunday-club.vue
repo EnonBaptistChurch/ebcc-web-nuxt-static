@@ -1,21 +1,79 @@
 <template>
-    <article >
-        <img src="/images/sunday-club.webp" class="responsive-image" alt="" decoding="async" fetchpriority="high" />
-        <div class="text-content">
-        <h1>Sunday Club</h1>
-        <p><strong>Every Sunday from 9.45 &#8211; 10.45am.</strong></p>
-        <p>Each week, the children are taught a lesson from the Bible in age groups. We follow a syllabus that covers the main teaching of the Bible over a five-year period.<br />
-        There is also singing, a quiz and if children come regularly they can choose rewards. </p>
-        <p>We go on some trips and have some fun activities for those attending. </p>
-        <p>Lifts can be provided to and from local roads. </p>
-        <p>At a time when morals are often ignored, it is important to consider the spiritual needs of today&#8217;s children.<br />
-        Why not send your children to our Sunday Club? They will be very welcome. </p>
-        </div>
-	</article>
+  <article class="page-container">
+    <section class="carousel-section">
+      <div class="text-info" style="margin:0;">
+      <h1 style="margin:0;">Sunday Club</h1>
+      <p class="highlight-time" style="margin:0.5rem 0;" >
+        <strong>Every Sunday from 9:45 – 10:45 am</strong>
+      </p>
+      </div>
+      
+      <swiper-container
+        :slides-per-view="1"
+        :space-between="16"
+        :loop="true"
+        :autoplay="{
+          delay: 2500,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true
+        }"
+        :pagination="{ clickable: true }"
+        :navigation="true"
+        :breakpoints="{
+          640: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 }
+        }"
+        class="custom-swiper"
+      >
+        <swiper-slide 
+          v-for="n in 16" 
+          :key="n"
+        >
+          <img 
+            :src="`/images/events/SCP-2026-07-12/${n}-768.webp`" 
+            :alt="`Sunday Club photo ${n}`"
+            class="aspect-3-2"
+            loading="lazy"
+          />
+        </swiper-slide>
+      </swiper-container>
+      <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #555; font-style: italic; padding: 0 0.5rem;">
+        Above are some pictures of the latest Sunday Club prize-giving Service, where the children received their prizes for attending and learning throughout the year.
+      </p>
+    </section>
+    <div class="text-info">
+      <p>
+        Each week, the children are taught a lesson from the Bible in age groups. 
+        We follow a syllabus that covers the main teaching of the Bible over a five-year period.
+        There is also singing, a quiz, and if children come regularly they can choose rewards.
+      </p>
+      <p>We go on some trips and have some fun activities for those attending.</p>
+      <p>Lifts can be provided to and from local roads.</p>
+      <p>
+        At a time when morals are often ignored, it is important to consider the spiritual needs of today’s children. 
+        Why not send your children to our Sunday Club? They will be very welcome.
+      </p>
+      <p>
+        The Children present something they've been learning within the main service at different points in the year, and we encourage parents to attend the service with their children.
+        </p>
+      <p>
+        During our prize-giving service, we celebrate the children's achievements and present them with their prizes, alongside a message during the service. 
+        This is a great opportunity for parents to see what their children have been learning.
+      </p>
+      
+    </div>
+  </article>
 </template>
 
 <script setup lang="ts">
 import { useHead } from 'nuxt/app';
+import { onMounted } from 'vue';
+import { register } from 'swiper/element/bundle';
+  register()
+onMounted(() => {
+  import('swiper/element/bundle').then(({ register }) => register());
+});
+
 
 useHead({
   title: 'Sunday Club for Children - Enon Baptist Church',
@@ -28,3 +86,79 @@ useHead({
 });
 </script>
 
+<style scoped>
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.text-info {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  padding: 0 0.5rem;
+}
+
+.text-info h1 {
+  margin-top: 0;
+  color: #1a1a1a;
+  
+}
+
+.highlight-time {
+  font-size: 1.1rem;
+  color: #2b6cb0;
+}
+
+/* 3:2 Aspect Ratio Enforcement */
+.aspect-3-2 {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 2.5 / 2;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+/* Swiper Styling Adjustments */
+.carousel-section {
+  width: 100%;
+}
+
+.custom-swiper {
+  width: 100%;
+  --swiper-theme-color: #2b6cb0; /* Custom button/dot color */
+}
+
+.custom-swiper {
+  width: 100%;
+  
+  /* --- 1. Edit Navigation Buttons --- */
+  /* Default is 44px; reducing to 24px-28px makes them much sleeker */
+  --swiper-navigation-size: 26px; 
+  --swiper-navigation-color: #FAFAFA;
+  
+  /* --- 2. Change Pagination Dots --- */
+  /* Size of the dots */
+  --swiper-pagination-bullet-size: 10px;
+  /* Active dot color */
+  --swiper-pagination-color: #2b6cb0; 
+  /* Inactive dot styling */
+  --swiper-pagination-bullet-inactive-color: #94a3b8;
+  --swiper-pagination-bullet-inactive-opacity: 0.5;
+  /* Gap between dots */
+  --swiper-pagination-bullet-horizontal-gap: 6px;
+}
+
+.custom-swiper::v-deep(.swiper-button-next::after),
+.custom-swiper::v-deep(.swiper-button-prev::after) {
+  font-weight: 1000; /* Try values like 300 (thin), 600 (bold), or 900 (ultra-bold) */
+}
+
+/* Optional: If you want to move the dots further down so they don't overlap images */
+.carousel-section {
+  padding-top: 1rem;
+  width: 100%;
+}
+
+
+</style>
