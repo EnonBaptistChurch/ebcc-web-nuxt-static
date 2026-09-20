@@ -39,13 +39,6 @@ const missionLinks: MissionLink[] = [
     imgSrc: ["/images/mission/morning-star-logo-320.webp","https://www.livinghope.co.za/wp-content/uploads/2018/07/main-logo-1.png"],
   },
   {
-    name: "Open Doors",
-    link: "https://www.opendoorsuk.org",
-    description: "Supporting persecuted Christians in over 70 countries, providing Bibles, training, and advocacy for those who suffer for their faith. We often pray for our persecuted brothers and sisters in Christ, and Open Doors provides us with updates and prayer points to guide our prayers.",
-    prayer: true,
-    imgSrc:"https://www.opendoorsuk.org/wp-content/uploads/2022/05/logo.svg"
-  },
-  {
     name: "Rosie Crowter – UFM",
     link: "https://www.ufm.org.uk/member/rosie-crowter/",
     description: "Rosie Crowter has served in Papua New Guinea for over 35 years. Over that time, she has witnessed enormous change – in the culture, the church, and the country itself – and remains passionate about seeing God’s Word take deep root in the lives of believers across PNG.",
