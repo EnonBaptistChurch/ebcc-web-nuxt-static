@@ -37,11 +37,12 @@
         <!-- Photo beside the text: side by side on desktop, text wraps around it on mobile -->
         <div class="fs-feature">
           <div class="fs-image-wrap">
+            
             <img
-              src="/images/whats-on/first-steps/portrait.jpeg"
-              alt="Enon First Steps group"
-              class="fs-image"
-              loading="lazy"
+                src="/images/whats-on/first-steps/portrait-640.webp"
+                alt="Enon First Steps Craft"
+                class="fs-image"
+                  loading="lazy"
             />
           </div>
 
@@ -75,12 +76,14 @@
           Steps. Come along, get to know us and enjoy a relaxed morning of play, friendship and fun!
         </p>
 
-        <p class="fs-card fs-find">
+        <div class="fs-card fs-find">
           <strong>Find us:</strong> Skinner Street, Chatham, ME4 5RF<br />
-          <a href="/find-us/">Directions</a> &middot;
-          <a href="/whats-on">What’s on at Enon</a> &middot;
-          <a href="/contact-us/">Contact us</a>
-        </p>
+          <div class="low-card">
+            <a href="/find-us/">Directions</a> &middot;
+            <a href="/whats-on">What’s on at Enon</a> &middot;
+            <a href="/contact-us/">Contact us</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -91,7 +94,7 @@ import { useHead } from 'nuxt/app';
 
 // Set this to a path such as '/images/whats-on/first-steps/hero.jpeg' to put a photo behind the heading.
 // While it is empty, the banner shows a plain dark placeholder.
-const heroImage = '/images/whats-on/first-steps/landscape.jpeg';
+const heroImage = '/images/whats-on/first-steps/landscape-1920.webp';
 
 // Padding is set in CSS (not here) so the heading stays centred at every screen width.
 const heroStyle = heroImage
@@ -314,6 +317,37 @@ useHead({
   padding: 1rem 1.25rem;
   text-align: center;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  text-decoration: none;
+  margin-top: 0.25rem;
+}
+.fs-card a {
+  text-decoration: none;
+  color: inherit;
+  padding: 4px 12px;
+}
+
+.fs-card a:hover {
+  
+  text-decoration: none;
+  color: inherit;
+  padding: 4px 12px;
+}
+
+.low-card {
+  margin-top: 0.5rem;
+  
+}
+
+.low-card a {
+  background-color: var(--nav-bar-bg-color2);
+  color: var(--body-bg-color);
+  border: 1px solid transparent;
+  border-radius: 12px;
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.12);
+}
+
+.low-card a:hover {
+  background-color: var(--nav-bar-bg-color);
 }
 
 /* Mobile */
