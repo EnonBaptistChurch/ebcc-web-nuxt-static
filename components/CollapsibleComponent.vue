@@ -22,14 +22,14 @@ const isOpen = ref(false)
 <style scoped>
 .collapsible-section {
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
   margin-bottom: 1rem;
   overflow: hidden;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
 }
 
 .collapsible-header {
-  background: var(--nav-bar-bg-color);
+  background: var(--nav-bar-bg-color2);
   color: var(--button-text-color);
   padding: 0.75rem 1rem;
   font-weight: bold;
@@ -45,7 +45,7 @@ const isOpen = ref(false)
 
 .collapsible-header:hover {
   background: #eaeaea;
-  color: var(--nav-bar-bg-color);
+  color: var(--nav-bar-bg-color2);
 
 }
 
