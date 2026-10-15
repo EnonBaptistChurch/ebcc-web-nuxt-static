@@ -1,14 +1,18 @@
 <template>
-  <div>
+  <div class="fs-page">
+    <!-- Hero: the image sits behind the heading, edge to edge. Set heroImage in the script to use a photo. -->
+    <header class="fs-hero" :class="{ 'fs-hero--placeholder': !heroImage }" :style="heroStyle">
+      <div class="fs-hero-inner">
+        <h1>First Steps</h1>
+        <p class="fs-subtitle">Every Thursday in term time at Enon Baptist Church, Chatham</p>
+      </div>
+    </header>
+
     <div class="text-content">
       <div class="text-wrapper">
-        <h1>First Steps</h1>
-
-        <p class="fs-subtitle">Every Thursday in term time at Enon Baptist Church, Chatham</p>
-
         <ul class="fs-facts" aria-label="Key details">
           <li>
-            <strong>Thursdays, 9–11am</strong>
+            <strong>Thursdays, 9 - 11am</strong>
             <span>During term time</span>
           </li>
           <li>
@@ -30,20 +34,34 @@
           play, explore and make new friends, while parents and carers enjoy a cuppa and connect with others.
         </p>
 
-        <p>
-          We meet every Thursday during term time, from 9–11am, and everyone is welcome. Our sessions are completely
-          free, with free parking available too!
-        </p>
+        <!-- Photo beside the text: side by side on desktop, text wraps around it on mobile -->
+        <div class="fs-feature">
+          <div class="fs-image-wrap">
+            <img
+              src="/images/whats-on/first-steps/portrait.jpeg"
+              alt="Enon First Steps group"
+              class="fs-image"
+              loading="lazy"
+            />
+          </div>
 
-        <h2>Play, explore and enjoy</h2>
+          <div class="fs-feature-text">
+            <p>
+              We meet every Thursday during term time, from 9–11am, and everyone is welcome. Our sessions are
+              completely free, with free parking available too!
+            </p>
 
-        <p>
-          Our mornings begin with plenty of time for free play, with a variety of toys and activities for all ages and
-          stages. From baby toys and small world play to role play, slide and seesaws, there’s lots for little ones to
-          discover. We also rotate some of our toys to keep things fresh and exciting. During playtime, we offer toast
-          and drinks for both children and adults to enjoy. There is also a craft available for those who wish to do
-          it.
-        </p>
+            <h2>Play, explore and enjoy</h2>
+
+            <p>
+              Our mornings begin with plenty of time for free play, with a variety of toys and activities for all ages
+              and stages. From baby toys and small world play to role play, slide and seesaws, there’s lots for little
+              ones to discover. We also rotate some of our toys to keep things fresh and exciting. During playtime, we
+              offer toast and drinks for both children and adults to enjoy. There is also a craft available for those
+              who wish to do it.
+            </p>
+          </div>
+        </div>
 
         <h2>Snacks, Bible story and songs</h2>
 
@@ -70,6 +88,19 @@
 
 <script setup lang="ts">
 import { useHead } from 'nuxt/app';
+
+// Set this to a path such as '/images/whats-on/first-steps/hero.jpeg' to put a photo behind the heading.
+// While it is empty, the banner shows a plain dark placeholder.
+const heroImage = '/images/whats-on/first-steps/landscape.jpeg';
+
+// Padding is set in CSS (not here) so the heading stays centred at every screen width.
+const heroStyle = heroImage
+  ? {
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)), url('${heroImage}')`,
+      backgroundPosition: 'center 2%',
+      backgroundSize: 'cover'
+    }
+  : {};
 
 const pageUrl = 'https://enonbaptistchatham.org.uk/whats-on/first-steps/';
 const title = 'Baby & Toddler Group in Chatham, Medway | Enon First Steps';
@@ -138,16 +169,17 @@ useHead({
 </script>
 
 <style>
+/* Stops the full-width hero from causing a sideways scrollbar */
+.fs-page {
+  overflow-x: clip;
+}
+
 .text-wrapper {
   max-width: 800px;
   margin: 0 auto;
 }
 .text-content p {
   margin-bottom: 1rem;
-}
-.text-content h1 {
-  text-align: center;
-  margin-bottom: 0.5rem;
 }
 .text-content h2 {
   margin-top: 1.75rem;
@@ -157,18 +189,57 @@ useHead({
   font-weight: bold;
 }
 
-.text-content .fs-subtitle {
+/*
+  Hero banner: full width of the screen, image behind the heading.
+  The fact cards overlap its bottom edge by 3rem, so bottom padding = top padding + 3rem
+  to keep the heading centred in the part you can see.
+*/
+.fs-page .fs-hero {
+  /* break out of any page container so it spans the whole screen */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  box-sizing: border-box;
+  min-height: clamp(10rem, 60vh, 40rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 1.5rem 7rem;
   text-align: center;
-  margin-bottom: 1.5rem;
+  color: #fff;
+  background-color: #2f3338;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0;
+}
+.fs-page .fs-hero--placeholder {
+  background-image: linear-gradient(135deg, #4a4f57, #2f3338);
+}
+.fs-page .fs-hero-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.fs-page .fs-hero h1 {
+  margin: 0 0 0.5rem;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.fs-page .fs-hero .fs-subtitle {
+  margin: 0;
+  font-size: 1.1rem;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
 }
 
 /* Fact cards */
 .text-content .fs-facts {
   list-style: none;
+  position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   gap: 1rem;
-  margin: 0 0 1.5rem;
+  margin: -3rem 1rem 1.5rem;
   padding: 0;
 }
 .text-content .fs-facts li {
@@ -180,6 +251,7 @@ useHead({
   border-radius: 12px;
   padding: 1.1rem 1rem;
   text-align: center;
+  color: #2b2b2b;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
 .text-content .fs-facts strong {
@@ -190,27 +262,6 @@ useHead({
   opacity: 0.75;
 }
 
-/* Mobile: merge the three fact cards into one card with dividers */
-@media (max-width: 600px) {
-  .text-content .fs-facts {
-    grid-template-columns: 1fr;
-    gap: 0;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-    overflow: hidden;
-  }
-  .text-content .fs-facts li {
-    background: transparent;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 0.9rem 1rem;
-  }
-  .text-content .fs-facts li + li {
-    border-top: 1px solid color-mix(in srgb, currentColor 15%, transparent);
-  }
-}
-
 /* Highlighted boxes: tint follows the site's text colour */
 .text-content .fs-box {
   background: color-mix(in srgb, currentColor 8%, transparent);
@@ -219,8 +270,41 @@ useHead({
   padding: 0.85rem 1.1rem;
 }
 .text-content .fs-welcome {
-  margin-top: 2rem;
-  font-size: 1.05rem;
+  margin: 1.5rem 0 1rem;
+  font-size: 1.1rem;
+}
+
+/* Photo beside the text */
+.text-content .fs-feature {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+.text-content .fs-image-wrap {
+  position: relative;
+  flex: 0 0 200px;
+  width: 200px;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+.text-content .fs-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.text-content .fs-feature-text {
+  flex: 1;
+  min-width: 0;
+}
+.text-content .fs-feature-text > :first-child {
+  margin-top: 0;
 }
 
 /* Find us card */
@@ -230,5 +314,74 @@ useHead({
   padding: 1rem 1.25rem;
   text-align: center;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .fs-page .fs-hero {
+    min-height: 22rem;
+    padding: 3rem 1rem;
+  }
+
+  /* Facts: plain text (no card). Day and time on the left, entry and parking on the right */
+  .text-content .fs-facts {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 0;
+    margin: 0.5rem 0;
+  }
+  .text-content .fs-facts li {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0.1rem 1rem;
+    color: inherit;
+  }
+  .text-content .fs-facts li:first-child {
+    grid-row: 1 / span 2;
+    justify-content: center;
+    padding: 1.1rem 1rem;
+  }
+  .text-content .fs-facts li:first-child strong {
+    font-size: 1rem;
+  }
+  .text-content .fs-facts li:nth-child(n + 2) strong {
+    font-size: 0.8rem;
+    margin: 0;
+  }
+  .text-content .fs-facts li:nth-child(n + 2) span {
+    font-size: 0.8rem;
+    margin: 0;
+  }
+
+  /*
+    Photo moves to the bottom of the page. The wrapper becomes a column, the feature
+    wrappers dissolve (display: contents) so their children become items in that column,
+    and `order` pushes the photo down: text (0) -> photo (1) -> Find us card (2).
+  */
+  .text-content .text-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .text-content .fs-feature,
+  .text-content .fs-feature-text {
+    display: contents;
+  }
+  /* flex items don't collapse margins, so trim the heading's top margin to keep spacing the same */
+  .text-content h2 {
+    margin-top: 0.75rem;
+  }
+  .text-content .fs-image-wrap {
+    order: 1;
+    align-self: center;
+    
+    width: auto;
+    max-width: 360px;
+    max-height: 200px;
+    aspect-ratio: 3/4;
+    margin: 0.5rem 0 1.5rem;
+  }
+  .text-content .fs-find {
+    order: 2;
+  }
 }
 </style>
