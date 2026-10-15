@@ -318,7 +318,7 @@ useHead({
   text-align: center;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
   text-decoration: none;
-  margin-top: 0.25rem;
+  margin: 1.5rem 0;
 }
 .fs-card a {
   text-decoration: none;
@@ -327,14 +327,13 @@ useHead({
 }
 
 .fs-card a:hover {
-  
   text-decoration: none;
   color: inherit;
   padding: 4px 12px;
 }
 
 .low-card {
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   
 }
 
