@@ -2,9 +2,9 @@
   <div>
     <div class="text-content">
       <div class="text-wrapper">
-        <h1>First Steps Baby &amp; Toddler Group in Chatham</h1>
+        <h1>First Steps</h1>
 
-        <p class="fs-subtitle">Every Thursday in term time at Enon Baptist Church</p>
+        <p class="fs-subtitle">Every Thursday in term time at Enon Baptist Church, Chatham</p>
 
         <ul class="fs-facts" aria-label="Key details">
           <li>
@@ -39,16 +39,16 @@
 
         <p>
           Our mornings begin with plenty of time for free play, with a variety of toys and activities for all ages and
-          stages. From baby toys and small world play to role play, slides and seesaws, there’s lots for little ones to
+          stages. From baby toys and small world play to role play, slide and seesaws, there’s lots for little ones to
           discover. We also rotate some of our toys to keep things fresh and exciting. During playtime, we offer toast
           and drinks for both children and adults to enjoy. There is also a craft available for those who wish to do
           it.
         </p>
 
-        <h2>Snacks, Bible stories and songs</h2>
+        <h2>Snacks, Bible story and songs</h2>
 
         <p>
-          We finish each session with a snack, followed by a time of Bible stories and songs, giving us a lovely
+          We finish each session with a snack, followed by a time of Bible story and songs, giving us a lovely
           opportunity to come together before heading home.
         </p>
 
