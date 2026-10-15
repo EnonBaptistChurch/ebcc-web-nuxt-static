@@ -34,15 +34,14 @@
           play, explore and make new friends, while parents and carers enjoy a cuppa and connect with others.
         </p>
 
-        <!-- Photo beside the text: side by side on desktop, text wraps around it on mobile -->
+        <!-- Photo beside the text on desktop; moves to the bottom of the page on mobile -->
         <div class="fs-feature">
           <div class="fs-image-wrap">
-            
             <img
-                src="/images/whats-on/first-steps/portrait-640.webp"
-                alt="Enon First Steps Craft"
-                class="fs-image"
-                  loading="lazy"
+              src="/images/whats-on/first-steps/portrait-640.webp"
+              alt="Enon First Steps Craft"
+              class="fs-image"
+              loading="lazy"
             />
           </div>
 
@@ -77,10 +76,10 @@
         </p>
 
         <div class="fs-card fs-find">
-          <strong>Find us:</strong> Skinner Street, Chatham, ME4 5RF<br />
+          <strong>Find us:</strong> Skinner Street, Chatham, ME4 5RF
           <div class="low-card">
-            <a href="/find-us/">Directions</a> &middot;
-            <a href="/whats-on">What’s on at Enon</a> &middot;
+            <a href="/find-us/">Directions</a>
+            <a href="/whats-on">What’s on at Enon</a>
             <a href="/contact-us/">Contact us</a>
           </div>
         </div>
@@ -317,34 +316,27 @@ useHead({
   padding: 1rem 1.25rem;
   text-align: center;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-  text-decoration: none;
   margin: 1.5rem 0;
 }
-.fs-card a {
-  text-decoration: none;
-  color: inherit;
-  padding: 4px 12px;
-}
-
+.fs-card a,
 .fs-card a:hover {
   text-decoration: none;
   color: inherit;
   padding: 4px 12px;
 }
 
+/* Link buttons inside the Find us card */
 .low-card {
   margin-top: 1rem;
-  
 }
-
 .low-card a {
   background-color: var(--nav-bar-bg-color2);
   color: var(--body-bg-color);
   border: 1px solid transparent;
   border-radius: 12px;
   box-shadow: 0 8px 14px rgba(0, 0, 0, 0.12);
+  margin: 0 0.25rem;
 }
-
 .low-card a:hover {
   background-color: var(--nav-bar-bg-color);
 }
@@ -406,15 +398,26 @@ useHead({
   .text-content .fs-image-wrap {
     order: 1;
     align-self: center;
-    
-    width: auto;
-    max-width: 360px;
-    max-height: 200px;
-    aspect-ratio: 3/4;
+    flex: none;
+    width: 150px; /* explicit size: with width:auto the wrapper has no content to size it */
+    aspect-ratio: 3 / 4; /* 150 x 200 */
     margin: 0.5rem 0 1.5rem;
   }
   .text-content .fs-find {
     order: 2;
+  }
+
+  /* Link buttons stack, full width */
+  .text-content .low-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  .text-content .low-card a {
+    margin: 0;
+    padding: 0.65rem 1rem;
+    text-align: center;
   }
 }
 </style>
