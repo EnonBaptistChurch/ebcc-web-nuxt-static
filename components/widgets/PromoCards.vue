@@ -22,7 +22,7 @@ import { computed } from 'vue'
 import { cards } from '../../data/PromoCards'
 import { useWindowSize } from '@vueuse/core'
 
-// SSR-safe width tracking
+
 const { width: screenWidth } = useWindowSize()
 
 
