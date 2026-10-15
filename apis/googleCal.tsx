@@ -17,7 +17,6 @@ export class GoogleCalendar {
         const cachedEvents = this.getCachedEvents();
         
         if (cachedEvents) {
-            console.log("Using cached events");
             return cachedEvents;
           }
 

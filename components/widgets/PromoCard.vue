@@ -29,7 +29,7 @@ defineProps({
 .action-card {
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background-color: var(--body-bg-color, #fff); 
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
@@ -47,7 +47,7 @@ defineProps({
 
 .action-card__image {
   width: 100%;
-  padding-top: 60%; /* maintain aspect ratio */
+  padding-top: 75%; /* maintain aspect ratio */
   background-size: cover;
   background-position: center;
   transition: transform 0.5s ease;

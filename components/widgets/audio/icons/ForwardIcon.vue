@@ -1,0 +1,21 @@
+<template>
+  <svg
+    :width="size"
+    :height="size"
+    viewBox="0 0 64 64"
+    xmlns="http://www.w3.org/2000/svg"
+    stroke-width="3"
+    stroke="#000000"
+    fill="none"
+  >
+    <polyline points="54.43 15.41 51.83 24.05 43.19 21.44" stroke-linecap="round"/>
+    <path d="M24.93,41.41V23a.09.09,0,0,0-.16-.07s-2.58,3.69-4.17,4.78" stroke-linecap="round"/>
+    <rect x="30.19" y="22.52" width="11.41" height="18.89" rx="5.7"/>
+    <path d="M51.86,23.94a21.91,21.91,0,1,0,.91,13.25" stroke-linecap="round"/>
+  </svg>
+</template>
+
+<script setup lang="ts">
+const props = defineProps<{ size?: number }>()
+const size = props.size || 24
+</script>

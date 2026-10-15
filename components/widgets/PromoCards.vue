@@ -25,6 +25,7 @@ import { useWindowSize } from '@vueuse/core'
 
 const { width: screenWidth } = useWindowSize()
 
+
 const visibleCards = computed(() => {
   const shownCards = cards.filter(c => c.show)
 
@@ -49,6 +50,6 @@ const columns = computed(() => {
   display: grid;
   gap: 2rem;
   padding: 2rem 1rem;
-  background: #e2e2e0d8 
+  background: linear-gradient(to top, #f7efe2, color-mix(in srgb, var(--body-bg-color) 97%, black)); 
 }
 </style>

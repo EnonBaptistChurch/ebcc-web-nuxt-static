@@ -7,7 +7,7 @@ const props = defineProps({
   text: { type: String, required: true }
 })
 
-const phone = atob("KzQ0MTYzNDMwMTQ5OQ==")
+const phone = atob("MDc1MDggNzc5MTQ1");
 
 function callNumber() {
   window.location.href = `tel:${phone}`

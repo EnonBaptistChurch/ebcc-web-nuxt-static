@@ -33,7 +33,6 @@ function processDirectory(dir) {
     });
 
     if (alreadyExists) {
-      console.log(`Skipping ${fullPath} (variants already exist)`);
       return;
     }
 

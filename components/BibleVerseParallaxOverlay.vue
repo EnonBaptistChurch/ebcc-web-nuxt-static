@@ -1,6 +1,5 @@
 <template>
   <div
-    id="edenParallax_page_section"
     class="edenParallax-zone"
     :class="{ 'edenParallax-error': isErrorPage }"
     :data-speed="speed"
@@ -60,13 +59,15 @@ export default {
 
 <style scoped>
 .edenParallax-zone {
+  flex-shrink: 0;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   width: 100%;
-  height: 300px; 
+  height: 300px !important; 
+  min-height: 300px !important;
   overflow: hidden;
   transition: background-image 0.3s ease-in-out;
 }

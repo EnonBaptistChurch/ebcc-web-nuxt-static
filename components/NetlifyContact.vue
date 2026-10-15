@@ -49,9 +49,6 @@ const handleSubmit = async () => {
   }
 
   const turnstileToken = widgetId ? (window as any).turnstile.getResponse(widgetId) : null;
-
-  console.log("Widget ID:", widgetId);
-console.log("Turnstile token:", turnstileToken);
   if (!turnstileToken) {
     status.value = 'error'
     console.error('Turnstile verification missing')
@@ -95,7 +92,7 @@ console.log("Turnstile token:", turnstileToken);
     </p>
 
     <div class="text-content contact-form-intro">
-      <h2>Phone: <CallWidget text="01634 301499" /></h2>
+      <h2>Phone: <CallWidget text="07508 779145" /></h2>
     </div>
 
     <h2 class="text-content contact-form-intro">Contact Form</h2>

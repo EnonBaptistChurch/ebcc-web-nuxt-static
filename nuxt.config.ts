@@ -18,8 +18,6 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon',type: 'image/x-icon', href: '/images/new-logo.ico' },  
-        { rel: 'preload', href: '/css/site.css', as: 'style' },  
-        { rel: 'stylesheet', href: '/css/site.css' },
       ],
       htmlAttrs: {
         lang: 'en'
@@ -45,8 +43,15 @@ export default defineNuxtConfig({
         mangle: {
           toplevel: true,  // Enable mangling of top-level variable names
         },
+        
       },
+      
     },
+    optimizeDeps: {
+        include: [
+          '@vueuse/core',
+        ]
+      },
     server: {
       allowedHosts: ['enonbaptistchatham.org.uk', 'localhost']
     },
