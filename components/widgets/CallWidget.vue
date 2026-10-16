@@ -15,7 +15,7 @@ function callNumber() {
 </script>
 <style scoped>
 .num {
-  color: var(--button-bg-color, #007bff);
+  color: var(--nav-bar-bg-color2, #007bff);
   font-weight: 600;
   text-decoration: none;
 } 
