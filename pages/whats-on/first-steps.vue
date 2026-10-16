@@ -335,7 +335,7 @@ useHead({
   margin-top: 1rem;
 }
 .low-card a {
-  background-color: var(--nav-bar-bg-color2);
+  background-color: var(--nav-bar-bg-color);
   color: var(--body-bg-color);
   border: 1px solid transparent;
   border-radius: 12px;

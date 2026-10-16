@@ -1,10 +1,9 @@
 :root {
   --body-bg-color: #fdf6ec;
-  --nav-bar-bg-color2: #104268;
+  --nav-bar-bg-color: #104268;
   --button-bg-color: var(--nav-bar-bg-color);
   --button-color: var(--body-bg-color);
   --button-text-color: var(--body-bg-color);
-  --nav-bar-bg-color: #84c4f4;
 }
 
 html,body {
