@@ -360,7 +360,9 @@ useHead({
 }
 
 .low-card a:hover {
-  background-color: var(--nav-bar-bg-color);
+  background-color:#FAF4F1;
+  color:  var(--nav-bar-bg-color);
+  border: 1px solid #0F0F0F
 }
 
 /* Mobile */
@@ -445,7 +447,7 @@ useHead({
     gap: 0.5rem;
     margin-top: 0.75rem;
   }
-  
+
   .text-content .low-card a {
     margin: 0;
     padding: 0.65rem 1rem;
