@@ -47,7 +47,7 @@
 
           <div class="fs-feature-text">
             <p>
-              We meet every Thursday during term time, from 9–11am, and everyone is welcome. Our sessions are
+              We meet every Thursday during term time, from 9 - 11am, and everyone is welcome. Our sessions are
               completely free, with free parking available too!
             </p>
 
@@ -55,10 +55,15 @@
 
             <p>
               Our mornings begin with plenty of time for free play, with a variety of toys and activities for all ages
-              and stages. From baby toys and small world play to role play, slide and seesaws, there’s lots for little
-              ones to discover. We also rotate some of our toys to keep things fresh and exciting. During playtime, we
-              offer toast and drinks for both children and adults to enjoy. There is also a craft available for those
-              who wish to do it.
+              and stages. From baby toys and small world play to role play, a slide and seesaws, there’s lots for little
+              ones to discover. 
+            </p>
+            <p> We also rotate some of our toys to keep things fresh and exciting. There is also a craft available for those
+              who wish to do it. 
+            </p>
+            <p>
+              During playtime, we
+              offer toast and drinks for both children and adults to enjoy. 
             </p>
           </div>
         </div>
