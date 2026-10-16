@@ -354,28 +354,28 @@ useHead({
     gap: 0;
     margin: 0.5rem 0;
   }
-  .text-content .fs-facts li {
+  .text-wrapper .fs-facts li {
     background: transparent;
     border-radius: 0;
     box-shadow: none;
     padding: 0.1rem 1rem;
     color: inherit;
   }
-  .text-content .fs-facts li:first-child {
+  .text-wrapper .fs-facts li:first-child {
     grid-row: 1 / span 2;
     justify-content: center;
     padding: 1.1rem 1rem;
   }
-  .text-content .fs-facts li:first-child strong {
+  .text-wrapper .fs-facts li:first-child strong {
     font-size: 1rem;
   }
-  .text-content .fs-facts li:nth-child(n + 2) strong {
+  .text-wrapper .fs-facts li:nth-child(n + 2) strong {
     font-size: 0.8rem;
-    margin: 0;
+    margin: 0.2rem 0 0;
   }
-  .text-content .fs-facts li:nth-child(n + 2) span {
-    font-size: 0.8rem;
+  .text-wrapper .fs-facts li:nth-child(n + 2) span {
     margin: 0;
+    font-size: 0.8rem;
   }
 
   /*
