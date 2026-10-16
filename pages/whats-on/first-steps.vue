@@ -1,7 +1,7 @@
 <template>
   <div class="fs-page">
     <!-- Hero: the image sits behind the heading, edge to edge. Set heroImage in the script to use a photo. -->
-    <header class="fs-hero" :class="{ 'fs-hero--placeholder': !heroImage }" :style="heroStyle">
+    <header class="fs-hero">
       <div class="fs-hero-inner">
         <h1>First Steps</h1>
         <p class="fs-subtitle">Every Thursday in term time at Enon Baptist Church, Chatham</p>
@@ -219,20 +219,26 @@ useHead({
   background-size: cover;
   background-position: center;
   border-radius: 0;
+  background-position: center 2%;
+  background-size: cover;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)), url('/images/whats-on/first-steps/landscape-1920.webp')
 }
 .fs-page .fs-hero--placeholder {
   background-image: linear-gradient(135deg, #4a4f57, #2f3338);
 }
+
 .fs-page .fs-hero-inner {
   max-width: 800px;
   margin: 0 auto;
 }
+
 .fs-page .fs-hero h1 {
   margin: 0 0 0.5rem;
   color: #fff;
   text-align: center;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
+
 .fs-page .fs-hero .fs-subtitle {
   margin: 0;
   font-size: 1.1rem;
@@ -249,6 +255,7 @@ useHead({
   margin: -3rem 1rem 1.5rem;
   padding: 0;
 }
+
 .text-content .fs-facts li {
   display: flex;
   flex-direction: column;
@@ -261,9 +268,11 @@ useHead({
   color: #2b2b2b;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
+
 .text-content .fs-facts strong {
   font-size: 1.1rem;
 }
+
 .text-content .fs-facts span {
   font-size: 0.95rem;
   opacity: 0.75;
@@ -276,6 +285,7 @@ useHead({
   border-radius: 8px;
   padding: 0.85rem 1.1rem;
 }
+
 .text-content .fs-welcome {
   margin: 1.5rem 0 1rem;
   font-size: 1.1rem;
@@ -289,6 +299,7 @@ useHead({
   gap: 1.5rem;
   margin: 1.5rem 0;
 }
+
 .text-content .fs-image-wrap {
   position: relative;
   flex: 0 0 200px;
@@ -298,6 +309,7 @@ useHead({
   overflow: hidden;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
+
 .text-content .fs-image {
   position: absolute;
   inset: 0;
@@ -306,10 +318,12 @@ useHead({
   object-fit: cover;
   object-position: center top;
 }
+
 .text-content .fs-feature-text {
   flex: 1;
   min-width: 0;
 }
+
 .text-content .fs-feature-text > :first-child {
   margin-top: 0;
 }
@@ -323,6 +337,7 @@ useHead({
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
   margin: 1.5rem 0;
 }
+
 .fs-card a,
 .fs-card a:hover {
   text-decoration: none;
@@ -334,6 +349,7 @@ useHead({
 .low-card {
   margin-top: 1rem;
 }
+
 .low-card a {
   background-color: var(--nav-bar-bg-color);
   color: var(--body-bg-color);
@@ -342,6 +358,7 @@ useHead({
   box-shadow: 0 8px 14px rgba(0, 0, 0, 0.12);
   margin: 0 0.25rem;
 }
+
 .low-card a:hover {
   background-color: var(--nav-bar-bg-color);
 }
@@ -359,6 +376,7 @@ useHead({
     gap: 0;
     margin: 0.5rem 0;
   }
+
   .text-wrapper .fs-facts li {
     background: transparent;
     border-radius: 0;
@@ -366,18 +384,22 @@ useHead({
     padding: 0.1rem 1rem;
     color: inherit;
   }
+
   .text-wrapper .fs-facts li:first-child {
     grid-row: 1 / span 2;
     justify-content: center;
     padding: 1.1rem 1rem;
   }
+
   .text-wrapper .fs-facts li:first-child strong {
     font-size: 1rem;
   }
+
   .text-wrapper .fs-facts li:nth-child(n + 2) strong {
     font-size: 0.8rem;
     margin: 0.2rem 0 0;
   }
+
   .text-wrapper .fs-facts li:nth-child(n + 2) span {
     margin: 0;
     font-size: 0.8rem;
@@ -392,14 +414,17 @@ useHead({
     display: flex;
     flex-direction: column;
   }
+
   .text-content .fs-feature,
   .text-content .fs-feature-text {
     display: contents;
   }
+
   /* flex items don't collapse margins, so trim the heading's top margin to keep spacing the same */
   .text-content h2 {
     margin-top: 0.75rem;
   }
+
   .text-content .fs-image-wrap {
     order: 1;
     align-self: center;
@@ -408,6 +433,7 @@ useHead({
     aspect-ratio: 3 / 4; /* 150 x 200 */
     margin: 0.5rem 0 1.5rem;
   }
+
   .text-content .fs-find {
     order: 2;
   }
@@ -419,6 +445,7 @@ useHead({
     gap: 0.5rem;
     margin-top: 0.75rem;
   }
+  
   .text-content .low-card a {
     margin: 0;
     padding: 0.65rem 1rem;
