@@ -53,7 +53,10 @@ const isActive = (title: string) => {
         prefetch
         class="nav-link"
       >
+      <div class="dropdown">
+      <div class="dropdown-menu-item">
         {{ item.title }}
+        </div>
         <svg
           v-if="item.submenu"
           :class="['navdesktop-icon', { 'navdesktop-icon-rotated': activeSubmenu === item.title }]"
@@ -64,6 +67,7 @@ const isActive = (title: string) => {
         >
           <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
         </svg>
+        </div>
       </NuxtLink>
 
       <div 
@@ -86,6 +90,17 @@ const isActive = (title: string) => {
 </template>
 
 <style scoped>
+.dropdown {
+  display: flex;
+  gap: 0.25rem;
+}
+.dropdown-menu-item {
+  padding-bottom: 0.25rem;
+}
+.dropdown svg{
+  padding-bottom: 2px;
+}
+
 .navdesktop-icon {
   width: 14px;
   height: 14px;
@@ -95,7 +110,6 @@ const isActive = (title: string) => {
 
 .navdesktop-icon-rotated {
   transform: rotate(180deg);
-  
 }
 
 /* Desktop Menu */
