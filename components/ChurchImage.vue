@@ -32,7 +32,7 @@
   overflow: hidden;
   width: 100%;
   /* Taller than before so the roof peak isn't clipped on wide screens */
-  height: clamp(280px, 42vw, 700px);
+  height: clamp(280px, 42vw, 665px);
   background-color: #1f2937; /* shown while the image loads */
 }
 

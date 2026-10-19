@@ -55,7 +55,7 @@ import ChurchImage from '../components/ChurchImage.vue';
   width: 100%;
   max-width: 66rem;
   margin: 0 auto;
-  padding: clamp(0.5rem, 2vw, 1.5rem) 1.25rem 0;
+  padding: 0.5rem 1.25rem 0;
   text-align: center;
 }
 

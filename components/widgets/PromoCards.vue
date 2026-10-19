@@ -58,7 +58,12 @@ const visibleCards = computed(() => {
 .action-card-grid {
   display: grid;
   gap: 2rem;
-  padding: 2rem 1rem;
+  padding: 0.5rem 1rem;
   background: linear-gradient(to top, #f7efe2, color-mix(in srgb, var(--body-bg-color) 97%, black)); 
+}
+@media (max-width:600px) {
+ .action-card-grid {
+   padding: 2rem 1rem;
+}
 }
 </style>
