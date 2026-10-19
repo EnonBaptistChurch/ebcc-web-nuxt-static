@@ -3,8 +3,7 @@
   --nav-bar-bg-color: #104268;
   --button-bg-color: var(--nav-bar-bg-color);
   --button-color: var(--body-bg-color);
-  --button-text-color: var(--body-bg-color)
-  
+  --button-text-color: var(--body-bg-color);
 }
 
 html,body {

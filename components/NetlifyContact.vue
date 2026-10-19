@@ -185,7 +185,7 @@ button {
   font-size: 1rem;
   font-weight: 600;
   color: var(--button-color);
-  background-color: var(--button-bg-color);
+  background-color: var(--nav-bar-bg-color);
   border-color: var(--button-bg-color);
   border-width: 1px;
   border-style: solid; 
