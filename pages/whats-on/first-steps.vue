@@ -96,7 +96,7 @@
 
 <script setup lang="ts">
 import { useHead } from 'nuxt/app';
-import { bannerNotices } from '../../data/bannerNotices'
+import { bannerNotices } from '../../data/bannerNotices.ts'
 
 // Set this to a path such as '/images/whats-on/first-steps/hero.jpeg' to put a photo behind the heading.
 // While it is empty, the banner shows a plain dark placeholder.
