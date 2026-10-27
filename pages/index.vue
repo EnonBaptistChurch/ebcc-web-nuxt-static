@@ -1,6 +1,11 @@
 <template>
   
   <div>
+    <ClientOnly>
+      
+    
+      <ScrollingBanner :notices="bannerNotices" :speed="70" dismissible />
+    </ClientOnly>
     <ChurchImage />
       <!-- <HeroSection /> -->
         <div class="home-page">
@@ -24,6 +29,8 @@
 </template>
 
 <script setup lang="ts">
+import { bannerNotices } from '../data/BannerNotices.ts'
+import ScrollingBanner from '../components/ScrollingBanner.vue'
 import { ref, computed, watch } from 'vue';
 import BibleVerseParallaxOverlay from '../components/BibleVerseParallaxOverlay.vue';
 import PromoCards from '../components/widgets/PromoCards.vue';
