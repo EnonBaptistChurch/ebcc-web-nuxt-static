@@ -1,7 +1,11 @@
 <template>
   
   <div>
-  <ScrollingBanner :notices="bannerNotices" :speed="70" dismissible />
+    <ClientOnly>
+      
+    
+      <ScrollingBanner :notices="bannerNotices" :speed="70" dismissible />
+    </ClientOnly>
     <ChurchImage />
       <!-- <HeroSection /> -->
         <div class="home-page">
