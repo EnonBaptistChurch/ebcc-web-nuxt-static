@@ -1,6 +1,8 @@
 <template>
   <div class="fs-page">
+    <ClientOnly>
     <ScrollingBanner :notices="bannerNotices" :speed="70" dismissible />
+    </ClientOnly>
     <!-- Hero: the image sits behind the heading, edge to edge. Set heroImage in the script to use a photo. -->
     <header class="fs-hero">
       <div class="fs-hero-inner">
@@ -96,7 +98,7 @@
 
 <script setup lang="ts">
 import { useHead } from 'nuxt/app';
-import { bannerNotices } from '../../data/bannerNotices.ts'
+import { bannerNotices } from '../../data/bannerNotices'
 
 // Set this to a path such as '/images/whats-on/first-steps/hero.jpeg' to put a photo behind the heading.
 // While it is empty, the banner shows a plain dark placeholder.
