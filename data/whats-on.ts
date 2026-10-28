@@ -72,7 +72,7 @@ export const eventCardsData: EventCardItem[] = [
     id: 'first-steps',
     day: 'Thursday',
     time: '9.00am',
-    title: 'First Steps – Toddler Group',
+    title: 'First Steps',
     url: '/whats-on/first-steps/',
     note: 'term-time',
     description: 'For parents, carers, and pre-school children. Parents/Carers need to stay with their children.',

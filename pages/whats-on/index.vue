@@ -191,6 +191,7 @@ const eventsByDay = computed(() => {
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  max-height: 150px;
 }
 
 .event-card:hover {
@@ -201,7 +202,7 @@ const eventsByDay = computed(() => {
 .card-media {
   position: relative;
   flex: 0 0 42%;
-  min-height: 170px;
+  
 }
 
 .card-media > img,
@@ -273,7 +274,7 @@ const eventsByDay = computed(() => {
 
 .event-description {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: #475569;
   line-height: 1.4;
 }
