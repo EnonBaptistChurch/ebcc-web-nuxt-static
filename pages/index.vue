@@ -235,6 +235,11 @@ const services = [
 .services__name {
   color: var(--services-text-wide);
 }
+
+.services__link:hover,
+.services__link:focus-visible {
+  color: var(--body-bg-color);
+}
 }
 
 @media (max-width:340px ) {
