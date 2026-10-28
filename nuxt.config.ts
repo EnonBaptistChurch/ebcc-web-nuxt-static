@@ -1,5 +1,8 @@
 import { defineNuxtConfig } from 'nuxt/config';
 import tsconfigPaths from 'vite-tsconfig-paths'
+import { getGoodFridays } from './composables/useBankHolidays'
+
+const goodFridays = await getGoodFridays();
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
@@ -56,5 +59,10 @@ export default defineNuxtConfig({
       allowedHosts: ['enonbaptistchatham.org.uk', 'localhost']
     },
     plugins: [tsconfigPaths()]
+  },
+  runtimeConfig: {
+    public: {
+      goodFridays,
+    },
   },
 })
