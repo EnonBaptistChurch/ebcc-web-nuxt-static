@@ -16,23 +16,26 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import PromoCard from '../components/widgets/PromoCard.vue'
 import { computed } from 'vue'
-import { cards } from '../../data/PromoCards'
+import { getVisibleCards } from '../../data/PromoCards'
 import { useWindowSize } from '@vueuse/core'
 
+const config = useRuntimeConfig()
+const now = ref<Date | null>(null)
+
+onMounted(() => { now.value = new Date() })
 
 const { width: screenWidth } = useWindowSize()
 
-
 const visibleCards = computed(() => {
-  const shownCards = cards.filter(c => c.show)
+  const cards = getVisibleCards({
+    now: now.value,
+    goodFridays: config.public.goodFridays ?? [],
+  })
 
-  if (screenWidth.value < 1024) {
-    return shownCards.slice(0, 4)
-  }
-  return shownCards
+  return screenWidth.value < 1024 ? cards.slice(0, 4) : cards
 })
 
 const columns = computed(() => {

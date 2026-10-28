@@ -1,5 +1,5 @@
 export interface SeasonalService {
-  id: number
+  id: number | string   // was: number
   label: string
   title: string
   icon: string
