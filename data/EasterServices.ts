@@ -56,7 +56,7 @@ function formatDisplayDate(date: Date) {
 // "18:30" -> "6:30pm"
 function formatDisplayTime(time: string) {
   const [h = 0, m = 0] = time.split(':').map(Number)
-  const suffix = h >= 12 ? 'pm' : 'am'
+  const suffix = h >= 12 ? ' pm' : ' am'
   return `${h % 12 || 12}:${String(m).padStart(2, '0')}${suffix}`
 }
 

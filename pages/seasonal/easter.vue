@@ -43,19 +43,16 @@
               <p class="day-label">{{ day.label }}</p>
               <h2 class="day-date">{{ day.displayDate }}</h2>
 
-              <blockquote class="verse">
+              <!-- <blockquote class="verse">
                 <p>“{{ day.verse.text }}”</p>
                 <cite>{{ day.verse.ref }}</cite>
-              </blockquote>
+              </blockquote> -->
 
               <article v-for="service in day.services" :key="service.id" class="service">
                 <div class="service-time">{{ service.displayTime }}</div>
                 <div class="service-info">
                   <h3 class="service-title">{{ service.title }}</h3>
                   <p v-if="service.extraDetail" class="service-extra-detail" v-html="service.extraDetail"></p>
-                  <button type="button" class="calendar-btn" @click="addToCalendar(service)">
-                    + Add to calendar
-                  </button>
                 </div>
               </article>
             </div>
@@ -120,12 +117,12 @@ const dayMeta: Record<string, { theme: 'dusk' | 'dawn'; icon: string; verse: Ver
   'Good Friday': {
     theme: 'dusk',
     icon: '✝',
-    verse: { text: 'It is finished.', ref: 'John 19:30' },
+    // verse: { text: 'It is finished.', ref: 'John 19:30' },
   },
   'Easter Sunday': {
     theme: 'dawn',
     icon: '☀',
-    verse: { text: 'He is not here: for he is risen, as he said.', ref: 'Matthew 28:6' },
+    // verse: { text: 'He is not here: for he is risen, as he said.', ref: 'Matthew 28:6' },
   },
 }
 const defaultMeta = dayMeta['Easter Sunday']!
@@ -192,36 +189,36 @@ const countdownUnits = computed(() => {
 })
 
 // ---- Add to calendar (.ics download) ----
-function addToCalendar(service: SeasonalService) {
-  const pad = (n: number) => String(n).padStart(2, '0')
-  const local = (d: Date) =>
-    `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`
+// function addToCalendar(service: SeasonalService) {
+//   const pad = (n: number) => String(n).padStart(2, '0')
+//   const local = (d: Date) =>
+//     `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`
 
-  const start = startOf(service)
-  const end = new Date(start.getTime() + SERVICE_DURATION_MINUTES * MINUTE)
-  const stamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
+//   const start = startOf(service)
+//   const end = new Date(start.getTime() + SERVICE_DURATION_MINUTES * MINUTE)
+//   const stamp = new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'
 
-  const ics = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//Easter Services//EN',
-    'BEGIN:VEVENT',
-    `UID:${service.id}@easter-services`,
-    `DTSTAMP:${stamp}`,
-    `DTSTART:${local(start)}`,
-    `DTEND:${local(end)}`,
-    `SUMMARY:${service.title}`,
-    'END:VEVENT',
-    'END:VCALENDAR',
-  ].join('\r\n')
+//   const ics = [
+//     'BEGIN:VCALENDAR',
+//     'VERSION:2.0',
+//     'PRODID:-//Easter Services//EN',
+//     'BEGIN:VEVENT',
+//     `UID:${service.id}@easter-services`,
+//     `DTSTAMP:${stamp}`,
+//     `DTSTART:${local(start)}`,
+//     `DTEND:${local(end)}`,
+//     `SUMMARY:${service.title}`,
+//     'END:VEVENT',
+//     'END:VCALENDAR',
+//   ].join('\r\n')
 
-  const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }))
-  const a = document.createElement('a')
-  a.href = url
-  a.download = `${service.id}.ics`
-  a.click()
-  URL.revokeObjectURL(url)
-}
+//   const url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }))
+//   const a = document.createElement('a')
+//   a.href = url
+//   a.download = `${service.id}.ics`
+//   a.click()
+//   URL.revokeObjectURL(url)
+// }
 </script>
 
 <style scoped>
@@ -234,8 +231,7 @@ function addToCalendar(service: SeasonalService) {
 }
 
 .page {
-  min-height: 100vh;
-  min-height: 100dvh;
+  
   background: linear-gradient(to bottom, #f1e4cd 0%, #fdf6ec 40%, #fff9e6 100%);
   padding: 2rem 1.25rem calc(2.5rem + env(safe-area-inset-bottom));
   position: relative;
@@ -438,8 +434,8 @@ h1 {
 }
 
 .day-body {
-  border-radius: 4px;
-  padding: 1.4rem 1.25rem 0.5rem;
+  border-radius: 12px;
+  padding: 1.4rem 1.25rem 0.1rem;
   border: 1px solid rgba(201, 168, 76, 0.4);
   transition: transform 0.25s ease;
 }
@@ -523,7 +519,7 @@ h1 {
 
 .service-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 400;
   line-height: 1.25;
 }
@@ -652,11 +648,11 @@ h1 {
     bottom: calc((var(--gap) + 1.25rem + 1.1rem) * -1);
   }
 
-  .day-body { padding: 1.75rem 1.75rem 0.75rem; }
+  .day-body { padding: 1.25rem 1.25rem 0.25rem; }
   .day-date { font-size: 1.9rem; }
   .service-title { font-size: 1.3rem; }
 
-  .footer-text { text-align: left; padding-left: 3.25rem; }
+  .footer-text { text-align: left;  }
 }
 
 @keyframes fadeUp {
