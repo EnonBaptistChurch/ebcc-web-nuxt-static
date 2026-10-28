@@ -62,7 +62,7 @@
 
 .church-hero__content {
   position: absolute;
-  inset: auto 0 0 0;
+  inset: auto  auto 0   0  ;
   box-sizing: border-box;
   padding: clamp(1rem, 3vw, 1.5rem) 1rem;
   display: flex;

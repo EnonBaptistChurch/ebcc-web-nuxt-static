@@ -1,17 +1,9 @@
 <template>
   <div class="home">
-    <ChurchImage>
-      <h1 class="home-title">Welcome to Enon Baptist Church</h1>
-    </ChurchImage>
-
-    <section class="intro">
-      <p class="intro__text">
-        We are a group of people who meet together to worship God. We are
-        concerned for one another and those who live around us. We believe the
-        Bible to be God’s Word that is relevant to all areas of our life. In
-        particular, we have a personal belief in Jesus Christ and through him
-        have a real relationship with God.
-      </p>
+    <div class="hero">
+      <ChurchImage>
+        <h1 class="home-title">Welcome to Enon Baptist Church</h1>
+      </ChurchImage>
 
       <aside class="services" aria-labelledby="services-heading">
         <h2 id="services-heading" class="services__title">Our Lord's Day Services</h2>
@@ -32,6 +24,16 @@
           <span class="services__arrow" aria-hidden="true">&rarr;</span>
         </NuxtLink>
       </aside>
+    </div>
+
+    <section class="intro">
+      <p class="intro__text">
+        We are a group of people who meet together to worship God. We are
+        concerned for one another and those who live around us. We believe the
+        Bible to be God’s Word that is relevant to all areas of our life. In
+        particular, we have a personal belief in Jesus Christ and through him
+        have a real relationship with God.
+      </p>
     </section>
 
     <ClientOnly>
@@ -59,9 +61,12 @@ const services = [
 </script>
 
 <style scoped>
+
 .home {
   /* Guards against any child pushing the page wider than the screen */
   overflow-x: hidden;
+  --services-text-wide: #fff;
+  --services-text: var(--nav-bar-bg-color);
 }
 
 .home-title {
@@ -75,16 +80,18 @@ const services = [
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
 }
 
-/* Mobile first: single column, services sit directly under the image */
+/* Wrapper so the card can be positioned against the image on desktop */
+.hero {
+  position: relative;
+}
+
+/* Intro text */
 .intro {
   box-sizing: border-box;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1rem;
   width: 100%;
   max-width: 66rem;
   margin: 0 auto;
-  padding: 0.75rem 1.25rem 1rem;
+  padding: 1rem 1.25rem;
 }
 
 .intro__text {
@@ -100,79 +107,76 @@ const services = [
   text-wrap: pretty;
 }
 
-
-/* Services card */
+/* Services card. Mobile: sits in the normal flow, directly under the image */
 .services {
-  --services-accent: #1e4a73;
 
-  order: -1;
   box-sizing: border-box;
-  padding: 1rem 1.25rem 0.75rem;
-  background: #fff;
+  margin: 0.25rem 0.25rem 0;
+  padding: 0.5rem 0.75rem 0.5rem;
   border: 1px solid rgba(17, 24, 39, 0.06);
-  border-top: 4px solid var(--services-accent);
+  
   border-radius: 0.75rem;
   box-shadow:
     0 1px 2px rgba(17, 24, 39, 0.04),
     0 12px 28px -12px rgba(17, 24, 39, 0.18);
-  color: #374151;
+  color: var(--services-text);
 }
 
 .services__title {
-  margin: 0 0 0.25rem;
+  margin: 0rem;
   font-size: 1.1rem;
   font-weight: 600;
   line-height: 1.3;
   letter-spacing: -0.01em;
-  color: #111827;
+  color: var(--services-text);
 }
 
+/* Services side by side */
 .services__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 0.5rem 0;
   margin: 0;
   padding: 0;
 }
 
-/* Name on the left, time on the right, same line */
 .services__item {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.25rem 1rem;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #f0ece6;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.25rem 0.25rem;
+  /* border-left: 1px solid #e5e7eb; */
 }
 
-
-
-.services__item:last-child {
-  border-bottom: none;
+.services__item:first-child {
+  padding-left: 0;
+  border-left: none;
 }
 
 .services__name {
   margin: 0;
   padding: 0;
+  font-size: 0.85rem;
   font-weight: 400;
-  color: #1f2937;
+  color: var(--services-text);
 }
 
 .services__time {
   margin: 0;
   padding: 0;
-  font-size: 0.95rem;
+  font-size: 1.25rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   color: var(--services-accent);
   white-space: nowrap;
 }
 
-/* Footer link, separated from the list */
 .services__link {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 0.25rem;
-  padding-top: 0.6rem;
+  padding-top: 0.2rem;
   border-top: 1px solid #e5e7eb;
   font-weight: 500;
   color: var(--services-accent);
@@ -183,14 +187,15 @@ const services = [
   transition: transform 0.2s ease;
 }
 
-.services__link:hover,
-.services__link:focus-visible {
-  color: #163a5c; /* slightly darker than the accent */
-}
 
 .services__link:hover .services__arrow,
 .services__link:focus-visible .services__arrow {
   transform: translateX(4px);
+}
+
+.services__link:hover,
+.services__link:focus-visible {
+  color: var(--services-text);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -199,21 +204,48 @@ const services = [
   }
 }
 
-/* Desktop: text on the left, services on the right */
-@media (min-width: 768px) {
-  .intro {
-    grid-template-columns: minmax(0, 1fr) 21rem;
-    gap: 3rem;
-    align-items: center;
-    padding: 0.5rem 1.25rem 1rem;
-  }
-
+/* Desktop: card floats in the bottom right corner of the image */
+@media (min-width: 876px) {
   .services {
-    order: 0;
-  }
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.15rem;  
+    z-index: 2;
+    width: 24rem;
+    max-width: calc(100% - 4rem);
+    margin: 0;
+  color: var(--services-text-wide);
+  padding: 0.25rem;
+  
+}
 
-  .intro__text {
-    text-align: left;
+
+.services__title {
+  color: var(--services-text-wide);
+}
+
+.services__item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.25rem 0.25rem;
+  /* border-left: 1px solid #e5e7eb; */
+}
+
+.services__name {
+  color: var(--services-text-wide);
+}
+}
+
+@media (max-width:340px ) {
+  .services__item {
+    border-left: none;
+  padding-left: 0;  
+  }
+  .services__list {
+    gap: 0.25rem;
   }
 }
+
+
 </style>
