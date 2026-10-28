@@ -1,4 +1,4 @@
-const WEEKS_BEFORE_EASTER = 40;    // card appears this many weeks before Easter Sunday
+const WEEKS_BEFORE_EASTER = 4;    // card appears this many weeks before Easter Sunday
 const DAYS_AFTER_GOOD_FRIDAY = 4; // 4 = hide after Easter Monday
 
 
