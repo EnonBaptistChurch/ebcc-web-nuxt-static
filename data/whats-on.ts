@@ -12,7 +12,11 @@ export interface EventCardItem {
   description?: string;
   note?: string;
   additionalLinks?: EventLink[];
+  images?: string[] | ImageItem[];
+  image?: string | ImageItem;
 }
+
+type ImageItem = { src: string; alt?: string };
 
 export const eventCardsData: EventCardItem[] = [
   {
@@ -21,7 +25,11 @@ export const eventCardsData: EventCardItem[] = [
     time: '9.45am',
     title: 'Sunday Club',
     url: '/whats-on/sunday-club/',
-    note: 'for children aged 4 to 15'
+    note: 'for children aged 4 to 15',
+    images: [{ src:'/images/events/SCP-2026-07-12/1-320.webp', alt: ''},
+      { src:'/images/events/SCP-2026-07-12/2-320.webp', alt: ''},
+      { src:'/images/events/SCP-2026-07-12/3-320.webp', alt: ''},
+      { src:'/images/events/SCP-2026-07-12/4-320.webp', alt: ''}]
   },
   {
     id: 'morning-worship',
@@ -67,7 +75,8 @@ export const eventCardsData: EventCardItem[] = [
     title: 'First Steps – Toddler Group',
     url: '/whats-on/first-steps/',
     note: 'term-time',
-    description: 'For parents, carers, and pre-school children. Parents/Carers need to stay with their children.'
+    description: 'For parents, carers, and pre-school children. Parents/Carers need to stay with their children.',
+    image: {src:'images/whats-on/first-steps/landscape-1920.webp'}
   },
   {
     id: 'ladies-meeting',
