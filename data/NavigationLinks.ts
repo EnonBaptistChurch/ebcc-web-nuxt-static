@@ -52,13 +52,13 @@ export const whatsaChristianSection: NavItem = {
   submenuOpen:false
 };
 export const linksSection: NavItem ={ 
-  title:"Links", link: "/links/local-churches/",
-  submenu: [
-    { link: "/links/local-churches/", title: "Local Churches" },
-    { link: "/links/mission/", title: "Missionary Links" },
-  ],
+  title:"Links", link: "/links/mission-and-christian-organisations",
+  // submenu: [
+  //   { link: "/links/mission-and-christian-organisations", title: "Missionary and Christian Organisation" },
+  // ],
   submenuOpen:false
 }
+
 export const sermonSection: NavItem ={ title:"Sermons", link: "/sermons/" }
 export const findUsSection: NavItem ={ title:"Find Us", link: "/find-us/" }
 export const contactSection: NavItem ={ title:"Contact Us", link: "/contact-us/" }

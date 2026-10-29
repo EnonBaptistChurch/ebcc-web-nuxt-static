@@ -2,59 +2,60 @@
     <div>
         <!-- Missionaries -->
         <header class="section-intro">
-        <span class="eyebrow">Global Outreach</span>
-        <h2>Missionary Links</h2>
-        <p class="subtitle">
+        
+        <h2 class="title">Missionary and Christian Organisation Links</h2>
+        <!-- <p class="subtitle">
             We have links with missionaries and mission organisations serving across the world, taking the gospel to the nations.
-        </p>
+        </p> -->
         </header>
 
         <div class="card-grid mission-grid">
         <article v-for="mission in missionLinks" :key="mission.name" class="card">
             <div class="card-body">
+            <a :href="mission.link" target="_blank" rel="noopener" >
+              <!-- IMAGE BLOCK -->
+              <div class="mission-image">
+                  <template v-if="Array.isArray(mission.imgSrc)">
+                      <img
+                      v-for="(src, i) in mission.imgSrc"
+                      :key="i"
+                      :src="src"
+                      :alt="mission.name"
+                      :style="mission.bgColor ? { backgroundColor: mission.bgColor } : {}"
+                      />
+                  </template>
 
-            <!-- IMAGE BLOCK -->
-            <div class="mission-image">
-                <template v-if="Array.isArray(mission.imgSrc)">
-                    <img
-                    v-for="(src, i) in mission.imgSrc"
-                    :key="i"
-                    :src="src"
-                    :alt="mission.name"
-                    :style="mission.bgColor ? { backgroundColor: mission.bgColor } : {}"
-                    />
-                </template>
+                  <img
+                      v-else-if="mission.imgSrc"
+                      :src="mission.imgSrc"
+                      :alt="mission.name"
+                      :style="mission.bgColor ? { backgroundColor: mission.bgColor } : {}"
+                  />
+                  </div>
 
-                <img
-                    v-else-if="mission.imgSrc"
-                    :src="mission.imgSrc"
-                    :alt="mission.name"
-                    :style="mission.bgColor ? { backgroundColor: mission.bgColor } : {}"
-                />
-                </div>
+              <h3 class="card-name">
+                  
+                  {{ mission.name }}
+                  
+              </h3>
 
-            <h3 class="card-name">
-                <a :href="mission.link" target="_blank" rel="noopener">
-                {{ mission.name }}
-                </a>
-            </h3>
+              <p class="card-description">
+                  {{ mission.description }}
+              </p>
 
-            <p class="card-description">
-                {{ mission.description }}
-            </p>
-
-            <div v-if="mission.moreInfoLink">
-                <a
-                class="link"
-                :href="mission.moreInfoLink.link"
-                target="_blank"
-                rel="noopener"
-                >
-                {{ mission.moreInfoLink.name }}
-                </a>
+              <div v-if="mission.moreInfoLink">
+                  <a
+                  class="link"
+                  :href="mission.moreInfoLink.link"
+                  target="_blank"
+                  rel="noopener"
+                  >
+                  {{ mission.moreInfoLink.name }}
+                  </a>
+              </div>
+            </a>
             </div>
-
-            </div>
+            
         </article>
         </div>
     </div>
@@ -112,6 +113,8 @@ useHead({
 .section-intro {
   text-align: center;
   margin-bottom: 2.5rem;
+  max-width: 66ch;
+  margin: 0 auto;
 }
 
 .eyebrow {
@@ -130,8 +133,9 @@ useHead({
   font-size: clamp(1.8rem, 4vw, 2.6rem);
   font-weight: 700;
   color: var(--navy);
-  margin: 0 0 0.75rem;
+  margin: 1.5rem 0 0.75rem;
   line-height: 1.15;
+  max-width: 66ch;
 }
 
 .subtitle {
@@ -170,13 +174,14 @@ useHead({
 /* ── Grid ───────────────────────────────────────────── */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
   margin-bottom: 3rem;
+  margin: 3rem 1rem;
 }
 
 .mission-grid {
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 }
 
 @media (max-width: 1024px) {
@@ -216,12 +221,17 @@ useHead({
 }
 
 .card-body {
-  padding: 1.25rem 1.25rem 0.75rem;
+  padding: 0 1.25rem 0.75rem;
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   
+}
+
+.card-body a {
+  text-decoration: none;
+  color: #000;
 }
 
 .card-footer {
@@ -253,12 +263,12 @@ useHead({
 }
 /* ── Card typography ────────────────────────────────── */
 .card-name {
-  margin: 0;
+  margin: 0.75rem 0;
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.3;
-  text-align: center;;
+  text-align: center;
 }
 
 .card-name a {
