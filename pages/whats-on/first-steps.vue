@@ -58,7 +58,7 @@
               and stages. From baby toys and small world play to role play, a slide and seesaws, there’s lots for little
               ones to discover. 
             </p>
-            <p> We also rotate some of our toys to keep things fresh and exciting. There is also a craft available for those
+            <p> We rotate some of our toys to keep things fresh and exciting. There is also a craft available for those
               who wish to do it. 
             </p>
             <p>
