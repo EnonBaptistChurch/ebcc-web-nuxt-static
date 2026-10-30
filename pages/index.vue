@@ -1,5 +1,9 @@
 <template>
   <div class="home">
+    <ClientOnly>
+      <ScrollingBanner :notices="bannerNotices" :speed="70" dismissible />
+    </ClientOnly>
+
     <div class="hero">
       <ChurchImage>
         <h1 class="home-title">Welcome to Enon Baptist Church</h1>
@@ -50,6 +54,9 @@
 </template>
 
 <script setup lang="ts">
+import { bannerNotices } from '../data/BannerNotices.ts'
+import ScrollingBanner from '../components/ScrollingBanner.vue'
+import { ref, computed, watch } from 'vue';
 import BibleVerseParallaxOverlay from '../components/BibleVerseParallaxOverlay.vue';
 import PromoCards from '../components/widgets/PromoCards.vue';
 import ChurchImage from '../components/ChurchImage.vue';
