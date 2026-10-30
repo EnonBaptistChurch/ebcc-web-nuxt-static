@@ -10,7 +10,7 @@ const services: SeasonalService[] = [
     time: '17:00',
     displayDate: 'Sunday 13th December',
     displayTime: '5:00pm',
-    extraDetail: 'There will be mince pies and refreshments after the service.'
+    extraDetail: 'There will be mince pies and refreshments following the end of the service.'
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const services: SeasonalService[] = [
     time: '11:15',
     displayDate: 'Sunday 20th December',
     displayTime: '11:15am',
-    extraDetail: 'The Sunday club children will present something during this service. There will be mince pies and refreshments after the service.'
+    extraDetail: 'The Sunday Club children will present something during this service. There will be mince pies and refreshments following the end of the service.'
   },
   {
     id: 3,

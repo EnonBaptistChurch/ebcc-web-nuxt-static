@@ -1,5 +1,4 @@
 import { defineNuxtConfig } from 'nuxt/config';
-import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
@@ -47,14 +46,22 @@ export default defineNuxtConfig({
       },
       
     },
+    
     optimizeDeps: {
         include: [
           '@vueuse/core',
         ]
       },
+      resolve: {
+      tsconfigPaths: true,
+    },
     server: {
       allowedHosts: ['enonbaptistchatham.org.uk', 'localhost']
     },
-    plugins: [tsconfigPaths()]
-  },
+    vue: {
+      compilerOptions: {
+        isCustomElement: (tag: string) => tag.startsWith('swiper-')
+      }
+    } as any
+  }
 })
