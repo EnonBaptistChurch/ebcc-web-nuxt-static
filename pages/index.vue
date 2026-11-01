@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <ClientOnly v-if="getRunningbannerNotices().length > 0">
-      <ScrollingBanner :notices="getRunningbannerNotices()" :speed="70" />
+    <ClientOnly v-if="notices.length > 0">
+      <ScrollingBanner :notices="notices" :speed="70" />
     </ClientOnly>
 
     <div class="hero">
@@ -30,7 +30,7 @@
       </aside>
     </div>
 
-    <section class="intro"> 
+    <section class="intro">
       <p class="intro__text">
         We are a group of people who meet together to worship God. We are
         concerned for one another and those who live around us. We believe the
@@ -40,11 +40,9 @@
       </p>
     </section>
 
-      <PromoCards />
-    
+    <PromoCards />
 
     <BibleVerseParallaxOverlay
-      image="/images/field.webp"
       verseText="For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life."
       reference="John 3:16"
       version="NKJV"
@@ -55,17 +53,19 @@
 <script setup lang="ts">
 import { getRunningbannerNotices } from '../data/BannerNotices.ts'
 import ScrollingBanner from '../components/ScrollingBanner.vue'
-import { ref, computed, watch } from 'vue';
-import BibleVerseParallaxOverlay from '../components/BibleVerseParallaxOverlay.vue';
-import PromoCards from '../components/widgets/PromoCards.vue';
-import ChurchImage from '../components/ChurchImage.vue';
+import BibleVerseParallaxOverlay from '../components/BibleVerseParallaxOverlay.vue'
+import PromoCards from '../components/widgets/PromoCards.vue'
+import ChurchImage from '../components/ChurchImage.vue'
+
+// Called once instead of twice per render
+const notices = getRunningbannerNotices()
 
 const services = [
   { name: 'Sunday Morning Worship', time: '11:15 am' },
   { name: 'Sunday Evening Service', time: '6:30 pm' },
-];
+]
 
-// Add structured JSON-LD data using Nuxt's useHead
+// Structured JSON-LD data
 useHead({
   script: [
     {
@@ -75,11 +75,11 @@ useHead({
         '@type': 'Church',
         'name': 'Enon Baptist Church',
         'description': 'A group of people who meet together to worship God, study the Bible, and share a personal belief in Jesus Christ.',
-        'url': 'https://www.enonbaptistchatham.org.uk', // Replace with your actual domain
-        'logo': 'https://www.enonbaptistchatham.org.uk/images/new-logo.ico', // Replace with your actual logo URL if available
+        'url': 'https://www.enonbaptistchatham.org.uk',
+        'logo': 'https://www.enonbaptistchatham.org.uk/images/new-logo.ico',
         'address': {
           '@type': 'PostalAddress',
-          'streetAddress': 'Skinner Street', // Replace with actual address
+          'streetAddress': 'Skinner Street',
           'addressLocality': 'Chatham',
           'postalCode': 'ME4 5RF',
           'addressCountry': 'GB'
