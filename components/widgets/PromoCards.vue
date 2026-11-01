@@ -1,55 +1,68 @@
 <template>
-  <section
-    class="action-card-grid"
-    :style="{ 'grid-template-columns': `repeat(${columns}, 1fr)` }"
-  >
+  <section class="action-card-grid">
     <PromoCard
-      v-for="(card, index) in visibleCards"
-      :key="index"
+      v-for="(card, index) in cardsWithRules"
+      :key="card.title"
+      :class="card.hideClasses"
       :image="card.image"
       :title="card.title"
       :description="card.description"
       :link="card.link"
       :aria-label="card.ariaLabel"
-      :buttonText="card.buttonText"
+      :button-text="card.buttonText"
     />
   </section>
 </template>
 
 <script setup>
 import PromoCard from '../components/widgets/PromoCard.vue'
-import { computed } from 'vue'
 import { cards } from '../../data/PromoCards'
-import { useWindowSize } from '@vueuse/core'
 
+const shownCards = cards.filter(c => c.show)
+const total = shownCards.length
 
-const { width: screenWidth } = useWindowSize()
+// For each column count, work out how many cards fit in complete rows
+const limitFor = (cols) => {
+  const complete = Math.floor(total / cols) * cols
+  return complete > 0 ? complete : total
+}
 
-
-const visibleCards = computed(() => {
-  const shownCards = cards.filter(c => c.show)
-
-  if (screenWidth.value < 1024) {
-    return shownCards.slice(0, 4)
-  }
-  return shownCards
-})
-
-const columns = computed(() => {
-  const count = visibleCards.value.length
-
-  if (screenWidth.value < 600) return 1
-  if (screenWidth.value < 900) return count === 3 ? 3 : 2
-  if (screenWidth.value < 1200) return count % 3 === 1 ? 2 : 3
-  return count % 4 === 1 ? 3 : 4
-})
+const cardsWithRules = shownCards.map((card, i) => ({
+  ...card,
+  hideClasses: [2, 3, 4]
+    .filter(cols => i >= limitFor(cols))
+    .map(cols => `hide-at-${cols}`),
+}))
 </script>
 
 <style scoped>
 .action-card-grid {
   display: grid;
+  grid-template-columns: 1fr;
   gap: 2rem;
-  padding: 2rem 1rem;
-  background: linear-gradient(to top, #f7efe2, color-mix(in srgb, var(--body-bg-color) 97%, black)); 
+  padding: 0.5rem 1rem;
+  background: linear-gradient(to top, #f7efe2, color-mix(in srgb, var(--body-bg-color) 97%, black));
+}
+
+@media (max-width: 600px) {
+  .action-card-grid { padding: 2rem 1rem; }
+}
+
+/* 2 columns */
+@media (min-width: 640px) and (max-width: 899.98px) {
+  .action-card-grid { grid-template-columns: repeat(2, 1fr); }
+  .action-card-grid > .hide-at-2 { display: none; }
+}
+
+/* 3 columns */
+@media (min-width: 900px) and (max-width: 1199.98px) {
+  .action-card-grid { grid-template-columns: repeat(3, 1fr); }
+  .action-card-grid > .hide-at-3 { display: none; }
+}
+
+/* 4 columns */
+@media (min-width: 1200px) {
+  .action-card-grid { grid-template-columns: repeat(4, 1fr); }
+  .action-card-grid > .hide-at-4 { display: none; }
 }
 </style>

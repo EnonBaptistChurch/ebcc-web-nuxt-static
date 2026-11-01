@@ -25,7 +25,7 @@ export default {
     images: { 
       type: Object, 
       default: () => ({
-        small: '/images/field-320.webp',
+        small: '/images/field-768.webp',
         medium: '/images/field-768.webp',
         large: '/images/field-1440.webp',
         xlarge: '/images/field-1920.webp',
