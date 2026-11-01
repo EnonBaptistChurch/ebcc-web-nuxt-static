@@ -30,7 +30,7 @@
       </aside>
     </div>
 
-    <section class="intro">
+    <section class="intro"> 
       <p class="intro__text">
         We are a group of people who meet together to worship God. We are
         concerned for one another and those who live around us. We believe the
