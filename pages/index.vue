@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <ClientOnly>
-      <ScrollingBanner :notices="bannerNotices" :speed="70" dismissible />
+    <ClientOnly v-if="getRunningbannerNotices().length > 0">
+      <ScrollingBanner :notices="getRunningbannerNotices()" :speed="70" />
     </ClientOnly>
 
     <div class="hero">
@@ -40,9 +40,8 @@
       </p>
     </section>
 
-    <ClientOnly>
       <PromoCards />
-    </ClientOnly>
+    
 
     <BibleVerseParallaxOverlay
       image="/images/field.webp"
@@ -54,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { bannerNotices } from '../data/BannerNotices.ts'
+import { getRunningbannerNotices } from '../data/BannerNotices.ts'
 import ScrollingBanner from '../components/ScrollingBanner.vue'
 import { ref, computed, watch } from 'vue';
 import BibleVerseParallaxOverlay from '../components/BibleVerseParallaxOverlay.vue';

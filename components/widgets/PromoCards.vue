@@ -1,69 +1,68 @@
 <template>
-  <section
-    class="action-card-grid"
-    :style="{ 'grid-template-columns': `repeat(${columns}, 1fr)` }"
-  >
+  <section class="action-card-grid">
     <PromoCard
-      v-for="(card, index) in visibleCards"
-      :key="index"
+      v-for="(card, index) in cardsWithRules"
+      :key="card.title"
+      :class="card.hideClasses"
       :image="card.image"
       :title="card.title"
       :description="card.description"
       :link="card.link"
       :aria-label="card.ariaLabel"
-      :buttonText="card.buttonText"
+      :button-text="card.buttonText"
     />
   </section>
 </template>
 
 <script setup>
 import PromoCard from '../components/widgets/PromoCard.vue'
-import { computed } from 'vue'
 import { cards } from '../../data/PromoCards'
-import { useWindowSize } from '@vueuse/core'
 
-const { width: screenWidth } = useWindowSize()
+const shownCards = cards.filter(c => c.show)
+const total = shownCards.length
 
-// 1. All available cards that pass the show condition
-const shownCards = computed(() => cards.filter(c => c.show))
+// For each column count, work out how many cards fit in complete rows
+const limitFor = (cols) => {
+  const complete = Math.floor(total / cols) * cols
+  return complete > 0 ? complete : total
+}
 
-// 2. Define standard responsive column breakpoints
-const columns = computed(() => {
-  if (screenWidth.value < 640) return 1  // Mobile
-  if (screenWidth.value < 900) return 2  // Tablet
-  if (screenWidth.value < 1200) return 3 // Laptop
-  return 4                               // Desktop
-})
-
-// 3. Display as many as possible without leaving remainder/gaps on the last row
-const visibleCards = computed(() => {
-  const total = shownCards.value.length
-  const cols = columns.value
-
-  // On single-column screens, display all cards
-  if (cols === 1) return shownCards.value
-
-  // Calculate the largest multiple of `cols` that fits within `total`
-  // Example: 11 cards on a 3-column grid -> Math.floor(11 / 3) * 3 = 9 cards
-  const completeRowsCount = Math.floor(total / cols) * cols
-
-  // If there aren't enough cards to fill even 1 full row, show what we have
-  const limit = completeRowsCount > 0 ? completeRowsCount : total
-
-  return shownCards.value.slice(0, limit)
-})
+const cardsWithRules = shownCards.map((card, i) => ({
+  ...card,
+  hideClasses: [2, 3, 4]
+    .filter(cols => i >= limitFor(cols))
+    .map(cols => `hide-at-${cols}`),
+}))
 </script>
 
 <style scoped>
 .action-card-grid {
   display: grid;
+  grid-template-columns: 1fr;
   gap: 2rem;
   padding: 0.5rem 1rem;
-  background: linear-gradient(to top, #f7efe2, color-mix(in srgb, var(--body-bg-color) 97%, black)); 
+  background: linear-gradient(to top, #f7efe2, color-mix(in srgb, var(--body-bg-color) 97%, black));
 }
-@media (max-width:600px) {
- .action-card-grid {
-   padding: 2rem 1rem;
+
+@media (max-width: 600px) {
+  .action-card-grid { padding: 2rem 1rem; }
 }
+
+/* 2 columns */
+@media (min-width: 640px) and (max-width: 899.98px) {
+  .action-card-grid { grid-template-columns: repeat(2, 1fr); }
+  .action-card-grid > .hide-at-2 { display: none; }
+}
+
+/* 3 columns */
+@media (min-width: 900px) and (max-width: 1199.98px) {
+  .action-card-grid { grid-template-columns: repeat(3, 1fr); }
+  .action-card-grid > .hide-at-3 { display: none; }
+}
+
+/* 4 columns */
+@media (min-width: 1200px) {
+  .action-card-grid { grid-template-columns: repeat(4, 1fr); }
+  .action-card-grid > .hide-at-4 { display: none; }
 }
 </style>
