@@ -9,7 +9,7 @@
     <div class="action-card__content">
       <h3 class="action-card__title">{{ title }}</h3>
       <p class="action-card__description">{{ description }}</p>
-      <a :href="link" class="action-card-grid__button">{{ buttonText }}</a>
+      <span class="action-card-grid__button">{{ buttonText }}</span>
     </div>
   </NuxtLink>
 </template>

@@ -127,16 +127,21 @@ export function linksToCurrentPage(link: string, currentPath: string, origin: st
   }
 }
 
+export function getRunningbannerNotices(): BannerNotice[] {
+  const now = Date.now()
+  return bannerNotices.filter((notice) => isNoticeActive(notice, now))
+}
+
 /** Your notices. Edit this list; the banner shows whichever are currently in range. */
 export const bannerNotices: BannerNotice[] = [
   {
     message: 'No First Steps this week (29/10/26)',
     startDate: '2026-10-27',
     endDate: '2026-10-29',
-    endTime: '11:30', // optional: stops showing at midday on the 29th
+    endTime: '11:30', 
     link: '/whats-on/first-steps',
     showLink: true,
-    linkText: 'First Steps', // optional: only these words become the link
+    linkText: 'First Steps', 
   },
   //   {
   //     message: 'Carol service tickets now available',
