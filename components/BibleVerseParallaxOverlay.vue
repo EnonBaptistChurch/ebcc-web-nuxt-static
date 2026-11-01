@@ -67,5 +67,37 @@ export default {
 
 .edenParallax-error { background-attachment: scroll; }
 
-/* .edenParallax-wrap, -screen and .verse-content stay as they are */
+.edenParallax-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.edenParallax-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  opacity: 0.1;
+  z-index: 1;
+}
+
+.verse-content {
+  z-index: 2;
+  color: #fff;
+  text-align: center;
+  font-weight: 300;
+  padding: 0 5%;
+  font-size: clamp(16px, 4vw, 32px);
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-height: 100%;
+  overflow: hidden;
+}
 </style>
