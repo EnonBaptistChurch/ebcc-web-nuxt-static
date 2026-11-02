@@ -67,6 +67,24 @@ const services = [
 
 // Structured JSON-LD data
 useHead({
+  link: [
+    {
+      rel: 'preload',
+      as: 'image',
+      fetchpriority: 'high',
+      imagesrcset: [
+        '/images/building/enonOutside-320.webp 320w',
+        '/images/building/enonOutside-480.webp 480w',
+        '/images/building/enonOutside-640.webp 640w',
+        '/images/building/enonOutside-768.webp 768w',
+        '/images/building/enonOutside-1024.webp 1024w',
+        '/images/building/enonOutside-1280.webp 1280w',
+        '/images/building/enonOutside-1440.webp 1440w',
+        '/images/building/enonOutside-1920.webp 1920w',
+      ].join(', '),
+      imagesizes: '100vw',
+    },
+  ],
   script: [
     {
       type: 'application/ld+json',
