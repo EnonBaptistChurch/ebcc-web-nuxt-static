@@ -3,7 +3,7 @@
   <!-- Banner, hero, facts, Find us and SEO all come from layouts/whats-on.vue -->
   <div class="ladies">
     <p class="ladies__intro">
-      For the ladies of Enon Baptist Church, we have two regular gatherings: a bi-monthly Ladies Meeting and a monthly Ladies Bible Study.
+      For the ladies of Enon Baptist Church, we have two regular gatherings: a semi-monthly Ladies Meeting and a monthly Ladies Bible Study.
     </p>
     <p class="ladies__intro">
       If you have never been to Enon before and are a woman, you are very welcome to come along to either or both of these gatherings. We would love to meet you!
