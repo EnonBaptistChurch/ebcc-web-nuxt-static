@@ -74,7 +74,7 @@ export const eventCardsData: EventCardItem[] = [
     day: 'Thursday',
     time: '1.45pm',
     title: 'Ladies Meeting',
-    url: '/whats-on/womens-meetings/',
+    url: '/whats-on/ladies-meetings/',
     note: '1st and 3rd Thursday each month'
   },
   {
