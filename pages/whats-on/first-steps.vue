@@ -1,5 +1,6 @@
 <!-- pages/whats-on/first-steps.vue -->
 <template>
+  <div>
   <!-- Everything else (banner, hero, facts, notice, Find us, SEO) comes from layouts/whats-on.vue -->
   <p>
     Enon First Steps is a friendly, welcoming baby and toddler group in Chatham, Medway, where little ones can
@@ -49,10 +50,10 @@
     Whether you’re a new parent in the area or have a curious toddler, we’d love to welcome you to Enon First
     Steps. Come along, get to know us and enjoy a relaxed morning of play, friendship and fun!
   </p>
+</div>
 </template>
 
 <script setup lang="ts">
-import { definePageMeta } from '#imports';
 
 // Note: definePageMeta is compiled ahead of time, so it can only contain plain values
 // (no variables declared elsewhere in this file).

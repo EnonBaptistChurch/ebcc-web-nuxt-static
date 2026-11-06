@@ -1,7 +1,8 @@
 <!-- pages/whats-on/ladies-meetings.vue -->
 <template>
-  <!-- Banner, hero, facts, Find us and SEO all come from layouts/whats-on.vue -->
+  
   <div class="ladies">
+    <!-- Banner, hero, facts, Find us and SEO all come from layouts/whats-on.vue -->
     <p class="ladies__intro">
       For the ladies of Enon Baptist Church, we have two regular gatherings: a semi-monthly Ladies Meeting and a monthly Ladies Bible Study.
     </p>
