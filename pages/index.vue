@@ -61,7 +61,7 @@ import BibleVerseParallaxOverlay from '../components/BibleVerseParallaxOverlay.v
 import PromoCards from '../components/widgets/PromoCards.vue'
 import ChurchImage from '../components/ChurchImage.vue'
 import MapWidget from '../components/widgets/MapsWidget.vue'
-import ContactCallout from '../components/contact/contactcallout.vue'
+import ContactCallout from '../components/contact/ContactCallout.vue'
 
 // Called once instead of twice per render
 const notices = getRunningbannerNotices()
