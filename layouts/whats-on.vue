@@ -44,11 +44,13 @@
         </div>
       </div>
     </div>
+    <Footer />
   </div>
 </template>
 
 <script setup lang="ts">
 import Nav from '../components/nav/Nav.vue';
+import Footer from '../components/nav/Footer.vue';
 import ScrollingBanner from '../components/ScrollingBanner.vue';
 import { computed } from 'vue';
 import { useRoute, useHead } from 'nuxt/app';
