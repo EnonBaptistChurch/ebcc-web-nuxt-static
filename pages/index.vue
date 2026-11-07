@@ -47,7 +47,6 @@
       reference="John 3:16"
       version="NKJV"
     />
-
     <section class="find-contact">
       <MapWidget />
       <ContactCallout compact />
