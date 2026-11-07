@@ -64,7 +64,7 @@
       />
       <div>
         <p class="author-label">Written by</p>
-        <p class="author-name">Pastor Paul Relf</p>
+        <p class="author-name">Paul Relf</p>
         <p class="author-role">Pastor, Enon Baptist Church</p>
       </div>
     </footer>
@@ -73,7 +73,6 @@
 
 <script setup lang="ts">
 import { useHead } from 'nuxt/app';
-import { onMounted } from 'vue';
 
 useHead({
   title: "Pastor's Message - Enon Baptist Church",
@@ -84,39 +83,6 @@ useHead({
         "Facing life’s uncertainties and rising costs? Pastor Paul Relf shares how Christians can find hope, guidance, and peace by seeking God first and trusting in His promises."
     }
   ],
-  script: [
-    // Settings must be defined BEFORE the RefTagger script loads
-    {
-      key: 'reftagger-settings',
-      innerHTML: `
-        var refTagger = {
-          settings: {
-            bibleVersion: "NKJV",
-            tooltipStyle: "light",
-            socialSharing: [],
-            roundCorners: true,
-            noSearchClassNames: ["no-reftag"]
-          }
-        };
-      `,
-      tagPosition: 'bodyClose'
-    },
-    {
-      key: 'reftagger-lib',
-      src: 'https://api.reftagger.com/v2/RefTagger.js',
-      async: true,
-      defer: true,
-      tagPosition: 'bodyClose'
-    }
-  ]
-});
-
-// On client-side navigation the library is already loaded, so re-scan the page
-onMounted(() => {
-  const w = window as any;
-  if (w.refTagger && typeof w.refTagger.tag === 'function') {
-    w.refTagger.tag();
-  }
 });
 </script>
 
@@ -129,6 +95,18 @@ onMounted(() => {
   max-width: 42rem;
   margin: 0 auto;
   padding: 2.5rem 1.25rem 4rem;
+}
+
+.post :deep(a.rtBibleRef),
+.post :deep(a.rtBibleRef:visited),
+.post :deep(a.rtBibleRef:hover),
+.post :deep(a.rtBibleRef:active) {
+  background-color: transparent !important;
+  color: inherit !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  text-decoration: none !important;
+  font-weight: inherit !important;
 }
 
 /* Header */
