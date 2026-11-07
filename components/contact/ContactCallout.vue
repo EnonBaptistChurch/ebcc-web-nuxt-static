@@ -10,7 +10,7 @@ withDefaults(
     heading: 'Get in touch',
     text: "Have a question, or want to know more about us or about Christianity? We'd love to hear from you.",
     phone: '07508 779145',
-    to: '/contact'
+    to: '/contact-us'
   }
 )
 </script>
