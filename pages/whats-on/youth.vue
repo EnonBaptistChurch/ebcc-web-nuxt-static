@@ -129,7 +129,7 @@ definePageMeta({
   whatsOn: {
     title: 'Discoverers',
     subtitle: 'Youth group for ages 11–16 at Enon Baptist Church, Chatham',
-    heroImage: '/images/whats-on/discoverers/potential_hero2.jpeg', // uncomment to put a photo behind the heading
+    heroImage: '/images/whats-on/discoverers/hero.jpeg', // uncomment to put a photo behind the heading
     facts: [
       { title: 'Every other Friday', detail: 'During term time' },
       { title: '7:30 – approx. 9:15pm', detail: 'In the church hall' },
