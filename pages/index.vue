@@ -47,6 +47,11 @@
       reference="John 3:16"
       version="NKJV"
     />
+
+    <section class="find-contact">
+      <MapWidget />
+      <ContactCallout compact />
+    </section>
   </div>
 </template>
 
@@ -56,6 +61,8 @@ import ScrollingBanner from '../components/ScrollingBanner.vue'
 import BibleVerseParallaxOverlay from '../components/BibleVerseParallaxOverlay.vue'
 import PromoCards from '../components/widgets/PromoCards.vue'
 import ChurchImage from '../components/ChurchImage.vue'
+import MapWidget from '../components/widgets/MapsWidget.vue'
+import ContactCallout from '../components/contact/contactcallout.vue'
 
 // Called once instead of twice per render
 const notices = getRunningbannerNotices()
@@ -150,6 +157,25 @@ useHead({
 /* Wrapper so the card can be positioned against the image on desktop */
 .hero {
   position: relative;
+}
+
+/* Map on the left, contact card on the right */
+.find-contact {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+  align-items: start;
+  width: 100%;
+  max-width: 66rem;
+  margin: 1.5rem auto;
+  padding: 0 0.5rem;
+}
+
+@media (max-width: 875px) {
+  .find-contact {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Intro text */
