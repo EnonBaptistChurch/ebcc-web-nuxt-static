@@ -1,4 +1,4 @@
-import type { NavItem } from '@/types/NavItem';
+import type { NavItem } from '~/types/NavItem';
 
 export const aboutSection :NavItem =
 {
@@ -20,9 +20,10 @@ export const whatsonSection: NavItem = {
     { link: "/whats-on/bible-study/", title: "Bible Study" },
     { link: "/whats-on/monthly-small-groups/", title: "Monthly Small Groups" },
     { link: "/whats-on/sunday-club/", title: "Sunday Club" },
-    { link: "/whats-on/womens-meetings/", title: "Women's Meetings" },
-    { link: "/whats-on/quarterly-online-prayer-meeting/", title: "Quarterly Online Prayer Meeting" },
     { link: "/whats-on/mens-meetings/", title: "Men's Meetings" },
+    { link: "/whats-on/ladies-meetings/", title: "Ladies Meetings" },
+    { link: "/whats-on/quarterly-online-prayer-meeting/", title: "Quarterly Online Prayer Meeting" },
+    
     { link: "/whats-on/youth/", title: "Discoverers" },
     { link: "/whats-on/first-steps/", title: "First Steps" },
   ],

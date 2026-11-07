@@ -8,7 +8,7 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import '@/public/css/site.css'
+import '~/public/css/site.css'
 
 const loaded = ref(false)
 

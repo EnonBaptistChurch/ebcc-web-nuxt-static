@@ -1,4 +1,5 @@
 <template>
+  <div>
   <article class="page-container">
     <section class="carousel-section">
       <div class="text-info" style="margin:0;">
@@ -63,6 +64,7 @@
       
     </div>
   </article>
+  </div>
 </template>
 
 <script setup lang="ts">

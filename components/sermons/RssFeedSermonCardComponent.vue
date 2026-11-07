@@ -97,11 +97,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { PodcastItem } from '@/types/SermonPodcasts'
+import type { PodcastItem } from '~/types/SermonPodcasts'
 import PlayIcon from '../widgets/audio/icons/PlayIcon.vue'
 import PauseIcon from '../widgets/audio/icons/PauseIcon.vue'
-import { getUkDateString } from '../../composables/useDateToText'
-import { useAudioPlayer } from '../../composables/useAudioPlayer'
+import { getUkDateString } from '~/composables/useDateToText'
+import { useAudioPlayer } from '~/composables/useAudioPlayer'
 
 const activeInfo = ref(false)
 
