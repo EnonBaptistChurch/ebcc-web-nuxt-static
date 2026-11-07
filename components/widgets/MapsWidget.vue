@@ -2,7 +2,8 @@
 <div>
     <div class="text-content">
     <h2>Find Us</h2>
-        <p>We are located at: Enon Baptist Church, Skinner Street, Chatham, ME4 5RF, UK</p>
+        <p>We are located at:</p>
+        <p class="address">Enon Baptist Church, Skinner Street, Chatham, ME4 5RF, UK</p>
     <div class ="mapcontainer">
     </div>
     </div>
@@ -32,3 +33,20 @@ onMounted(() => {
   }, 1000); // adjust delay as needed
 });
 </script>
+
+<style scoped>
+.mapcontainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.address {
+  font-size: 1rem;
+}
+p {
+  margin: 0 0 0.25rem 0;
+}
+.text-content h2 {
+  margin:  0  0 0.5rem  0;
+}
+</style>
