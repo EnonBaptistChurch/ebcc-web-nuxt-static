@@ -19,7 +19,7 @@
     "rrule": "^2.8.1",
     "rss-parser": "^3.13.0",
     "sharp": "^0.35.3",
-    "swiper": "^14.1.0"
+    "swiper": "^14.4.0"
   },
   "devDependencies": {
     "@types/ical": "^0.8.3",
