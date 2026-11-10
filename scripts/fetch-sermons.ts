@@ -15,7 +15,7 @@ async function main() {
 
   const items = rawFeed.items.map(item => ({
     ...item,
-    parsedSnippet: parseContentSnippet(item.content || ""),
+    parsedSnippet: parseContentSnippet(item.content || "", item.itunes.duration || ""),
   }))
 
   // Newest first; same date: evening before morning

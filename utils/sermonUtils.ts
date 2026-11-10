@@ -1,7 +1,7 @@
 import type { ParsedSnippet } from "@/types/SermonPodcasts"
 import { getSermonDate } from "@/composables/UseSermonDateConverter";
 import { findScripturePassage, parseSermonTitle } from "@/composables/useScriptureParser";
-export function parseContentSnippet(snippet: string): ParsedSnippet |null {
+export function parseContentSnippet(snippet: string, duration: string): ParsedSnippet |null {
   
   
   const lines = [...snippet.matchAll(/<p>(.*?)<\/p>/gi)]
@@ -28,7 +28,8 @@ export function parseContentSnippet(snippet: string): ParsedSnippet |null {
     service: lines[3] ?? "",
     series: splitTags(lines[4]) ?? "",
     passage: findScripturePassage(lines.join(" "))?.raw ?? "",
-    formattedDate: getSermonDate(date) ?? undefined
+    formattedDate: getSermonDate(date) ?? undefined,
+    duration: duration || ""
   };
 }
 

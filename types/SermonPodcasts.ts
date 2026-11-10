@@ -33,6 +33,7 @@ export interface ParsedSnippet {
   formattedDate?: Date
   series?: string[],
   passage?: string
+  duration?: string
 }
 
 export interface Speaker {
