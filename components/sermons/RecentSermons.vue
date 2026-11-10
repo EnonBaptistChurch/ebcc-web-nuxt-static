@@ -112,6 +112,7 @@ function onSeek(e: Event) {
             </div>
 
             <div class="recent-sermons__footer">
+              <div class="recent-sermons__seek-container">
               <input
                 v-if="props.showSeekBar && audioSrc"
                 type="range"
@@ -123,6 +124,10 @@ function onSeek(e: Event) {
                 :value="current"
                 @input="onSeek"
               />
+              <span  class="recent-sermons__duration">
+                {{ latest.parsedSnippet.duration }}
+              </span>
+              </div>
               <NuxtLink to="/sermons/" class="recent-sermons__all">
                 All sermons <span aria-hidden="true">→</span>
               </NuxtLink>
@@ -313,6 +318,19 @@ function onSeek(e: Event) {
   align-items: center;
   gap: 0.25rem 0.75rem;
   margin-top: 0.25rem;
+}
+
+.recent-sermons__seek-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1 1 auto;             /* grows to fill the space, but can shrink if needed */
+  min-width: 0;               /* allows it to shrink below its content width */
+}
+
+.recent-sermons__duration {
+  font-size: 0.75rem;
+  color: var(--muted);
 }
 
 .recent-sermons__seek {
