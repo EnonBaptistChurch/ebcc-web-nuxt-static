@@ -2,13 +2,11 @@
   <div class="sermons-page">
     <h1>Recent Sermons</h1>
 
-    <!-- Show if fetching sermons failed -->
-    <SermonWidget v-if="fetchedNoPodcastSuccessfully">
+    <SermonWidget v-if="!hasSermons">
       <p>Here is our latest uploaded sermon.</p>
     </SermonWidget>
 
-    <!-- Show podcast content if available -->
-    <div v-else-if="podcast">
+    <div v-else>
       <AudioPlayerWidget :src="chosenPodcast" :player="audioPlayer" />
 
       <RssFeedSermonsComponent
@@ -18,24 +16,19 @@
         :player="audioPlayer"
       />
     </div>
-
-    <!-- Loading state -->
-    <div v-else>
-      <p>Loading sermons...</p>
-    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import SermonWidget from '../components/sermons/SermonWidget.vue'
 import RssFeedSermonsComponent from '../components/sermons/RssFeedSermonsComponent.vue'
 import AudioPlayerWidget from '../components/widgets/AudioPlayerWidget.vue'
 import type { PodcastItem } from '@/types/SermonPodcasts'
 import { useHead } from 'nuxt/app'
 import { useAudioPlayer } from '../composables/useAudioPlayer'
+import sermonsData from '~~/data/sermons.json'
 
-// Set page title and meta
 useHead({
   title: 'Sermons - Enon Baptist Church',
   meta: [
@@ -46,26 +39,13 @@ useHead({
   ]
 })
 
-// Reactive state
-const podcast = ref<any>(null)
-const chosenPodcast = ref<any>(null)
-const fetchedNoPodcastSuccessfully = ref<boolean | null>(false)
+const podcast = sermonsData as any
+const hasSermons = podcast?.items?.length > 0
 const audioPlayer = useAudioPlayer()
+const chosenPodcast = ref<PodcastItem | null>(hasSermons ? podcast.items[0] : null)
 
-// Fetch sermons on mount
-onMounted(async () => {
-  try {
-    const data = await fetch("/.netlify/functions/sermons").then(res => res.json())
-    podcast.value = data
-    choosePodcast(data.items[0])
-  } catch (err) {
-    podcast.value = []
-    fetchedNoPodcastSuccessfully.value = true
-  }
-})
-
-const choosePodcast = (podcast: PodcastItem) => {
-  chosenPodcast.value = podcast
+const choosePodcast = (item: PodcastItem) => {
+  chosenPodcast.value = item
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 </script>

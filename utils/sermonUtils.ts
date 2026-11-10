@@ -1,22 +1,8 @@
 import type { ParsedSnippet } from "@/types/SermonPodcasts"
 import { getSermonDate } from "@/composables/UseSermonDateConverter";
+import { findScripturePassage, parseSermonTitle } from "@/composables/useScriptureParser";
 export function parseContentSnippet(snippet: string): ParsedSnippet |null {
-  // const lines = snippet
-  //   .split("\n")
-  //   .map(line => line.trim())
-  //   .filter(Boolean);
-  //   if(lines.length < 3) return null;
-  //   const hasValidDate = parseDateString(lines[2]!) !== 0;
-  //   if(!hasValidDate) return null;
-    
-  // return {
-  //   title: lines[0] || "",
-  //   speaker: lines[1] || "",
-  //   date: lines[2] || "",
-  //   service: lines[3] || "",
-  //   series: lines[4] || "",
-  //   formattedDate: getSermonDate(lines[2]!) || undefined
-  // 
+  
   
   const lines = [...snippet.matchAll(/<p>(.*?)<\/p>/gi)]
   .map(m => (m[1]?.trim() || "").replace(/&amp;/g, "&"));
@@ -36,10 +22,12 @@ export function parseContentSnippet(snippet: string): ParsedSnippet |null {
   const speaker = convertToSpeaker(deDupe(potentialSpeaker));
   return {
     title: lines[0] ?? "",
+    condensedTitle: parseSermonTitle(lines[0] ?? "").title,
     speaker: speaker,
     date,
     service: lines[3] ?? "",
     series: splitTags(lines[4]) ?? "",
+    passage: findScripturePassage(lines.join(" "))?.raw ?? "",
     formattedDate: getSermonDate(date) ?? undefined
   };
 }
@@ -68,10 +56,13 @@ function extractBracketContent(str: string)  {
 }
 
 function splitTags(input?: string): string[] {
-  return (input ?? "")
+  const tags = (input ?? "")
     .split(";")
+    .filter(tag => tag.trim() !== "<br>")
     .map(t => t.trim())
     .filter(Boolean);
+
+  return tags;
 }
 
 function deDupe(preacher: string): string {
@@ -98,3 +89,4 @@ export function parseDateString(dateStr: string): number {
   const native = new Date(dateStr).getTime()
   return isNaN(native) ? 0 : native
 }
+
