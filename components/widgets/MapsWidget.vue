@@ -44,9 +44,12 @@ onMounted(() => {
   font-size: 1rem;
 }
 p {
-  margin: 0 0 0.25rem 0;
+  margin: 0 0 0rem 0;
+  padding: 0.25rem;
 }
+
+
 .text-content h2 {
-  margin:  0  0 0.5rem  0;
+  margin: 1rem 0.25rem;
 }
 </style>
