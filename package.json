@@ -5,7 +5,8 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
+    "fetch-sermons": "tsx scripts/fetch-sermons.ts",
+    "generate": "npm run fetch-sermons && nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "start": "nuxt start"
@@ -26,6 +27,7 @@
     "@types/luxon": "^3.7.6",
     "compression-webpack-plugin": "^12.0.0",
     "nuxt": "^4.6.1",
+    "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vite-tsconfig-paths": "^6.1.1"
   }
