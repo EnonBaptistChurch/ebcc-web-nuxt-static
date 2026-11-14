@@ -39,7 +39,7 @@
 
 .pastor-message__label {
   display: inline-block;
-  margin: 0 0 1.5rem;
+  margin: 0 0 0.5rem;
   padding: 0.2rem 0.7rem;
   font-size: 0.75rem;
   font-weight: 700;
