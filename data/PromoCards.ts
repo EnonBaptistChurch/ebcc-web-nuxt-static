@@ -50,14 +50,23 @@ export const cards = [
     show: false
   },
   {
-    image: '/images/bible-320.webp',
-    title: 'Sermons',
-    description: 'Catch up on all our recent sermons by clicking the link below',
-    link: '/sermons',
-    ariaLabel: 'Sermons Image',
-    buttonText: 'Listen Now',
+    image: '/images/building/new-enon-480.webp',
+    title: 'About Us',
+    description: 'Find out more about who we are and what we believe.',
+    link: '/about',
+    ariaLabel: 'About Us',
+    buttonText: 'See More',
     show: true
   },
+  // {
+  //   image: '/images/bible-320.webp',
+  //   title: 'Sermons',
+  //   description: 'Catch up on all our recent sermons by clicking the link below',
+  //   link: '/sermons',
+  //   ariaLabel: 'Sermons Image',
+  //   buttonText: 'Listen Now',
+  //   show: true
+  // },
   {
     image: '/images/events/SCP-2026-07-12/4-640.webp',
     title: 'What\'s On',
