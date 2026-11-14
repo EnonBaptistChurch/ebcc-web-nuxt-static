@@ -58,6 +58,11 @@
     />
     <section class="find-contact">
       <div class="maps-widget">
+        <div class="text-content">
+          <h2>Find Us</h2>
+          <p class="address-details">We are located at:</p>
+          <p class="address-details">Enon Baptist Church, Skinner Street, Chatham, ME4 5RF, UK</p>
+        </div>
       <MapWidget />
       </div>
       <ContactCallout compact />
@@ -195,8 +200,8 @@ useHead({
 }
 .maps-widget {
   width: 100%;
-  height: 100%;
-  min-height: 12rem;
+  height: max(100%, 15rem);
+  min-height: 5rem;
   border-radius: 0.75rem;
   overflow: hidden;
   border: 1px solid #888888;
@@ -206,9 +211,6 @@ useHead({
     0 12px 28px -12px rgba(17, 24, 39, 0.18);
 }
 
-.maps-widget p {
-  padding: 0.75rem;
-}
 
 @media (max-width: 875px) {
   .find-contact {
@@ -473,6 +475,18 @@ useHead({
   .services__list {
     gap: 0.25rem;
   }
+}
+
+.address-details {
+  font-size: 1rem;
+  margin: 0.25rem 0 0;
+  padding: 0rem 0;
+}
+
+.address-details:last-child {
+  font-size: 1rem;
+  margin: 0.25rem 0 0;
+  padding: 0  0 0.75rem;
 }
 
 </style>

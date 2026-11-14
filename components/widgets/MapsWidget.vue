@@ -1,52 +1,46 @@
 <template>
-<div>
-    <div class="text-content">
-    <h2>Find Us</h2>
-        <p>We are located at:</p>
-        <p class="address">Enon Baptist Church, Skinner Street, Chatham, ME4 5RF, UK</p>
-    <div class ="mapcontainer">
-    </div>
-    </div>
+  <!-- Add a wrapper class here so we can control its height and flex layout -->
+  <div class="map-wrapper">  
     <iframe
-        :src="mapUrl"
-        width="100%"
-        height="300px"
-        style="border:0;"
-        allowfullscreen=""
-        loading="eager"
-        referrerpolicy="no-referrer-when-downgrade"
-      ></iframe>
-</div>
+      :src="mapUrl"
+      allowfullscreen=""
+      loading="eager"
+      referrerpolicy="no-referrer-when-downgrade"
+      class="mapcontainer"
+    />
+  </div>
 </template>
 
 <script setup>
-
 import { ref, onMounted } from 'vue';
 
-const mapUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2490.338154880195!2d0.5245410153408684!3d51.378462827943984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8cd053f801537%3A0x39e4cda4ed625544!2sEnon+Baptist+Church!5e0!3m2!1sen!2suk!4v1485452280704'; // your Google Maps embed URL
+const mapUrl = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2490.338154880195!2d0.5245410153408684!3d51.378462827943984!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8cd053f801537%3A0x39e4cda4ed625544!2sEnon+Baptist+Church!5e0!3m2!1sen!2suk!4v1485452280704';
 const preloadMap = ref(false);
 
 onMounted(() => {
-  // Start preloading map after page is interactive
   setTimeout(() => {
     preloadMap.value = true;
-  }, 1000); // adjust delay as needed
+  }, 1000);
 });
 </script>
 
 <style scoped>
-.mapcontainer {
-  position: relative;
+/* 1. Give the parent wrapper a defined height or make it stretch to its container */
+.map-wrapper {
+  display: flex;
   width: 100%;
-  overflow: hidden;
+  height: 100%;
+  min-height: 300px; /* Adjust this value as needed */
 }
-.address {
-  font-size: 1rem;
+
+/* 2. Style the iframe to fill that wrapper */
+.mapcontainer {
+  width: 100%;
+  height: 100%;
+  border: none; /* Removes default iframe borders */
+  flex: 1;
 }
-p {
-  margin: 0 0 0rem 0;
-  padding: 0.25rem;
-}
+
 
 
 .text-content h2 {
