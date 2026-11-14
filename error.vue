@@ -7,7 +7,7 @@ import { clearError } from 'nuxt/app'
 const goHome = () => {
   clearError({ redirect: '/' })
 }
-import BibleVerseParallaxOverlay from '@/components/BibleVerseParallaxOverlay.vue'
+import BibleVerseParallaxOverlay from '~/components/BibleVerseParallaxOverlay.vue'
 
 
 </script>

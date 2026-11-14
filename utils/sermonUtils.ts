@@ -1,5 +1,5 @@
-import type { ParsedSnippet } from "@/types/SermonPodcasts"
-import { getSermonDate } from "@/composables/UseSermonDateConverter";
+import type { ParsedSnippet } from "~/types/SermonPodcasts"
+import { getSermonDate } from "~/composables/UseSermonDateConverter";
 export function parseContentSnippet(snippet: string): ParsedSnippet |null {
   // const lines = snippet
   //   .split("\n")

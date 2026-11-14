@@ -31,7 +31,7 @@ import { ref, onMounted } from 'vue'
 import SermonWidget from '../components/sermons/SermonWidget.vue'
 import RssFeedSermonsComponent from '../components/sermons/RssFeedSermonsComponent.vue'
 import AudioPlayerWidget from '../components/widgets/AudioPlayerWidget.vue'
-import type { PodcastItem } from '@/types/SermonPodcasts'
+import type { PodcastItem } from '~/types/SermonPodcasts'
 import { useHead } from 'nuxt/app'
 import { useAudioPlayer } from '../composables/useAudioPlayer'
 

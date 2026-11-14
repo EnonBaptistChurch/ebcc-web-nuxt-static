@@ -1,4 +1,5 @@
 <template>
+  <div>
   <article class="whats-on-container">
     <h1>What's On</h1>
     <h2>Weekly Meetings</h2>
@@ -39,6 +40,7 @@
       </div>
     </section>
   </article>
+  </div>
 </template>
 
 <script setup lang="ts">
