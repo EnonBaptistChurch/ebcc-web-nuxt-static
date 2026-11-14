@@ -13,7 +13,7 @@
   "dependencies": {
     "@netlify/functions": "^6.0.2",
     "@vueuse/core": "^15.0.0",
-    "dotenv": "^18.0.7",
+    "dotenv": "^18.0.9",
     "ical": "^0.8.0",
     "node-mailjet": "^6.0.11",
     "rrule": "^2.8.1",
