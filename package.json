@@ -23,10 +23,11 @@
     "swiper": "^14.1.0"
   },
   "devDependencies": {
+    "@nuxt/cli": "^4.0.3",
     "@types/ical": "^0.8.3",
     "@types/luxon": "^3.7.6",
     "compression-webpack-plugin": "^12.0.0",
-    "nuxt": "^4.6.1",
+    "nuxt": "^4.6.4",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vite-tsconfig-paths": "^6.1.1"
