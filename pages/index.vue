@@ -45,7 +45,7 @@
         </p>
         </div>
         <div class="intro__brush" aria-hidden="true"></div>
-        <RecentSermons :sermons="latestThree" showSeekBar="true" />
+        <RecentSermons :showSeekBar="true" />
       </div>
     </section>
 
@@ -79,7 +79,7 @@ import ChurchImage from '../components/ChurchImage.vue'
 import MapWidget from '../components/widgets/MapsWidget.vue'
 import ContactCallout from '../components/contact/ContactCallout.vue'
 import PastorMessageComponent from '../components/PastorMessageComponent.vue'
-import PulpitBand from '../components/PulpitBand.vue'
+
 import RecentSermons from '../components/sermons/RecentSermons.vue'
 
 // Called once instead of twice per render
