@@ -144,7 +144,7 @@ export const bannerNotices: BannerNotice[] = [
     linkText: 'First Steps', 
   },
   {
-    message: 'No Bible Study and Prayer Meeting at Enon this week (18/11/26), due to Joint midweek meeting at Wigmore (17/11/26 - 19:45)',
+    message: 'No Bible Study and Prayer Meeting at Enon this week (18/11/26), due to Joint midweek meeting at Wigmore Evangelical Free Service (17/11/26 - 19:45)',
     startDate: '2026-11-14',
     endDate: '2026-11-18',
     endTime: '20:30', 
