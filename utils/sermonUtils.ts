@@ -1,6 +1,11 @@
 import type { ParsedSnippet } from "@/types/SermonPodcasts"
 import { getSermonDate } from "@/composables/UseSermonDateConverter";
-import { findScripturePassage, parseSermonTitle } from "@/composables/useScriptureParser";
+import {
+  findScripturePassages,
+  formatPassages,
+  booksOf,
+  parseSermonTitle,
+} from "@/composables/useScriptureParser";
 export function parseContentSnippet(snippet: string, duration: string): ParsedSnippet |null {
   
   
@@ -18,19 +23,27 @@ export function parseContentSnippet(snippet: string, duration: string): ParsedSn
     console.log(snippet, 'invalid snippet');
     console.log(lines[5], 'invalid snippet');
   }
-  const potentialSpeaker = lines[1] != null? lines[1] : "";
-  const speaker = convertToSpeaker(deDupe(potentialSpeaker));
-  return {
-    title: lines[0] ?? "",
-    condensedTitle: parseSermonTitle(lines[0] ?? "").title,
-    speaker: speaker,
-    date,
-    service: lines[3] ?? "",
-    series: splitTags(lines[4]) ?? "",
-    passage: findScripturePassage(lines.join(" "))?.raw ?? "",
-    formattedDate: getSermonDate(date) ?? undefined,
-    duration: duration || ""
-  };
+  const potentialSpeaker = lines[1] != null ? lines[1] : "";
+const speaker = convertToSpeaker(deDupe(potentialSpeaker));
+
+// Look in the title first; fall back to every line if the title has no reference
+const parsedTitle = parseSermonTitle(lines[0] ?? "");
+const passages = parsedTitle.passages.length
+  ? parsedTitle.passages
+  : findScripturePassages(lines.join(" "));
+
+return {
+  title: lines[0] ?? "",
+  condensedTitle: parsedTitle.title,
+  speaker: speaker,
+  date,
+  service: lines[3] ?? "",
+  series: splitTags(lines[4]) ?? "",
+  passage: formatPassages(passages),
+  formattedDate: getSermonDate(date) ?? undefined,
+  duration: duration || "",
+  booksUsed: booksOf(passages),
+};
 }
 
 function convertToSpeaker(speakerStr: string): ParsedSnippet["speaker"] {

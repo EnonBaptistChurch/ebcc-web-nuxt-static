@@ -3,6 +3,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises"
 import path from "node:path"
 import type { PodcastItem } from "../types/SermonPodcasts"
 import { parseContentSnippet, parseDateString } from "../utils/sermonUtils"
+import 'dotenv/config'
 
 const FEED_URL = process.env.SERMON_RSS_FEED_URL
 const OUT_FILE = path.resolve("data/sermons.json")

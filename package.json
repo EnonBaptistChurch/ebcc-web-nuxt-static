@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "npm run fetch-sermons && nuxt dev",
     "fetch-sermons": "tsx scripts/fetch-sermons.ts",
     "generate": "npm run fetch-sermons && nuxt generate",
     "preview": "nuxt preview",
@@ -14,7 +14,6 @@
   "dependencies": {
     "@netlify/functions": "^6.0.2",
     "@vueuse/core": "^15.0.0",
-    "dotenv": "^18.0.7",
     "ical": "^0.8.0",
     "node-mailjet": "^6.0.11",
     "rrule": "^2.8.1",
@@ -27,6 +26,7 @@
     "@types/ical": "^0.8.3",
     "@types/luxon": "^3.7.6",
     "compression-webpack-plugin": "^12.0.0",
+    "dotenv": "^18.0.10",
     "nuxt": "^4.6.4",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",

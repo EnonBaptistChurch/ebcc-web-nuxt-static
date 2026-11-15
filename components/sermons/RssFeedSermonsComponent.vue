@@ -10,16 +10,17 @@
       />
       <div :class="{ 'filters-container': true, 'container-open': filtersOpen }">
 
-      
+
         <button class="dropdown-toggle" @click="filtersOpen = !filtersOpen">
               <span class="checkbox-label">
                 Filters
+                <span v-if="activeFilterCount" class="active-badge">{{ activeFilterCount }}</span>
               </span>
               <span class="chevron" :class="{ open: filtersOpen }">&#8250;</span>
         </button>
         <div v-if="filtersOpen" class="filters-dropdown">
           <div class="checkbox-group"> </div>
-            
+
             <!-- Speaker dropdown -->
             <div class="checkbox-group">
             <button class="dropdown-toggle" @click="speakersOpen = !speakersOpen">
@@ -36,7 +37,7 @@
               </label>
             </div>
           </div>
-        
+
 
           <!-- Series dropdown -->
           <div class="checkbox-group">
@@ -54,10 +55,27 @@
               </label>
             </div>
           </div>
+
+          <!-- Books dropdown -->
+          <div class="checkbox-group">
+            <button class="dropdown-toggle" @click="booksOpen = !booksOpen">
+              <span class="checkbox-label">
+                Bible Book
+                <span v-if="selectedBooks.length" class="active-badge">{{ selectedBooks.length }}</span>
+              </span>
+              <span class="chevron" :class="{ open: booksOpen }">&#8250;</span>
+            </button>
+            <div v-if="booksOpen" class="checkbox-items">
+              <label v-for="bookObj in distinctBooks" :key="bookObj.book">
+                <input type="checkbox" :value="bookObj.book" v-model="selectedBooks" />
+                {{ bookObj.book }} ({{ bookObj.count }})
+              </label>
+            </div>
+          </div>
         </div>
 
         <!-- Active filter chips -->
-        <div v-if="selectedSpeakers.length || selectedSeries.length" class="active-filters">
+        <div v-if="activeFilterCount" class="active-filters">
           <div class="filter-chips">
             <button
               v-for="speaker in selectedSpeakers"
@@ -74,6 +92,14 @@
               @click="selectedSeries = selectedSeries.filter(s => s !== series)"
             >
               {{ series }} <span>&times;</span>
+            </button>
+            <button
+              v-for="book in selectedBooks"
+              :key="`book-${book}`"
+              class="filter-chip"
+              @click="selectedBooks = selectedBooks.filter(b => b !== book)"
+            >
+              {{ book }} <span>&times;</span>
             </button>
           </div>
           <button @click="clearFilters" class="clear-all">Clear all</button>
@@ -107,6 +133,7 @@ import { ref, computed } from 'vue'
 import type { PodcastItem } from '@/types/SermonPodcasts'
 import SermonsRssFeedSermonCardComponent from './RssFeedSermonCardComponent.vue'
 import { useAudioPlayer } from '../../composables/useAudioPlayer'
+import { BIBLE_BOOKS } from '../../composables/useScriptureParser'
 
 const props = defineProps<{
   episodes: PodcastItem[]
@@ -118,11 +145,18 @@ const props = defineProps<{
 const searchQuery = ref('')
 const selectedSpeakers = ref<string[]>([])
 const selectedSeries = ref<string[]>([])
+const selectedBooks = ref<string[]>([])
 const visibleCount = ref(10)
 const increment = 10
 const speakersOpen = ref(false)
 const seriesOpen = ref(false)
+const booksOpen = ref(false)
 const filtersOpen = ref(false)
+
+const activeFilterCount = computed(
+  () => selectedSpeakers.value.length + selectedSeries.value.length + selectedBooks.value.length,
+)
+
 const distinctSpeakers = computed(() => {
   const counts = props.episodes.reduce((acc, episode) => {
     const speaker = episode.parsedSnippet?.speaker
@@ -147,22 +181,42 @@ const distinctSeries = computed(() => {
     .map(([series, count]) => ({ series, count }))
 })
 
-const filteredEpisodes = computed(() => {
-  let list = props.episodes
+// Only books that actually appear, in Bible order (Genesis -> Revelation)
+const distinctBooks = computed(() => {
+  const counts: Record<string, number> = {}
+  for (const ep of props.episodes) {
+    for (const book of ep.parsedSnippet?.booksUsed ?? []) {
+      counts[book] = (counts[book] || 0) + 1
+    }
+  }
+  return BIBLE_BOOKS.filter(book => counts[book]).map(book => ({ book, count: counts[book] as number }))
+})
+
+// Every episode that matches the search box and filters (before paging)
+const matchingEpisodes = computed(() => {
   const query = searchQuery.value.toLowerCase().trim()
-  if (query) {
-    list = list.filter(ep =>
-      ep.title.toLowerCase().includes(query) ||
-      ep.pubDate?.toLowerCase().includes(query) ||
-      ep.parsedSnippet?.speaker?.name?.toLowerCase().includes(query)
-    )
-  }
-  if (selectedSpeakers.value.length) {
-    list = list.filter(ep => selectedSpeakers.value.includes(ep.parsedSnippet?.speaker?.name ?? ''))
-  }
-  if (selectedSeries.value.length) {
-    list = list.filter(ep => selectedSeries.value.some(tag => ep.parsedSnippet?.series?.includes(tag)))
-  }
+  return props.episodes.filter(ep => {
+    const matchesQuery = query
+      ? ep.title.toLowerCase().includes(query) ||
+        ep.pubDate?.toLowerCase().includes(query) ||
+        ep.parsedSnippet?.speaker?.name?.toLowerCase().includes(query) ||
+        ep.parsedSnippet?.passage?.toLowerCase().includes(query)
+      : true
+    const matchesSpeaker = selectedSpeakers.value.length
+      ? selectedSpeakers.value.includes(ep.parsedSnippet?.speaker?.name ?? '')
+      : true
+    const matchesSeries = selectedSeries.value.length
+      ? selectedSeries.value.some(tag => ep.parsedSnippet?.series?.includes(tag))
+      : true
+    const matchesBooks = selectedBooks.value.length
+      ? selectedBooks.value.some(book => ep.parsedSnippet?.booksUsed?.includes(book))
+      : true
+    return matchesQuery && matchesSpeaker && matchesSeries && matchesBooks
+  })
+})
+
+const filteredEpisodes = computed(() => {
+  let list = matchingEpisodes.value
   if (props.chosenPodcast) {
     list = [
       ...list.filter(ep => ep.guid === props.chosenPodcast.guid),
@@ -172,24 +226,7 @@ const filteredEpisodes = computed(() => {
   return list.slice(0, visibleCount.value)
 })
 
-const hasMoreEpisodes = computed(() => {
-  const totalMatching = props.episodes.filter(ep => {
-    const query = searchQuery.value.toLowerCase().trim()
-    const matchesQuery = query
-      ? ep.title.toLowerCase().includes(query) ||
-        ep.pubDate?.toLowerCase().includes(query) ||
-        ep.parsedSnippet?.speaker?.name?.toLowerCase().includes(query)
-      : true
-    const matchesSpeaker = selectedSpeakers.value.length
-      ? selectedSpeakers.value.includes(ep.parsedSnippet?.speaker?.name ?? '')
-      : true
-    const matchesSeries = selectedSeries.value.length
-      ? selectedSeries.value.some(tag => ep.parsedSnippet?.series?.includes(tag))
-      : true
-    return matchesQuery && matchesSpeaker && matchesSeries
-  })
-  return visibleCount.value < totalMatching.length
-})
+const hasMoreEpisodes = computed(() => visibleCount.value < matchingEpisodes.value.length)
 
 const showMore = () => { visibleCount.value += increment }
 const isChosenPodcast = (episode: PodcastItem) => props.chosenPodcast?.guid === episode.guid
@@ -197,6 +234,7 @@ const clearFilters = () => {
   searchQuery.value = ''
   selectedSpeakers.value = []
   selectedSeries.value = []
+  selectedBooks.value = []
   visibleCount.value = 10
 }
 </script>

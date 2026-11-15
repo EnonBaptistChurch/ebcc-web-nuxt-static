@@ -32,8 +32,9 @@ export interface ParsedSnippet {
   service?: string,
   formattedDate?: Date
   series?: string[],
-  passage?: string
-  duration?: string
+  passage?: string,
+  duration?: string,
+  booksUsed: string[]
 }
 
 export interface Speaker {
