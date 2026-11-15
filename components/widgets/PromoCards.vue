@@ -37,9 +37,10 @@ const cardsWithRules = shownCards.map((card, i) => ({
 
 <style scoped>
 .action-card-grid {
+  /* max-width: 1200px; */
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 0.5rem;
   padding: 0.5rem 1rem;
   background: linear-gradient(to top, #f7efe2, color-mix(in srgb, var(--body-bg-color) 97%, black));
 }

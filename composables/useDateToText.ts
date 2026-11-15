@@ -34,3 +34,14 @@ export const getUkDateString = (date?: Date | null) :string => {
     year: 'numeric',
   });
 };
+
+export const getUkShortDateString = (date?: Date | null) :string => {
+  if (!date) return '';
+  const newDate = new Date(date);
+  return newDate.toLocaleDateString('en-GB', {
+    weekday: 'short',
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+  });
+};
