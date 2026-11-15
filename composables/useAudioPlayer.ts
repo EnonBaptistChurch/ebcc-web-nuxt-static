@@ -1,7 +1,8 @@
-import { ref, onBeforeUnmount } from 'vue';
+import { shallowRef, ref, onBeforeUnmount } from 'vue';
 
 export function useAudioPlayer() {
-  const audio = ref<HTMLAudioElement | null>(null);
+  // shallowRef: no need for Vue to deeply proxy a DOM element
+  const audio = shallowRef<HTMLAudioElement | null>(null);
 
   const isPlaying = ref(false);
   const currentTime = ref(0);
@@ -15,8 +16,10 @@ export function useAudioPlayer() {
     initialStart.value = autoplay;
   };
 
-  // ✅ create audio ONCE
+  // create audio ONCE, in the browser only
   const ensureAudio = () => {
+    // `Audio` doesn't exist during SSR / prerender
+    if (!import.meta.client) return;
     if (audio.value) return;
 
     const el = new Audio();
@@ -37,12 +40,24 @@ export function useAudioPlayer() {
     audio.value = el;
   };
 
+  const play = () => {
+    if (!audio.value) return;
+    isPlaying.value = true;
+    // play() returns a promise that rejects if the browser blocks autoplay
+    audio.value.play().catch(() => {
+      isPlaying.value = false;
+    });
+  };
+
   const init = (url: string, autoplay = false) => {
+    // Do nothing on the server, and don't record currentUrl there
+    if (!import.meta.client) return;
+
     ensureAudio();
 
     if (!audio.value) return;
 
-    // ✅ prevent re-initialising same audio
+    // prevent re-initialising same audio
     if (url === currentUrl) return;
     currentUrl = url;
 
@@ -51,15 +66,13 @@ export function useAudioPlayer() {
     audio.value.load();
 
     setVolume(volume.value);
+    currentTime.value = 0;
 
     if (autoplay) {
-      audio.value.play();
-      isPlaying.value = true;
+      play();
     } else {
       isPlaying.value = false;
     }
-
-    currentTime.value = 0;
   };
 
   const togglePlay = () => {
@@ -69,8 +82,7 @@ export function useAudioPlayer() {
       audio.value.pause();
       isPlaying.value = false;
     } else {
-      audio.value.play();
-      isPlaying.value = true;
+      play();
     }
   };
 
@@ -115,6 +127,7 @@ export function useAudioPlayer() {
     audio.value.pause();
     audio.value.src = '';
     audio.value = null;
+    currentUrl = null;
   });
 
   return {

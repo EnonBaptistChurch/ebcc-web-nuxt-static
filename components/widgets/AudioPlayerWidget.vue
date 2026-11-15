@@ -1,10 +1,10 @@
 <template>
   <div class="audio-player" id="audio-player">
     <p class="audio-details">{{ src.title }}</p>
-    <p class="audio-details">{{ src.parsedSnippet?.speaker.name }}</p>
+    <p class="audio-details">{{ src.parsedSnippet?.speaker?.name }}</p>
 
-    <p v-if="src.parsedSnippet?.speaker.information" class="audio-details  speaker-info">
-      {{ src.parsedSnippet?.speaker.information }}
+    <p v-if="src.parsedSnippet?.speaker?.information" class="audio-details  speaker-info">
+      {{ src.parsedSnippet?.speaker?.information }}
     </p>
 
     <p class="audio-details">
@@ -26,7 +26,7 @@
         <button
           @click="toPlayAtStart()"
           class="play-btn"
-          :class="{ playing: props.player.isPlaying }"
+          :class="{ playing: props.player.isPlaying.value }"
           title="Play/Pause"
           :style="{ '--btn-size': buttonSize + 'px' }"
         >
@@ -53,7 +53,7 @@
             min="0"
             max="1"
             step="0.01"
-            v-model.number="props.player.volume.value"
+            :value="props.player.volume.value"
             @input="changeVolume"
             title="Volume"
             class="volume-slider"
@@ -85,7 +85,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue';
+import { ref, watch } from 'vue';
 import RewindIcon from './audio/icons/RewindIcon.vue';
 import PlayIcon from './audio/icons/PlayIcon.vue';
 import PauseIcon from './audio/icons/PauseIcon.vue';
@@ -106,12 +106,11 @@ const buttonSize = ref(40);
 const toPlayAtStart = () => {
   if (!props.player.initialStart.value) {
     props.player.setInitialStart(true);
-    props.player.togglePlay();
-  } else {
-    props.player.togglePlay();
   }
+  props.player.togglePlay();
 };
 
+// Safe during SSR/prerender: player.init() is a no-op on the server
 watch(
   () => props.src?.enclosure?.url,
   (url) => {
@@ -122,19 +121,9 @@ watch(
   { immediate: true }
 );
 
-const changeVolume = () => {
-  props.player.setVolume(props.player.volume.value);
+const changeVolume = (e: Event) => {
+  props.player.setVolume(Number((e.target as HTMLInputElement).value));
 };
-
-/**
- * FIX: proper seek binding
- */
-const seekTime = computed({
-  get: () => props.player.currentTime.value,
-  set: (val: number) => {
-    props.player.seek(val);
-  }
-});
 </script>
 
 <style scoped>

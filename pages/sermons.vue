@@ -2,7 +2,7 @@
   <div class="sermons-page">
     <h1>Recent Sermons</h1>
 
-    <SermonWidget v-if="!hasSermons">
+    <SermonWidget v-if="!chosenPodcast">
       <p>Here is our latest uploaded sermon.</p>
     </SermonWidget>
 
@@ -27,7 +27,7 @@ import AudioPlayerWidget from '../components/widgets/AudioPlayerWidget.vue'
 import type { PodcastItem } from '@/types/SermonPodcasts'
 import { useHead } from 'nuxt/app'
 import { useAudioPlayer } from '../composables/useAudioPlayer'
-import sermonsData from '~~/data/sermons.json'
+import sermonsData from '../data/sermons.json'
 
 useHead({
   title: 'Sermons - Enon Baptist Church',
