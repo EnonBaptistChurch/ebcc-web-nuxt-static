@@ -92,9 +92,10 @@ useHead({
         '@context': 'https://schema.org',
         '@type': 'Church',
         'name': 'Enon Baptist Church',
-        'description': 'A group of people who meet together to worship God, study the Bible, and share a personal belief in Jesus Christ.',
-        'url': 'https://www.enonbaptistchatham.org.uk',
-        'logo': 'https://www.enonbaptistchatham.org.uk/images/new-logo.ico',
+        'description': 'An Independent Evangelical Reformed Baptist Church in Chatham, Medway, Kent.',
+        'telephone': '+44 7508 7795',
+        'url': 'https://enonbaptistchatham.org.uk',
+        'logo': 'https://enonbaptistchatham.org.uk/images/new-logo.ico',
         'address': {
           '@type': 'PostalAddress',
           'streetAddress': 'Skinner Street',
@@ -119,6 +120,12 @@ useHead({
             'dayOfWeek': 'Sunday',
             'opens': '18:30',
             'closes': '19:30'
+          },
+          {
+            '@type': 'OpeningHoursSpecification',
+            'dayOfWeek': 'Wednesday',
+            'opens': '19:30',
+            'closes': '21:00'
           }
         ]
       })
