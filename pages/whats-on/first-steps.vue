@@ -1,8 +1,5 @@
 <template>
   <div class="fs-page">
-    <ClientOnly>
-    <ScrollingBanner :notices="bannerNotices" :speed="70" dismissible />
-    </ClientOnly>
     <!-- Hero: the image sits behind the heading, edge to edge. Set heroImage in the script to use a photo. -->
     <header class="fs-hero">
       <div class="fs-hero-inner">
@@ -98,20 +95,6 @@
 
 <script setup lang="ts">
 import { useHead } from 'nuxt/app';
-import { bannerNotices } from '../../data/BannerNotices'
-
-// Set this to a path such as '/images/whats-on/first-steps/hero.jpeg' to put a photo behind the heading.
-// While it is empty, the banner shows a plain dark placeholder.
-const heroImage = '/images/whats-on/first-steps/landscape-1920.webp';
-
-// Padding is set in CSS (not here) so the heading stays centred at every screen width.
-const heroStyle = heroImage
-  ? {
-      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55)), url('${heroImage}')`,
-      backgroundPosition: 'center 2%',
-      backgroundSize: 'cover'
-    }
-  : {};
 
 const pageUrl = 'https://enonbaptistchatham.org.uk/whats-on/first-steps/';
 const title = 'Baby & Toddler Group in Chatham, Medway | Enon First Steps';
