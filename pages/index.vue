@@ -93,7 +93,7 @@ useHead({
         '@type': 'Church',
         'name': 'Enon Baptist Church',
         'description': 'An Independent Evangelical Reformed Baptist Church in Chatham, Medway, Kent.',
-        'telephone': '+44 7508 7795',
+        'telephone': '+44 7508 779145',
         'url': 'https://enonbaptistchatham.org.uk',
         'logo': 'https://enonbaptistchatham.org.uk/images/new-logo.ico',
         'address': {
