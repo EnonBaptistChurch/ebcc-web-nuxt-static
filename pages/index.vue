@@ -1,8 +1,6 @@
 <template>
   <div class="home">
-    <ClientOnly v-if="notices.length > 0">
-      <ScrollingBanner :notices="notices" :speed="70" />
-    </ClientOnly>
+    
 
     <div class="hero">
       <ChurchImage>
@@ -51,14 +49,10 @@
 </template>
 
 <script setup lang="ts">
-import { getRunningbannerNotices } from '../data/BannerNotices.ts'
-import ScrollingBanner from '../components/ScrollingBanner.vue'
 import BibleVerseParallaxOverlay from '../components/BibleVerseParallaxOverlay.vue'
 import PromoCards from '../components/widgets/PromoCards.vue'
 import ChurchImage from '../components/ChurchImage.vue'
 
-// Called once instead of twice per render
-const notices = getRunningbannerNotices()
 
 const services = [
   { name: 'Sunday Morning Worship', time: '11:15 am' },
