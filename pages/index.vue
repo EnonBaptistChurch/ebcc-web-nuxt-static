@@ -128,7 +128,7 @@ useHead({
             'closes': '21:00'
           }
         ],
-        'areasServed': ["Chatham", "Rochester", "Gillingham", "Medway"]
+        'areaServed': ["Chatham", "Rochester", "Gillingham", "Medway"]
       })
     }
   ]
