@@ -31,6 +31,13 @@
 
         <p v-if="info.notice" class="ep-box">
           <strong>{{ info.notice.label }}</strong> {{ info.notice.text }}
+          <a
+            v-if="info.notice.link"
+            :href="info.notice.link.href"
+            target="_blank"
+            rel="noopener"
+            class="ep-box-link"
+          >{{ info.notice.link.label }}</a>
         </p>
 
         <!-- The page's own content goes here -->
@@ -62,7 +69,11 @@ interface WhatsOnInfo {
   heroImage?: string;
   heroPosition?: string;
   facts?: { title: string; detail?: string }[];
-  notice?: { label: string; text: string };
+  notice?: {
+    label: string;
+    text: string;
+    link?: { label: string; href: string };
+  };
   // SEO
   pageUrl: string;
   metaTitle: string;
@@ -414,4 +425,14 @@ useHead(() => ({
     text-align: center;
   }
 }
+
+.text-content .ep-box-link {
+  display: block;
+  width: fit-content;
+  margin-top: 0.5rem;
+  font-weight: 700;
+  text-decoration: underline;
+  color: inherit;
+}
+
 </style>

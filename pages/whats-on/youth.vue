@@ -88,7 +88,7 @@
         <div class="mix-group">
           <span class="mix-label">All year</span>
           <ul>
-            <li>Joint evenings with other local Gospel Church Youth Groups</li>
+            <li>Occasional joint evenings with local Church youth groups</li>
           </ul>
         </div>
       </div>
@@ -129,7 +129,7 @@ definePageMeta({
   whatsOn: {
     title: 'Discoverers',
     subtitle: 'Youth group for ages 11–16 at Enon Baptist Church, Chatham',
-    heroImage: '/images/whats-on/discoverers/hero.jpeg', // uncomment to put a photo behind the heading
+    heroImage: '/images/whats-on/discoverers/hero.jpeg',
     facts: [
       { title: 'Every other Friday', detail: 'During term time' },
       { title: '7:30 – approx. 9:15pm', detail: 'In the church hall' },
