@@ -1,36 +1,37 @@
 <template>
-  <div class="text-content">
-    <div class="evening-total-content">
-    <h1>Sunday Evening Service - 6:30 PM</h1>
-    <div class="evening-image">
-    <img src="/images/building/from_the_back.jpg" class="evening-worship-image" alt="">
+  <article class="service">
+    <div class="service-image">
+      <img src="/images/building/from_the_back.jpg" class="evening-worship-image" alt="">
     </div>
-    <div class="evening-text-content">
-      <div class="evening-text">
-        <p class="lead-text">
-          Join us Sunday evening as we gather to worship, pray, and hear from God's Word together.
-        </p>
-        
+
+    <div class="service-body">
+      <p class="time-badge">Sunday · 6:30 PM</p>
+      <h2>Evening Service</h2>
+
+      <p class="lead-text">
+        Join us Sunday evening as we gather to worship, pray, and hear from God's Word together.
+      </p>
+
+      <div class="online">
         <p class="sub-text">
-          Everyone is welcome to attend in person. If you can't be with us physically, you can tune in online via our live Zoom broadcast.
+          Everyone is welcome to attend in person. If you can't be with us physically, you can tune in online
+          via our live Zoom broadcast.
         </p>
 
-        <div class="action-block">
-          <button type="button" class="zoom-btn" @click="openZoom">
-            Join Zoom Meeting
-          </button>
+        <button type="button" class="zoom-btn" @click="openZoom">
+          Join Zoom Meeting
+        </button>
+
+        <div class="zoom-image-container">
+          <img
+            src="/images/other-zoom.png"
+            alt="Zoom service information"
+            class="zoom-image"
+          />
         </div>
       </div>
-<div class="zoom-image-container">
-      <img 
-        src="/images/other-zoom.png" 
-        alt="Zoom service information" 
-        class="zoom-image" 
-      />
-      </div>
     </div>
-    </div>
-  </div>
+  </article>
 </template>
 
 <script setup>
@@ -46,94 +47,113 @@ function openZoom() {
 </script>
 
 <style scoped>
-.evening-total-content {
-  text-align: center;
-  margin: 0 auto;
+.service {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--card-border, #e5e7eb);
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.06);
 }
 
-.evening-image {
-  padding: 0 1rem 0 1rem;
+.service-image {
+  line-height: 0;
 }
 
 .evening-worship-image {
-  max-height: 300px;
-  max-width: 1920px;
-  height: auto;
+  display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: auto;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
 }
 
-/* Centered container with row layout */
-.evening-text-content {
+.service-body {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  margin: 0 auto 1rem auto;
-  width: 100%;
-  max-width: 900px; /* Limits width so margin: 0 auto can center it */
-  padding: 0 1rem;
-  box-sizing: border-box;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.5rem 1.75rem 1.75rem;
+  line-height: 1.6;
+  color: var(--ink-soft, #4b5563);
 }
 
-/* Left-aligned text content */
-.evening-text {
-  flex: 1;
-  text-align: left;
+.time-badge {
+  align-self: flex-start;
+  margin: 0 0 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  background: var(--accent-soft, #faf6ef);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent, #9a7b4f);
+}
+
+h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.6rem;
+  line-height: 1.2;
+  color: var(--ink, #1f2937);
 }
 
 .lead-text {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  margin: 0 0 0.75rem 0;
-  color: #2c3e50;
+  margin: 0 0 1.25rem;
+  font-size: 1.05rem;
+  color: var(--ink, #1f2937);
 }
 
 .sub-text {
+  margin: 0;
   font-size: 0.95rem;
-  line-height: 1.5;
-  margin: 0 0 1.5rem 0;
-  color: #555;
 }
 
-.action-block {
-  margin-top: 0.5rem;
+.online {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--accent, #9a7b4f);
+  border-radius: 0.5rem;
+  background: var(--accent-soft, #faf6ef);
 }
 
 .zoom-btn {
-  background-color: var(--button-bg-color, #1976D2);
+  align-self: flex-start;
+  padding: 0.75rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--button-bg-color, #1976d2);
   color: #fff;
   font-weight: 600;
-  padding: 12px 22px;
-  border-radius: 8px;
-  border: none;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
   transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
 }
 
 .zoom-btn:hover {
-  background-color: #166FE5;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  background-color: #166fe5;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.15);
 }
 
 .zoom-btn:active {
-  background-color: #0B5FCC;
+  background-color: #0b5fcc;
   transform: scale(0.97);
 }
 
 .zoom-btn:focus-visible {
-  outline: 2px solid #8BB8F3;
+  outline: 2px solid #8bb8f3;
   outline-offset: 3px;
 }
 
-/* Image container placed on the right */
 .zoom-image-container {
-  flex-shrink: 0;
-  width: 300px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 300px;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  line-height: 0;
 }
 
 .zoom-image {
@@ -149,28 +169,10 @@ function openZoom() {
   filter: blur(0);
 }
 
-/* Mobile responsive layout */
-@media (max-width: 600px) {
-  .evening-text-content {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .evening-text {
-    text-align: center;
-  }
-
-  .zoom-image-container {
-    width: 100%;
-  }
-
+@media (prefers-reduced-motion: reduce) {
+  .zoom-btn,
   .zoom-image {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    filter: blur(3px);
-    transition: filter 0.3s ease;
+    transition: none;
   }
 }
 </style>
