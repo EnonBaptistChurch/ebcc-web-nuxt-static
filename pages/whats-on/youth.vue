@@ -139,7 +139,7 @@ definePageMeta({
       label: 'First-time attendees:',
       text: 'Parents will need to complete a consent form for their child to join.'
     },
-
+    calendarEvent: 'Discoverers',
     pageUrl: 'https://enonbaptistchatham.org.uk/whats-on/discoverers/',
     metaTitle: 'Discoverers Youth Group - Enon Baptist Church',
     description:
