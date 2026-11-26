@@ -30,6 +30,7 @@
     "dotenv": "^18.0.10",
     "node-ical": "^0.27.6",
     "nuxt": "^4.6.4",
+    "source-map": "^0.8.0",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
     "vite-tsconfig-paths": "^6.1.1"
