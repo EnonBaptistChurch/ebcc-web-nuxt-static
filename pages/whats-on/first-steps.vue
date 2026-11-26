@@ -72,6 +72,7 @@ definePageMeta({
 
     pageUrl: 'https://enonbaptistchatham.org.uk/whats-on/first-steps/',
     metaTitle: 'Baby & Toddler Group in Chatham, Medway | Enon First Steps',
+    calendarEvent: 'First Steps',
     description:
       'Free baby and toddler group in Chatham, Medway. Join Enon First Steps every Thursday in term time, 9–11am, for play, snacks, songs and free parking.',
 
