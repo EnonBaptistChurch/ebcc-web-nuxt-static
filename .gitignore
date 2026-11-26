@@ -27,3 +27,4 @@ logs
 .netlify
 
 /data/sermons.json
+/data/calendar*.json
