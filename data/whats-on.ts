@@ -83,6 +83,7 @@ export const eventCardsData: EventCardItem[] = [
     time: '10.00am – 11.30am',
     title: 'Coffee Morning',
     note: 'every fortnight',
+    url: '/whats-on/coffee-morning/',
     additionalLinks: [{ text: 'Contact us for details', url: '/contact-us' }]
   },
   {
