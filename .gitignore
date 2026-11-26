@@ -25,3 +25,6 @@ logs
 
 # Local Netlify folder
 .netlify
+
+/data/sermons.json
+/data/calendar*.json

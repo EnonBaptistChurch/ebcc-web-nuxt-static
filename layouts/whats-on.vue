@@ -40,6 +40,32 @@
           >{{ info.notice.link.label }}</a>
         </p>
 
+        <!--
+          Next / upcoming dates from the church's Google Calendar (only when the page sets
+          `calendarEvent`). The calendar is saved to data/calendar-events.json at build time;
+          which dates are still upcoming is worked out in the browser. Nothing is shown until then.
+        -->
+        <template v-if="info.calendarEvent && upcomingDates !== null">
+          <div v-if="upcomingDates.length" class="ep-box ep-dates">
+            <p class="ep-next">
+              <strong>Next on:</strong>
+              {{ isToday(upcomingDates[0]) ? 'Today' : upcomingDates[0].label }}
+              <span v-if="upcomingDates[0].note">– {{ upcomingDates[0].note }}</span>
+            </p>
+            <template v-if="upcomingDates.length > 1">
+              <strong>Following dates:</strong>
+              <ul class="ep-date-list">
+                <li v-for="d in upcomingDates.slice(1)" :key="d.date">
+                  {{ d.label }}<span v-if="d.note"> – {{ d.note }}</span>
+                </li>
+              </ul>
+            </template>
+          </div>
+          <p v-else class="ep-box ep-dates">
+            <strong>Next on:</strong> please <a href="/contact-us/">contact us</a> for the next date.
+          </p>
+        </template>
+
         <!-- The page's own content goes here -->
         <slot />
 
@@ -59,15 +85,18 @@
 import Nav from '../components/nav/Nav.vue';
 import Footer from '../components/nav/Footer.vue';
 import ScrollingBanner from '../components/ScrollingBanner.vue';
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useRoute, useHead } from 'nuxt/app';
 import { bannerNotices } from '../data/BannerNotices';
+import calendarData from '../data/calendar-events.json'; // written at build time by scripts/fetch-calendar.mjs
 
 interface WhatsOnInfo {
   title: string;
   subtitle?: string;
   heroImage?: string;
   heroPosition?: string;
+  /** Text in the Google Calendar event title (e.g. 'Coffee Morning'); shows "Next on" and the following dates */
+  calendarEvent?: string;
   facts?: { title: string; detail?: string }[];
   notice?: {
     label: string;
@@ -96,6 +125,54 @@ interface WhatsOnInfo {
 
 const route = useRoute();
 const info = computed(() => (route.meta.whatsOn ?? {}) as WhatsOnInfo);
+
+interface CalendarEvent {
+  title: string;
+  date: string; // 'YYYY-MM-DD'
+  time?: string;
+}
+interface CalendarDate {
+  date: string;
+  label: string;
+  note?: string;
+}
+
+// Today's date (UK) is only worked out in the browser, so the list is always current even on a
+// static build, and past dates drop off without a rebuild. Until then nothing is rendered.
+const today = ref<string | null>(null);
+onMounted(() => {
+  today.value = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/London' }).format(new Date());
+});
+
+const formatLabel = (iso: string) =>
+  new Intl.DateTimeFormat('en-GB', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    timeZone: 'UTC'
+  }).format(new Date(`${iso}T12:00:00Z`));
+
+/** 'Coffee Morning - Christmas special' with match 'Coffee Morning' -> 'Christmas special' */
+const noteFrom = (title: string, match: string): string | undefined => {
+  const i = title.toLowerCase().indexOf(match.toLowerCase());
+  if (i < 0) return undefined;
+  const rest = (title.slice(0, i) + title.slice(i + match.length))
+    .replace(/^[\s\-–—:|,]+|[\s\-–—:|,]+$/g, '')
+    .trim();
+  return rest || undefined;
+};
+
+// null = not ready (or the page has no calendarEvent); [] = nothing coming up
+const upcomingDates = computed<CalendarDate[] | null>(() => {
+  const match = info.value.calendarEvent?.trim();
+  if (!match || !today.value) return null;
+  return (calendarData.events as CalendarEvent[])
+    .filter((e) => e.date >= today.value! && e.title.toLowerCase().includes(match.toLowerCase()))
+    .slice(0, 5)
+    .map((e) => ({ date: e.date, label: formatLabel(e.date), note: noteFrom(e.title, match) }));
+});
+
+const isToday = (d: CalendarDate) => d.date === today.value;
 
 const address = computed(() => info.value.address ?? 'Skinner Street, Chatham, ME4 5RF');
 const links = computed(
@@ -424,6 +501,21 @@ useHead(() => ({
     padding: 0.65rem 1rem;
     text-align: center;
   }
+}
+
+/* Next / upcoming dates */
+.text-content .ep-dates .ep-next {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+.text-content .ep-dates a {
+  text-decoration: underline;
+  color: inherit;
+}
+.text-content .ep-date-list {
+  margin: 0.25rem 0 0;
+  padding-left: 1.25rem;
+  list-style: disc;
 }
 
 .text-content .ep-box-link {

@@ -26,6 +26,7 @@ export const whatsonSection: NavItem = {
     
     { link: "/whats-on/youth/", title: "Discoverers" },
     { link: "/whats-on/first-steps/", title: "First Steps" },
+  { link: "/whats-on/coffee-morning/", title: "Coffee Morning"}
   ],
   link: "/whats-on",
   submenuOpen:false

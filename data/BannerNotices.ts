@@ -135,13 +135,31 @@ export function getRunningbannerNotices(): BannerNotice[] {
 /** Your notices. Edit this list; the banner shows whichever are currently in range. */
 export const bannerNotices: BannerNotice[] = [
   {
-    message: 'No First Steps this week (29/10/26)',
-    startDate: '2026-10-27',
-    endDate: '2026-10-29',
-    endTime: '11:30', 
-    link: '/whats-on/first-steps',
+    message: 'Carol Service: Sunday, 13 December: 5pm (please note: there is no 6:30 PM service that evening).',
+    startDate: '2026-11-27',
+    endDate: '2026-12-13',
+    endTime: '17:00',
+    link: '/seasonal/christmas-services',
     showLink: true,
-    linkText: 'First Steps', 
+    linkText: 'View Christmas Carol Service details',
+  },
+  {
+    message: 'Christmas Family Service: Sunday, 20 December: 11:15pm.',
+    startDate: '2026-12-13',
+    endDate: '2026-12-20',
+    endTime: '12:00',
+    link: '/seasonal/christmas-services',
+    showLink: true,
+    linkText: '',
+  },
+  {
+    message: 'Christmas Day Service: 10:00am, see our Christmas Services.',
+    startDate: '2026-12-01',
+    endDate: '2026-12-25',
+    endTime: '10:30', 
+    link: '/seasonal/christmas-services',
+    showLink: true,
+    linkText: 'Christmas Services', 
   },
   //   {
   //     message: 'Carol service tickets now available',
