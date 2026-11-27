@@ -107,7 +107,7 @@ useHead({
 
 .im-new h1 {
   margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
   font-size: 2rem;
 }
 
