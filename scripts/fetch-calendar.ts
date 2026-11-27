@@ -11,14 +11,13 @@
 // - If the download fails, the last saved JSON is kept so the build never breaks.
 // - For testing without the network:  CALENDAR_ICS_FILE=./sample.ics npm run fetch-calendar
 // - Needs:  npm i -D node-ical
-
+import 'dotenv/config';
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import ical from 'node-ical';
 
-const CALENDAR_URL =
-  'https://calendar.google.com/calendar/ical/enonbcwebsite%40gmail.com/public/basic.ics';
+const CALENDAR_URL = process.env.CALENDAR_ICS_URL;
 // npm scripts run from the project root
 const OUT_FILE = resolve(process.cwd(), 'data/calendar-events.json');
 const DAYS_AHEAD = 400;
@@ -90,6 +89,7 @@ const main = async () => {
     if (file) {
       icsText = await readFile(file, 'utf8');
     } else {
+      if (!CALENDAR_URL) throw new Error('CALENDAR_ICS_URL is not set');
       const res = await fetch(CALENDAR_URL);
       if (!res.ok) throw new Error(`Calendar responded ${res.status}`);
       icsText = await res.text();
