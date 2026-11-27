@@ -74,7 +74,7 @@ export const eventCardsData: EventCardItem[] = [
     day: 'Thursday',
     time: '1.45pm',
     title: 'Ladies Meeting',
-    url: '/whats-on/womens-meetings/',
+    url: '/whats-on/ladies-meetings/',
     note: '1st and 3rd Thursday each month'
   },
   {
@@ -83,6 +83,7 @@ export const eventCardsData: EventCardItem[] = [
     time: '10.00am – 11.30am',
     title: 'Coffee Morning',
     note: 'every fortnight',
+    url: '/whats-on/coffee-morning/',
     additionalLinks: [{ text: 'Contact us for details', url: '/contact-us' }]
   },
   {

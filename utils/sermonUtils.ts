@@ -1,11 +1,11 @@
-import type { ParsedSnippet } from "@/types/SermonPodcasts"
-import { getSermonDate } from "@/composables/UseSermonDateConverter";
+import type { ParsedSnippet } from "~/types/SermonPodcasts"
+import { getSermonDate } from "~/composables/UseSermonDateConverter";
 import {
   findScripturePassages,
   formatPassages,
   booksOf,
   parseSermonTitle,
-} from "@/composables/useScriptureParser";
+} from "~/composables/useScriptureParser";
 export function parseContentSnippet(snippet: string, duration: string): ParsedSnippet |null {
   
   

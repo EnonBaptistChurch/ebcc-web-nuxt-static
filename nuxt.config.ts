@@ -32,6 +32,11 @@ export default defineNuxtConfig({
       }
     }
   },
+  vue: {
+      compilerOptions: {
+        isCustomElement: (tag: string) => tag.startsWith('swiper-')
+      }
+    } as any,
   vite: {
     build: {
       minify: 'esbuild',  // Minify JavaScript using esbuild
@@ -58,10 +63,6 @@ export default defineNuxtConfig({
     server: {
       allowedHosts: ['enonbaptistchatham.org.uk', 'localhost']
     },
-    vue: {
-      compilerOptions: {
-        isCustomElement: (tag: string) => tag.startsWith('swiper-')
-      }
-    } as any
+    
   }
 })

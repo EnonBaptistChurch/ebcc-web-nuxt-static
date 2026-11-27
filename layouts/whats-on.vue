@@ -29,6 +29,28 @@
           </li>
         </ul>
 
+        <template v-if="info.calendarEvent && upcomingDates !== null">
+          <div v-if="upcomingDates.length" class="ep-schedule" :class="{ 'ep-schedule--today': isToday(upcomingDates[0]) }">
+            <div class="ep-next">
+              <span class="ep-eyebrow">{{ isToday(upcomingDates[0]) ? 'On today' : 'Next on' }}</span>
+              <span class="ep-next-date">{{ upcomingDates[0].label }}</span>
+              <span v-if="upcomingDates[0].note" class="ep-next-note">{{ upcomingDates[0].note }}</span>
+            </div>
+            <div v-if="upcomingDates.length > 1" class="ep-later">
+              <span class="ep-eyebrow">Then</span>
+              <ul class="ep-chips">
+                <li v-for="d in upcomingDates.slice(1)" :key="d.date">
+                  {{ d.label }}<small v-if="d.note"> · {{ d.note }}</small>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <p v-else class="ep-box ep-dates">
+            <strong>Next on:</strong> please <a href="/contact-us/">contact us</a> for the next date.
+          </p>
+        </template>
+
         <p v-if="info.notice" class="ep-box">
           <strong>{{ info.notice.label }}</strong> {{ info.notice.text }}
           <a
@@ -45,26 +67,7 @@
           `calendarEvent`). The calendar is saved to data/calendar-events.json at build time;
           which dates are still upcoming is worked out in the browser. Nothing is shown until then.
         -->
-        <template v-if="info.calendarEvent && upcomingDates !== null">
-          <div v-if="upcomingDates.length" class="ep-box ep-dates">
-            <p class="ep-next">
-              <strong>Next on:</strong>
-              {{ isToday(upcomingDates[0]) ? 'Today' : upcomingDates[0].label }}
-              <span v-if="upcomingDates[0].note">– {{ upcomingDates[0].note }}</span>
-            </p>
-            <template v-if="upcomingDates.length > 1">
-              <strong>Following dates:</strong>
-              <ul class="ep-date-list">
-                <li v-for="d in upcomingDates.slice(1)" :key="d.date">
-                  {{ d.label }}<span v-if="d.note"> – {{ d.note }}</span>
-                </li>
-              </ul>
-            </template>
-          </div>
-          <p v-else class="ep-box ep-dates">
-            <strong>Next on:</strong> please <a href="/contact-us/">contact us</a> for the next date.
-          </p>
-        </template>
+        
 
         <!-- The page's own content goes here -->
         <slot />
@@ -163,6 +166,7 @@ const noteFrom = (title: string, match: string): string | undefined => {
 };
 
 // null = not ready (or the page has no calendarEvent); [] = nothing coming up
+// slice(0, 5) = the next date plus up to four more
 const upcomingDates = computed<CalendarDate[] | null>(() => {
   const match = info.value.calendarEvent?.trim();
   if (!match || !today.value) return null;
@@ -324,7 +328,7 @@ useHead(() => ({
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
   gap: 1rem;
-  margin: -3rem 1rem 1.5rem;
+  margin: -3rem 1rem 0.25rem;
   padding: 0;
 }
 .text-content .ep-facts li {
@@ -424,6 +428,88 @@ useHead(() => ({
   border: 1px solid #0f0f0f;
 }
 
+/* Upcoming dates: one compact strip (before the mobile block so its overrides win) */
+.text-content .ep-dates a {
+  text-decoration: underline;
+  color: inherit;
+}
+.text-content .ep-schedule {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  margin: -0.25rem 1rem 1rem;
+  padding: 0.2rem 0.5rem;
+  background: color-mix(in srgb, #fff 50%, #fdf6ec);
+  color: #2b2b2b;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+.text-content .ep-schedule--today {
+  outline: 2px solid var(--nav-bar-bg-color);
+  outline-offset: 2px;
+}
+.text-content .ep-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+.text-content .ep-next {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.6rem;
+}
+.text-content .ep-next-date {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+.text-content .ep-next-note {
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+.text-content .ep-later {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.6rem;
+}
+.text-content .ep-chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+}
+.text-content .ep-chips li {
+  padding: 0.1rem 0.65rem;
+  border-left: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+  
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.text-content .ep-chips li:first-child {
+  border-left: none;
+}
+.text-content .ep-chips small {
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+.text-content .ep-box-link {
+  display: block;
+  width: fit-content;
+  margin-top: 0.5rem;
+  font-weight: 700;
+  text-decoration: underline;
+  color: inherit;
+}
+
 /* Mobile */
 @media (max-width: 600px) {
   .ep-page .ep-hero {
@@ -489,6 +575,11 @@ useHead(() => ({
     order: 2;
   }
 
+  .text-content .ep-schedule {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   /* Link buttons stack, full width */
   .text-content .low-card {
     display: flex;
@@ -502,29 +593,4 @@ useHead(() => ({
     text-align: center;
   }
 }
-
-/* Next / upcoming dates */
-.text-content .ep-dates .ep-next {
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-}
-.text-content .ep-dates a {
-  text-decoration: underline;
-  color: inherit;
-}
-.text-content .ep-date-list {
-  margin: 0.25rem 0 0;
-  padding-left: 1.25rem;
-  list-style: disc;
-}
-
-.text-content .ep-box-link {
-  display: block;
-  width: fit-content;
-  margin-top: 0.5rem;
-  font-weight: 700;
-  text-decoration: underline;
-  color: inherit;
-}
-
 </style>

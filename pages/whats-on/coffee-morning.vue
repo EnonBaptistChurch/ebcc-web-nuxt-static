@@ -5,8 +5,7 @@ definePageMeta({
   whatsOn: {
     title: 'Coffee Morning',
     subtitle: 'A hot drink and a friendly chat',
-    // Self-hosted copy of the Unsplash photo (see notes), saved in public/images/whats-on/
-    heroImage: '/images/whats-on/coffee-morning-1920.webp',
+    
     facts: [
       { title: 'Friday', detail: 'Every fortnight' },
       { title: '10:00 – 11:30 am' },

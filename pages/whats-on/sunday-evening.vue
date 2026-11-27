@@ -1,5 +1,7 @@
 <template>
+  <div>
     <SundayEvening />
+  </div>
 </template>
 <script setup lang="ts">
 import SundayEvening from '../../components/sundays/SundayEvening.vue';

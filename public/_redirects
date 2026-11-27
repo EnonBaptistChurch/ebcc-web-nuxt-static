@@ -7,8 +7,8 @@
 /sermons-2           /sermons              301
 /sunday-services     /whats-on/sunday-services 301
 /mens-meetings       /whats-on/mens-meetings 301
-/womens-meetings-2   /whats-on/womens-meetings 301
-/womens-meetings     /whats-on/womens-meetings 301
+/womens-meetings-2   /whats-on/ladies-meetings 301
+/womens-meetings     /whats-on/ladies-meetings 301
 /bible-study         /whats-on/bible-study 301
 /event-category/bible-study         /whats-on/bible-study 301
 /becoming-a-christian/* /what-is-a-christian/:splat 301
