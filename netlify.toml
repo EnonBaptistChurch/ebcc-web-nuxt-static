@@ -4,14 +4,12 @@
 
 [functions]
   directory = "netlify/functions"
+  node_bundler = "esbuild"
 
 [dev]
   command = "npm run dev"
-  port = 3000
-  targetPort = 3000
-  publish = "dist"
+publish = "dist"
 [[headers]]
   for = "/*"
   [headers.values]
     Content-Security-Policy = ""
-  

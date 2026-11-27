@@ -26,7 +26,7 @@ export const cards = [
     image:'/images/christmas-pic-640.webp',
     title: 'Christmas Services',
     description: `Join us this Christmas as we celebrate the birth of Jesus Christ.`,
-    link: '/christmas-services',
+    link: 'seasonal/christmas-services',
     ariaLabel: 'Christmas Services Image',
     buttonText: 'Find Out More',
     show: showChristmasCard()
@@ -50,16 +50,25 @@ export const cards = [
     show: false
   },
   {
-    image: '/images/bible-320.webp',
-    title: 'Sermons',
-    description: 'Catch up on all our recent sermons by clicking the link below',
-    link: '/sermons',
-    ariaLabel: 'Sermons Image',
-    buttonText: 'Listen Now',
+    image: '/images/building/new-enon-480.webp',
+    title: 'About Us',
+    description: 'Find out more about who we are and what we believe.',
+    link: '/about',
+    ariaLabel: 'About Us',
+    buttonText: 'See More',
     show: true
   },
+  // {
+  //   image: '/images/bible-320.webp',
+  //   title: 'Sermons',
+  //   description: 'Catch up on all our recent sermons by clicking the link below',
+  //   link: '/sermons',
+  //   ariaLabel: 'Sermons Image',
+  //   buttonText: 'Listen Now',
+  //   show: true
+  // },
   {
-    image: '/images/sunday-club-640.webp',
+    image: '/images/events/SCP-2026-07-12/4-640.webp',
     title: 'What\'s On',
     description: 'Find out about our regular meetings and what we do.',
     link: '/whats-on',
@@ -68,13 +77,22 @@ export const cards = [
     show: true
   },
   {
-    image: '/images/GMT-MST-640.webp',
+    image: '/images/people/testimonyCard-640.webp',
     title: 'Testimonies',
     description: 'See the stories of how God has worked in the lives of our members',
     link: '/testimonies',
     ariaLabel: 'Testimonies',
     buttonText: 'See More',
     show: true
-  }
+  },
+  // {
+  //   image: '/images/mission/globe-480.webp',
+  //   title: 'Mission',
+  //   description: 'We believe the Gospel is meant for everyone. Find out those who we support.',
+  //   link: '/links/mission',
+  //   ariaLabel: 'Mission',
+  //   buttonText: 'Find out More',
+  //   show: true
+  // }
 
 ]

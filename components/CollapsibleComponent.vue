@@ -20,7 +20,7 @@ defineProps({
 <style scoped>
 .item {
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
   margin-bottom: 1rem;
   overflow: hidden;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);

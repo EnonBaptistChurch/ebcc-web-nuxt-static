@@ -1,6 +1,15 @@
 <template>
     <div>
-        <MapsWidget />
+      <div class="maps-widget2">
+        <div class="text-content">
+          <h2>Find Us</h2>
+          <p class="address-details">We are located at:</p>
+          <p class="address-details">Enon Baptist Church, Skinner Street, Chatham, ME4 5RF, UK</p>
+        </div>
+        <div class="map-container">
+      <MapsWidget />
+      </div>
+      </div>
     <div class="directions-page">
     <h3>Getting to Enon</h3>
     <CollapsibleSection
@@ -11,7 +20,7 @@
     />
     <p>
       If you have any queries, please give us a call on
-      <CallWidget text="01634 301499" />
+      <CallWidget text="07508 779145" />
     </p>
   </div>
 
@@ -97,5 +106,22 @@ const sections = [
 .directions-page h2 {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
+}
+
+.address-details {
+  font-size: 1rem;
+  margin: 0.25rem 0 0;
+  padding: 0rem 0;
+}
+.map-container {
+  width: 100%;
+  height: 400px; /* Adjust the height as needed */
+  margin-top: 1rem;
+}
+
+.address-details:last-child {
+  font-size: 1rem;
+  margin: 0.25rem 0 0;
+  padding: 0  0 0.75rem;
 }
 </style>

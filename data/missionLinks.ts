@@ -1,0 +1,69 @@
+export interface MissionLink {
+  name: string;
+  link: string;
+  description: string;
+  prayer?: boolean;
+  imgSrc?: string | string[];
+  bgColor?: string;
+}
+
+
+const missionLinks: MissionLink[] = [
+  // {
+  //   name: "African Pastors' Conference",
+  //   link: "https://africanpastorsconferences.org/",
+  //   description: "African Pastors’ Conferences exists to glorify God through Jesus Christ in enabling Pastors to lead Christ-exalting Biblical churches as Christ-like servant leaders through the faithful ministry of God’s word in preaching and leading Bible-studies. ",
+  //   prayer: true,
+  //   imgSrc: "https://africanpastorsconferences.org/Graphics/logo.jpg"
+  // },
+  // {
+  //   name: "CCM (Philippines)",
+  //   link: "https://www.ccmmanila.org/",
+  //   description: "Christian Compassion Ministries serves poor communities in the Philippines through church-based outreach, providing education, discipleship, and practical support to children and families.",
+  //   prayer: true,
+  //   imgSrc:"https://www.ccmmanila.org/wp-content/uploads/2018/01/FINAL-CROPPED-white.png",
+  //   bgColor: "#2d5c88"
+  // },
+  {
+    name: "Christian Institute",
+    link: "https://www.ci.org.uk/",
+    description: "The Christian Institute is a nondenominational Christian charity committed to upholding historic biblical Christianity in public life. It defends religious liberty, the sanctity of life and the sanctity of marriage.",
+    // imgSrc:"https://www.christian.org.uk/wp-content/themes/ci/img/ci--logo.svg",
+    bgColor: "#00B4DB"
+  },
+  {
+    name: "Evangelical Times",
+    link: "https://www.evangelical-times.org/",
+    description: "Evangelical Times (ET) is a UK Reformed Evangelical Christian news publication online and in print.",
+    // imgSrc:"https://storage.ghost.io/c/88/89/8889104e-f384-453d-b3bf-4b84553c582d/content/images/size/w300/2022/03/ETlogo-new.png",
+    bgColor: "#cf2026"
+  },
+  {
+    name: "Grace Baptist Mission",
+    link: "https://www.gbm.org.uk/",
+    description: "Grace Baptist Mission exists to help churches support their missionaries worldwide.  Grace Baptist Mission also has a Radio ministry, broadcasting in French and English to hard-to-reach places around the world.",
+    // imgSrc:"https://www.gbm.org.uk/wp-content/uploads/2020/12/GBM-2020-updated-logo_-CMYK-100x100.jpg"
+  }
+  // {
+  //   name: "Morning Star (South Africa)",
+  //   link: "https://www.livinghope.co.za/where-we-work/free-state-morning-star/",
+  //   description: "Morning Star Mission works in South Africa to reach and disciple communities through church planting, education, and practical care, with a focus on gospel transformation. It began in 2000 as a ministry for children affected by AIDS and is now transitioning into supporting those same children as teenagers and young adults, under the oversight of the charity Living Hope.",
+  //   prayer: true,
+  //   imgSrc: ["/images/mission/morning-star-logo-320.webp","https://www.livinghope.co.za/wp-content/uploads/2018/07/main-logo-1.png"],
+  // },
+  // {
+  //   name: "Rosie Crowter – UFM",
+  //   link: "https://www.ufm.org.uk/member/rosie-crowter/",
+  //   description: "Rosie Crowter has served in Papua New Guinea for over 35 years. Over that time, she has witnessed enormous change – in the culture, the church, and the country itself – and remains passionate about seeing God’s Word take deep root in the lives of believers across PNG.",
+  //   prayer: true,
+  //   imgSrc: "https://www.ufm.org.uk/ufm/wp-content/uploads/2022/06/Crowter_Rosie_1920px.jpg"
+  // },
+  // {
+  //   name: "Vuyiroli",
+  //   link: "https://vuyiroli.org/en-gb/",
+  //   description: "Vuyiroli is a non-profit organization that serves the abandoned elderly in need, regardless of caste, creed, religion, or language. Providing homes for the elderly who have no one else to care for them.",
+  //   imgSrc: "https://vuyiroli.org/wp-content/uploads/2015/01/vuyiroli-combined1.png"
+  // }
+];
+
+export default missionLinks;

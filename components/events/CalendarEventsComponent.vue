@@ -54,11 +54,9 @@ const emit = defineEmits(['eventsLoaded']);
 
 async function loadGoogle() {
   try {
-    console.log('Events loading...');
     const data = await fetch('/.netlify/functions/ical-calendar?maxResults=4')
       .then((res) => res.json())
       .then((data) => data as GoogleCalendarEvent[]);
-      console.log('Events loaded', data);
     events.value = data;
   } catch (error) {
     console.error('Failed to fetch events:', error);
@@ -68,7 +66,6 @@ async function loadGoogle() {
 
 onMounted(async () => {
   await loadGoogle();
-  console.log('Events loaded:', events.value);
   emit('eventsLoaded');
 });
 </script>

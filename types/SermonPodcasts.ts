@@ -1,3 +1,4 @@
+
 export interface PodcastFeed {
   rss: {
     channel: PodcastChannel
@@ -24,10 +25,21 @@ export interface PodcastChannel {
 }
 
 export interface ParsedSnippet {
-  title: string
-  speaker: string
+  title: string,
+  condensedTitle?: string,
+  speaker: Speaker
   date: string
-  service?: string
+  service?: string,
+  formattedDate?: Date
+  series?: string[],
+  passage?: string,
+  duration?: string,
+  booksUsed: string[]
+}
+
+export interface Speaker {
+  name: string,
+  information?: string
 }
 
 export interface ItunesOwner {

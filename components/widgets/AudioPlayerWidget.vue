@@ -1,163 +1,271 @@
 <template>
-  <div class="audio-player" id="#audio-player">
-    <p class="audio-details">{{ src.title }}</p>
-    <p class="audio-details">{{ src.parsedSnippet?.speaker }}</p>
-    <p class="audio-details">{{ ukDateString(src.parsedSnippet?.date!) }} - {{ src.parsedSnippet?.service }}</p>
-    
-    <div class="controls">
-      <!-- Rewind 10s -->
-      <button @click="rewind" class="icon-btn" title="Rewind 10s">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><polyline points="9.57 15.41 12.17 24.05 20.81 21.44" stroke-linecap="round"></polyline><path d="M26.93,41.41V23a.09.09,0,0,0-.16-.07s-2.58,3.69-4.17,4.78" stroke-linecap="round"></path><rect x="32.19" y="22.52" width="11.41" height="18.89" rx="5.7"></rect><path d="M12.14,23.94a21.91,21.91,0,1,1-.91,13.25" stroke-linecap="round"></path></g></svg>
-      </button>
+  <div class="audio-player" id="audio-player">
+    <p class="now-playing">Now playing</p>
 
-      <!-- Play/Pause -->
-      <button @click="togglePlay" class="play-btn" :class="{ playing: isPlaying }" title="Play/Pause">
-        <svg v-if="!isPlaying" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon">
-          <path d="M8 5v14l11-7z"/>
-        </svg>
-        <svg v-else xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon">
-          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-        </svg>
-      </button>
+    <h2 class="title">{{ src.title }}</h2>
 
-      <!-- Forward 10s -->
-      <button @click="forward" class="icon-btn" title="Forward 10s">
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" stroke-width="3" stroke="#000000" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><polyline points="54.43 15.41 51.83 24.05 43.19 21.44" stroke-linecap="round"></polyline><path d="M24.93,41.41V23a.09.09,0,0,0-.16-.07s-2.58,3.69-4.17,4.78" stroke-linecap="round"></path><rect x="30.19" y="22.52" width="11.41" height="18.89" rx="5.7"></rect><path d="M51.86,23.94a21.91,21.91,0,1,0,.91,13.25" stroke-linecap="round"></path></g></svg>
-      </button>
-    </div>
-<div class="time-container">
-  <span class="current-time">{{ formatTime(currentTime) }}</span>
-  <span class="duration">{{ formatTime(duration) }}</span>
-</div>
+    <p v-if="src.parsedSnippet?.speaker?.name" class="speaker">
+      {{ src.parsedSnippet.speaker.name }}
+    </p>
+
+    <p v-if="src.parsedSnippet?.speaker?.information" class="speaker-info">
+      {{ src.parsedSnippet.speaker.information }}
+    </p>
+
+    <p v-if="src.parsedSnippet?.formattedDate" class="meta">
+      {{ getUkDateString(src.parsedSnippet.formattedDate) }}
+      <span v-if="src.parsedSnippet?.service" aria-hidden="true">·</span>
+      {{ src.parsedSnippet?.service }}
+    </p>
+
     <div class="progress">
       <input
         type="range"
         min="0"
-        :max="duration"
+        :max="props.player.duration.value || 0"
         step="0.1"
-        v-model="currentTime"
-        @input="seekAudio"
+        :value="props.player.currentTime.value"
+        :style="{ '--progress': progressPercent + '%' }"
+        aria-label="Seek"
+        @input="onSeek"
       />
-      
+      <div class="time-container">
+        <span>{{ props.player.formatTime(props.player.currentTime.value) }}</span>
+        <span>{{ props.player.formatTime(props.player.duration.value) }}</span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button
+        @click="props.player.rewind(10)"
+        class="icon-btn"
+        title="Rewind 10s"
+        aria-label="Rewind 10 seconds"
+        :style="{ '--btn-size': buttonSize + 'px' }"
+      >
+        <RewindIcon :size="iconSize" />
+      </button>
+
+      <button
+        @click="toPlayAtStart()"
+        class="play-btn"
+        :class="{ playing: props.player.isPlaying.value }"
+        :title="props.player.isPlaying.value ? 'Pause' : 'Play'"
+        :aria-label="props.player.isPlaying.value ? 'Pause sermon' : 'Play sermon'"
+        :style="{ '--btn-size': playButtonSize + 'px' }"
+      >
+        <PauseIcon v-if="props.player.isPlaying.value" :size="playIconSize" />
+        <PlayIcon v-else :size="playIconSize" />
+      </button>
+
+      <button
+        @click="props.player.forward(10)"
+        class="icon-btn"
+        title="Forward 10s"
+        aria-label="Forward 10 seconds"
+        :style="{ '--btn-size': buttonSize + 'px' }"
+      >
+        <ForwardIcon :size="iconSize" />
+      </button>
+    </div>
+
+    <div class="volume-control">
+      <label for="volume" aria-label="Volume">🔊</label>
+      <input
+        id="volume"
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        :value="props.player.volume.value"
+        :style="{ '--progress': props.player.volume.value * 100 + '%' }"
+        @input="changeVolume"
+        title="Volume"
+        class="volume-slider"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
+import { ref, computed, watch } from 'vue';
+import RewindIcon from './audio/icons/RewindIcon.vue';
+import PlayIcon from './audio/icons/PlayIcon.vue';
+import PauseIcon from './audio/icons/PauseIcon.vue';
+import ForwardIcon from './audio/icons/ForwardIcon.vue';
 
-import type { PodcastItem } from '@/types/SermonPodcasts'
-
-
+import type { PodcastItem } from '@/types/SermonPodcasts';
+import { getUkDateString } from '../../composables/useDateToText';
+import { useAudioPlayer } from '../../composables/useAudioPlayer';
 
 const props = defineProps<{
-  src: PodcastItem
-}>()
+  src: PodcastItem;
+  player: ReturnType<typeof useAudioPlayer>;
+}>();
 
-let audio: any
-const isPlaying = ref(false)
-const currentTime = ref(0)
-const duration = ref(0)
+const iconSize = ref(24);
+const buttonSize = ref(44);
+const playIconSize = ref(28);
+const playButtonSize = ref(60);
 
-const initAudio = () => {
-  if (audio) {
-    audio.pause()
-    audio.src = ''
-    isPlaying.value = false
+const progressPercent = computed(() => {
+  const d = props.player.duration.value;
+  if (!d) return 0;
+  return Math.min(100, (props.player.currentTime.value / d) * 100);
+});
+
+const toPlayAtStart = () => {
+  if (!props.player.initialStart.value) {
+    props.player.setInitialStart(true);
   }
-  audio = new Audio(props.src.enclosure.url)
+  props.player.togglePlay();
+};
 
-  audio.addEventListener('timeupdate', () => {
-    if(audio !== null)
-    currentTime.value = audio.currentTime;
-  })
+// Safe during SSR/prerender: player.init() is a no-op on the server
+watch(
+  () => props.src?.enclosure?.url,
+  (url) => {
+    if (url) {
+      props.player.init(url, props.player.initialStart.value);
+    }
+  },
+  { immediate: true }
+);
 
-  audio.addEventListener('loadedmetadata', () => {
-    duration.value = audio.duration
-  })
+const onSeek = (e: Event) => {
+  props.player.seek(Number((e.target as HTMLInputElement).value));
+};
 
-  audio.addEventListener('ended', () => {
-    isPlaying.value = false
-  })
-}
-
-const ukDateString = (date: string) => {
-  const newDate = new Date(parseDateString(date));
- return newDate.toLocaleDateString('en-GB', {
-      weekday: 'long',
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric'
-    });
-} 
-
-onMounted(initAudio)
-watch(() => props.src, initAudio)
-
-const togglePlay = () => {
-  if (!audio) return
-  if (isPlaying.value) audio.pause()
-  else audio.play()
-  isPlaying.value = !isPlaying.value
-}
-
-const seekAudio = () => {
-  if (audio) audio.currentTime = currentTime.value
-}
-
-const rewind = () => {
-  if (audio) audio.currentTime = Math.max(0, audio.currentTime - 10)
-}
-
-const forward = () => {
-  if (audio) audio.currentTime = Math.min(audio.duration, audio.currentTime + 10)
-}
-
-const formatTime = (sec: number) => {
-  if (isNaN(sec)) return '0:00'
-  const m = Math.floor(sec / 60)
-  const s = Math.floor(sec % 60).toString().padStart(2, '0')
-  return `${m}:${s}`
-}
-
-onBeforeUnmount(() => {
-  if (audio) {
-    audio.pause()
-    audio.src = ''
-    audio = null
-  }
-})
+const changeVolume = (e: Event) => {
+  props.player.setVolume(Number((e.target as HTMLInputElement).value));
+};
 </script>
 
 <style scoped>
 .audio-player {
+  --accent: var(--button-bg-color, #1f2937);
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem 1.25rem;
-  border-radius: 1rem;
-  background: linear-gradient(145deg, #ffffff, #f2f4f8);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
-  max-width: 400px;
+  padding: 1.5rem 1.5rem 1.25rem;
+  border-radius: 1.25rem;
+
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.88)),
+    url('/images/building/new-enon-320.webp') no-repeat center / cover;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  max-width: 540px;
   margin: 0 auto;
-  transition: all 0.3s ease;
 }
 
-.audio-player:hover {
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
-  transform: translateY(-1px);
+.now-playing {
+  margin: 0 0 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b6b6b;
 }
 
-.audio-details {
+.title {
+  margin: 0;
+  font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem);
+  line-height: 1.25;
+  font-weight: 700;
   text-align: center;
-  margin:0.25rem;
+  overflow-wrap: anywhere;
 }
 
+.speaker {
+  margin: 0.5rem 0 0;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.speaker-info {
+  margin: 0.15rem 0 0;
+  font-size: 0.875rem;
+  font-style: italic;
+  font-weight: 400;
+  color: #555;
+  text-align: center;
+}
+
+.meta {
+  margin: 0.4rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #6b6b6b;
+  text-align: center;
+}
+
+/* progress */
+.progress {
+  width: 100%;
+  margin-top: 1.25rem;
+}
+
+.time-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: #6b6b6b;
+}
+
+/* shared range-slider styling, filled up to --progress */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  margin: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  background: linear-gradient(
+    to right,
+    var(--accent) var(--progress, 0%),
+    rgba(0, 0, 0, 0.15) var(--progress, 0%)
+  );
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px #fff, 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px #fff, 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+input[type='range']:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* buttons */
 .controls {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   gap: 1.25rem;
+  margin-top: 1rem;
 }
 
 .icon-btn,
@@ -165,49 +273,72 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f9fafb;
+  width: var(--btn-size, 44px);
+  height: var(--btn-size, 44px);
   border: none;
   border-radius: 50%;
-  width: 52px;
-  height: 52px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 
-.icon-btn:hover,
+.icon-btn {
+  background: #f9fafb;
+  color: #232323;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.icon-btn:hover {
+  background: #e5e7eb;
+}
+
+.play-btn {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
 .play-btn:hover {
-  background: #e0e7ff;
+  transform: scale(1.05);
 }
 
-.play-btn.playing {
-  background: #2563eb;
-  color: white;
+.icon-btn:active,
+.play-btn:active {
+  transform: scale(0.95);
 }
 
-.icon {
-  width: 24px;
-  height: 24px;
+.icon-btn:focus-visible,
+.play-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
-.progress {
+/* volume */
+.volume-control {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  width: 100%;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
-input[type='range'] {
-  width: 100%;
-  accent-color: #2563eb;
-  cursor: pointer;
+.volume-slider {
+  width: 110px;
+  height: 4px;
 }
 
-.time-container {
-  display: flex;
-  justify-content: space-between; /* pushes content to the edges */
-  font-size: 14px;
-  width: 100%;
-  margin:0;
+@media (prefers-reduced-motion: reduce) {
+  .icon-btn,
+  .play-btn {
+    transition: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .audio-player {
+    padding: 1.25rem 1rem 1rem;
+  }
+
+  .controls {
+    gap: 1rem;
+  }
 }
 </style>

@@ -1,5 +1,4 @@
 import { defineNuxtConfig } from 'nuxt/config';
-import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
@@ -18,8 +17,6 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon',type: 'image/x-icon', href: '/images/new-logo.ico' },  
-        { rel: 'preload', href: '/css/site.css', as: 'style' },  
-        { rel: 'stylesheet', href: '/css/site.css' },
       ],
       htmlAttrs: {
         lang: 'en'
@@ -35,6 +32,11 @@ export default defineNuxtConfig({
       }
     }
   },
+  vue: {
+      compilerOptions: {
+        isCustomElement: (tag: string) => tag.startsWith('swiper-')
+      }
+    } as any,
   vite: {
     build: {
       minify: 'esbuild',  // Minify JavaScript using esbuild
@@ -45,11 +47,22 @@ export default defineNuxtConfig({
         mangle: {
           toplevel: true,  // Enable mangling of top-level variable names
         },
+        
       },
+      
+    },
+    
+    optimizeDeps: {
+        include: [
+          '@vueuse/core',
+        ]
+      },
+      resolve: {
+      tsconfigPaths: true,
     },
     server: {
       allowedHosts: ['enonbaptistchatham.org.uk', 'localhost']
     },
-    plugins: [tsconfigPaths()]
-  },
+    
+  }
 })

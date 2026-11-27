@@ -1,4 +1,4 @@
-import type { NavItem } from '@/types/NavItem';
+import type { NavItem } from '~/types/NavItem';
 
 export const imNewSection :NavItem =
 {
@@ -15,6 +15,7 @@ export const aboutSection :NavItem =
   link: "/about",
   submenu: [
     { link: "/about/what-we-believe/", title: "What We Believe" },
+    { link: "/about/leaders/", title: "Leadership" },
     { link: "/about/church-history/", title: "Church History" },
     { link: "/about/pastors-message/", title: "Pastor's Message" },
     { link: "/faq/", title: "FAQs" },
@@ -26,12 +27,15 @@ export const whatsonSection: NavItem = {
   submenu: [
     { link: "/whats-on/sunday-services/", title: "Sunday Services" },
     { link: "/whats-on/bible-study/", title: "Bible Study" },
+    { link: "/whats-on/monthly-small-groups/", title: "Monthly Small Groups" },
     { link: "/whats-on/sunday-club/", title: "Sunday Club" },
-    { link: "/whats-on/womens-meetings/", title: "Women's Meetings" },
-    { link: "/whats-on/online-prayer-meeting/", title: "Online Prayer Meeting" },
     { link: "/whats-on/mens-meetings/", title: "Men's Meetings" },
+    { link: "/whats-on/ladies-meetings/", title: "Ladies Meetings" },
+    { link: "/whats-on/quarterly-online-prayer-meeting/", title: "Quarterly Online Prayer Meeting" },
+    
     { link: "/whats-on/youth/", title: "Discoverers" },
     { link: "/whats-on/first-steps/", title: "First Steps" },
+  { link: "/whats-on/coffee-morning/", title: "Coffee Morning"}
   ],
   link: "/whats-on",
   submenuOpen:false
@@ -53,10 +57,18 @@ export const whatsaChristianSection: NavItem = {
     { link: "/testimonies/graham-trice", title: "Graham Trice" },
     { link: "/testimonies/georgina-newton", title: "Georgina Newton" },
     { link: "/testimonies/patrick-nkala", title: "Patrick Nkala" },
+    { link: "/testimonies/simon-asante", title: "Simon Asante" },
   ],
   link:"/testimonies/",
   submenuOpen:false
 };
+export const linksSection: NavItem ={ 
+  title:"Links", link: "/links/mission-and-christian-organisations",
+  // submenu: [
+  //   { link: "/links/mission-and-christian-organisations", title: "Missionary and Christian Organisation" },
+  // ],
+  submenuOpen:false
+}
 
 export const sermonSection: NavItem ={ title:"Sermons", link: "/sermons/" }
 export const findUsSection: NavItem ={ title:"Find Us", link: "/find-us/" }
@@ -68,6 +80,7 @@ const navItems: NavItem[] = [
   whatsonSection,
   whatsaChristianSection,
   testimonySection,
+  linksSection,
   sermonSection,
   findUsSection,
   contactSection

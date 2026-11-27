@@ -40,11 +40,10 @@ export const handler: Handler = async () => {
 
   try {
     const rawFeed = await parser.parseURL(FEED_URL)
-
     // Map over items to add parsedSnippet
     const itemsWithSnippet = rawFeed.items.map(item => ({
       ...item,
-      parsedSnippet: parseContentSnippet(item.contentSnippet || ""),
+      parsedSnippet: parseContentSnippet( item.content || ""),
     }))
 
     // Sort by parsedSnippet.date (newest first)

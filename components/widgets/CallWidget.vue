@@ -7,7 +7,7 @@ const props = defineProps({
   text: { type: String, required: true }
 })
 
-const phone = atob("KzQ0MTYzNDMwMTQ5OQ==")
+const phone = atob("MDc1MDggNzc5MTQ1");
 
 function callNumber() {
   window.location.href = `tel:${phone}`
@@ -15,7 +15,7 @@ function callNumber() {
 </script>
 <style scoped>
 .num {
-  color: var(--button-bg-color, #007bff);
+  color: var(--nav-bar-bg-color, #007bff);
   font-weight: 600;
   text-decoration: none;
 } 

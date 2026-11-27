@@ -1,10 +1,13 @@
 <template>
   <div
-    id="edenParallax_page_section"
     class="edenParallax-zone"
     :class="{ 'edenParallax-error': isErrorPage }"
-    :data-speed="speed"
-    :style="{ backgroundImage: `url(${currentImage})` }"
+    :style="{
+      '--img-sm': `url(${images.small})`,
+      '--img-md': `url(${images.medium})`,
+      '--img-lg': `url(${images.large})`,
+      '--img-xl': `url(${images.xlarge})`,
+    }"
   >
     <div class="edenParallax-wrap">
       <div class="edenParallax-screen"></div>
@@ -22,72 +25,47 @@ export default {
     verseText: { type: String, required: true },
     reference: { type: String, required: true },
     version: { type: String, default: '' },
-    speed: { type: String, default: "0.3" },
-    images: { 
-      type: Object, 
+    images: {
+      type: Object,
       default: () => ({
-        small: '/images/field-320.webp',
+        small: '/images/field-768.webp',
         medium: '/images/field-768.webp',
         large: '/images/field-1440.webp',
         xlarge: '/images/field-1920.webp',
-      })
+      }),
     },
-    isErrorPage: { type: Boolean, default: false }
+    isErrorPage: { type: Boolean, default: false },
   },
-  data() {
-    return {
-      currentImage: '', // Will be set on mount
-    };
-  },
-  mounted() {
-    this.updateImage();
-    window.addEventListener('resize', this.updateImage);
-  },
-  beforeUnmount() {
-    window.removeEventListener('resize', this.updateImage);
-  },
-  methods: {
-    updateImage() {
-      const width = window.innerWidth;
-      if (width >= 1920 && this.images.xlarge) this.currentImage = this.images.xlarge;
-      else if (width >= 1440 && this.images.large) this.currentImage = this.images.large;
-      else if (width >= 768 && this.images.medium) this.currentImage = this.images.medium;
-      else this.currentImage = this.images.small || '';
-    }
-  }
 };
 </script>
 
 <style scoped>
 .edenParallax-zone {
-  background-attachment: fixed;
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background-image: var(--img-sm);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: relative;
-  width: 100%;
-  height: 300px; 
-  overflow: hidden;
-  transition: background-image 0.3s ease-in-out;
 }
 
-.edenParallax-error {
-  background-attachment: unset !important;
+@media (min-width: 768px)  { .edenParallax-zone { background-image: var(--img-md); } }
+@media (min-width: 1440px) { .edenParallax-zone { background-image: var(--img-lg); } }
+@media (min-width: 1920px) { .edenParallax-zone { background-image: var(--img-xl); } }
+
+/* Parallax only where it works well: wide screens with a mouse */
+@media (min-width: 1024px) and (hover: hover) {
+  .edenParallax-zone { background-attachment: fixed; }
 }
 
-/* Safari/iOS fallback for fixed backgrounds */
-@supports (-webkit-overflow-scrolling: touch) {
-  .edenParallax-zone {
-    background-attachment: scroll;
-  }
+@media (orientation: landscape) and (max-width: 1023px) {
+  .edenParallax-zone { height: 400px; }
 }
 
-/* Increase height on landscape */
-@media (orientation: landscape) {
-  .edenParallax-zone {
-    height: 400px;
-  }
-}
+.edenParallax-error { background-attachment: scroll; }
 
 .edenParallax-wrap {
   display: flex;
@@ -104,7 +82,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #ffffff;
+  
   opacity: 0.1;
   z-index: 1;
 }

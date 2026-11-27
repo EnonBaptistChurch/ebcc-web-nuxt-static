@@ -1,5 +1,6 @@
 import type { CalendarEvent } from "../types/CalendarEvent";
 
+
 export class GoogleCalendar {
     private cacheDuration: number = 3600000; // 1 hour
     private cacheKey: string = "googleCalendarEvents";
@@ -17,7 +18,6 @@ export class GoogleCalendar {
         const cachedEvents = this.getCachedEvents();
         
         if (cachedEvents) {
-            console.log("Using cached events");
             return cachedEvents;
           }
 

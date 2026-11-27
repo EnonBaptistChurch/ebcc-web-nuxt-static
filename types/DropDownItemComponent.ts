@@ -1,4 +1,4 @@
-import { Link } from '@/types/Link';
+import { Link } from '~/types/Link';
 export class DropDownItemComponent {
     
     public title: string;
