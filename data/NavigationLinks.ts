@@ -1,5 +1,14 @@
 import type { NavItem } from '~/types/NavItem';
 
+export const imNewSection :NavItem =
+{
+  title: "I'm New",
+  link: "/im-new",
+  submenu: [
+    { link: "/faq/", title: "FAQs" },
+  ],
+  submenuOpen: false
+};
 export const aboutSection :NavItem =
 {
   title: "About Us",
@@ -9,7 +18,7 @@ export const aboutSection :NavItem =
     { link: "/about/leaders/", title: "Leadership" },
     { link: "/about/church-history/", title: "Church History" },
     { link: "/about/pastors-message/", title: "Pastor's Message" },
-    
+    { link: "/faq/", title: "FAQs" },
   ],
   submenuOpen: false
 }
@@ -66,6 +75,7 @@ export const findUsSection: NavItem ={ title:"Find Us", link: "/find-us/" }
 export const contactSection: NavItem ={ title:"Contact Us", link: "/contact-us/" }
 
 const navItems: NavItem[] = [
+  imNewSection,
   aboutSection,
   whatsonSection,
   whatsaChristianSection,
