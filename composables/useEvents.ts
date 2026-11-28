@@ -25,7 +25,7 @@ interface CalendarEvent {
  */
 const EXTRAS: { match: string; audience?: string; href?: string }[] = [
     { match: 'Sunday Club', audience: 'Ages 4–15', href: '/whats-on/sunday-club/' },
-    { match: 'First Steps', audience: 'Toddler group', href: '/whats-on/first-steps/' },
+    { match: 'First Steps', audience: ' Baby & Toddler group', href: '/whats-on/first-steps/' },
     { match: 'Discoverers', audience: 'Ages 11–16', href: '/whats-on/youth/' },
     { match: 'Morning Service', href: '/whats-on/sunday-services/' },
     { match: 'Evening Service', href: '/whats-on/sunday-services/' },
