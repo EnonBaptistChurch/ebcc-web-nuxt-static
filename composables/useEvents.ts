@@ -48,7 +48,7 @@ const events: EventOccurrence[] = (raw.events as CalendarEvent[])
         return {
             key: `${e.date}-${e.time}-${e.title}`,
             title: title.trim(),
-            detail: rest.join(' - ').trim() || undefined,
+            // detail: rest.join(' - ').trim() || undefined,
             audience: extra?.audience,
             href: extra?.href,
             date: e.date,
