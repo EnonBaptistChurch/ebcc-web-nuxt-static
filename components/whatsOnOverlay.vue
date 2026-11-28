@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useEvents, formatDay, formatTime } from '~/composables/useEvents' // adjust path
+
 // Place inside a `position: relative` wrapper that holds the picture.
 const props = withDefaults(defineProps<{ max?: number }>(), { max: 12 })
 
@@ -9,7 +12,7 @@ const items = computed(() => upcoming.value.slice(0, props.max))
 <template>
     <section v-if="items.length" class="next-events" aria-label="Coming up at Enon">
         <ul class="next-list">
-            <li v-for="e in items" :key="e.key">
+            <li v-for="e in items" :key="e.key" :data-category="e.category">
                 <NuxtLink class="next-item" :to="e.href ?? '/whats-on/'">
                     <span class="next-when">{{ formatDay(e.date, now.date) }} · {{ formatTime(e.time) }}</span>
                     <span class="next-title">{{ e.title }}</span>
@@ -48,7 +51,7 @@ const items = computed(() => upcoming.value.slice(0, props.max))
     overflow: hidden;
     list-style: none;
     border: 1px solid rgb(255 255 255 / 0.25);
-    background: rgb(0 0 0 / 0.55);
+    background: rgb(0 0 0 / 0.25);
     backdrop-filter: blur(6px);
     pointer-events: auto;
 }
@@ -57,7 +60,14 @@ const items = computed(() => upcoming.value.slice(0, props.max))
     min-width: 0;
     min-height: 0;
     overflow: hidden;
+    /* Default: neutral, so most events stay calm */
+    --tint: 0 0 0;
+    --stripe: 0.18;
 }
+
+/* Only two groups get a colour, both soft pastels */
+.next-list li[data-category='service'] { --tint: 170 200 230; --stripe: 0.7; } /* dusty blue */
+.next-list li[data-category='kids']    { --tint: 240 205 170; --stripe: 0.7; } /* soft peach */
 
 .next-list li + li .next-item {
     border-left: 1px solid rgb(255 255 255 / 0.2);
@@ -72,11 +82,13 @@ const items = computed(() => upcoming.value.slice(0, props.max))
     padding: 0.45rem clamp(0.3rem, 1.6cqi, 0.8rem);
     color: #fff;
     text-decoration: none;
+    background: rgb(var(--tint) / 0.2);
+    box-shadow: inset 0 -3px 0 rgb(var(--tint) / var(--stripe));
 }
 
 .next-item:hover,
 .next-item:focus-visible {
-    background: rgb(255 255 255 / 0.15);
+    background: rgb(var(--tint) / 0.22);
 }
 
 /* Every line is a single line, so the bar is the same height at any width.
@@ -85,8 +97,7 @@ const items = computed(() => upcoming.value.slice(0, props.max))
 .next-title,
 .next-audience {
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    text-overflow: wrap;
 }
 
 .next-when {
@@ -96,7 +107,7 @@ const items = computed(() => upcoming.value.slice(0, props.max))
 }
 
 .next-title {
-    font-size: clamp(0.72rem, 0.4rem + 1.4cqi, 1rem);
+    font-size: clamp(0.72rem, 0.4rem + 1.4cqi, 0.85rem);
     font-weight: 700;
     line-height: 1.2;
 }

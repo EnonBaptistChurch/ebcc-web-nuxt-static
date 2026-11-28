@@ -1,6 +1,28 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import raw from '../data/calendar-events.json' // adjust to wherever your build writes the file
 
+
+export type EventCategory = 'service' | 'kids' | 'study' | 'ladies' | 'community' | 'other'
+
+export interface EventOccurrence {
+    // ...existing fields
+    category: EventCategory
+}
+
+const EXTRAS: { match: string; category: EventCategory; audience?: string; href?: string }[] = [
+    { match: 'Sunday Club', category: 'kids', audience: 'Ages 4–15', href: '/whats-on/sunday-club/' },
+    { match: 'First Steps', category: 'kids', audience: 'Baby & Toddler group', href: '/whats-on/first-steps/' },
+    { match: 'Discoverers', category: 'kids', audience: 'Ages 11–16', href: '/whats-on/youth/' },
+    { match: 'Morning Service', category: 'service', href: '/whats-on/sunday-services/' },
+    { match: 'Evening Service', category: 'service', href: '/whats-on/sunday-services/' },
+    { match: "Lord's Supper", category: 'service', href: '/whats-on/sunday-services/' },
+    { match: 'Christmas', category: 'service', href: '/seasonal/christmas-services' },
+    { match: 'Bible Study', category: 'study', href: '/whats-on/bible-study/' },
+    { match: 'Small Groups', category: 'study', href: '/whats-on/monthly-small-groups/' },
+    { match: 'Ladies Meeting', category: 'ladies', href: '/whats-on/ladies-meetings/' },
+    { match: 'Ladies Bible Study', category: 'ladies', href: '/whats-on/ladies-meetings/' },
+    { match: 'Coffee Morning', category: 'community', href: '/whats-on/coffee-morning/' },
+]
 export interface EventOccurrence {
     key: string
     title: string
@@ -19,24 +41,6 @@ interface CalendarEvent {
     end?: string
 }
 
-/*
- * Optional extras, matched on the start of the title, so each event can link
- * to its page and show who it's for. Titles not listed here just show as-is.
- */
-const EXTRAS: { match: string; audience?: string; href?: string }[] = [
-    { match: 'Sunday Club', audience: 'Ages 4–15', href: '/whats-on/sunday-club/' },
-    { match: 'First Steps', audience: ' Baby & Toddler group', href: '/whats-on/first-steps/' },
-    { match: 'Discoverers', audience: 'Ages 11–16', href: '/whats-on/youth/' },
-    { match: 'Morning Service', href: '/whats-on/sunday-services/' },
-    { match: 'Evening Service', href: '/whats-on/sunday-services/' },
-    { match: "Lord's Supper", href: '/whats-on/sunday-services/' },
-    { match: 'Christmas', href: '/seasonal/christmas-services' },
-    { match: 'Bible Study', href: '/whats-on/bible-study/' },
-    { match: 'Small Groups', href: '/whats-on/monthly-small-groups/' },
-    { match: 'Ladies Meeting', href: '/whats-on/ladies-meetings/' },
-    { match: 'Ladies Bible Study', href: '/whats-on/ladies-meetings/' },
-    { match: 'Coffee Morning', href: '/whats-on/coffee-morning/' },
-]
 
 const ZONE = 'Europe/London'
 
@@ -54,6 +58,7 @@ const events: EventOccurrence[] = (raw.events as CalendarEvent[])
             date: e.date,
             time: e.time,
             end: e.end,
+            category: extra?.category ?? 'other'
         }
     })
 // Current UK date and time, whatever timezone the visitor's device is in
