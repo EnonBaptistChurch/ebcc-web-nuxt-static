@@ -20,11 +20,19 @@
       fetchpriority="high"
     />
     <div class="church-hero__shade" aria-hidden="true" />
+    <SnowEffect contained :enabled="snow" :count="snowAmount" :limit="3.5" />
     <div v-if="$slots.default" class="church-hero__content">
       <slot />
     </div>
   </section>
 </template>
+<script setup>
+import { ref } from 'vue'
+
+const snow = ref(true) 
+const snowAmount = ref(600)
+import SnowEffect from '../components/misc/snoweffect.vue'
+</script>
 
 <style scoped>
 .church-hero {
