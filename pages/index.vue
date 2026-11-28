@@ -5,9 +5,12 @@
     </ClientOnly>
 
     <div class="hero">
-      <ChurchImage>
-        <h1 class="home-title">Welcome to Enon Baptist Church</h1>
-      </ChurchImage>
+      <div class="hero__picture">
+        <ChurchImage>
+          <h1 class="home-title">Welcome to Enon Baptist Church</h1>
+        </ChurchImage>
+        <whatsOnOverlay />
+      </div>
 
       <aside class="services" aria-labelledby="services-heading">
         <h2 id="services-heading" class="services__title">Our Lord's Day Services</h2>
@@ -76,6 +79,7 @@ import ScrollingBanner from '../components/ScrollingBanner.vue'
 import BibleVerseParallaxOverlay from '../components/BibleVerseParallaxOverlay.vue'
 import PromoCards from '../components/widgets/PromoCards.vue'
 import ChurchImage from '../components/ChurchImage.vue'
+import whatsOnOverlay from '../components/whatsOnOverlay.vue'
 import MapWidget from '../components/widgets/MapsWidget.vue'
 import ContactCallout from '../components/contact/ContactCallout.vue'
 import PastorMessageComponent from '../components/PastorMessageComponent.vue'
@@ -175,6 +179,18 @@ useHead({
 /* Wrapper so the card can be positioned against the image on desktop */
 .hero {
   position: relative;
+}
+
+/* Wraps just the image, so the "coming up" overlay sits on the picture itself */
+.hero__picture {
+  position: relative;
+}
+
+/* Desktop: leave room for the services card in the bottom right */
+@media (min-width: 876px) {
+  .hero__picture {
+    --next-events-right: 25.5rem;
+  }
 }
 
 .home-verse {
@@ -488,5 +504,4 @@ useHead({
   margin: 0.25rem 0 0;
   padding: 0  0 0.75rem;
 }
-
 </style>

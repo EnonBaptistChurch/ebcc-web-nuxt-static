@@ -39,6 +39,7 @@
         </div>
       </div>
     </section>
+    <whatsOnTable />
   </article>
   </div>
 </template>
@@ -47,6 +48,7 @@
 import { computed } from 'vue';
 import { useHead } from 'nuxt/app';
 import { eventCardsData } from '../../data/whats-on';
+import  whatsOnTable  from '../../components/whatsOnTable.vue'
 
 useHead({
   title: "What's On - Enon Baptist Church",
