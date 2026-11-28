@@ -39,7 +39,7 @@
         </div>
       </div>
     </section>
-    <whatsOnTable />
+    <whatsOnTable  style="margin-top: 1rem;"/>
   </article>
   </div>
 </template>

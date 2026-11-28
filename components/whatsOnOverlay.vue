@@ -52,22 +52,23 @@ const items = computed(() => upcoming.value.slice(0, props.max))
     list-style: none;
     border: 1px solid rgb(255 255 255 / 0.25);
     background: rgb(0 0 0 / 0.25);
-    backdrop-filter: blur(6px);
+    backdrop-filter: blur(0px);
     pointer-events: auto;
 }
 
 .next-list li {
+    display: flex;
     min-width: 0;
     min-height: 0;
     overflow: hidden;
-    /* Default: neutral, so most events stay calm */
     --tint: 0 0 0;
-    --stripe: 0.18;
+    --stripe: 0.12;
 }
 
 /* Only two groups get a colour, both soft pastels */
-.next-list li[data-category='service'] { --tint: 170 200 230; --stripe: 0.7; } /* dusty blue */
-.next-list li[data-category='kids']    { --tint: 240 205 170; --stripe: 0.7; } /* soft peach */
+.next-list li[data-category='service'] { --tint: 170 200 230; --stripe: 0.4; }
+.next-list li[data-category='kids']    { --tint: 240 205 170; --stripe: 0.4; }
+
 
 .next-list li + li .next-item {
     border-left: 1px solid rgb(255 255 255 / 0.2);
@@ -76,19 +77,18 @@ const items = computed(() => upcoming.value.slice(0, props.max))
 .next-item {
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: 0.1rem;
-    height: 100%;
-    /* Side padding shrinks on narrow bars; top/bottom stays fixed */
     padding: 0.45rem clamp(0.3rem, 1.6cqi, 0.8rem);
     color: #fff;
     text-decoration: none;
-    background: rgb(var(--tint) / 0.2);
-    box-shadow: inset 0 -3px 0 rgb(var(--tint) / var(--stripe));
+    background: rgb(var(--tint) / 0.25);
+    box-shadow: inset 0 -2px 0 rgb(var(--tint) / var(--stripe));
 }
 
 .next-item:hover,
 .next-item:focus-visible {
-    background: rgb(var(--tint) / 0.22);
+    background: rgb(var(--tint) / 0.52);
 }
 
 /* Every line is a single line, so the bar is the same height at any width.

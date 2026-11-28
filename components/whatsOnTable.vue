@@ -37,7 +37,7 @@ const hasMore = computed(() => long.value.length > short.value.length)
                             <span v-if="e.audience" class="audience">{{ e.audience }}</span>
                             <span v-if="e.detail" class="detail">{{ e.detail }}</span>
                         </td>
-                    </tr>
+                    </tr>   
                     <tr v-if="!shown.length">
                         <td class="empty" colspan="3">Nothing coming up just now. Please check back soon.</td>
                     </tr>
@@ -150,6 +150,11 @@ const hasMore = computed(() => long.value.length > short.value.length)
     color: #fff;
 }
 
+.col-what a {
+        text-decoration: none;
+        color: inherit;
+    }
+
 /* Narrow screens: each row becomes a small stacked entry */
 @media (max-width: 39.99rem) {
     .events thead {
@@ -183,19 +188,21 @@ const hasMore = computed(() => long.value.length > short.value.length)
         color: var(--muted);
     }
 
-    .col-what {
-        grid-area: what;
+    .col-what > a,
+    .col-what > span:first-child {
+        display: block;
     }
 
     .audience {
-        margin-left: 0;
         display: inline-block;
-        margin-top: 0.25rem;
+        margin-left: 0;
+        margin-top: 0.4rem;
     }
 
     .detail {
         display: block;
         margin-left: 0;
+        margin-top: 0.25rem;
     }
 
     .empty {
